@@ -1,3 +1,9 @@
+"""
+This file defines langgraph agents and their overarching structure.
+
+Note: Tools will be moved into packages in future.
+"""
+
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 
@@ -18,7 +24,7 @@ def search(query: str):
 
 tools = [search]
 # model = ChatOllama(model="deepseek-r1:8b")
-model = ChatOllama(model="mistral")
+model = ChatOllama(model="mistral", temperature=0.8)
 
 # Initialize memory to persist state between graph runs
 checkpointer = MemorySaver()
