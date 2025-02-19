@@ -14,7 +14,8 @@ dependencies = [
     "langchain-community (>=0.3.16,<0.4.0)",
     "langchain-ollama (>=0.2.3,<0.3.0)",
     "langchain-core (>=0.3.34,<0.4.0)",
-    "langgraph (>=0.2.72,<0.3.0)"
+    "langgraph (>=0.2.72,<0.3.0)",
+    "streamlit (>=1.42.1,<2.0.0)"
 ]
 
 
