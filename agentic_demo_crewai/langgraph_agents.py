@@ -16,18 +16,55 @@ from langgraph.checkpoint.memory import MemorySaver
 from langchain_ollama.chat_models import ChatOllama  # Changed this line
 from langchain_core.tools import tool
 
-from langgraph.graph import START, StateGraph  # Langgraph imports
+from langgraph.graph import START, END, StateGraph  # Langgraph imports
 
 from IPython.display import Image, display  # For visualising the output GRAPH
 
 model = ChatOllama(model="mistral", temperature=0.8)
 
+# graph.add_edge("node_a", END) : ending the graph
+
 
 # For states
-class State(BaseModel):
-    value_1: str
-    value_2: int
+class AgentState(BaseModel):
+    user_input: str
+    requirement: str
+    risks: str
+    price: int
+    manhours: int
 
+
+def node_1(agentState: AgentState):
+
+    return agentState
+
+
+def node_2(agentState: AgentState):
+    return agentState
+
+
+def node_3(agentState: AgentState):
+    return agentState
+
+
+graph_builder = StateGraph(AgentState)
+
+graph_builder.add_node("node_1", node_1)
+graph_builder.add_node("node_2", node_1)
+graph_builder.add_node("node_3", node_1)
+
+
+graph_builder.add_edge(START, "Start")
+
+
+graph_builder.add_edge(
+    Edge("tech", "sales", condition=lambda state: "missing_info" in state)
+)
+
+
+graph = graph_builder.compile()
+
+display(Image(graph.get_graph().draw_mermaid_png()))
 
 ###################################################################################################
 # Agent Classes Low Level Definition
@@ -125,18 +162,19 @@ def manager_node(state):
 #
 
 # Define the graph
-graph_builder = StateGraph(State)
+# graph_builder = StateGraph(AgentState)
+# graph_builder.add_node(START, "Start")
 
-graph_builder.add_node("sales", sales_node)
-graph_builder.add_node(Node("tech", tech_node))
-graph_builder.add_node(Node("manager", manager_node))
-graph_builder.add_edge(Edge("sales", "tech"))
-graph_builder.add_edge(
-    Edge("tech", "sales", condition=lambda state: "missing_info" in state)
-)
-graph_builder.add_edge(
-    Edge("tech", "manager", condition=lambda state: "technical_plan" in state)
-)
+# graph_builder.add_node("sales", sales_node)
+# graph_builder.add_node(Node("tech", tech_node))
+# graph_builder.add_node(Node("manager", manager_node))
+# graph_builder.add_edge(Edge("sales", "tech"))
+# graph_builder.add_edge(
+#     Edge("tech", "sales", condition=lambda state: "missing_info" in state)
+# )
+# graph_builder.add_edge(
+#     Edge("tech", "manager", condition=lambda state: "technical_plan" in state)
+# )
 
 # Conditional edges -> for determining if we should move to A or B -> create cycles in the Graph
 # graph.add_conditional_edges("node_a", routing_function)
@@ -150,9 +188,9 @@ graph_builder.add_edge(
 # graph.add_conditional_edges(START, routing_function)
 
 
-graph = graph_builder.compile()
+# graph = graph_builder.compile()
 
-display(Image(graph.get_graph().draw_mermaid_png()))
+# display(Image(graph.get_graph().draw_mermaid_png()))
 
 ###################################################################################################
 # High Level Definition
