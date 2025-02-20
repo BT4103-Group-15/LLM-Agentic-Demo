@@ -127,7 +127,7 @@ def manager_node(state):
 # Define the graph
 graph_builder = StateGraph(State)
 
-graph_builder.add_node(Node("sales", sales_node))
+graph_builder.add_node("sales", sales_node)
 graph_builder.add_node(Node("tech", tech_node))
 graph_builder.add_node(Node("manager", manager_node))
 graph_builder.add_edge(Edge("sales", "tech"))
