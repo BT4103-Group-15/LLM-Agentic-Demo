@@ -1,0 +1,178 @@
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #24516e;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding: 24px;
+    background-color: white;
+    box-sizing: border-box; /* Ensure padding doesn't overflow */
+    
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    width: 100%;
+    margin-left: 3%;
+    margin-top: auto;
+}
+
+.controls {
+    display: flex;
+    gap: 12px; /* Space between filter and search */
+    align-items: center; /* Vertically center the elements */
+    justify-content: flex-end; /* Align items to the right */
+    width: 100%; /* Make the container take full width */
+}
+
+.filter-button {
+    background-color: #F3F3F3;
+    color: rgb(90, 90, 90);
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 7px;
+    padding: 1% 5%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: auto;
+    box-shadow: 2px 1px 2px rgb(181, 180, 180);
+}
+
+.filter-button:hover {
+    background-color: #888888;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    width: 40%; /* Adjust the width of the search bar */
+    font-size: 1rem;
+    box-shadow: 2px 1px 2px rgb(181, 180, 180);
+    font-weight: bold;
+}
+
+/* Table */
+.table-container {
+    overflow-y: auto;
+    flex: 1;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.table-header {
+    background-color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.cell {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-bottom: 2px solid #d2d2d2;
+    font-size: 1.1rem;
+}
+
+.table-row:hover {
+    background-color: #f9fafb;
+}
+
+.table td:nth-child(1),
+.table td:nth-child(2),
+.table td:nth-child(3) {
+    text-align: center; /* Center align for the first three columns */
+}
+.table th:nth-child(1),
+.table th:nth-child(2),
+.table th:nth-child(3) {
+    text-align: center; /* Center align for the first three columns */
+}
+
+
+.custom-button {
+    background-color: #A6CB73;
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 8px;
+    padding: 6px 20px; /* Adjusted padding for consistency */
+    border: none; /* Remove any border */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth background transition */
+    box-shadow: none !important; /* Ensure no shadow */
+}
+
+.custom-button:hover {
+    background-color: #538c08;
+}
+
+/* Filter box */
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
