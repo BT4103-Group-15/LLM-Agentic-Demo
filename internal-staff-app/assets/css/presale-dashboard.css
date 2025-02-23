@@ -1,0 +1,39 @@
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.chart-container {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.sub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.chart-title {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.chart-placeholder {
+    background: #f8f8f8;
+    height: 200px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.large-chart {
+    height: 300px;
+}

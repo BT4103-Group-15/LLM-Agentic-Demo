@@ -40,19 +40,6 @@ a {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Dashboard page styles */
-.dashboard-container {
-    margin: 20px;
-    padding: 20px;
-}
-
-.dashboard-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 20px;
-}
-
 .back-button {
     background: #EF4444;
     color: white;

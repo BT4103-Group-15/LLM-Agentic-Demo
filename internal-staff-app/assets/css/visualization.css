@@ -1,0 +1,12 @@
+/* Dashboard page styles */
+.dashboard-container {
+    margin: 20px;
+    padding: 20px;
+}
+
+.dashboard-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+}
