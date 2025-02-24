@@ -220,3 +220,28 @@ footer {
   text-align: center;
   font-size: 1rem;
 }
+
+
+/* Loading indicator centered */
+.loading {
+  display: none;  /* Hide initially */
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+
+.loading p {
+  animation: loadingAnimation 1.5s infinite;
+  font-weight: bold;
+  color: #0956e4; /* Change color for better visibility */
+}
+
+@keyframes loadingAnimation {
+  0% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.5; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+
