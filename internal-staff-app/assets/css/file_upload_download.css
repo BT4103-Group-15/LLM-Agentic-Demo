@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    font-size: 1.4vw;
+}
+
+/* Wrapper for table with rounded corners, border, and shadow */
+.table-wrapper {
+    border: 1px solid #e1e0e0; /* Outer border */
+    border-radius: 10px;
+    overflow: hidden; /* Ensures the rounded corners are visible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 1vw;
+    text-align: center;
+}
+
+th {
+    background-color: #ffffff;
+    border-bottom: 2px solid #e1e0e0; /* Add a bottom border for the header */
+}
+
+.freeze-header thead {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 1;
+}
+
+.button {
+    padding: 0.7vw 2vw;
+    margin: 2px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 2px solid #e1e0e0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.3vw;
+    width: 15vw;
+    height: 7vh;
+}
+
+.button.reupload {
+    background-color: #ffffff;
+}
+
+/* Style for the back button with shadow */
+.back-button {
+    display: block;
+    margin-top: 20px;
+    padding: 0.5vw;
+    cursor: pointer;
+    background-color: #fb3030;
+    color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.3vw;
+    text-align: center;
+    width: 10vw;
+    margin-left: auto;
+    margin-right: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for back button */
+}
+
+/* Hover effects to enhance shadow */
+.button:hover, .back-button:hover {
+    background-color: #e9e9e9;
+}

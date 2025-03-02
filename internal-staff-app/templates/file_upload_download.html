@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Management</title>
+    <link rel="stylesheet" href="../assets/css/file_upload_download.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+    <h2>File Upload / Download</h2>
+
+    <!-- Table wrapper to control the border and rounded corners -->
+    <div class="table-wrapper">
+        <table class="freeze-header">
+            <thead>
+                <tr>
+                    <th>Files</th>
+                    <th>Agent Type</th>
+                    <th>Upload/Export</th>
+                    <th>Reupload</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="file-row" data-process="Requirements Form">
+                    <td>Requirements Form</td>
+                    <td>Sales</td>
+                    <td><button class="button" id="req-download">Download File</button></td>
+                    <td><button class="button reupload" id="req-reupload">Reupload File</button></td>
+                </tr>
+                <tr class="file-row" data-process="Technical Assessment">
+                    <td>Technical Assessment</td>
+                    <td>Sales</td>
+                    <td><button class="button" id="tech-upload">Upload File</button></td>
+                    <td><button class="button reupload" id="tech-reupload" style="display: none;">Reupload File</button></td>
+                </tr>
+                <tr class="file-row" data-process="Risk Assessment">
+                    <td>Risk Assessment</td>
+                    <td>Sales</td>
+                    <td><button class="button" id="risk-upload">Upload File</button></td>
+                    <td><button class="button reupload" id="risk-reupload" style="display: none;">Reupload File</button></td>
+                </tr>
+                <tr class="file-row" data-process="SOW">
+                    <td>SOW</td>
+                    <td>Sales</td>
+                    <td><button class="button" id="sow-upload">Upload File</button></td>
+                    <td><button class="button reupload" id="sow-reupload" style="display: none;">Reupload File</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Back Button aligned to the right -->
+    <button class="back-button" onclick="window.history.back()">Back</button>
+
+    <script src="../assets/js/file_upload_download.js"></script> <!-- Link to the external JavaScript file -->
+</body>
+</html>
