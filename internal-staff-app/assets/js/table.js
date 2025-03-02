@@ -1,15 +1,16 @@
 // common.js
 function buildTable(columns, data, tableId, buttonLabel) {
-    const tableHead = document.querySelector(`#${tableId}Head`);
-    const tableBody = document.querySelector(`#${tableId}Body`);
+    const tableHead = document.getElementById("tableHead");
+    const tableBody = document.getElementById("tableBody");
+    console.log("build table");
 
     // Create table header
-    tableHead.innerHTML = columns.map(col => `<th class='cell'>${col}</th>`).join('');
+    tableHead.innerHTML = `<tr>${columns.map(col => `<th class='cell'>${col}</th>`).join('')}</tr>`;
 
     // Create table rows
     tableBody.innerHTML = data.map(row => {
         return `<tr class='table-row'>
-            ${columns.slice(0, -1).map(col => `<td class='cell'>${row[col]}</td>`).join('')}
+            ${columns.slice(0, -1).map(col => `<td class='cell'>${row[col] || ""}</td>`).join('')}
             <td class='cell'>
                 <button class='custom-button'>${buttonLabel}</button>
             </td>
@@ -18,45 +19,43 @@ function buildTable(columns, data, tableId, buttonLabel) {
 }
 
 
-function handleModal(filterBtnId, modalId, closeModalId, applyFilterBtnId, resetFilterBtnId,buttonLabel, tableId, columns, originalData) {
-    // Open modal
-    document.getElementById(filterBtnId).addEventListener("click", function () {
-        document.getElementById(modalId).style.display = "block";
+
+function handleModal(filterBtnId, modalId, closeModalId, applyFilterBtnId, resetFilterBtnId, tableId, buttonLabel, columns, originalData) {
+    const modal = document.getElementById(modalId);
+
+    document.getElementById(filterBtnId).addEventListener("click", () => {
+        modal.style.display = "block";
     });
 
-    // Close modal
-    document.querySelector('.close').addEventListener("click", function () {
-        document.getElementById(modalId).style.display = "none";
+    document.querySelector('.close').addEventListener("click", () => {
+        modal.style.display = "none";
     });
-       
 
-    // Apply filter
-    document.getElementById(applyFilterBtnId).addEventListener("click", function () {
+    document.getElementById(applyFilterBtnId).addEventListener("click", () => {
         const column = document.getElementById("columnSelect").value;
         const query = document.getElementById("filterInput").value.toLowerCase();
 
         let filteredData = originalData.filter(row =>
-            String(row[column]).toLowerCase().includes(query)
+            row[column] && String(row[column]).toLowerCase().includes(query)
         );
 
         buildTable(columns, filteredData, tableId, buttonLabel);
-        document.getElementById(modalId).style.display = "none"; // Close the modal
+        modal.style.display = "none";
     });
 
-    // Reset filter
-    document.getElementById(resetFilterBtnId).addEventListener("click", function () {
-        document.getElementById("filterInput").value = ""; // Clear the input field
-        buildTable(columns, originalData, tableId, buttonLabel); // Rebuild the table with original data
-        document.getElementById(modalId).style.display = "none"; // Close the modal
+    document.getElementById(resetFilterBtnId).addEventListener("click", () => {
+        document.getElementById("filterInput").value = "";
+        buildTable(columns, originalData, tableId, buttonLabel);
+        modal.style.display = "none";
     });
 
-    // Close modal if clicked outside
     window.onclick = function (event) {
-        if (event.target === document.getElementById(modalId)) {
-            document.getElementById(modalId).style.display = "none";
+        if (event.target === modal) {
+            modal.style.display = "none";
         }
     };
 }
+
 
 function handleSearch(searchInputId, tableId, buttonLabel, columns, originalData) {
     document.getElementById(searchInputId).addEventListener("input", function () {
