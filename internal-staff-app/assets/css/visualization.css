@@ -1,12 +1,50 @@
-/* Dashboard page styles */
-.dashboard-container {
-    margin: 20px;
-    padding: 20px;
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 3vw;
 }
 
-.dashboard-options {
+h1 {
+    margin-bottom: 2vw;
+    margin-left: 2vw;
+    text-align: left;
+}
+
+/* Use Grid Layout for 2 rows and 3 columns */
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    grid-template-rows: repeat(2, 1fr); /* 2 equal rows */
+    gap: 3vw; /* Add spacing between buttons */
+    width: 100%;
+    margin: auto; /* Center the container */
+}
+
+.button {
+    height: 20vh; /* Reduce height for better spacing */
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 20px;
+    flex-direction: row; /* Arrange items horizontally */
+    align-items: center; /* Vertically align items */
+    background-color: white;
+    color: rgb(82, 81, 81);
+    font-size: 1.8vw;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 1px solid #d2d2d2;
+    cursor: pointer;
+    padding-left: 2vw;
+    padding-top: 2vw;
+    box-sizing: border-box;
+    padding-bottom: 1vw;
+    border-bottom: 5px solid #4d93f4;
+    justify-content: flex-start; /* Align content to the left */
+}
+
+.button img {
+    width: 3vw;
+    margin-right: 1vw; /* Add space between image and text */
+}
+
+.button:hover {
+    background-color: #f1f1f1;
 }
