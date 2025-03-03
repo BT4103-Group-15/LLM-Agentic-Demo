@@ -15,7 +15,14 @@ def extract_requirements(email_content: str) -> list[dict]:
     """
     response = ollama.generate(
         model="mistral",
-        prompt=f"Extract software requirements from the following email:\n\n{email_content}\n\nFormat the requirements as a list of dictionaries with keys: 'Requirement ID', 'Description', 'Priority', 'Status'.",
+        prompt="""
+        # Task
+        Extract software requirements from the following email:
+        \n\n{email_content}\n\n 
+        # Requirement: 
+        Format the requirements as a list of dictionaries with keys:
+         'Requirement ID', 'Description', 'Priority', 'Status'.
+         """,
     )
     # Parse the response into a list of dictionaries
     requirements = eval(
@@ -64,7 +71,7 @@ compiled_workflow = workflow.compile()
 
 
 # Main function to run the workflow
-def main():
+def run_scoping_generator():
     # Simulate user input (email content)
     email_content = """
     Hi Team,
@@ -79,7 +86,3 @@ def main():
 
     # Run the workflow with the email content as input
     compiled_workflow.invoke({"email_content": email_content})
-
-
-if __name__ == "__main__":
-    main()
