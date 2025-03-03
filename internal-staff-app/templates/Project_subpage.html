@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Dashboard</title>
     <link rel="stylesheet" href="../assets/css/project-subpage.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <div class="row-1">
@@ -25,8 +26,8 @@
 
     <div class="row-2">
         <div class="section">
-            <div class="buttons">
-                <button>File Upload / Download</button>
+            <div class="action-buttons">
+                <button onclick="window.location.href='file_upload_download.html'">File Upload / Download</button>
                 <button>Chat History</button>
                 <button>Logs</button>
             </div>
@@ -37,7 +38,7 @@
         </div>
     </div>
     
-    <button class="back-button">Back</button>
+    <a href="javascript:history.back()" class="back-button">Back
 
     <script src="../assets/js/project-subpage.js"></script>
 </body>

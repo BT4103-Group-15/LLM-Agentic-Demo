@@ -26,6 +26,7 @@
                 <tbody id="tableBody"></tbody>
             </table>
         </div>
+        <button class="back-button" onclick="window.history.back()">Back</button>
     </div>
 
     <!-- Modal -->
@@ -52,6 +53,8 @@
         </div>
     </div>
 
+    
+
     <script src="../assets/js/table.js"></script> <!-- Link to the common JavaScript file -->
     
     <script>
@@ -73,7 +76,8 @@
         handleModal("filterBtn", "filterModal", "close", "applyFilterBtn", "resetFilterBtn", "table",buttonLabel, columns, originalData);
         handleSearch("searchInput", "table",buttonLabel, columns, originalData);
     </script>
-    <a href="../index.html" class="back-button">Back</a>
+
+    
     
 </body>
 </html>
