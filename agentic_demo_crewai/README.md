@@ -6,3 +6,5 @@ The things accomplished by this repository
 4. Summarise the Client questions and forward them to the tech Pre-Sale team member
 5. Generate SOW and allow the Tech-Presales team to edit them while generating the requirements -> INTERRUPT function (note) 
 6. SLM would generate a PDF report on the requirement validation and risk assessment and send it via email to the client, sales team and tech pre-sale team.
+
+## Sample http POST request Input

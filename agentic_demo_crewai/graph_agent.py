@@ -1,6 +1,9 @@
+from pydantic import BaseModel
+
 from langgraph.graph import Graph
 from langgraph.graph import START, END, StateGraph
 import ollama
+from langchain_ollama import OllamaLLM
 import pandas as pd
 
 # Define the requirement document structure
@@ -8,11 +11,19 @@ requirement_columns = ["Requirement ID", "Description", "Priority", "Status"]
 requirement_doc = pd.DataFrame(columns=requirement_columns)
 
 
+# This state class to be determined, depending on how the email task is to be decomposed
+class State(BaseModel):
+    email_text: str  # input from http
+
+    workflow_steps: int  # track cycle from agents
+
+
 # Step 1: Extract requirements from the email
 def extract_requirements(email_content: str) -> list[dict]:
     """
     Use the Ollama Mistral model to extract requirements from the email.
     """
+    # Since the scoping sheet has 10 sub tables, we will loop through it
     response = ollama.generate(
         model="mistral",
         prompt="""
@@ -27,7 +38,7 @@ def extract_requirements(email_content: str) -> list[dict]:
     # Parse the response into a list of dictionaries
     requirements = eval(
         response["response"]
-    )  # Assuming the model returns a valid Python list of dictionaries
+    )  # Assuming the model returns a valid Python list of dictionaries -> dangerous function
     return requirements
 
 
@@ -71,18 +82,22 @@ compiled_workflow = workflow.compile()
 
 
 # Main function to run the workflow
-def run_scoping_generator():
-    # Simulate user input (email content)
-    email_content = """
-    Hi Team,
-
-    Please add the following requirements to the project:
-    1. Requirement ID: REQ001, Description: User authentication, Priority: High, Status: New
-    2. Requirement ID: REQ002, Description: Data encryption, Priority: Medium, Status: New
-
-    Thanks,
-    John
+def run_scoping_generator(email_content: str) -> str:
     """
+    Wrapper method to run the scoping generator workflow.
+    """
+    # Sample Email
+    # email_content = """
+    # Hi Team,
+
+    # Please add the following requirements to the project:
+    # 1. Requirement ID: REQ001, Description: User authentication, Priority: High, Status: New
+    # 2. Requirement ID: REQ002, Description: Data encryption, Priority: Medium, Status: New
+
+    # Thanks,
+    # John
+    # """
 
     # Run the workflow with the email content as input
-    compiled_workflow.invoke({"email_content": email_content})
+    scopingsheet_filled = compiled_workflow.invoke({"email_content": email_content})
+    return scopingsheet_filled
