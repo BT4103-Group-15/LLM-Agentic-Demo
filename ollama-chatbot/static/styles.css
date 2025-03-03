@@ -1,0 +1,222 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  background-color: #121232;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Navigation Styles */
+header {
+  background-color: #001f3d;
+  text-align: center;
+  padding: 1% 0;
+  border-radius: 1% 1% 0 0;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0 0;
+}
+
+nav .logo {
+  margin-right: 2%;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 2vw;
+}
+
+.nav-links li a {
+  font-size: 1vw;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #0956e4;
+}
+
+.nav-links li.contact a {
+  font-weight: bold;
+  color: #0956e4;
+}
+
+/* Chatbot */
+.chatBot {
+  border-radius: 1vw;
+  margin: 5% auto;
+  overflow: hidden;
+  width: 90%;
+  overflow-y: clip;
+  height: 100%;
+  background: rgb(255, 255, 255) url(gfg-gg-logo.svg);
+  background-size: contain;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.chatBot header {
+  background-color: #006adc; 
+  padding: 1vw;
+  text-align: center;
+  border-radius: 1vw 1vw 0 0; 
+}
+
+header h2 {
+  color: #fff;
+  margin: 0;
+}
+
+/* Chatbox - Container for Messages */
+.chatbox {
+  padding: 15px;
+  list-style: none;
+  overflow-y: auto;
+  height: 60vh;
+  display: flex;
+  flex-direction: column; /* Stack messages vertically */
+  width: 100%; /* Full available width */
+}
+
+.chatbox .chat-outgoing, .chatbox .chat-incoming {
+  border-radius: 10px; /* Rounded corners */
+  margin-bottom: 10px; /* Space between messages */
+  width: auto; /* Width adjusts based on content */
+  max-width: 90%; /* Max width for outgoing messages */
+  min-width: 100px; /* Minimum width before text breaks */
+  box-sizing: border-box; /* Include padding in width calculation */
+  white-space: normal; /* Allow wrapping */
+  max-height: 200px; /* Limit max height */
+  overflow-wrap: break-word; /* Ensure text breaks within box */
+}
+
+.chatbox .chat-outgoing {
+  align-self: flex-end; /* Align the outgoing message to the right */
+  background-color: #162887; /* Background color */
+  color: white; /* Text color */
+}
+
+.chatbox .chat-incoming {
+  align-self: flex-start; /* Align the incoming message to the left */
+  color: black; /* Text color */
+}
+
+.chatbox li {
+  margin-bottom: 10px;
+}
+
+.chat p {
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.chat-outgoing p {
+  background-color: #162887;
+  align-self: flex-end;
+  color: #fff;
+}
+
+.chat-incoming p {
+  background-color: #eaeaea;
+  color: black;
+}
+
+.chat-input {
+  padding: 1vw;
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  position: relative;
+}
+
+.chat-input textarea {
+  width: 100%;
+  padding: 1vw;
+  padding-right: 10%;
+  border: 1px solid rgb(232, 232, 232);
+  border-radius: 7vw;
+  resize: none;
+  outline: none;
+  overflow-y: scroll;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 600;
+  height: 10vh;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); 
+}
+
+.chatbox .chat p.error {
+  color: #ffffff;
+  background-color: #ff3737e8;
+}
+
+.send-btn-container {
+  display: flex;
+  align-items: center; /* Vertically center the button */
+  justify-content: center; /* Horizontally center the button */
+  position: absolute;
+  right: 10px;
+  bottom: 50%; /* Move the button to the vertical center */
+  transform: translateY(50%); /* Corrects the positioning */
+}
+
+#sendBTN {
+  padding: 8px 16px;
+  font-size: 20px;  /* Adjust the size of the arrow */
+  font-weight: 600;
+  background-color: transparent;  /* Remove background color */
+  border: none;
+  cursor: pointer;
+  color: #d3d3d3;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sendBTN::before {
+  content: '>';  /* Arrow character */
+  font-size: 2vw;  /* Adjust size as needed */
+}
+
+
+#sendBTN:hover {
+  color: #585858;
+}
+
+
+/* Footer Styles */
+footer {
+  background-color: #001f3d;
+  padding: 10px;
+  text-align: center;
+  font-size: 1rem;
+}

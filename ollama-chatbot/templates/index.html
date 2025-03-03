@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vantage Point Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+
+<!-- Navigation Bar -->
+<header>
+    <nav>
+        <div class="logo">
+            <img src="../static/img/logo.png" alt="Vantage Point Security Logo" />
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Solutions</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Careers</a></li>
+            <li class="contact"><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Chatbot -->
+<body>
+    <div class="chatBot">
+        <header>
+            <h2>ChatBot</h2>
+        </header>
+        
+        <ul class="chatbox" id="messages">
+            <li class="chat-incoming chat">
+                <p>Hey! How can I assist you today?</p>
+            </li>
+        </ul>
+
+        <div class="chat-input">
+            <textarea id="userInput" rows="4" cols="20" placeholder="Enter a message..."></textarea>
+            <div class="send-btn-container">
+                <button id="sendBTN" onclick="sendMessage()"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/chatbot.js"></script>
+</body>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Asia Media Studio Co.Ltd. All Rights Reserved.</p>
+</footer>
+
+
+</html>
