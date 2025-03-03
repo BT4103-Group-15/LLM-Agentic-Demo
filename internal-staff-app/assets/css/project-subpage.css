@@ -16,6 +16,7 @@ p {
 }
 
 .row-1 {
+    padding-top: 8vh !important;
     display: grid;
     grid-template-columns: 2fr 3fr;
     gap: 1vw;
@@ -27,7 +28,7 @@ p {
     grid-template-columns: 2fr 4fr;
     gap: 1vw;
     height: 42vh;
-    margin-top: 1vw;
+    padding-top: 1vw;
 }
 
 .section {

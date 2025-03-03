@@ -4,6 +4,10 @@ body {
     font-size: 1.4vw;
 }
 
+h2{
+    padding-top: 8vh;
+}
+
 /* Wrapper for table with rounded corners, border, and shadow */
 .table-wrapper {
     border: 1px solid #e1e0e0; /* Outer border */

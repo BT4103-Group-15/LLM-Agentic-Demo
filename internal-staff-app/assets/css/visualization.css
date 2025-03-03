@@ -8,6 +8,7 @@ h1 {
     margin-bottom: 2vw;
     margin-left: 2vw;
     text-align: left;
+    margin-top: 8vh;
 }
 
 /* Use Grid Layout for 2 rows and 3 columns */
@@ -48,3 +49,39 @@ h1 {
 .button:hover {
     background-color: #f1f1f1;
 }
+
+/* Navbar styling */
+/* Navbar styling */
+.navbar {
+    background-color: #ffffff;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center; /* Vertically center the button */
+    border-bottom: 2px solid #d2d2d2;
+}
+
+/* Back button styling */
+.back-button {
+    background: none;
+    border: none;
+    color: rgb(151, 151, 151);
+    font-weight: bold;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.back-button:hover {
+    color: rgb(223, 221, 221);
+}
+
+
+
+
+

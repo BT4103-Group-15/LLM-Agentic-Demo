@@ -8,76 +8,78 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="title">Logs</h1> <!-- You can change this title based on the page -->
-            <div class="controls">
-                <button id="filterBtn" class="filter-button">Filter</button>
-                <input id="searchInput" type="text" placeholder="Search" class="search-input">
-            </div>
-        </div>
 
-        <!-- Table -->
-        <div class="table-container">
-            <table class="table">
-                <thead>
-                    <tr id="tableHead" class="table-header"></tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-        </div>
-        <button class="back-button" onclick="window.history.back()">Back</button>
-    </div>
+  <!-- Navbar -->
+  <div id="navbar-container"></div>
 
-    <!-- Modal -->
-    <div id="filterModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Filter Table</h2>
-            <div class="modal-body">
-                <label for="columnSelect">Select Column:</label>
-                <select id="columnSelect">
-                    <option value="Project ID">Project ID</option>
-                    <option value="Client ID">Client ID</option>
-                    <option value="Agent Type">Agent Type</option>
-                    <option value="Client Email">Client Email</option>
-                    <option value="Last Update">Last Update</option>
-                </select>
+  <!-- Main content -->
+  <div class="container">
+      <div class="header">
+          <h1 class="title">Logs</h1>
+          <div class="controls">
+              <button id="filterBtn" class="filter-button">Filter</button>
+              <input id="searchInput" type="text" placeholder="Search" class="search-input">
+          </div>
+      </div>
 
-                <label for="filterInput">Enter Filter Value:</label>
-                <input type="text" id="filterInput" placeholder="Enter filter value" />
-                
-                <button id="applyFilterBtn">Apply Filter</button>
-                <button id="resetFilterBtn">Reset Filter</button>
-            </div>
-        </div>
-    </div>
+      <!-- Table -->
+      <div class="table-container">
+          <table class="table">
+              <thead>
+                  <tr id="tableHead" class="table-header"></tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+          </table>
+      </div>
+      <button class="back-button" onclick="window.history.back()">Back</button>
+  </div>
 
-    
+  <!-- Modal -->
+  <div id="filterModal" class="modal">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Filter Table</h2>
+          <div class="modal-body">
+              <label for="columnSelect">Select Column:</label>
+              <select id="columnSelect">
+                  <option value="Project ID">Project ID</option>
+                  <option value="Client ID">Client ID</option>
+                  <option value="Agent Type">Agent Type</option>
+                  <option value="Client Email">Client Email</option>
+                  <option value="Last Update">Last Update</option>
+              </select>
 
-    <script src="../assets/js/table.js"></script> <!-- Link to the common JavaScript file -->
-    
-    <script>
-        // Define columns and data specific to the page (project or logs)
-        const columns = ["Project ID", "Client ID", "Agent Type", "Client Email", "Status", ""];
-        const originalData = [
-            { "Project ID": "003", "Client ID": "002", "Agent Type": "Sales", "Client Email": "alice@example.com", "Status": "Drafting SOW" },
-            { "Project ID": "004", "Client ID": "003", "Agent Type": "Sales", "Client Email": "bob@example.com", "Status": "Drafting SOW" },
-            { "Project ID": "005", "Client ID": "002", "Agent Type": "Sales", "Client Email": "charlie@example.com", "Status": "Drafting SOW" }
-        ];
+              <label for="filterInput">Enter Filter Value:</label>
+              <input type="text" id="filterInput" placeholder="Enter filter value" />
+              
+              <button id="applyFilterBtn">Apply Filter</button>
+              <button id="resetFilterBtn">Reset Filter</button>
+          </div>
+      </div>
+  </div>
 
-        // Initialize filtered data
-        let filteredData = [...originalData];
+  <!-- Link to external JS files -->
+  <script src="../assets/js/table.js"></script> <!-- Link to the common JavaScript file -->
+  <script src="../assets/js/script.js"></script> <!-- Link to the navbar sidebar toggle script -->
 
-        // Call the functions for table, modal, and search handling
-        const buttonLabel = "Download";
+  <script>
+      // Define columns and data specific to the page (project or logs)
+      const columns = ["Project ID", "Client ID", "Agent Type", "Client Email", "Status", ""];
+      const originalData = [
+          { "Project ID": "003", "Client ID": "002", "Agent Type": "Sales", "Client Email": "alice@example.com", "Status": "Drafting SOW" },
+          { "Project ID": "004", "Client ID": "003", "Agent Type": "Sales", "Client Email": "bob@example.com", "Status": "Drafting SOW" },
+          { "Project ID": "005", "Client ID": "002", "Agent Type": "Sales", "Client Email": "charlie@example.com", "Status": "Drafting SOW" }
+      ];
 
-        buildTable(columns, filteredData, "table", buttonLabel);
-        handleModal("filterBtn", "filterModal", "close", "applyFilterBtn", "resetFilterBtn", "table",buttonLabel, columns, originalData);
-        handleSearch("searchInput", "table",buttonLabel, columns, originalData);
-    </script>
+      // Initialize filtered data
+      let filteredData = [...originalData];
 
-    
-    
+      // Call the functions for table, modal, and search handling
+      const buttonLabel = "Download";
+
+      buildTable(columns, filteredData, "table", buttonLabel);
+      handleModal("filterBtn", "filterModal", "close", "applyFilterBtn", "resetFilterBtn", "table", buttonLabel, columns, originalData);
+      handleSearch("searchInput", "table", buttonLabel, columns, originalData);
+  </script>
 </body>
 </html>
