@@ -21,7 +21,7 @@ app = FastAPI(
 @app.post("/api/scoping-local-flow")
 async def ask_agent(request: RequirementRequest):
     """Endpoint to interact with the local LLM"""
-    response = run_scoping_generator(request.email_text)
+    response = run_scoping_generator(request.email_text, request.requirement_df)
     return {"response": response}
 
 

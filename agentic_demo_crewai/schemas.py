@@ -15,21 +15,14 @@ from typing import List
 from pydantic import BaseModel
 
 
-class RequirementColumns(BaseModel):
+class RequirementItem(BaseModel):
     """
     columns in the scoping sheet to be filled -> to be updated to new format
     """
 
-    Application_Overview: List[str]
-    Authentication_Access_Control: List[str]
-    Input_Processing: List[str]
-    Data_Processing: List[str]
-    API_Details: List[str]
-    Infrastructure: List[str]
-    Business_Logic: List[str]
-    Security_Requirements: List[str]
-    Testing_Constraints: List[str]
-    Deliverables: List[str]
+    category: str
+    requirement: str
+    # Status -> to be added within the steps
 
 
 class RequirementRequest(BaseModel):
@@ -38,4 +31,4 @@ class RequirementRequest(BaseModel):
     """
 
     email_text: str
-    requirement_columns: RequirementColumns
+    requirement_df: List[RequirementItem]
