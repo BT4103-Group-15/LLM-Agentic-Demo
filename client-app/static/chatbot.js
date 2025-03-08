@@ -1,4 +1,5 @@
 function sendMessage() {
+    console.log("test")
     const userInput = document.getElementById('userInput').value;
     if (userInput.trim() === "") return;
 
