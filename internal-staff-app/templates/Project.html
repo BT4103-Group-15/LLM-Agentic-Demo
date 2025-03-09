@@ -64,22 +64,71 @@
     <script src="../assets/js/script.js"></script>
 
     <script>
-        // Define columns and data specific to the page (project or logs)
-        const columns = ["Project ID", "Client ID", "Agent Type", "Client Email", "Status", ""];
-        const originalData = [
-            { "Project ID": "003", "Client ID": "002", "Agent Type": "Sales", "Client Email": "alice@example.com", "Status": "Drafting SOW" },
-            { "Project ID": "004", "Client ID": "003", "Agent Type": "Sales", "Client Email": "bob@example.com", "Status": "Drafting SOW" },
-            { "Project ID": "005", "Client ID": "002", "Agent Type": "Sales", "Client Email": "charlie@example.com", "Status": "Drafting SOW" }
-        ];
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchData();
+        });
 
-        // Initialize filtered data
-        let filteredData = [...originalData];
+        async function fetchData() {
+            try {
+                // Fetch data from the n8n webhook
+                const response = await fetch('http://localhost:5678/webhook-test/e16c6e2f-f583-4b54-ab7d-ba7e1859eb26');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                // Parse the JSON response
+                const data = await response.json();
+                console.log("Response data:", data);
+
+                // Extract the array of projects
+                const projects = data[0].projects;  // Access the 'projects' array
+                
+                console.log("Response proj:", projects);
+
+                if (!projects || projects.length === 0) {
+                    console.warn("No project data received.");
+                    return;
+                }
+
+                // Define columns
+                const columns = ["Project ID", "Client ID", "Agent Type", "Client Email", "Status", ""];
+                const buttonLabel = "Details";
+
+                // Populate the table with the fetched data
+                buildTable(columns, projects, "table", buttonLabel);
+
+                // Store the fetched data as originalData
+                window.originalData = projects;
+                window.filteredData = [...projects];
+
+                // Initialize the modal and search with the fetched data
+                handleModal("filterBtn", "filterModal", "close", "applyFilterBtn", "resetFilterBtn", "table", buttonLabel, columns, window.originalData);
+                handleSearch("searchInput", "table", buttonLabel, columns, window.originalData);
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+
+
+        // // Define columns and data specific to the page (project or logs)
+        // const columns = ["Project ID", "Client ID", "Agent Type", "Client Email", "Status", ""];
+        // const originalData = [
+        //     { "Project ID": "003", "Client ID": "002", "Agent Type": "Sales", "Client Email": "alice@example.com", "Status": "Drafting SOW" },
+        //     { "Project ID": "004", "Client ID": "003", "Agent Type": "Sales", "Client Email": "bob@example.com", "Status": "Drafting SOW" },
+        //     { "Project ID": "005", "Client ID": "002", "Agent Type": "Sales", "Client Email": "charlie@example.com", "Status": "Drafting SOW" }
+        // ];
+
+        // // Initialize filtered data
+        // let filteredData = [...originalData];
         
-        // Call the functions for table, modal, and search handling
-        const buttonLabel = "Details";
-        buildTable(columns, filteredData, "table", buttonLabel);
-        handleModal("filterBtn", "filterModal", "close", "applyFilterBtn", "resetFilterBtn", "table",buttonLabel, columns, originalData);
-        handleSearch("searchInput", "table",buttonLabel, columns, originalData);
+        // // Call the functions for table, modal, and search handling
+        // const buttonLabel = "Details";
+        // buildTable(columns, filteredData, "table", buttonLabel);
+        // handleModal("filterBtn", "filterModal", "close", "applyFilterBtn", "resetFilterBtn", "table",buttonLabel, columns, originalData);
+        // handleSearch("searchInput", "table",buttonLabel, columns, originalData);
     </script>
     
 
