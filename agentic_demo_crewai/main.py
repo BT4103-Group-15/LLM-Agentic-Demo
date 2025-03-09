@@ -43,7 +43,9 @@ async def ask_agent(request: RequirementRequest):  # raw request
     """Endpoint to interact with the local LLM"""
     # fixed_request = transform_input(request)  # Fix structure
     # request_obj = RequirementRequest(**fixed_request)
-    response = run_scoping_generator(request.email_text, request.requirement_df)
+    response = run_scoping_generator(
+        request.email_text, request.requirement_df, request.sample_scopingsheet
+    )
     return response  # {"response": response}
 
 

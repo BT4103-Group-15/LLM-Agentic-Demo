@@ -44,7 +44,8 @@ groq_api_key = api_key  # move into dotenv
 # llm = ChatGroq(
 #     groq_api_key=groq_api_key, model_name="llama-3.3-70b-versatile", temperature=0.7
 # ) # Rate limit exceeded
-llm = ChatGroq(groq_api_key=groq_api_key, model_name="gemma2-9b-it", temperature=0.3)
+# llm = ChatGroq(groq_api_key=groq_api_key, model_name="gemma2-9b-it", temperature=0.3)
+llm = mistral_7b_local
 
 
 ###################################################################################################
@@ -56,6 +57,7 @@ class InputState(BaseModel):
     """
 
     email_text: str
+    sample_scopingsheet: str  # in markdown format string
     requirement_df: list[RequirementItem]  # confirm type from HTTP request
 
 
@@ -74,6 +76,7 @@ class OverAllState(BaseModel):
     # requirement_df: pd.DataFrame  not allowed in pydantic framework
     requirement_df: list[dict]  # standard
     scopingsheet_markdown: str
+    sample_scopingsheet: str
     workflow_steps: int  # track cycle from agents
 
     model_config = {"arbitrary_types_allowed": True}
@@ -132,33 +135,36 @@ def extract_requirements(state: InputState) -> OverAllState:
     {requirement_row} 
     """
     requirement_dataframe = pd.DataFrame(
-        state.requirement_df
-    )  # already converts to DF here
+        state.requirement_df, columns=["category", "requirement"]
+    )
+    print("dataframe is: \n ", requirement_dataframe)
     status_column = []
     extraction_prompt = ChatPromptTemplate.from_template(req_extraction_template)
     qa_prompt = ChatPromptTemplate.from_template(req_checking_template)
+
     step1 = extraction_prompt | llm | StrOutputParser()  # Extracts the "content" string
     step2 = qa_prompt | llm | StrOutputParser()
 
     extraction_chain = step1 | step2  # Chaining the two prompts
-    for index, requirement in requirement_dataframe.iterrows():
-        req_string = str(index) + ", ".join(
-            requirement.astype(str)
-        )  # will this work on dictionary?
+
+    for index, row in requirement_dataframe.iterrows():
+        req_description = (
+            f"Category: {row['category']}\nRequirement: {row['requirement']}"
+        )
         str_output = extraction_chain.invoke(
             {
                 "email_content": state.email_text,
-                "the_requirement": req_string,  # str from row of dataframe
+                "the_requirement": req_description,  # str from row of dataframe
             }
         )
-        # req_status = groq_output.content
-        # checking_status = groq_output.response_metadata[
-        #     "token_usage"
-        # ]  # check groq output times
-        # print(checking_status)
-        print(index, " : " + str_output)
+        print(index, " : " + str_output)  # LLM evaluation
         status_column.append(str_output)
-    requirement_dataframe["status"] = status_column
+
+    # requirement_dataframe["status"] = status_column
+    # Add new column without modifying existing structure
+    requirement_dataframe = requirement_dataframe.assign(status=status_column)
+    print("dataframe became: \n ", requirement_dataframe)
+
     # Must return all fields in the OverAllState object that are to be tracked
     return {
         "email_text": state.email_text,
@@ -188,8 +194,13 @@ def create_markdown(state: OverAllState):
     """
     md_prompt = ChatPromptTemplate.from_template(template_for_md)
     chain = md_prompt | llm | StrOutputParser()
+    # Template_for_md needs to be copied into OverAllState from InputState
+    # That is if the sponsor even gives us a template
     str_output = chain.invoke(
-        {"scopingsheet_md": markdown_content, "template_for_md": template_for_md}
+        {
+            "scopingsheet_md": markdown_content,
+            "template_for_md": state.sample_scopingsheet,
+        }
     )
     # markdown_content = groq_output.content
     # checking_status = groq_output.response_metadata["token_usage"]
@@ -248,14 +259,20 @@ compiled_workflow = workflow.compile()  # Graph is compiled
 # Scoping Generator Method
 ###################################################################################################
 def run_scoping_generator(
-    email_content: str, requirement_dataframe: List[RequirementItem]
+    email_content: str,
+    requirement_dataframe: List[RequirementItem],
+    sample_scopingsheet: str,
 ) -> str:
     """
     Wrapper method to run the scoping generator workflow.
     """
 
     output = compiled_workflow.invoke(
-        {"email_text": email_content, "requirement_df": requirement_dataframe}
+        {
+            "email_text": email_content,
+            "requirement_df": requirement_dataframe,
+            "sample_scopingsheet": sample_scopingsheet,
+        }
     )
     # print(output)
     return output

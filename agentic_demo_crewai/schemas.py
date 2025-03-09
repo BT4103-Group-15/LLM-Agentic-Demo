@@ -22,7 +22,6 @@ class RequirementItem(BaseModel):
 
     category: str
     requirement: str
-    # Status -> to be added within the steps
 
 
 class RequirementRequest(BaseModel):
@@ -31,4 +30,5 @@ class RequirementRequest(BaseModel):
     """
 
     email_text: str
+    sample_scopingsheet: str  # in markdown format string
     requirement_df: List[RequirementItem]
