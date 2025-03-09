@@ -1,280 +1,280 @@
 {
-    "scopingsheet_markdown": "```markdown\n# Scoping Sheet:\n|    | 0                                               | 1                                            | status                |\n|---:|:------------------------------------------------|:---------------------------------------------|:------------------------------------------------------------|\n|  0 | ('category', 'Application Overview')            | ('requirement', 'Application Name')          | NA                |\n|  1 | ('category', 'Application Overview')            | ('requirement', 'Production URL')            | NA                |\n|  2 | ('category', 'Application Overview')            | ('requirement', 'Environment for Testing')   | NA                |\n|  3 | ('category', 'Application Overview')            | ('requirement', 'Application Type')          | Application Type: Web, API, Mobile |\n|  4 | ('category', 'Authentication & Access Control') | ('requirement', 'Authentication Method')     | Authentication Method |\n|  5 | ('category', 'Authentication & Access Control') | ('requirement', 'User Roles')                | NA                |\n|  6 | ('category', 'Authentication & Access Control') | ('requirement', 'Session Management')        | Session Management |\n|  7 | ('category', 'Authentication & Access Control') | ('requirement', 'Session timeout period')    | Session timeout period |\n|  8 | ('category', 'Input Processing')                | ('requirement', 'total_num_input_fields')    | NA                |\n|  9 | ('category', 'Input Processing')                | ('requirement', 'Input Types Present')       | NA                |\n| 10 | ('category', 'Data Processing')                 | ('requirement', 'Sensitive Data Handled')    | Sensitive Data Handled: Personal and Healthcare Information |\n| 11 | ('category', 'Data Processing')                 | ('requirement', 'Data Storage')              | NA                |\n| 12 | ('category', 'API Details')                     | ('requirement', 'Number of Endpoints')       | NA                |\n| 13 | ('category', 'API Details')                     | ('requirement', 'Authentication Required')   | Authentication Required |\n| 14 | ('category', 'API Details')                     | ('requirement', 'Rate Limiting')             | NA                |\n| 15 | ('category', 'API Details')                     | ('requirement', 'Documentation Available')   | NA                |\n| 16 | ('category', 'Infrastructure')                  | ('requirement', 'Security Controls Present') | Security Controls |\n| 17 | ('category', 'Infrastructure')                  | ('requirement', 'Input Types Present')       | NA                |\n| 18 | ('category', 'Business Logic')                  | ('requirement', 'Critical Functions')        | NA                |\n| 19 | ('category', 'Security Requirements')           | ('requirement', 'Compliance Requirements')   | HIPAA, GDPR |\n| 20 | ('category', 'Security Requirements')           | ('requirement', 'Previous Testing')          | NA                |\n| 21 | ('category', 'Testing Constraints')             | ('requirement', 'Time Restrictions')         | Testing Window: Business Hours |\n| 22 | ('category', 'Testing Constraints')             | ('requirement', 'Testing Limitations')       | NA                |\n| 23 | ('category', 'Deliverables')                    | ('requirement', 'Required Reports')          | NA                |\n| 24 | ('category', 'Deliverables')                    | ('requirement', 'Timeline')                  | NA                |\n```\n\n\n\n",
+    "scopingsheet_markdown": " ```markdown\n   # Scoping Sheet: HealthTrack\n\n   | Category                                        | Requirement                                              | Status                                                                                                      |\n   |-----------------------------------------------|:-------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------|\n   | Application Overview                           | Application Name                                         | HealthTrack                                                                                                |\n   | Application Overview                           | Production URL                                          | [Production URL](healthtrack.com)                                                                         |\n   | Application Overview                           | Environment for Testing                                 | Staging Environment                                                                                       |\n   | Application Overview                           | Application Type                                         | ['Web', 'API', 'Mobile']                                                                                    |\n   | Authentication & Access Control                | Authentication Method                                     | Username/Password, OAuth                                                                                  |\n   | Authentication & Access Control                | User Roles                                                | ['Admin', 'User']                                                                                           |\n   | Authentication & Access Control                | Session Management                                        | Requirement: Session Management (Username/Password, OAuth for Authentication)                             |\n   | Authentication & Access Control                | Session timeout period                                    | 1 hour                                                                                                     |\n   | Input Processing                               | total_num_input_fields                                  | Number of input fields for user authentication and data processing in HealthTrack: 4                         |\n   | Input Processing                               | Input Types Present                                       | Requirement: Input Types Present (Username/Password, OAuth)                                                |\n   | Data Processing                               | Sensitive Data Handled                                   | ('requirement', 'Handling of personal and healthcare information')                                           |\n   | Data Processing                               | Data Storage                                             | Requirement: Data Storage (AWS S3, Cloud SQL)                                                              |\n   | API Details                                    | Number of Endpoints                                       | ('requirement', 'Number of APIs')                                                                          |\n   | API Details                                    | Authentication Required                                   | Requirement: API requires authentication                                                                  |\n   | API Details                                    | Rate Limiting                                             | API Rate Limiting (Yes)                                                                                     |\n   | API Details                                    | Documentation Available                                   | ('requirement', 'API documentation available for details on WAF, IPS/IDS, Load Balancer, API Gateway')  |\n   | Infrastructure                                 | Security Controls Present                               | ('requirement', 'Security controls: WAF, IPS/IDS, Load Balancer, API Gateway')                             |\n   | Infrastructure                                 | Input Types Present                                       | Input Types Present: Username/Password, OAuth                                                              |\n   | Business Logic                                 | Critical Functions                                        | ('requirement', 'Critical Functions - Business Logic')                                                     |\n   | Security Requirements                           | Compliance Requirements                                  | 1. HIPAA, GDPR                                                                                             |\n   | Security Requirements                           | Previously Conducted Testing                            | 1. Penetration testing and vulnerability assessment in the past                                              |\n   | Testing Constraints                            | Time Restrictions                                        | Requirement: ('requirement', 'Testing Window'), Value: 'Business Hours Only'                               |\n   | Testing Constraints                            | Testing Limitations                                      | 1. Business hours only, No production impact                                                                |\n   | Deliverables                                   | Required Reports                                         | Required Report(s): Security Testing Results (for HealthTrack)                                             |\n   | Deliverables                                   | Timeline                                                 | Testing Window: Monday to Friday, 9 AM to 5 PM                                                              |\n   ```",
     "requirement_df": [
         {
-            "0": [
+            "category": [
                 "category",
                 "Application Overview"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Application Name"
             ],
-            "status": "NA \n"
+            "status": " Application Name: HealthTrack"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Application Overview"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Production URL"
             ],
-            "status": "NA \n"
+            "status": " ('requirement', 'Production URL')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Application Overview"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Environment for Testing"
             ],
-            "status": "NA \n"
+            "status": " ('requirement', 'Testing Environment')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Application Overview"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Application Type"
             ],
-            "status": "Application Type: Web, API, Mobile \n"
+            "status": " Application Types: ['Web', 'API', 'Mobile']"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Authentication & Access Control"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Authentication Method"
             ],
-            "status": "Authentication Method \n"
+            "status": " Authentication Method: Username/Password, OAuth"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Authentication & Access Control"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "User Roles"
             ],
-            "status": "NA \n"
+            "status": " ('requirement', 'User Roles')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Authentication & Access Control"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Session Management"
             ],
-            "status": "Session Management \n"
+            "status": " Requirement: Session Management (Username/Password, OAuth for Authentication)"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Authentication & Access Control"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Session timeout period"
             ],
-            "status": "Session timeout period \n"
+            "status": " Requirement: Session timeout period"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Input Processing"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "total_num_input_fields"
             ],
-            "status": "NA \n"
+            "status": "1. ('requirement', 'Number of input fields for user authentication and data processing in HealthTrack')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Input Processing"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Input Types Present"
             ],
-            "status": "NA \n"
+            "status": " Requirement: Input Types Present (Username/Password, OAuth)"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Data Processing"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Sensitive Data Handled"
             ],
-            "status": "Sensitive Data Handled: Personal and Healthcare Information \n"
+            "status": " ('requirement', 'Handling of personal and healthcare information')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Data Processing"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Data Storage"
             ],
-            "status": "NA \n"
+            "status": " Requirement: Data Storage"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "API Details"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Number of Endpoints"
             ],
-            "status": "NA \n"
+            "status": " ('requirement', 'Number of APIs')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "API Details"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Authentication Required"
             ],
-            "status": "Authentication Required \n"
+            "status": " Requirement: API requires authentication"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "API Details"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Rate Limiting"
             ],
-            "status": "NA \n"
+            "status": " API Rate Limiting (NA)"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "API Details"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Documentation Available"
             ],
-            "status": "NA \n"
+            "status": " ('requirement', 'API documentation available for details on WAF, IPS/IDS, Load Balancer, API Gateway')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Infrastructure"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Security Controls Present"
             ],
-            "status": "Security Controls \n"
+            "status": " ('requirement', 'Security controls: WAF, IPS/IDS, Load Balancer, API Gateway')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Infrastructure"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Input Types Present"
             ],
-            "status": "NA \n"
+            "status": " Input Types Present: Username/Password, OAuth"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Business Logic"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Critical Functions"
             ],
-            "status": "NA \n"
+            "status": " ('requirement', 'Critical Functions - Business Logic')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Security Requirements"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Compliance Requirements"
             ],
-            "status": "HIPAA, GDPR \n"
+            "status": "1. ('requirement', 'Security Requirements')\n   - HIPAA\n   - GDPR"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Security Requirements"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Previous Testing"
             ],
-            "status": "NA \n"
+            "status": "1. ('requirement', 'Previously Conducted Testing')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Testing Constraints"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Time Restrictions"
             ],
-            "status": "Testing Window: Business Hours  \n"
+            "status": " Requirement: ('requirement', 'Testing Window'), Value: 'Business Hours Only'"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Testing Constraints"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Testing Limitations"
             ],
-            "status": "NA \n"
+            "status": "1. ('testing_limitations', 'Business hours only')"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Deliverables"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Required Reports"
             ],
-            "status": "NA \n"
+            "status": " Required Report(s): Security Testing Results (for HealthTrack)"
         },
         {
-            "0": [
+            "category": [
                 "category",
                 "Deliverables"
             ],
-            "1": [
+            "requirement": [
                 "requirement",
                 "Timeline"
             ],
-            "status": "NA \n"
+            "status": " Testing Window"
         }
     ]
 }
