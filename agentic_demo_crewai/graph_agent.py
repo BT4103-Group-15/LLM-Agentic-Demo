@@ -8,13 +8,38 @@ from langchain_core.prompts import ChatPromptTemplate  # For formatting purposes
 from langchain_ollama import OllamaLLM  # for LangChain version
 import pandas as pd
 
+from schemas import RequirementItem  # Confirm the path
+from typing import List
+
+# for Groq credentials
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GROQ_API_KEY")
 
 ###################################################################################################
 # Local Model Initialisation via LangChain
 ###################################################################################################
+# Groq is for development, for production use OllamaLLM
+from langchain_groq import ChatGroq  # llm invocation output differs from OllamaLLM
+
+# The structure of groq model.invoke():
+# content : the response string
+# additional_kwargs : not sure what this is yet
+# response_metadata :
+#   token_usage:{...}, model_name="str", system_fingerprint, finish_reason: good = stop
+# id='to track and monitor chat id',
+# usage_metadata : {...},
+
 mistral_7b_local = OllamaLLM(model="mistral")
 llama3_8b_local = OllamaLLM(model="llama3.1")
 qwen_2p5b_local = OllamaLLM(model="qwen2.5:14b")
+
+groq_api_key = api_key  # move into dotenv
+llm = ChatGroq(
+    groq_api_key=groq_api_key, model_name="llama-3.3-70b-versatile", temperature=0.7
+)
 
 
 ###################################################################################################
@@ -26,7 +51,7 @@ class InputState(BaseModel):
     """
 
     email_text: str
-    requirement_df: list[dict]  # confirm type from HTTP request
+    requirement_df: list[RequirementItem]  # confirm type from HTTP request
 
 
 # This state class to be determined, depending on how the email task is to be decomposed
@@ -41,9 +66,12 @@ class OverAllState(BaseModel):
     """
 
     email_text: str  # input from http
-    requirement_df: list[dict]  # Convert this into a pandas dataframe?
+    # requirement_df: pd.DataFrame  not allowed in pydantic framework
+    requirement_df: list[dict]  # standard
     scopingsheet_markdown: str
     workflow_steps: int  # track cycle from agents
+
+    model_config = {"arbitrary_types_allowed": True}
 
 
 class OutputState(BaseModel):
@@ -75,11 +103,11 @@ def extract_requirements(state: InputState) -> OverAllState:
     Note: Data types of each requirement can be added with eval() in future versions 2.0
     """
     # Since the scoping sheet has 10 sub tables, we will loop through it
-    template = """
+    req_extraction_template = """
     # Role
-    You are a seasoned software security tester with experience in penetration testing. You
-    are tasked with extracting software requirements from the clients email before conducting
-    a software security test.
+    You are a seasoned software security tester with experience in penetration testing and are
+    tasked with extracting software requirements from the clients email before conducting
+    a software security test. This is part of the customer engagement phase.
 
     # Task
     Extract a specific software requirement from the following email.
@@ -87,30 +115,42 @@ def extract_requirements(state: InputState) -> OverAllState:
     # Output Format
     1. If the requirement is not clear enough, please output NA as the output string.
     2. If the requirements are clear, output the extracted requirement in short phrases
-    under 10 words.
+    under 20 words.
 
     # Software Requirement: {the_requirement}
 
     # Email:
     \n\n{email_content}\n\n
     """
-    requirement_dataframe = pd.DataFrame(state["requirement_df"])
+    requirement_dataframe = pd.DataFrame(
+        state.requirement_df
+    )  # already converts to DF here
     status_column = []
-    prompt = ChatPromptTemplate.from_template(template)
-    chain = prompt | mistral_7b_local
+    prompt = ChatPromptTemplate.from_template(req_extraction_template)
+    chain = prompt | llm
     for index, requirement in requirement_dataframe.iterrows():
-        req_string = ", ".join(requirement.astype(str))
-        req_status = chain.invoke(
+        req_string = str(index) + ", ".join(
+            requirement.astype(str)
+        )  # will this work on dictionary?
+        groq_output = chain.invoke(
             {
-                "email_content": state["email_text"],
+                "email_content": state.email_text,
                 "the_requirement": req_string,  # str from row of dataframe
             }
         )
+        req_status = groq_output.content
+        checking_status = groq_output.response_metadata[
+            "token_usage"
+        ]  # check groq output times
+        print(checking_status)
         status_column.append(req_status)
     requirement_dataframe["status"] = status_column
+    # Must return all fields in the OverAllState object that are to be tracked
     return {
-        "email_text": state["email_text"],
-        "requirement_df": requirement_dataframe,  # pandas dataframe
+        "email_text": state.email_text,
+        "requirement_df": requirement_dataframe.to_dict("records"),  # pandas dataframe
+        "scopingsheet_markdown": "",
+        "workflow_steps": 1,
     }
 
 
@@ -121,8 +161,8 @@ def create_markdown(state: OverAllState):
     """
     # Convert the updated document to markdown
     markdown_content = pd.DataFrame(
-        state["requirement_df"]
-    ).to_markdown()  # pandas function -> add this plus formatting
+        state.requirement_df
+    ).to_markdown()  # Do i need to convert this into markdown to begin with?
     template_for_md = """
     Create a markdown file for the scoping sheet. Follow the format of this template. (insert template file)
 
@@ -133,12 +173,25 @@ def create_markdown(state: OverAllState):
     {template_for_md}
     """
     md_prompt = ChatPromptTemplate.from_template(template_for_md)
-    chain = md_prompt | mistral_7b_local
+    chain = md_prompt | llm
+    groq_output = chain.invoke(
+        {"scopingsheet_md": markdown_content, "template_for_md": template_for_md}
+    )
+    markdown_content = groq_output.content
+    checking_status = groq_output.response_metadata["token_usage"]
+    print(checking_status)
+    print(markdown_content)
     return {
-        "scopingsheet_markdown": chain.invoke(
-            {"scopingsheet_md": markdown_content, "template_for_md": template_for_md}
-        ),
+        "scopingsheet_markdown": markdown_content,
     }
+
+
+# content : the response string
+# additional_kwargs : not sure what this is yet
+# response_metadata :
+#   token_usage:{...}, model_name="str", system_fingerprint, finish_reason: good = stop
+# id='to track and monitor chat id',
+# usage_metadata : {...},
 
 
 # Step 4: Print the updated requirement document
@@ -147,10 +200,10 @@ def output_document(state: OverAllState) -> OutputState:
     Print the updated requirement document.
     """
     print("Updated Requirement Document:")
-    print(state["requirement_df"])
+    print(state.requirement_df)
     return {
-        "scopingsheet_markdown": state["scopingsheet_markdown"],
-        "requirement_df": state["requirement_df"],
+        "scopingsheet_markdown": state.scopingsheet_markdown,
+        "requirement_df": state.requirement_df,
     }  # Printing for debugging purposes
 
 
@@ -179,10 +232,15 @@ compiled_workflow = workflow.compile()  # Graph is compiled
 ###################################################################################################
 # Scoping Generator Method
 ###################################################################################################
-def run_scoping_generator(email_content: str) -> str:
+def run_scoping_generator(
+    email_content: str, requirement_dataframe: List[RequirementItem]
+) -> str:
     """
     Wrapper method to run the scoping generator workflow.
     """
-    # To fix this input type again on sunday
-    scopingsheet_filled = compiled_workflow.invoke({"email_content": email_content})
-    return scopingsheet_filled
+
+    output = compiled_workflow.invoke(
+        {"email_text": email_content, "requirement_df": requirement_dataframe}
+    )
+    print(output)
+    return output
