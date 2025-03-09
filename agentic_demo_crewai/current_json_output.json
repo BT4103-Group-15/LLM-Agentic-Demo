@@ -1,0 +1,280 @@
+{
+    "scopingsheet_markdown": "```markdown\n# Scoping Sheet:\n|    | 0                                               | 1                                            | status                |\n|---:|:------------------------------------------------|:---------------------------------------------|:------------------------------------------------------------|\n|  0 | ('category', 'Application Overview')            | ('requirement', 'Application Name')          | NA                |\n|  1 | ('category', 'Application Overview')            | ('requirement', 'Production URL')            | NA                |\n|  2 | ('category', 'Application Overview')            | ('requirement', 'Environment for Testing')   | NA                |\n|  3 | ('category', 'Application Overview')            | ('requirement', 'Application Type')          | Application Type: Web, API, Mobile |\n|  4 | ('category', 'Authentication & Access Control') | ('requirement', 'Authentication Method')     | Authentication Method |\n|  5 | ('category', 'Authentication & Access Control') | ('requirement', 'User Roles')                | NA                |\n|  6 | ('category', 'Authentication & Access Control') | ('requirement', 'Session Management')        | Session Management |\n|  7 | ('category', 'Authentication & Access Control') | ('requirement', 'Session timeout period')    | Session timeout period |\n|  8 | ('category', 'Input Processing')                | ('requirement', 'total_num_input_fields')    | NA                |\n|  9 | ('category', 'Input Processing')                | ('requirement', 'Input Types Present')       | NA                |\n| 10 | ('category', 'Data Processing')                 | ('requirement', 'Sensitive Data Handled')    | Sensitive Data Handled: Personal and Healthcare Information |\n| 11 | ('category', 'Data Processing')                 | ('requirement', 'Data Storage')              | NA                |\n| 12 | ('category', 'API Details')                     | ('requirement', 'Number of Endpoints')       | NA                |\n| 13 | ('category', 'API Details')                     | ('requirement', 'Authentication Required')   | Authentication Required |\n| 14 | ('category', 'API Details')                     | ('requirement', 'Rate Limiting')             | NA                |\n| 15 | ('category', 'API Details')                     | ('requirement', 'Documentation Available')   | NA                |\n| 16 | ('category', 'Infrastructure')                  | ('requirement', 'Security Controls Present') | Security Controls |\n| 17 | ('category', 'Infrastructure')                  | ('requirement', 'Input Types Present')       | NA                |\n| 18 | ('category', 'Business Logic')                  | ('requirement', 'Critical Functions')        | NA                |\n| 19 | ('category', 'Security Requirements')           | ('requirement', 'Compliance Requirements')   | HIPAA, GDPR |\n| 20 | ('category', 'Security Requirements')           | ('requirement', 'Previous Testing')          | NA                |\n| 21 | ('category', 'Testing Constraints')             | ('requirement', 'Time Restrictions')         | Testing Window: Business Hours |\n| 22 | ('category', 'Testing Constraints')             | ('requirement', 'Testing Limitations')       | NA                |\n| 23 | ('category', 'Deliverables')                    | ('requirement', 'Required Reports')          | NA                |\n| 24 | ('category', 'Deliverables')                    | ('requirement', 'Timeline')                  | NA                |\n```\n\n\n\n",
+    "requirement_df": [
+        {
+            "0": [
+                "category",
+                "Application Overview"
+            ],
+            "1": [
+                "requirement",
+                "Application Name"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Application Overview"
+            ],
+            "1": [
+                "requirement",
+                "Production URL"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Application Overview"
+            ],
+            "1": [
+                "requirement",
+                "Environment for Testing"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Application Overview"
+            ],
+            "1": [
+                "requirement",
+                "Application Type"
+            ],
+            "status": "Application Type: Web, API, Mobile \n"
+        },
+        {
+            "0": [
+                "category",
+                "Authentication & Access Control"
+            ],
+            "1": [
+                "requirement",
+                "Authentication Method"
+            ],
+            "status": "Authentication Method \n"
+        },
+        {
+            "0": [
+                "category",
+                "Authentication & Access Control"
+            ],
+            "1": [
+                "requirement",
+                "User Roles"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Authentication & Access Control"
+            ],
+            "1": [
+                "requirement",
+                "Session Management"
+            ],
+            "status": "Session Management \n"
+        },
+        {
+            "0": [
+                "category",
+                "Authentication & Access Control"
+            ],
+            "1": [
+                "requirement",
+                "Session timeout period"
+            ],
+            "status": "Session timeout period \n"
+        },
+        {
+            "0": [
+                "category",
+                "Input Processing"
+            ],
+            "1": [
+                "requirement",
+                "total_num_input_fields"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Input Processing"
+            ],
+            "1": [
+                "requirement",
+                "Input Types Present"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Data Processing"
+            ],
+            "1": [
+                "requirement",
+                "Sensitive Data Handled"
+            ],
+            "status": "Sensitive Data Handled: Personal and Healthcare Information \n"
+        },
+        {
+            "0": [
+                "category",
+                "Data Processing"
+            ],
+            "1": [
+                "requirement",
+                "Data Storage"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "API Details"
+            ],
+            "1": [
+                "requirement",
+                "Number of Endpoints"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "API Details"
+            ],
+            "1": [
+                "requirement",
+                "Authentication Required"
+            ],
+            "status": "Authentication Required \n"
+        },
+        {
+            "0": [
+                "category",
+                "API Details"
+            ],
+            "1": [
+                "requirement",
+                "Rate Limiting"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "API Details"
+            ],
+            "1": [
+                "requirement",
+                "Documentation Available"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Infrastructure"
+            ],
+            "1": [
+                "requirement",
+                "Security Controls Present"
+            ],
+            "status": "Security Controls \n"
+        },
+        {
+            "0": [
+                "category",
+                "Infrastructure"
+            ],
+            "1": [
+                "requirement",
+                "Input Types Present"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Business Logic"
+            ],
+            "1": [
+                "requirement",
+                "Critical Functions"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Security Requirements"
+            ],
+            "1": [
+                "requirement",
+                "Compliance Requirements"
+            ],
+            "status": "HIPAA, GDPR \n"
+        },
+        {
+            "0": [
+                "category",
+                "Security Requirements"
+            ],
+            "1": [
+                "requirement",
+                "Previous Testing"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Testing Constraints"
+            ],
+            "1": [
+                "requirement",
+                "Time Restrictions"
+            ],
+            "status": "Testing Window: Business Hours  \n"
+        },
+        {
+            "0": [
+                "category",
+                "Testing Constraints"
+            ],
+            "1": [
+                "requirement",
+                "Testing Limitations"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Deliverables"
+            ],
+            "1": [
+                "requirement",
+                "Required Reports"
+            ],
+            "status": "NA \n"
+        },
+        {
+            "0": [
+                "category",
+                "Deliverables"
+            ],
+            "1": [
+                "requirement",
+                "Timeline"
+            ],
+            "status": "NA \n"
+        }
+    ]
+}
