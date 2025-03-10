@@ -14,7 +14,7 @@ from IPython.display import Image, display
 # llm = OllamaLLM(model="mistral", temperature=0.7)
 
 
-groq_api_key = ""
+groq_api_key = "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"
 llm = ChatGroq(
     groq_api_key=groq_api_key, model_name="llama-3.3-70b-versatile", temperature=0.7
 )

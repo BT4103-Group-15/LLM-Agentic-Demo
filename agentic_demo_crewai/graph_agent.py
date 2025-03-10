@@ -137,6 +137,13 @@ def extract_requirements(state: InputState) -> OverAllState:
     requirement_dataframe = pd.DataFrame(
         state.requirement_df, columns=["category", "requirement"]
     )
+    # requirement_dataframe.columns = [col[1] if isinstance(col, tuple) else col for col in requirement_dataframe.columns]
+    # print(requirement_dataframe.columns.tolist())
+    print(type(requirement_dataframe["category"].iloc[0]))  # Check first value in 'category' column
+    print(type(requirement_dataframe["requirement"].iloc[0]))  # Check first value in 'requirement' column
+    requirement_dataframe["category"] = requirement_dataframe["category"].apply(lambda x: x[1] if isinstance(x, tuple) else x)
+    requirement_dataframe["requirement"] = requirement_dataframe["requirement"].apply(lambda x: x[1] if isinstance(x, tuple) else x)
+
     print("dataframe is: \n ", requirement_dataframe)
     status_column = []
     extraction_prompt = ChatPromptTemplate.from_template(req_extraction_template)
