@@ -1,5 +1,5 @@
 {
-	"email": "Hi Team, Please add the following requirements to the project: 1. Requirement ID: REQ001, Description: User authentication, Priority: High, Status: New 2. Requirement ID: REQ002, Description: Data encryption, Priority: Medium, Status: New Thanks, John",
+	"email_text": "Hi Team, Please add the following requirements to the project: 1. Requirement ID: REQ001, Description: User authentication, Priority: High, Status: New 2. Requirement ID: REQ002, Description: Data encryption, Priority: Medium, Status: New Thanks, John",
     "requirement_columns" : [
         {"Category": "Application Overview", "Requirement": "Application Name"},
         {"Category": "Application Overview", "Requirement": "Production URL"},
