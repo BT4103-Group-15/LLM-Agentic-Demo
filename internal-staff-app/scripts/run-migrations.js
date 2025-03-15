@@ -1,9 +1,33 @@
 const fs = require('fs').promises;
 const path = require('path');
-const { pool } = require('../server/db');
+const mysql = require('mysql2/promise');
 
 async function runMigrations() {
+  let rootConnection;
+  let dbConnection;
+  
   try {
+    // First connect as root without specifying a database
+    rootConnection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '0000'
+    });
+    
+    // Create database if not exists
+    console.log('Creating database if not exists...');
+    await rootConnection.query('CREATE DATABASE IF NOT EXISTS data');
+    console.log('Database "data" is ready');
+    
+    // Now create a connection with the database specified
+    dbConnection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '0000',
+      database: 'data',
+      multipleStatements: true
+    });
+    
     // Get all migration files sorted by name
     const migrationsDir = path.join(__dirname, '..', 'migrations');
     const files = await fs.readdir(migrationsDir);
@@ -17,6 +41,12 @@ async function runMigrations() {
     
     // Execute each migration file in order
     for (const file of sqlFiles) {
+      // Skip the database creation file if it exists
+      if (file === '00_create_database.sql') {
+        console.log(`Skipping ${file} - database already created`);
+        continue;
+      }
+      
       console.log(`Running migration: ${file}`);
       
       // Read the SQL file content
@@ -32,7 +62,7 @@ async function runMigrations() {
       // Execute each statement
       for (const statement of statements) {
         try {
-          await pool.query(statement);
+          await dbConnection.query(statement);
         } catch (err) {
           console.error(`Error executing statement from ${file}:`, err.message);
           console.error('Statement:', statement);
@@ -48,8 +78,9 @@ async function runMigrations() {
     console.error('Migration failed:', error);
     process.exit(1);
   } finally {
-    // Close the connection pool
-    pool.end();
+    // Close connections
+    if (rootConnection) await rootConnection.end();
+    if (dbConnection) await dbConnection.end();
   }
 }
 
