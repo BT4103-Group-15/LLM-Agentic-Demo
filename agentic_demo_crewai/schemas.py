@@ -7,7 +7,7 @@ To be confirmed:
 3. What do we do when there is insufficient information in the email?
 
 Questions
-1. For repeated customers, are there additional information about the client the 
+1. For repeated customers, are there additional information about the client the
 we have which can help us in our generation?
 """
 
@@ -32,3 +32,12 @@ class RequirementRequest(BaseModel):
     email_text: str
     sample_scopingsheet: str  # in markdown format string
     requirement_df: List[RequirementItem]
+
+
+class ScopeOfWorkRequest(BaseModel):
+    """
+    JSON n8n request to the FastAPI server for SOW generation
+    """
+
+    sample_sow: str  # in markdown format string
+    completed_scopingsheet: str  # in markdown format string

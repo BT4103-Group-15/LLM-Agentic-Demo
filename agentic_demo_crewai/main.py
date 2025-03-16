@@ -8,8 +8,9 @@ import pandas as pd
 # from fastapi.middleware.cors import CORSMiddleware
 
 # from fastapi.responses import Response -> for markdown
-from schemas import RequirementRequest
+from schemas import RequirementRequest, ScopeOfWorkRequest
 from graph_agent import run_scoping_generator  # Import your LLM function
+from sow_generator import generate_sow
 
 app = FastAPI(
     title="Scoping Sheet Generator Server",
@@ -47,6 +48,16 @@ async def ask_agent(request: RequirementRequest):  # raw request
         request.email_text, request.requirement_df, request.sample_scopingsheet
     )
     return response  # {"response": response}
+
+
+@app.post("/api/sow-local-flow")
+async def run_sow_generator(request: ScopeOfWorkRequest):  # raw request
+    """Input will be a scoping sheet that is filled out in markdown?
+    Output will be a SOW in markdown format
+    Best if the markdown has signing fields for the client and the user
+    """
+    sow_markdown_str = generate_sow(request.completed_scopingsheet, request.sample_sow)
+    return {"sow_document": sow_markdown_str}
 
 
 # Run the FastAPI app from this file
