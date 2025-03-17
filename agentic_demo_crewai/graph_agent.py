@@ -29,7 +29,7 @@ def update_requirement_doc(requirements: list[dict]) -> pd.DataFrame:
     """
     Update the requirement document with the extracted requirements.
     """
-    global requirement_doc
+    global requirement_doc  # Does this need to be global?
     new_requirements = pd.DataFrame(requirements)
     requirement_doc = pd.concat([requirement_doc, new_requirements], ignore_index=True)
     return requirement_doc
