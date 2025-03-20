@@ -1,8 +1,8 @@
-CREATE TABLE IF NOT EXISTS clients (
+CREATE TABLE IF NOT EXISTS chatbot_logs (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
-    request_id INT,
+    pentest_request_id INT,
     user_input JSON,
     bot_response JSON,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (request_id) REFERENCES requests(request_id)
+    FOREIGN KEY (pentest_request_id) REFERENCES pentest_requests(pentest_request_id)
 );
