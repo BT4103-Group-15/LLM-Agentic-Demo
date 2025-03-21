@@ -9,9 +9,9 @@ async function runMigrations() {
   try {
     // First connect as root without specifying a database
     rootConnection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '0000'
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD
     });
     
     // Create database if not exists
@@ -21,10 +21,10 @@ async function runMigrations() {
     
     // Now create a connection with the database specified
     dbConnection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '0000',
-      database: 'data',
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       multipleStatements: true
     });
     
