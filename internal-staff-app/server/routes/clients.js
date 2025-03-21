@@ -5,7 +5,6 @@ const { pool } = require('../db');
 /**
  * Get all clients
  * GET /clients
- * curl http://localhost:3000/clients
  */
 router.get('/', async (req, res) => {
   try {
@@ -20,7 +19,6 @@ router.get('/', async (req, res) => {
 /**
  * Get client by ID
  * GET /clients/:id
- * curl http://localhost:3000/clients/1
  */
 router.get('/:id', async (req, res) => {
   try {
@@ -38,9 +36,6 @@ router.get('/:id', async (req, res) => {
 /**
  * Create new client
  * POST /clients
- * curl -X POST http://localhost:3000/clients \
-  -H "Content-Type: application/json" \
-  -d "{\"company_name\":\"Acme Corp\",\"contact_name\":\"John Doe\",\"email\":\"john@acme.com\"}"
  */
 router.post('/', async (req, res) => {
   const { company_name, contact_name, email } = req.body;
@@ -76,9 +71,6 @@ router.post('/', async (req, res) => {
 /**
  * Update client
  * PUT /clients/:id
- * curl -X POST http://localhost:3000/clients \
-  -H "Content-Type: application/json" \
-  -d "{\"company_name\":\"Acme Corp\",\"contact_name\":\"John Doe\",\"email\":\"john@acme.com\"}
  */
 router.put('/:id', async (req, res) => {
   const { company_name, contact_name, email } = req.body;
@@ -140,7 +132,6 @@ router.put('/:id', async (req, res) => {
 /**
  * Delete client
  * DELETE /clients/:id
- * curl -X DELETE http://localhost:3000/clients/1
  */
 router.delete('/:id', async (req, res) => {
   try {

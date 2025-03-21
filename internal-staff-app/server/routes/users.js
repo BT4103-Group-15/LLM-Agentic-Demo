@@ -5,7 +5,6 @@ const { pool } = require('../db');
 /**
  * Get all users
  * GET /users
- * curl http://localhost:3000/users
  */
 router.get('/', async (req, res) => {
   try {
@@ -20,7 +19,6 @@ router.get('/', async (req, res) => {
 /**
  * Get user by ID
  * GET /users/:id
- * curl http://localhost:3000/users/1
  */
 router.get('/:id', async (req, res) => {
   try {
@@ -38,9 +36,6 @@ router.get('/:id', async (req, res) => {
 /**
  * Create new user
  * POST /users
- * curl -X POST http://localhost:3000/users \
-  -H "Content-Type: application/json" \
-  -d "{\"name\":\"John Doe\",\"role\":\"SALES\"}
  */
 router.post('/', async (req, res) => {
   const { name, role } = req.body;
@@ -77,9 +72,6 @@ router.post('/', async (req, res) => {
 /**
  * Update user
  * PUT /users/:id
- * curl -X PUT http://localhost:3000/users/1 \
-  -H "Content-Type: application/json" \
-  -d "{\"name\":\"John Smith\",\"role\":\"PROJECT_MANAGER\"}"
  */
 router.put('/:id', async (req, res) => {
   const { name, role } = req.body;
@@ -117,7 +109,6 @@ router.put('/:id', async (req, res) => {
 /**
  * Delete user
  * DELETE /users/:id
- * curl -X DELETE http://localhost:3000/users/1
  */
 router.delete('/:id', async (req, res) => {
   try {
