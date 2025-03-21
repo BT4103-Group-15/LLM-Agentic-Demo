@@ -1,0 +1,22 @@
+meta {
+  name: Update user
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/users/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 2
+}
+
+body:json {
+  {
+    "name": "Test update user",
+    "role": "PROJECT_MANAGER"
+  }
+}
