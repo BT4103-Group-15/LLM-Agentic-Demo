@@ -3,10 +3,11 @@ const { pool, testConnection } = require('./db');
 
 // import all routes
 const usersRoutes = require('./routes/users');
-// const requestsRoutes = require('./routes/requests');
-// const reportsRoutes = require('./routes/reports');
-// const logsRoutes = require('./routes/logs');
-// const clientsRoutes = require('./routes/clients');
+const pentestRequestsRoutes = require('./routes/pentest-requests');
+const reportsRoutes = require('./routes/reports');
+const activityLogsRoutes = require('./routes/activity-logs');
+const clientsRoutes = require('./routes/clients');
+const chatbotLogsRoutes = require('./routes/chatbot-logs')
 
 const app = express();
 app.use(express.json());
@@ -19,10 +20,11 @@ app.use(express.json());
 
 // Mount all routes
 app.use('/users', usersRoutes);
-// app.use('/requests', requestsRoutes);
-// app.use('/reports', reportsRoutes);
-// app.use('/logs', logsRoutes);
-// app.use('/clients', clientsRoutes);
+app.use('/pentest-requests', pentestRequestsRoutes);
+app.use('/reports', reportsRoutes);
+app.use('/activity-logs', activityLogsRoutes);
+app.use('/clients', clientsRoutes);
+app.use('/chatbot-logs', chatbotLogsRoutes)
 
 
 // Start the server
