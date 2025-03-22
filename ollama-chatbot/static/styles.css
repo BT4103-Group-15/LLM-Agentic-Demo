@@ -157,6 +157,13 @@ header h2 {
   position: relative;
 }
 
+.chat-input #open-input{
+  padding: 1vw;
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  position: relative;
+}
+
 .chat-input textarea {
   width: 100%;
   padding: 1vw;
@@ -219,4 +226,10 @@ footer {
   padding: 10px;
   text-align: center;
   font-size: 1rem;
+}
+
+.checkbox-label {
+  display: block;
+  margin: 5px 0;
+  font-size: 16px;
 }
