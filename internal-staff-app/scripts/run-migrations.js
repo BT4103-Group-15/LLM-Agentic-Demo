@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const mysql = require('mysql2/promise');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 async function runMigrations() {
   let rootConnection;
