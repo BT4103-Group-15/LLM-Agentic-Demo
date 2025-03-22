@@ -8,6 +8,7 @@ const reportsRoutes = require('./routes/reports');
 const activityLogsRoutes = require('./routes/activity-logs');
 const clientsRoutes = require('./routes/clients');
 const chatbotLogsRoutes = require('./routes/chatbot-logs')
+const projectActionLogsRoutes = require('./routes/project-action-logs')
 
 const app = express();
 app.use(express.json());
@@ -25,6 +26,7 @@ app.use('/reports', reportsRoutes);
 app.use('/activity-logs', activityLogsRoutes);
 app.use('/clients', clientsRoutes);
 app.use('/chatbot-logs', chatbotLogsRoutes)
+app.use('/project-action-logs', projectActionLogsRoutes)
 
 
 // Start the server
