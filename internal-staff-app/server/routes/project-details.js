@@ -186,12 +186,9 @@ router.post('/', async (req, res) => {
     
     // Fetch and return the created project
     const [newProject] = await pool.query(`
-      SELECT 
-        p.*,
-        c.company_name
-      FROM project_details p
-      JOIN clients c ON p.client_id = c.client_id
-      WHERE p.project_id = ?
+      SELECT * 
+      FROM project_details
+      WHERE project_id = ?
     `, [result.insertId]);
     
     res.status(201).json(newProject[0]);
@@ -236,7 +233,7 @@ router.put('/:id', async (req, res) => {
       }
     }
     
-    // Build update query dynamically based on provided fields
+    // Update dynamically based on provided fields
     const updates = [];
     const values = [];
     
@@ -295,12 +292,9 @@ router.put('/:id', async (req, res) => {
     
     // Get updated project with joined data
     const [updatedProject] = await pool.query(`
-      SELECT 
-        p.*,
-        c.company_name
-      FROM project_details p
-      JOIN clients c ON p.client_id = c.client_id
-      WHERE p.project_id = ?
+      SELECT *
+      FROM project_details
+      WHERE project_id = ?
     `, [projectId]);
     
     res.json(updatedProject[0]);
@@ -336,13 +330,6 @@ router.delete('/:id', async (req, res) => {
     res.status(204).send();
   } catch (error) {
     console.error('Error deleting project details:', error);
-    
-    // Check if error is due to foreign key constraint
-    if (error.code === 'ER_ROW_IS_REFERENCED') {
-      return res.status(400).json({ 
-        error: 'Cannot delete project. It is referenced by other records.' 
-      });
-    }
     
     res.status(500).json({ 
       error: 'Failed to delete project details', 
