@@ -57,64 +57,41 @@ router.get('/project-details/:projectId', async (req, res) => {
 /**
  * Create new report
  * POST /reports
- * curl -X POST http://localhost:3000/reports \
-  -H "Content-Type: application/json" \
-  -d "{\"project_id\":1,\"report_type\":\"REQUIREMENT_VALIDATION\",\"content\":{\"findings\":[\"Finding 1\"]},\"created_by\":1}"
+ * curl -X POST http://localhost:3000/reports -H "Content-Type: application/json" -d "{\"project_id\":1,\"report_type\":\"REQUIREMENT_VALIDATION\",\"content\":{\"findings\":[\"Finding 1\"]},\"status\":\"DRAFT\"}"
  */
-  router.post('/', async (req, res) => {
-    const { project_id, report_type, content, created_by, status = 'DRAFT' } = req.body;
+router.post('/', async (req, res) => {
+  const { project_id, report_type, content, status = 'DRAFT' } = req.body;
+  
+  if (!project_id || !report_type || !content) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+  
+  try {
+    // Insert the report
+    const [result] = await pool.query(
+      'INSERT INTO reports (project_id, report_type, content, status) VALUES (?, ?, ?, ?)',
+      [project_id, report_type, JSON.stringify(content), status]
+    );
     
-    if (!project_id || !report_type || !content || !created_by) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
+    // Log activity
+    await pool.query(
+      'INSERT INTO activity_logs (project_id, action_type) VALUES (?, ?)',
+      [project_id, 'GENERATE_REPORT']
+    );
     
-    try {
-      // Verify project exists
-      const [requestRows] = await pool.query(
-        'SELECT * FROM project_details WHERE project_id = ?', 
-        [project_id]
-      );
-      
-      if (requestRows.length === 0) {
-        return res.status(404).json({ error: 'project not found' });
-      }
-            
-      if (userRows.length === 0) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-      
-      const [result] = await pool.query(
-        'INSERT INTO reports (project_id, report_type, content, status, created_by) VALUES (?, ?, ?, ?, ?)',
-        [project_id, report_type, JSON.stringify(content), status, created_by]
-      );
-      
-      // Log the activity
-      try {
-        await pool.query(
-          'INSERT INTO activity_logs (project_id, action_type) VALUES (?, ?, ?)',
-          [project_id, 'GENERATE_REPORT']
-        );
-      } catch (logError) {
-        console.warn('Unable to log activity:', logError.message);
-      }
-      
-      res.status(201).json({ 
-        report_id: result.insertId,
-        project_id,
-        report_type,
-        content,
-        status,
-        created_by,
-        timestamp: new Date()
-      });
-    } catch (error) {
-      console.error('Error creating report:', error);
-      res.status(500).json({ 
-        error: 'Failed to create report', 
-        details: error.message 
-      });
-    }
-  });
+    res.status(201).json({ 
+      report_id: result.insertId,
+      project_id,
+      report_type,
+      content,
+      status,
+      timestamp: new Date()
+    });
+  } catch (error) {
+    console.error('Error creating report:', error);
+    res.status(500).json({ error: 'Failed to create report' });
+  }
+});
 
 /**
  * Update report
@@ -148,7 +125,6 @@ router.put('/:id', async (req, res) => {
   }
   
   try {
-    // First get the existing report to get the user ID for logging
     const [existingReport] = await pool.query(
       'SELECT created_by FROM reports WHERE report_id = ?',
       [req.params.id]
@@ -171,7 +147,7 @@ router.put('/:id', async (req, res) => {
     try {
       await pool.query(
         'INSERT INTO activity_logs (action_type) VALUES (?, ?)',
-        [existingReport[0].created_by, 'GENERATE_REPORT']
+        ['GENERATE_REPORT']
       );
     } catch (logError) {
       console.warn('Unable to log activity:', logError.message);

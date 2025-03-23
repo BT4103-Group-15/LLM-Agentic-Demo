@@ -66,12 +66,12 @@ INSERT INTO project_details (
  'No load testing', 'API Security Assessment', '2025-04-10', '2025-04-28', '2025-05-10');
 
  
-INSERT INTO reports (project_id, report_type, content, status, created_by) VALUES 
-(1, 'REQUIREMENT_VALIDATION', '{"findings": ["Application uses outdated framework", "Insufficient input validation"], "recommendations": ["Update to latest framework version", "Implement proper input validation"]}', 'DRAFT', 2),
-(2, 'RISK_ASSESSMENT', '{"risk_level": "Medium", "vulnerabilities": ["Weak network segmentation", "Default credentials"], "impact": "Potential unauthorized access"}', 'SENT', 4),
-(3, 'DRAFT_SOW', '{"executive_summary": "This SOW outlines the mobile application security testing...", "deliverables": ["Vulnerability report", "Remediation plan"], "timeline": "2 weeks", "cost": 15000}', 'APPROVED', 2),
-(4, 'FINAL_SOW', '{"executive_summary": "This SOW details the cloud infrastructure assessment...", "deliverables": ["Security findings", "Compliance gaps", "Recommendations"], "timeline": "4 weeks", "cost": 25000}', 'APPROVED', 3),
-(5, 'REQUIREMENT_VALIDATION', '{"findings": ["API lacks rate limiting", "Insufficient authentication"], "recommendations": ["Implement API gateway with rate limiting", "Add multi-factor authentication"]}', 'DRAFT', 4);
+INSERT INTO reports (project_id, report_type, content, status) VALUES 
+(1, 'REQUIREMENT_VALIDATION', '{"findings": ["Application uses outdated framework", "Insufficient input validation"], "recommendations": ["Update to latest framework version", "Implement proper input validation"]}', 'DRAFT'),
+(2, 'RISK_ASSESSMENT', '{"risk_level": "Medium", "vulnerabilities": ["Weak network segmentation", "Default credentials"], "impact": "Potential unauthorized access"}', 'SENT'),
+(3, 'DRAFT_SOW', '{"executive_summary": "This SOW outlines the mobile application security testing...", "deliverables": ["Vulnerability report", "Remediation plan"], "timeline": "2 weeks", "cost": 15000}', 'APPROVED'),
+(4, 'FINAL_SOW', '{"executive_summary": "This SOW details the cloud infrastructure assessment...", "deliverables": ["Security findings", "Compliance gaps", "Recommendations"], "timeline": "4 weeks", "cost": 25000}', 'APPROVED'),
+(5, 'REQUIREMENT_VALIDATION', '{"findings": ["API lacks rate limiting", "Insufficient authentication"], "recommendations": ["Implement API gateway with rate limiting", "Add multi-factor authentication"]}', 'DRAFT');
 
 INSERT INTO activity_logs (project_id, action_type) VALUES 
 (1, 'CREATE_REQUEST'),
