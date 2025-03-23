@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "llm_agentic_demo",
+  "name": "bruno_api_files",
   "type": "collection",
   "ignore": [
     "node_modules",
