@@ -6,6 +6,5 @@ CREATE TABLE IF NOT EXISTS reports (
     status ENUM('DRAFT', 'SENT', 'APPROVED') DEFAULT 'DRAFT',
     created_by INT NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES project_details(project_id),
-    FOREIGN KEY (created_by) REFERENCES users(user_id)
+    FOREIGN KEY (project_id) REFERENCES project_details(project_id)
 );

@@ -10,35 +10,12 @@ const { pool } = require('../db');
 router.get('/', async (req, res) => {
   try {
     const [rows] = await pool.query(`
-      SELECT al.*, u.name as user_name 
-      FROM activity_logs al
-      JOIN users u ON al.user_id = u.user_id
-      ORDER BY al.timestamp DESC
+      SELECT * from activity_logs
     `);
     res.json(rows);
   } catch (error) {
     console.error('Error fetching activity logs:', error);
     res.status(500).json({ error: 'Failed to retrieve activity logs' });
-  }
-});
-
-/**
- * Get activity logs by user ID
- * GET /activity-logs/user/:userId
- * curl http://localhost:3000/activity-logs/user/1
- */
-router.get('/user/:userId', async (req, res) => {
-  try {
-    const [rows] = await pool.query(`
-      SELECT * FROM activity_logs
-      WHERE user_id = ?
-      ORDER BY timestamp DESC
-    `, [req.params.userId]);
-    
-    res.json(rows);
-  } catch (error) {
-    console.error('Error fetching user activity logs:', error);
-    res.status(500).json({ error: 'Failed to retrieve user activity logs' });
   }
 });
 
@@ -54,8 +31,8 @@ router.post('/', async (req, res) => {
   const { user_id, action_type } = req.body;
   
   // Validate required fields
-  if (!user_id || !action_type) {
-    return res.status(400).json({ error: 'User ID and action type are required' });
+  if (!action_type) {
+    return res.status(400).json({ error: 'Action type is required' });
   }
   
   // Validate action type

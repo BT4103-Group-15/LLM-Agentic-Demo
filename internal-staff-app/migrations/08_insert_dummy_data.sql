@@ -1,10 +1,3 @@
-INSERT INTO users (name, role) VALUES 
-('John Smith', 'SALES'),
-('Jane Doe', 'TECH_PRE_SALES'),
-('Robert Johnson', 'PROJECT_MANAGER'),
-('Emily Chen', 'TECH_PRE_SALES'),
-('Michael Brown', 'SALES');
-
 INSERT INTO clients (company_name, contact_name, email) VALUES 
 ('Acme Corporation', 'Wile E. Coyote', 'wile@acme.com'),
 ('Wayne Enterprises', 'Bruce Wayne', 'bruce@wayne.com'),
@@ -80,16 +73,16 @@ INSERT INTO reports (project_id, report_type, content, status, created_by) VALUE
 (4, 'FINAL_SOW', '{"executive_summary": "This SOW details the cloud infrastructure assessment...", "deliverables": ["Security findings", "Compliance gaps", "Recommendations"], "timeline": "4 weeks", "cost": 25000}', 'APPROVED', 3),
 (5, 'REQUIREMENT_VALIDATION', '{"findings": ["API lacks rate limiting", "Insufficient authentication"], "recommendations": ["Implement API gateway with rate limiting", "Add multi-factor authentication"]}', 'DRAFT', 4);
 
-INSERT INTO activity_logs (user_id, project_id, action_type) VALUES 
-(1, 1, 'CREATE_REQUEST'),
-(1, 2, 'CREATE_REQUEST'),
-(2, 3, 'CREATE_REQUEST'),
-(2, 1, 'GENERATE_REPORT'),
-(3, 4, 'GENERATE_REPORT'),
-(3, 2, 'UPDATE_REQUEST'),
-(4, 5, 'GENERATE_REPORT'),
-(4, 5, 'CREATE_REQUEST'),
-(5, 3, 'UPDATE_REQUEST');
+INSERT INTO activity_logs (project_id, action_type) VALUES 
+(1, 'CREATE_REQUEST'),
+(2, 'CREATE_REQUEST'),
+(3, 'CREATE_REQUEST'),
+(1, 'GENERATE_REPORT'),
+(4, 'GENERATE_REPORT'),
+(2, 'UPDATE_REQUEST'),
+(5, 'GENERATE_REPORT'),
+(5, 'CREATE_REQUEST'),
+(3, 'UPDATE_REQUEST');
 
 INSERT INTO project_action_logs 
 (project_id, action_type, timestamp) 
