@@ -25,39 +25,25 @@ router.get('/', async (req, res) => {
  * POST /activity-logs
  * curl -X POST http://localhost:3000/activity-logs \
   -H "Content-Type: application/json" \
-  -d "{\"user_id\":1,\"action_type\":\"CREATE_REQUEST\"}"
+  -d "{"action_type\":\"CREATE_REQUEST\"}"
  */
 router.post('/', async (req, res) => {
-  const { user_id, action_type } = req.body;
+  const { action_type } = req.body;
   
   // Validate required fields
   if (!action_type) {
     return res.status(400).json({ error: 'Action type is required' });
   }
   
-  // Validate action type
-  const validActionTypes = ['CREATE_REQUEST', 'UPDATE_REQUEST', 'GENERATE_REPORT'];
-  if (!validActionTypes.includes(action_type)) {
-    return res.status(400).json({ 
-      error: 'Invalid action type. Must be one of: CREATE_REQUEST, UPDATE_REQUEST, GENERATE_REPORT' 
-    });
-  }
-  
   try {
-    // Verify user exists
-    const [userRows] = await pool.query('SELECT user_id FROM users WHERE user_id = ?', [user_id]);
-    if (userRows.length === 0) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-    
+   
     const [result] = await pool.query(
-      'INSERT INTO activity_logs (user_id, action_type) VALUES (?, ?)',
-      [user_id, action_type]
+      'INSERT INTO activity_logs (action_type) VALUES (?, ?)',
+      [action_type]
     );
     
     res.status(201).json({
       log_id: result.insertId,
-      user_id,
       action_type,
       timestamp: new Date()
     });
