@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server/index.js",
     "db:migrate": "node scripts/run-migrations.js",
-    "db:test": "node -e \"require('./server/db').testConnection()\""
+    "db:test": "node -e \"require('./server/db').testConnection()\"",
+    "db:drop": "node scripts/run-migrations.js --file=00_drop_database.sql"
   },
   "dependencies": {
     "dotenv": "^16.4.1",

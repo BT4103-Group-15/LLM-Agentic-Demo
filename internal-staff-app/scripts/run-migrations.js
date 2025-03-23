@@ -3,6 +3,11 @@ const path = require('path');
 const mysql = require('mysql2/promise');
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
+// Parse command line arguments
+const args = process.argv.slice(2);
+const fileArg = args.find(arg => arg.startsWith('--file='));
+const specificFile = fileArg ? fileArg.split('=')[1] : null;
+
 async function runMigrations() {
   let rootConnection;
   let dbConnection;
@@ -14,6 +19,16 @@ async function runMigrations() {
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD
     });
+    
+    // db:drop command
+    if (specificFile === '00_drop_database.sql') {
+      console.log('Dropping and recreating database...');
+      await rootConnection.query(`DROP DATABASE IF EXISTS ${process.env.DB_NAME || 'data'}`);
+      await rootConnection.query(`CREATE DATABASE ${process.env.DB_NAME || 'data'}`);
+      console.log(`Database "${process.env.DB_NAME || 'data'}" has been dropped and recreated`);
+      await rootConnection.end();
+      return;
+    }
     
     // Create database if not exists
     console.log('Creating database if not exists...');
