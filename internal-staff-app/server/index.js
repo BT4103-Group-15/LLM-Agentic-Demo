@@ -2,7 +2,6 @@ const express = require('express');
 const { pool, testConnection } = require('./db');
 
 // import all routes
-const usersRoutes = require('./routes/users');
 const projectDetailsRoutes = require('./routes/project-details');
 const reportsRoutes = require('./routes/reports');
 const activityLogsRoutes = require('./routes/activity-logs');
@@ -19,8 +18,7 @@ app.use(express.json());
 })();
 
 
-// Mount all routes
-app.use('/users', usersRoutes);
+// Mount all routes 
 app.use('/project-details', projectDetailsRoutes);
 app.use('/reports', reportsRoutes);
 app.use('/activity-logs', activityLogsRoutes);
