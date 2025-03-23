@@ -3,7 +3,7 @@ const { pool, testConnection } = require('./db');
 
 // import all routes
 const usersRoutes = require('./routes/users');
-const pentestRequestsRoutes = require('./routes/pentest-requests');
+const projectDetailsRoutes = require('./routes/project-details');
 const reportsRoutes = require('./routes/reports');
 const activityLogsRoutes = require('./routes/activity-logs');
 const clientsRoutes = require('./routes/clients');
@@ -21,7 +21,7 @@ app.use(express.json());
 
 // Mount all routes
 app.use('/users', usersRoutes);
-app.use('/pentest-requests', pentestRequestsRoutes);
+app.use('/project-details', projectDetailsRoutes);
 app.use('/reports', reportsRoutes);
 app.use('/activity-logs', activityLogsRoutes);
 app.use('/clients', clientsRoutes);
