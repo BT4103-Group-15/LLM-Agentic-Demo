@@ -6,10 +6,17 @@ meta {
 
 put {
   url: http://localhost:3000/project-details/:id
-  body: none
+  body: json
   auth: inherit
 }
 
 params:path {
-  id: 
+  id: 2
+}
+
+body:json {
+  {
+    "application_name": "Updated App Security Test",
+    "testing_environment": "Production-like environment"
+  }
 }
