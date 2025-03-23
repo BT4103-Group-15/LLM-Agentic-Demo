@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS activity_logs (
     project_id INT,
     action_type VARCHAR(100) NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES project_details(project_id)
+    FOREIGN KEY (project_id) REFERENCES project_details(project_id) ON DELETE CASCADE
 );
