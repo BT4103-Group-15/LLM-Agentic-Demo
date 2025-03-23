@@ -96,65 +96,56 @@ router.post('/', async (req, res) => {
 /**
  * Update report
  * PUT /reports/:id
- * curl -X PUT http://localhost:3000/reports/4 \
-  -H "Content-Type: application/json" \
-  -d "{\"content\":{\"findings\":[\"Updated Finding\"]},\"status\":\"SENT\"}"
+ * curl -X PUT http://localhost:3000/reports/4 -H "Content-Type: application/json" -d "{\"content\":{\"findings\":[\"Updated Finding\"]},\"status\":\"SENT\"}"
  */
 router.put('/:id', async (req, res) => {
-  const updates = [];
-  const values = [];
-  
-  // Build dynamic update query
-  if (req.body.report_type) {
-    updates.push('report_type = ?');
-    values.push(req.body.report_type);
-  }
-  
-  if (req.body.content) {
-    updates.push('content = ?');
-    values.push(JSON.stringify(req.body.content));
-  }
-  
-  if (req.body.status) {
-    updates.push('status = ?');
-    values.push(req.body.status);
-  }
-  
-  if (updates.length === 0) {
-    return res.status(400).json({ error: 'No update fields provided' });
-  }
-  
   try {
-    const [existingReport] = await pool.query(
-      'SELECT created_by FROM reports WHERE report_id = ?',
-      [req.params.id]
-    );
+    const reportId = req.params.id;
+    const { report_type, content, status } = req.body;
+    const updates = [];
+    const values = [];
     
-    if (existingReport.length === 0) {
+    // Dynamic update query
+    if (report_type) {
+      updates.push('report_type = ?');
+      values.push(report_type);
+    }
+    
+    if (content) {
+      updates.push('content = ?');
+      values.push(JSON.stringify(content));
+    }
+    
+    if (status) {
+      updates.push('status = ?');
+      values.push(status);
+    }
+    
+    if (updates.length === 0) {
+      return res.status(400).json({ error: 'No update fields provided' });
+    }
+    
+    // Get project_id for activity logging
+    const [report] = await pool.query('SELECT project_id FROM reports WHERE report_id = ?', [reportId]);
+    if (report.length === 0) {
       return res.status(404).json({ error: 'Report not found' });
     }
     
-    // Add the ID to the query values
-    values.push(req.params.id);
+    // Add ID to values array
+    values.push(reportId);
     
-    // Update the report
-    const [result] = await pool.query(
-      `UPDATE reports SET ${updates.join(', ')} WHERE report_id = ?`,
-      values
+    // Update report
+    await pool.query(`UPDATE reports SET ${updates.join(', ')} WHERE report_id = ?`, values);
+    
+    // Log activity
+    await pool.query(
+      'INSERT INTO activity_logs (project_id, action_type) VALUES (?, ?)',
+      [report[0].project_id, 'GENERATE_REPORT']
     );
     
-    // Log the activity
-    try {
-      await pool.query(
-        'INSERT INTO activity_logs (action_type) VALUES (?, ?)',
-        ['GENERATE_REPORT']
-      );
-    } catch (logError) {
-      console.warn('Unable to log activity:', logError.message);
-    }
-    
-    const [rows] = await pool.query('SELECT * FROM reports WHERE report_id = ?', [req.params.id]);
-    res.json(rows[0]);
+    // Get updated report
+    const [updated] = await pool.query('SELECT * FROM reports WHERE report_id = ?', [reportId]);
+    res.json(updated[0]);
   } catch (error) {
     console.error('Error updating report:', error);
     res.status(500).json({ error: 'Failed to update report' });
