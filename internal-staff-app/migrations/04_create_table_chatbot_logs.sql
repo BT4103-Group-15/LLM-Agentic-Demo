@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS chatbot_logs (
     project_id INT,
     chat_history JSON,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES project_details(project_id)
+    FOREIGN KEY (project_id) REFERENCES project_details(project_id) ON DELETE CASCADE
 );

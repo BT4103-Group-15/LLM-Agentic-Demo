@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS project_details (
     draft_report_due_date DATE,
     final_report_due_date DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (client_id) REFERENCES clients(client_id)
+    FOREIGN KEY (client_id) REFERENCES clients(client_id) ON DELETE CASCADE
 );
