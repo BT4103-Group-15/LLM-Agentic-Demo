@@ -10,9 +10,9 @@ const { pool } = require('../db');
 router.get('/', async (req, res) => {
   try {
     const [rows] = await pool.query(`
-      SELECT cl.*, pr.pentest_request_id 
+      SELECT cl.*, pr.project_id 
       FROM chatbot_logs cl
-      LEFT JOIN pentest_requests pr ON cl.pentest_request_id = pr.pentest_request_id
+      LEFT JOIN project_id pr ON cl.project_id = pr.project_id
       ORDER BY cl.timestamp DESC
     `);
     res.json(rows);
@@ -30,9 +30,9 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const [rows] = await pool.query(`
-      SELECT cl.*, pr.pentest_request_id 
+      SELECT cl.*, pr.project_id 
       FROM chatbot_logs cl
-      LEFT JOIN pentest_requests pr ON cl.pentest_request_id = pr.pentest_request_id
+      LEFT JOIN project_id pr ON cl.project_id = pr.project_id
       WHERE cl.log_id = ?
     `, [req.params.id]);
     
@@ -48,22 +48,22 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
- * Get logs by pentest request ID
- * GET /chatbot-logs/pentest-request/:pentestRequestId
- * curl http://localhost:3000/chatbot-logs/pentest-request/1
+ * Get logs by project ID
+ * GET /chatbot-logs/project-details/:projectId
+ * curl http://localhost:3000/chatbot-logs/project-details/1
  */
-router.get('/pentest-request/:pentestRequestId', async (req, res) => {
+router.get('/project-details/:projectId', async (req, res) => {
   try {
     const [rows] = await pool.query(`
       SELECT * FROM chatbot_logs 
-      WHERE pentest_request_id = ?
+      WHERE project_id = ?
       ORDER BY timestamp DESC
-    `, [req.params.pentestRequestId]);
+    `, [req.params.projectId]);
     
     res.json(rows);
   } catch (error) {
-    console.error('Error fetching pentest request logs:', error);
-    res.status(500).json({ error: 'Failed to retrieve pentest request logs' });
+    console.error('Error fetching project details:', error);
+    res.status(500).json({ error: 'Failed to retrieve project details' });
   }
 });
 
@@ -72,10 +72,10 @@ router.get('/pentest-request/:pentestRequestId', async (req, res) => {
  * POST /chatbot-logs
  * curl -X POST http://localhost:3000/chatbot-logs \
   -H 'Content-Type: application/json' \
-  -d '{"pentest_request_id":1,"chat_history":[{"role":"user","content":"Hello!"},{"role":"assistant","content":"Hi there!"}]}'
+  -d '{"project_id":1,"chat_history":[{"role":"user","content":"Hello!"},{"role":"assistant","content":"Hi there!"}]}'
  */
   router.post('/', async (req, res) => {
-    const { pentest_request_id, chat_history } = req.body;
+    const { project_id, chat_history } = req.body;
     
     // Validate input
     if (!chat_history || !Array.isArray(chat_history)) {
@@ -83,22 +83,22 @@ router.get('/pentest-request/:pentestRequestId', async (req, res) => {
     }
     
     try {
-      // Check if pentest request exists if pentest_request_id is provided
-      if (pentest_request_id) {
+      // Check if project id exists if project_id is provided
+      if (project_id) {
         const [requestRows] = await pool.query(
-          'SELECT pentest_request_id FROM pentest_requests WHERE pentest_request_id = ?', 
-          [pentest_request_id]
+          'SELECT project_id FROM project_id WHERE project_id = ?', 
+          [project_id]
         );
         if (requestRows.length === 0) {
-          return res.status(404).json({ error: 'Pentest request not found' });
+          return res.status(404).json({ error: 'Project details not found' });
         }
       }
       
       let query, params;
       
-      if (pentest_request_id) {
-        query = 'INSERT INTO chatbot_logs (pentest_request_id, chat_history) VALUES (?, ?)';
-        params = [pentest_request_id, JSON.stringify(chat_history)];
+      if (project_id) {
+        query = 'INSERT INTO chatbot_logs (project_id, chat_history) VALUES (?, ?)';
+        params = [project_id, JSON.stringify(chat_history)];
       } else {
         query = 'INSERT INTO chatbot_logs (chat_history) VALUES (?)';
         params = [JSON.stringify(chat_history)];
@@ -108,7 +108,7 @@ router.get('/pentest-request/:pentestRequestId', async (req, res) => {
       
       res.status(201).json({
         log_id: result.insertId,
-        pentest_request_id,
+        project_id,
         chat_history,
         timestamp: new Date()
       });
