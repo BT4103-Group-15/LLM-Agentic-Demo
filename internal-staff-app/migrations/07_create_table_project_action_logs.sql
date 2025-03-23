@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS project_action_logs (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
     project_id INT NOT NULL,
@@ -11,5 +10,6 @@ CREATE TABLE IF NOT EXISTS project_action_logs (
         'FINAL_SOW_SENT_TO_CLIENT'
     ) NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES pentest_requests(pentest_request_id)
+    -- current_step 
+    FOREIGN KEY (project_id) REFERENCES project_details(project_id)
 );
