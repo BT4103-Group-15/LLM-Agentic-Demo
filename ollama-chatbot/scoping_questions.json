@@ -1,1 +1,60 @@
-{"0": {"question": "What is your application name?", "type": "open"}, "1": {"question": "What is your production URL?", "type": "open"}, "2": {"question": "What is your current enviroment for testing?", "type": "mcq_multi", "options": ["Production", "Staging", "Development"], "text": ["Development Environment - This environment is typically where new features and changes are created, tested, and validated. It's often used by developers to ensure their code works correctly before it moves to other environments.\n\n", "Staging Environment - Also known as pre-production, this environment is a replica of the production environment where changes are tested before they go live. It allows teams to simulate real-world conditions and verify that everything functions properly in a near-production setting.\n\n", "Production Environment - This is the live, publicly accessible environment where your application or website is available for end users. It's important to avoid making any changes directly in this environment as it could impact the service provided to customers. Changes should be thoroughly tested and deployed only after careful planning.\n\n", "Other (Specify) - If the testing environment doesn't fit within Development, Staging, or Production, you can specify here. For example, a QA (Quality Assurance) environment or a sandbox environment for exploration and development of new features."]}, "3": {"question": "What is your application type?", "type": "mcq_multi", "options": ["Web", "API", "Mobile", "Desktop"], "text": ["Web Application - This is an application that runs in a web browser such as Google Chrome, Mozilla Firefox, Safari, etc. Examples include Facebook and Gmail.\n\n", "API (Application Programming Interface) - An API is not an application itself, but it enables the creation of applications by defining methods and procedures that a developer can call to access the functionality provided by a service or platform. APIs are used in various types of applications such as mobile apps, web apps, and desktop software.\n\n", "Mobile Application - This is an application designed to run on mobile devices such as smartphones and tablets. Examples include Instagram, WhatsApp, and Angry Birds.\n\n", "Desktop Application - This is a program or software that runs directly on a personal computer without a web browser. Examples include Microsoft Office Suite (Word, Excel, PowerPoint), Adobe Photoshop, and Steam games."]}}
+{
+    "13": {
+        "category": "API Details",
+        "requirement": "Number of Endpoints",
+        "question": "What is the number of API endpoints?",
+        "type": "open"
+    },
+    "14": {
+        "category": "API Details",
+        "requirement": "Authentication Required",
+        "question": "Is Authentication required for API network?",
+        "type": "mcq",
+        "options": [
+            "Yes",
+            "No"
+        ]
+    },
+    "15": {
+        "category": "API Details",
+        "requirement": "Rate Limiting",
+        "question": "Is there a rate limit?",
+        "type": "mcq",
+        "options": [
+            "Yes",
+            "No"
+        ]
+    },
+    "16": {
+        "category": "API Details",
+        "requirement": "Documentation Available",
+        "question": "Is there documentation available on the API network?",
+        "type": "mcq",
+        "options": [
+            "Yes",
+            "No"
+        ]
+    },
+    "17": {
+        "category": "API Details",
+        "requirement": "API Methods",
+        "question": "What are the API methods used?",
+        "type": "mcq_multi",
+        "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE",
+            "PATCH",
+            "Other"
+        ],
+        "text": [
+            "GET - This method is used to retrieve data from the server. The client sends a request to the server, and the server responds with the requested data.\n\n",
+            "POST - This method is used to send data to the server to create a new resource. The client sends a body containing the new resource's data, and the server creates it.\n\n",
+            "PUT - Similar to POST, this method is also used for creating resources, but unlike POST, it is idempotent, meaning multiple identical requests will result in exactly one resource with the same state. It replaces the resource if it already exists.\n\n",
+            "DELETE - This method is used to remove an existing resource from the server. The client sends a request to the server, and the server responds by deleting the requested resource.\n\n",
+            "PATCH - Unlike PUT or POST, which usually replace the entire resource, PATCH allows the client to update only parts of a resource. It is also idempotent like PUT.\n\n",
+            "Other - This option includes any other API methods that may be used, such as HEAD, OPTIONS, CONNECT, etc., which are less commonly used but serve specific purposes in communication between client and server. For example, HEAD returns only the headers of a resource without its body, while OPTIONS asks the server about the communication options available for a given URL."
+        ]
+    }
+}

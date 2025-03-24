@@ -37,9 +37,9 @@ function sendMessage() {
 }
 
 // Start scoping
-let currentIndex = 0;  // Track question index
+let currentIndex = 13;  // Track question index
 
-async function fetchQuestion(index = 0, answer = null) {
+async function fetchQuestion(index = 13, answer = null) {
     let response = await fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -53,6 +53,7 @@ async function fetchQuestion(index = 0, answer = null) {
 function displayQuestion(data) {
     let openInputContainer = document.getElementById("open-input");
     let multiChoiceContainer = document.getElementById("multi-choice-container");
+    let radioChoiceContainer = document.getElementById("multi-choice-single-container");
 
     currentIndex = data.index; // Update question index
     const messagesDiv = document.getElementById('messages');
@@ -67,6 +68,7 @@ function displayQuestion(data) {
         messagesDiv.appendChild(botMessage);
         openInputContainer.style.display = "none";
         multiChoiceContainer.style.display = "none";
+        radioChoiceContainer.style.display = "none";
     } else {
         // Show new question
         const botMessage = document.createElement('li');
@@ -79,17 +81,30 @@ function displayQuestion(data) {
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
         openInputContainer.style.display = "none";
         multiChoiceContainer.style.display = "none";
+        radioChoiceContainer.style.display = "none";
 
         if (data.type === "mcq") {
             // Display single-choice buttons
             data.options.forEach(option => {
-                let btn = document.createElement("button");
-                btn.innerText = option;
-                btn.onclick = () => handleAnswer(option);
+                    const label = document.createElement("label");
+                    const radio = document.createElement("input");
+                    
+                    radio.type = "radio";
+                    radio.value = option;
+                    radio.name = "mcq-options"; // Same name to allow single selection
+                    
+                    label.appendChild(radio);
+                    label.appendChild(document.createTextNode(" " + option));
+
+                    const optionMessage = document.createElement('li');
+                    optionMessage.classList.add('chat-incoming', 'chat');
+                    optionMessage.appendChild(label);
+                    messagesDiv.appendChild(optionMessage);
             });
+            radioChoiceContainer.style.display = "block";
         } else if (data.type === "mcq_multi") {
             // Display multiple-choice checkboxes
-            data.options.forEach(option => {
+            data.options.forEach((option, index) => {
                 let label = document.createElement("label");
                 label.classList.add("checkbox-label");
         
@@ -102,8 +117,8 @@ function displayQuestion(data) {
                 // Add text with spacing
                  // Add text directly as a separate span
                 let textSpan = document.createElement("span");
-                let o_index = data.options.indexOf(option);
-                textSpan.textContent = " " + data.text[o_index];
+                //let o_index = data.options.indexOf(option);
+                textSpan.textContent = " " + data.text[index] || option;
                 label.appendChild(textSpan); // Append the span inside label
 
                 const optionMessage = document.createElement('li');
@@ -149,12 +164,38 @@ function submitMultiChoiceAnswer() {
             selectedOptions.push(checkbox.value);
         }
     });
-
+    // Add user message to the chat window
+    const userMessage = document.createElement('li');
+    userMessage.classList.add('chat-outgoing', 'chat');
+    userMessage.innerHTML = `<p>${selectedOptions}</p>`;
+    messagesDiv.appendChild(userMessage);
+    document.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
+        checkbox.checked = false;
+    });
     if (selectedOptions.length > 0) {
         fetchQuestion(currentIndex, selectedOptions); // Send selected options as a list
     }
+    
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+
+function getSelectedRadioOption() {
+    let selected = document.querySelector('input[name="mcq-options"]:checked');
+    if (selected) {
+        const messagesDiv = document.getElementById('messages');
+        const userMessage = document.createElement('li');
+        userMessage.classList.add('chat-outgoing', 'chat');
+        userMessage.innerHTML = `<p>${selected.value}</p>`;
+        messagesDiv.appendChild(userMessage);
+        fetchQuestion(currentIndex, selected.value);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    
+    document.querySelectorAll('input[name="mcq-options"]:checked').forEach(radio =>{
+        radio.checked = false;
+    });
+}
+
 
 // Start the chat
 fetchQuestion();

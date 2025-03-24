@@ -7,12 +7,12 @@ from model import get_answer
 #from model_scoping_sheet_final import get_application_overview
 app = Flask(__name__)
 
-scoping_requirements = {}
 scoping_questions = {}
 with open('scoping_questions.json', 'r') as file:
     scoping_data = file.read()
 scoping_questions = json.loads(scoping_data)
 scoping_questions = {int(k): v for k, v in scoping_questions.items()}
+requirement_df = []
 #print(scoping_questions[0])
 
 @app.route("/")
@@ -33,7 +33,13 @@ def chat():
     answer = data.get('answer')
 
     if index > 0:
-        scoping_requirements[index - 1] = answer  # Store previous response
+        scoping_requirements = {}
+        # requirement_df : [{category: "Application Overview", requirement:"Application Name",status:"finsecure"}]
+        scoping_requirements["category"] = scoping_questions[index-1]["category"]
+        scoping_requirements["requirement"] = scoping_questions[index-1]["requirement"]
+        scoping_requirements["status"] = answer  # Store previous response
+        requirement_df.append(scoping_requirements)
+        scoping_requirements = {}
 
     if index in scoping_questions:
         question_data = scoping_questions[index]
@@ -45,12 +51,13 @@ def chat():
 
         if "options" in question_data:
             response_data["options"] = question_data["options"]  # Send options for MCQ
-            response_data["text"] = question_data["text"]
+            if question_data["type"] == "mcq_multi":
+                response_data["text"] = question_data["text"]
 
         return jsonify(response_data)
     else:
-        print(scoping_requirements)
-        return jsonify({"message": "Thanks for your responses!", "responses": scoping_requirements})
+        print(requirement_df)
+        return jsonify({"message": "Thanks for your responses!"})
 
 if __name__ == "__main__":
     webbrowser.open('http://127.0.0.1:5001/')
@@ -59,6 +66,7 @@ if __name__ == "__main__":
 
 ## Flow of application
 # Model scoping sheet -> generate the list of questions + LLM , save it in a final questions + options list
-# app.py to create the for loop of the whole list of questions for back and forth user input
-# save it to scoping_requirements
-# create function to format scoping requirements to send it over to n8n
+# Create the whole list of questions, save it to scoping_questions.json
+# app.py to create the for loop of the whole list of questions for back and forth user input (done)
+# save it to scoping_requirements > requirement_df (done)
+# create function to generate markdown + requirement_df to send it over to n8n
