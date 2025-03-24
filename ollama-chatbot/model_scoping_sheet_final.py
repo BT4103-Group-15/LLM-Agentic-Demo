@@ -37,7 +37,7 @@ def generate_multiple_choice_questions(questions_multiple_choice):
     for index, items in questions_multiple_choice.items():
         choices_text = chain.invoke({"question":questions_withLLM[index]["question"],"choices":questions_withLLM[index]["options"]})
         model_options = re.split(r'\d+\.\s*', choices_text)[1:]
-        questions_withLLM[index]["options"] = model_options
+        questions_withLLM[index]["text"] = model_options
     return questions_multiple_choice
 
 ## Define each section into functions
@@ -61,13 +61,15 @@ def get_application_overview():
             {
                 "question":"What is your current enviroment for testing?",
                 "type":"mcq_multi",
-                "options": ["Production","Staging","Development"]
+                "options": ["Production","Staging","Development"],
+                "text":[]
             },
         3:
             {
                 "question":"What is your application type?",
                 "type": "mcq_multi",
-                "options": ["Web","API","Mobile","Desktop"]
+                "options": ["Web","API","Mobile","Desktop"],
+                "text":[]
             }
     }
     # reformat the whole chunk of questions like this : {0: {question: ..., type: open/mcq},}?
@@ -252,10 +254,10 @@ def get_testing_contraints(user_answers):
 
 ## Sign off with Client Contact information
 
-# final_questions = get_application_overview()
+final_questions = get_application_overview()
 # for index, question in final_questions.items():
 #     print(index)
 #     print(question)
 
-# with open('scoping_questions.json', 'w') as fp:
-#     json.dump(final_questions, fp)
+with open('scoping_questions.json', 'w') as fp:
+    json.dump(final_questions, fp)

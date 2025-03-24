@@ -45,6 +45,7 @@ def chat():
 
         if "options" in question_data:
             response_data["options"] = question_data["options"]  # Send options for MCQ
+            response_data["text"] = question_data["text"]
 
         return jsonify(response_data)
     else:

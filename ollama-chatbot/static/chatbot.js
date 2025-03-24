@@ -102,7 +102,8 @@ function displayQuestion(data) {
                 // Add text with spacing
                  // Add text directly as a separate span
                 let textSpan = document.createElement("span");
-                textSpan.textContent = " " + option;
+                let o_index = data.options.indexOf(option);
+                textSpan.textContent = " " + data.text[o_index];
                 label.appendChild(textSpan); // Append the span inside label
 
                 const optionMessage = document.createElement('li');
