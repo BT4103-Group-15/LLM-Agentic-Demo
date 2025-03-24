@@ -73,6 +73,12 @@ INSERT INTO reports (project_id, report_type, content, status) VALUES
 (4, 'FINAL_SOW', '{"executive_summary": "This SOW details the cloud infrastructure assessment...", "deliverables": ["Security findings", "Compliance gaps", "Recommendations"], "timeline": "4 weeks", "cost": 25000}', 'APPROVED'),
 (5, 'REQUIREMENT_VALIDATION', '{"findings": ["API lacks rate limiting", "Insufficient authentication"], "recommendations": ["Implement API gateway with rate limiting", "Add multi-factor authentication"]}', 'DRAFT');
 
+INSERT INTO chatbot_logs (project_id, chat_history)
+VALUES 
+(1, '[{"role": "user", "content": "Hello!"}, {"role": "assistant", "content": "Hi there!"}]'),
+(1, '[{"role": "user", "content": "I need help with my project"}, {"role": "assistant", "content": "I\'d be happy to help. What specifically do you need assistance with?"}]'),
+(2, '[{"role": "user", "content": "What\'s the status of my project?"}, {"role": "assistant", "content": "Let me check that for you. Your project is currently in the SOW drafting phase."}]');
+
 INSERT INTO activity_logs (project_id, action_type) VALUES 
 (1, 'CREATE_REQUEST'),
 (2, 'CREATE_REQUEST'),
