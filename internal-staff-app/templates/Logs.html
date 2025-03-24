@@ -15,7 +15,7 @@
   <!-- Main content -->
   <div class="container">
       <div class="header">
-          <h1 class="title">Logs</h1>
+          <h1 class="title">Action Logs</h1>
           <div class="controls">
               <button id="filterBtn" class="filter-button">Filter</button>
               <input id="searchInput" type="text" placeholder="Search" class="search-input">
@@ -91,7 +91,7 @@
                 return {
                     "Log ID": project.log_id,  // Accessing 'project_id' property
                     "Project ID": project.project_id,  // Accessing 'project_id' property
-                    "Action Type": project.action_type,    // Accessing 'client_id' property
+                    "Action Type": formatActionType(project.action_type),    // Accessing 'client_id' property
                     "Timestamp": formatDate(new Date(project.timestamp)),
                 };
             });
@@ -126,6 +126,15 @@
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 
+    function formatActionType(actionType) {
+    return actionType
+        .toLowerCase()              // Convert everything to lowercase
+        .replace(/_/g, " ")         // Replace underscores with spaces
+        .replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first letter of each word
+    }
+
+
+    
 
     
   </script>

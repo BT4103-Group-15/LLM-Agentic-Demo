@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../db');
 
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");  // Or specify a particular origin instead of "*"
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
+
 /**
  * Get all chatbot logs
  * GET /chatbot-logs

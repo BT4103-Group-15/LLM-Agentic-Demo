@@ -6,12 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // Fetch the project data for the given project_id (from local storage or API)
         fetchProjectData(projectId);
     }
-
+    
     // Add event listener for the "Logs" button
     const logsButton = document.getElementById('logs-button');
     logsButton.addEventListener('click', () => {
         // Fetch logs when the button is clicked
         fetchLogs();
+    });
+
+    // Add event listener for the "Logs" button
+    const chatButton = document.getElementById('chat-button');
+    chatButton.addEventListener('click', () => {
+        // Fetch logs when the button is clicked
+        fetchChatHistory();
     });
 });
 
@@ -102,6 +109,33 @@ async function fetchProjectData(projectId) {
 
     } catch (error) {
         console.error('Error fetching project data:', error);
+    }
+}
+
+async function fetchChatHistory() {
+    try {
+        const logs_response = await fetch('http://localhost:3000/chatbot-logs');
+        if (!logs_response.ok) {
+            throw new Error("Error fetching logs data");
+        }
+        
+
+        const logs = await logs_response.json();
+        // Assuming you already have project_id available
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('project_id');
+        
+        // Find logs for the given project_id
+        const logsForProject = logs.filter(l => l.project_id === parseInt(projectId));
+        if (logsForProject) {
+            // Download logs as JSON file
+            downloadJSON(logsForProject, 'chatbot-log.json');
+        } else {
+            console.error("Logs not found for the given project_id");
+        }
+
+    } catch (error) {
+        console.error('Error fetching logs:', error);
     }
 }
 
