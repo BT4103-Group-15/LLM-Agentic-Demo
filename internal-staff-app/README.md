@@ -43,3 +43,7 @@ a `.env` file with your credentials.
 - `npm run db:drop` to drop database
 - `npm run db:migrate` to seed database with all migration scripts from the migrations folder.
 - `npm run start` to start the database connection [Note: This command is necessary if you would like to utilise the API endpoints.]
+
+## 4. Testing APIs
+- Download Bruno 
+- Click on Collection > Open Collection, then select folder bruno_api_endpoints from internal-staff-app project folder 
