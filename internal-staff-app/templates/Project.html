@@ -154,7 +154,8 @@
                         "Status": latestLog ? latestLog.action_type : "No status",  // Safely access 'action_type'
                         "Project Start Date": formatDate(new Date(project.project_start_date)),
                         "Draft Report Due": formatDate(new Date(project.draft_report_due_date)),
-                        "Final Report Due": formatDate(new Date(project.final_report_due_date))
+                        "Final Report Due": formatDate(new Date(project.final_report_due_date)),
+                        "Details": `<button onclick="window.location.href='Project_subpage.html?project_id=${project.project_id}'">Details</button>`
                     };
                 });
                 console.log("Logs data:", project_summary);
