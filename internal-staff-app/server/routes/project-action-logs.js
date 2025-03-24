@@ -131,6 +131,68 @@ router.post('/', async (req, res) => {
 });
 
 /**
+ * Update project action log by ID
+ * PUT /project-action-logs/:id
+ * curl -X PUT http://localhost:3000/project-action-logs/1 \
+ *  -H "Content-Type: application/json" \
+ *  -d '{"project_id":2,"action_type":"SOW_APPROVAL"}'
+ */
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { project_id, action_type } = req.body;
+  
+  // Validate required fields
+  if (!project_id || !action_type) {
+    return res.status(400).json({ error: 'Project ID and action type are required' });
+  }
+  
+  // Validate action_type is one of the allowed enum values
+  const validActionTypes = [
+    'SCOPING_SHEET_SUBMISSION',
+    'SCOPING_SHEET_APPROVAL',
+    'SOW_DRAFTING_TRIGGERED',
+    'DRAFT_SOW_SUBMISSION',
+    'SOW_APPROVAL',
+    'FINAL_SOW_SENT_TO_CLIENT'
+  ];
+  
+  if (!validActionTypes.includes(action_type)) {
+    return res.status(400).json({ 
+      error: 'Invalid action type. Must be one of: ' + validActionTypes.join(', ')
+    });
+  }
+  
+  try {
+    const [result] = await pool.query(
+      'UPDATE project_action_logs SET project_id = ?, action_type = ? WHERE log_id = ?',
+      [project_id, action_type, id]
+    );
+    
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Project action log not found' });
+    }
+    
+    res.json({
+      log_id: id,
+      project_id,
+      action_type,
+      message: 'Project action log updated successfully'
+    });
+  } catch (error) {
+    console.error('Error updating project action log:', error);
+    
+    // Handle foreign key constraint error
+    if (error.code === 'ER_NO_REFERENCED_ROW_2') {
+      return res.status(400).json({ 
+        error: 'Invalid project_id. The referenced project does not exist.' 
+      });
+    }
+    
+    res.status(500).json({ error: 'Failed to update project action log' });
+  }
+});
+
+/**
  * Delete project action log
  * DELETE /project-action-logs/:id
  * curl -X DELETE http://localhost:3000/project-action-logs/1
