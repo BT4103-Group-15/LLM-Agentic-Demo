@@ -93,7 +93,7 @@ def get_authentication_access_control():
                 "category": "Authentication & Access Control",
                 "requirement":"Authentication Method",
                 "question":"What is your current authentication method for your application?",
-                "type":"mcq_multi",
+                "type": "mcq_multi",
                 "options": ["Username & Password","SSO","Development","OAuth","Certificate-based", "Other"],
                 "text":[]
             },
@@ -102,8 +102,8 @@ def get_authentication_access_control():
                 "category": "Authentication & Access Control",
                 "requirement":"User Roles",
                 "question":"What are your user roles?",
-                "type":"mcq_multi",
-                "options": ["Username & Password","SSO","Development","OAuth","Certificate-based", "Other"],
+                "type": "mcq_multi",
+                "options": ["Anonymous Users","Regular Users","Power Users","Administrators","System Administrators"],
                 "text":[]
             },
         6:
@@ -164,7 +164,7 @@ def get_data_processing():
                 "category":"Data Processing",
                 "requirement":"Sensitive Data Handled",
                 "question":"What types of sensitive data are going to be handled?",
-                "type":"mcq_multi",
+                "type": "mcq_multi",
                 "options": ["Personal Information","Financial Data","Healthcare Information","Government Data","Intellectual Property"],
                 "text":[]
             },
@@ -173,7 +173,7 @@ def get_data_processing():
                 "category":"Data Processing",
                 "requirement":"Data Storage",
                 "question":"What do you use for the data storage?",
-                "type":"mcq_multi",
+                "type": "mcq_multi",
                 "options": ["Local Database","Cloud Storage","Third-party Services","Distributed Systems"],
                 "text":[]
             },
@@ -378,10 +378,31 @@ def get_client_contact_info():
 
     return client_contact_info_questions
 
-final_questions = get_api_details()
-#for index, question in final_questions.items():
-    # print(index)
-    # print(question)
+# application_questions = get_application_overview()
+# print(1)
+# authentication_questions = get_authentication_access_control()
+# print(authentication_questions)
+# input_questions = get_input_processing()
+# print(3)
+data_questions = get_data_processing()
+print(data_questions)
+# api_questions = get_api_details()
+# print(5)
+# infrastructure_questions = get_infrastructure()
+# print(6)
+# business_questions = get_business_logic()
+# print(7)
+# security_questions = get_security_requirements()
+# print(8)
+# testing_questions = get_testing_contraints()
+# print(9)
+# deliverables_questions = get_deliverables()
+# print(10)
+# notes_questions = get_additional_notes()
+# print(11)
+# client_contact_questions = get_client_contact_info()
+# print(12)
 
-with open('scoping_questions.json', 'w') as fp:
-    json.dump(final_questions, fp, indent=4)
+# final_questions = application_questions | authentication_questions | input_questions | data_questions| api_questions| infrastructure_questions| business_questions| security_questions|testing_questions|deliverables_questions|notes_questions|client_contact_questions
+# with open('scoping_questions.json', 'w') as fp:
+#     json.dump(final_questions, fp, indent=4)

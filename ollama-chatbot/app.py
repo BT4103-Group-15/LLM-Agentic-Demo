@@ -3,8 +3,6 @@ import json
 import webbrowser
 from flask import Flask, render_template, request, jsonify
 from model import get_answer
-#from model_scoping_sheet import get_application_overview, get_api_details, get_authentication_access_control, get_business_logic, get_data_processing, get_infrastructure, get_input_processing, get_security_requirements, get_testing_contraints
-#from model_scoping_sheet_final import get_application_overview
 app = Flask(__name__)
 
 scoping_questions = {}
@@ -12,6 +10,7 @@ with open('scoping_questions.json', 'r') as file:
     scoping_data = file.read()
 scoping_questions = json.loads(scoping_data)
 scoping_questions = {int(k): v for k, v in scoping_questions.items()}
+print(scoping_questions)
 requirement_df = []
 #print(scoping_questions[0])
 

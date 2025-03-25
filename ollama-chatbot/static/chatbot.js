@@ -37,9 +37,9 @@ function sendMessage() {
 }
 
 // Start scoping
-let currentIndex = 13;  // Track question index
+let currentIndex = 0;  // Track question index
 
-async function fetchQuestion(index = 13, answer = null) {
+async function fetchQuestion(index = 0, answer = null) {
     let response = await fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

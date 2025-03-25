@@ -1,4 +1,184 @@
 {
+    "0": {
+        "category": "Application Overview",
+        "requirement": "Application Name",
+        "question": "What is your application name?",
+        "type": "open"
+    },
+    "1": {
+        "category": "Application Overview",
+        "requirement": "Production URL",
+        "question": "What is your production URL?",
+        "type": "open"
+    },
+    "2": {
+        "category": "Application Overview",
+        "requirement": "Environment for Testing",
+        "question": "What is your current authentication method for your application?",
+        "type": "mcq_multi",
+        "options": [
+            "Production",
+            "Staging",
+            "Development"
+        ],
+        "text": [
+            "Development Authentication Method - This method is typically used during the development phase and may not be as secure as other methods due to its simplicity. It could involve using hardcoded credentials or sharing sensitive information among team members.\n\n",
+            "Staging Authentication Method - In the staging environment, more secure authentication methods are usually implemented to simulate a production environment. This may include using OAuth, two-factor authentication (2FA), or even third-party identity providers like Google Sign-In or Facebook Login.\n\n",
+            "Production Authentication Method - For the production application, the most secure authentication methods should be employed. This could involve using encryption, secure tokens, and robust password policies. It's also common to use third-party services for identity verification, such as Okta or Auth0, which offer additional security features like multi-factor authentication (MFA) and session management.\n\n",
+            "Not Set - If the application is in its early stages, it may not have an authentication method set up yet. In this case, it's crucial to prioritize implementing a secure authentication solution as soon as possible."
+        ]
+    },
+    "3": {
+        "category": "Application Overview",
+        "requirement": "Application Type",
+        "question": "What is your application type?",
+        "type": "mcq_multi",
+        "options": [
+            "Web",
+            "API",
+            "Mobile",
+            "Desktop"
+        ],
+        "text": [
+            "Web Application - This is an application that runs in a web browser, such as Google Chrome or Mozilla Firefox. It can be accessed via a URL and typically does not require any download or installation.\n\nExample: A Facebook account or this AI assistant you're using now.\n\n",
+            "API (Application Programming Interface) - An API is a set of rules that allows different software applications to talk to each other. It defines the methods and data formats that a program should use to communicate with an operating system, library, or another application. APIs are essential for integrating various software components.\n\nExample: Twitter's API lets developers create apps that interact with their platform, like third-party Twitter clients or apps that analyze tweets.\n\n",
+            "Mobile Application - This is an application designed to run on smartphones and other mobile devices. Mobile applications can be installed from app stores, such as Google Play Store or Apple App Store, and they are typically optimized for use with touchscreens.\n\nExample: Instagram, WhatsApp, or Angry Birds.\n\n",
+            "Desktop Application - This is an application designed to run on a personal computer. These applications can be installed directly onto the computer's operating system (e.g., Windows, macOS, Linux) and are often optimized for use with mouse and keyboard interactions.\n\nExample: Adobe Photoshop, Microsoft Office Suite, or Steam games."
+        ]
+    },
+    "4": {
+        "category": "Authentication & Access Control",
+        "requirement": "Authentication Method",
+        "question": "What is your current authentication method for your application?",
+        "type": "mcq_multi",
+        "options": [
+            "Username & Password",
+            "SSO",
+            "Development",
+            "OAuth",
+            "Certificate-based",
+            "Other"
+        ],
+        "text": [
+            "Username & Password: This method requires users to input a unique username and password to access the application. It's a common approach for web and mobile applications.\n\n",
+            "SSO (Single Sign-On): SSO allows users to log in once and gain access to multiple applications without having to re-enter their credentials each time.\n\n",
+            "Development: If you're developing an application, the authentication method could be hardcoded for testing purposes or use simple methods like a static username/password combination.\n\n",
+            "OAuth: OAuth is an open standard authorization protocol that allows users to grant third-party applications limited access to their data from another service without sharing their credentials. This is commonly used in applications that require access to user data from other services, such as Google or Facebook.\n\n",
+            "Certificate-based: In this method, clients are authenticated through digital certificates instead of usernames and passwords. It's often used in enterprise environments for higher security requirements.\n\n",
+            "Other: This option is for any authentication method not listed above, such as biometric authentication (fingerprint scanning, facial recognition), multi-factor authentication, etc."
+        ]
+    },
+    "5": {
+        "category": "Authentication & Access Control",
+        "requirement": "User Roles",
+        "question": "What are your user roles?",
+        "type": "mcq_multi",
+        "options": [
+            "Anonymous Users", "Regular Users", "Power Users", "Administrators", "System Administrators"],
+        "text": [
+            "Anonymous User: This user does not have an account or sign in to access a service or website. They can browse but cannot make changes or personalize their experience.\n\n",
+            "Regular User: A registered user who has basic privileges, such as creating and modifying content within certain limits, and personalizing their own profile. They cannot manage other users or system settings.\n\n",
+            "Power User: A user with advanced capabilities beyond regular users, including customization options, extensive access to features, and the ability to manage multiple accounts or resources.\n\n",
+            "Administrator: A user with full control over a system, service, or website. They can manage content, handle user accounts, and have access to all areas of the platform.\n\n",
+            "System Administrator: An administrator responsible for managing an entire system or network of systems. They perform tasks such as setting up servers, configuring software, maintaining security, and resolving technical issues. This role usually requires advanced technical skills."
+        ]
+    },
+    "6": {
+        "category": "Authentication & Access Control",
+        "requirement": "Custom Roles",
+        "question": "Number of custom roles?",
+        "type": "open"
+    },
+    "7": {
+        "category": "Authentication & Access Control",
+        "requirement": "Session Management",
+        "question": "How does your application manage its session?",
+        "type": "mcq_multi",
+        "options": [
+            "JWT",
+            "Session Cookies",
+            "Custom Tokens Session"
+        ],
+        "text": [
+            "JWT (JSON Web Token): In this approach, the server generates a JSON Web Token (JWT) that contains user information and expires after a certain period. The token is sent back to the client and included in every subsequent request to authenticate the user. This method provides stateless session management as all necessary data is contained within the token.\n\n",
+            "Session Cookies: With this method, the server creates a unique identifier (session ID) for each user upon login. The session ID is then stored on the client's device in a cookie and sent back to the server with every subsequent request, allowing the server to maintain state across multiple requests from the same user.\n\n",
+            "Custom Tokens Session: This method combines aspects of both JWT and session cookies. Upon login, the server generates a custom token that contains necessary user information and is stored in a cookie on the client's device like traditional session cookies. However, instead of maintaining state on the server, the server verifies the validity of the custom token each time it receives a request. This approach provides improved security over traditional session cookies due to the use of tokens, while still enabling stateful session management with the convenience of storing the token on the client's device."
+        ]
+    },
+    "8": {
+        "category": "Authentication & Access Control",
+        "requirement": "Session Timeout Period",
+        "question": "What is the session timeout period (in minutes)?",
+        "type": "open"
+    },
+    "9": {
+        "category": "Input Processing",
+        "requirement": "total_num_input_fields",
+        "question": "What is your total number of input fields?",
+        "type": "open"
+    },
+    "10": {
+        "category": "Input Processing",
+        "requirement": "Input Types Present",
+        "question": "What are the input types present?",
+        "type": "mcq_multi",
+        "options": [
+            "Free text fields",
+            "File uploads (Types allowed: .pdf, .png)",
+            "Rich text editors",
+            "Payment information",
+            "Personal data",
+            "Database queries",
+            "API calls"
+        ],
+        "text": [
+            "Free text fields: These are inputs where users can type any text. For example, a form might have a field asking for the user's name or comments.\n\n",
+            "File uploads (Types allowed: .pdf, .png): These are inputs where users can upload files with specific extensions like PDF and PNG. This could be used in a form to ask for the submission of documents or images.\n\n",
+            "Rich text editors: These are more advanced text fields that allow formatting options such as bold, italics, bullet points, etc. They are useful when users need to input complex or structured text like a detailed description or feedback.\n\n",
+            "Payment information: This refers to inputs where users can enter their credit card numbers, PayPal email addresses, or other payment-related details. These inputs are often used in online shopping forms and donation forms.\n\n",
+            "Personal data: This includes any information about the user such as their name, address, phone number, email address, etc. This data is typically used to identify and contact the user.\n\n",
+            "Database queries: While not directly visible as an input type to the end-user, database queries allow for the retrieval of data from a database based on certain criteria. Developers use these queries to pull information needed for various purposes in the application.\n\n",
+            "API calls: Similar to database queries, API calls are not user-facing inputs but rather requests made by the application to another service's API (Application Programming Interface). This allows the application to access and use data from other sources, such as social media platforms or maps."
+        ]
+    },
+    "11": {
+        "category": "Data Processing",
+        "requirement": "Sensitive Data Handled",
+        "question": "What types of sensitive data are going to be handled?",
+        "type": "mcq_multi",
+        "options": [
+            "Personal Information",
+            "Financial Data",
+            "Healthcare Information",
+            "Government Data",
+            "Intellectual Property"
+        ],
+        "text": [
+            "Personal Information - Refers to any information that can be used to identify an individual, such as name, address, phone number, email, or social security number.\n\n",
+            "Financial Data - Includes any data related to a person's financial status, transactions, or accounts, like credit card numbers, bank account details, tax records, or pay stubs.\n\n",
+            "Healthcare Information - Entails any information about an individual's physical or mental health, medical history, or healthcare services received, such as diagnosis, treatment, prescriptions, or insurance information.\n\n",
+            "Government Data - Consists of data provided by citizens to the government or collected by the government about its citizens, including passport numbers, driver's license details, voting records, or social security numbers.\n\n",
+            "Intellectual Property - Represents creations of the mind, such as inventions, artistic works, literary works, designs, symbols, names, images, and musical recordings, whose ownership rights are protected in law. This type of data might include confidential business information, trade secrets, or copyrighted materials.\n\nWhen handling sensitive data, it's crucial to ensure the security and privacy of the information by following proper protocols and adhering to relevant regulations like GDPR, HIPAA, or PCI-DSS."
+        ]
+    },
+    "12": {
+        "category": "Data Processing",
+        "requirement": "Data Storage",
+        "question": "What do you use for the data storage?",
+        "type": "mcq_multi",
+        "options": [
+            "Local Database",
+            "Cloud Storage",
+            "Third-party Services",
+            "Distributed Systems"
+        ],
+        "text": [
+            "Local Database: This option refers to a database that is stored and managed on a single computer or server, rather than over a network. Examples include SQLite, MySQL, and Microsoft Access.\n\n",
+            "Cloud Storage: With this option, data is stored on remote servers maintained by third-party service providers like Google Drive, Dropbox, and Amazon S', 'This allows users to access their data from anywhere with an internet connection.\n\n",
+            "Third-party Services: These are services provided by companies like Facebook, Twitter, or GitHub for storing specific types of data. For example, when you store your photographs on Flickr or your repositories on GitHub, you're using a third-party service for storage.\n\n",
+            "Distributed Systems: In this case, data is stored across multiple computers that communicate and coordinate among themselves to appear as a single system. Examples include Google's Bigtable and Apache Hadoop's HDFS (Hadoop Distributed File System). These systems are designed to handle large amounts of data and provide high availability and fault tolerance."
+        ]
+    },
     "13": {
         "category": "API Details",
         "requirement": "Number of Endpoints",
@@ -49,12 +229,174 @@
             "Other"
         ],
         "text": [
-            "GET - This method is used to retrieve data from the server. The client sends a request to the server, and the server responds with the requested data.\n\n",
-            "POST - This method is used to send data to the server to create a new resource. The client sends a body containing the new resource's data, and the server creates it.\n\n",
-            "PUT - Similar to POST, this method is also used for creating resources, but unlike POST, it is idempotent, meaning multiple identical requests will result in exactly one resource with the same state. It replaces the resource if it already exists.\n\n",
-            "DELETE - This method is used to remove an existing resource from the server. The client sends a request to the server, and the server responds by deleting the requested resource.\n\n",
-            "PATCH - Unlike PUT or POST, which usually replace the entire resource, PATCH allows the client to update only parts of a resource. It is also idempotent like PUT.\n\n",
-            "Other - This option includes any other API methods that may be used, such as HEAD, OPTIONS, CONNECT, etc., which are less commonly used but serve specific purposes in communication between client and server. For example, HEAD returns only the headers of a resource without its body, while OPTIONS asks the server about the communication options available for a given URL."
+            "GET - This method is used to retrieve data from a server. For example, when you visit a webpage in your browser, a GET request is being sent to the server asking for the HTML of that page.\n\n",
+            "POST - This method is used to send data to a server and create new resources. For example, submitting a form on a website typically results in a POST request.\n\n",
+            "PUT - This method is used to update an existing resource on the server. Unlike POST, which often creates a new resource, PUT modifies the existing one.\n\n",
+            "DELETE - This method is used to delete a resource from the server. It permanently removes the resource specified in the request.\n\n",
+            "PATCH - Similar to PUT, but instead of replacing the entire resource, it updates parts or specific fields of the resource.\n\n",
+            "Other - These could include methods like HEAD, OPTIONS, CONNECT, etc., which are less commonly used HTTP methods with specific purposes in API requests. For example, HEAD is used to request only the headers (metadata) of a webpage rather than its content."
         ]
+    },
+    "18": {
+        "category": "Infrastructure",
+        "requirement": "Security Controls Present",
+        "question": "What are the security controls present?",
+        "type": "mcq_multi",
+        "options": [
+            "WAF",
+            "IPS/IDS",
+            "Load Balancer",
+            "Anti-DDoS",
+            "API Gateway"
+        ],
+        "text": [
+            "WAF (Web Application Firewall): A security control that monitors, filters, and blocks HTTP traffic to protect web applications against common web exploits, such as SQL injection or Cross-Site Scripting (XSS).\n\n",
+            "IPS/IDS (Intrusion Prevention System/Intrusion Detection System): A system that monitors network traffic for suspicious activity patterns and alerts administrators when it detects potential threats, or blocks them in case of an IPS.\n\n",
+            "Load Balancer: A security control that distributes incoming network traffic across multiple servers to ensure no single server becomes overwhelmed, improving the overall performance and availability of the system while also providing a basic level of security by distributing denial-of-service (DoS) attacks evenly among multiple servers.\n\n",
+            "Anti-DDoS: A specialized form of protection that mitigates Distributed Denial of Service (DDoS) attacks, which aim to make a network resource unavailable by overwhelming it with traffic or requests. An Anti-DDoS solution can protect against both volume-based and application-layer attacks.\n\n",
+            "API Gateway: A security control that manages and secures APIs (Application Programming Interfaces) by handling inbound API requests, enforcing authentication and authorization policies, rate limiting, and sometimes includes features like API monitoring and analytics."
+        ]
+    },
+    "19": {
+        "category": "Infrastructure",
+        "requirement": "Hosting",
+        "question": "Where do you host your application?",
+        "type": "mcq_multi",
+        "options": [
+            "Cloud",
+            "On-premises",
+            "Hybrid"
+        ],
+        "text": [
+            "Cloud: Hosting your application in the cloud means it is stored, managed, and maintained by third-party providers such as Amazon Web Services (AWS), Microsoft Azure, or Google Cloud Platform (GCP). This option allows for scalability, flexibility, and lower capital expenditures since you only pay for what you use.\n\n",
+            "On-premises: Hosting your application on-premises refers to having the infrastructure and resources in your own physical location. This may offer greater control over data security and privacy but requires significant upfront investment and ongoing maintenance costs.\n\n",
+            "Hybrid: A hybrid approach combines elements of both cloud and on-premises hosting by utilizing a mix of public, private, and community cloud services as well as on-site infrastructure. This option allows for flexibility in terms of data storage location and can offer a balance between control, cost, security, and scalability."
+        ]
+    },
+    "20": {
+        "category": "Business Logic",
+        "requirement": "Critical Functions",
+        "question": "What are the critical functions does your application handle?",
+        "type": "mcq_multi",
+        "options": [
+            "Financial Transactions",
+            "User Data Management",
+            "Administrative Operations",
+            "System Configuration",
+            "Report Generation"
+        ],
+        "text": [
+            "Financial Transactions (Handles transactions such as payments, deposits, withdrawals, and transfers.)\n\n",
+            "User Data Management (Manages user data including registration, authentication, profile creation, and modification.)\n\n",
+            "Administrative Operations (Performs administrative tasks like user management, role assignments, and system permissions.)\n\n",
+            "System Configuration (Enables configuration of various system settings, such as security protocols, performance optimization, and user interface customization.)\n\n",
+            "Report Generation (Generates reports on various aspects of the application's performance, user behavior, and financial transactions for analysis and decision-making purposes.)"
+        ]
+    },
+    "21": {
+        "category": "Security Requirements",
+        "requirement": "Compliance Requirements",
+        "question": "What are the compliance required?",
+        "type": "mcq_multi",
+        "options": [
+            "PCI DSS",
+            "HIPAA",
+            "GDPR",
+            "ISO 27001",
+            "SOC 2",
+            "Other"
+        ],
+        "text": [
+            "PCI DSS (Payment Card Industry Data Security Standard) - This standard is designed to ensure the security of credit card information used in transactions. It applies to any organization that stores, processes, or transmits cardholder data and requires strict controls over network architecture, software design, and information management.\n\n",
+            "HIPAA (Health Insurance Portability and Accountability Act) - This law in the United States sets standards for protecting patient health information and is enforced by the Department of Health and Human Services. It applies to healthcare providers, health plans, and healthcare clearinghouses that deal with protected health information (PHI).\n\n",
+            "GDPR (General Data Protection Regulation) - This regulation aims to protect the privacy and personal data of EU citizens and applies to any organization processing the personal data of individuals within the European Union, regardless of where the organization is located. It requires organizations to obtain explicit consent for data collection, provide clear notice about how data will be used, and allow individuals to access their own data upon request.\n\n",
+            "ISO 27001 (Information Technology - Security Techniques - Information Security Management Systems) - This international standard outlines a set of best practices for establishing, implementing, maintaining, and continually improving an information security management system (ISMS). It can be applied to any organization, regardless of its size or industry.\n\n",
+            "SOC 2 (System and Organization Controls) - These are auditing standards developed by the American Institute of Certified Public Accountants (AICPA) for service organizations that store customer data in the cloud. They cover five trust service criteria: security, availability, processing integrity, confidentiality, and privacy.\n\n",
+            "Other - This category would include other compliance requirements specific to a particular industry or region, such as FINRA regulations for financial institutions or the California Consumer Privacy Act (CCPA) in the United States. These standards may be similar to those listed above but are not covered explicitly in this list."
+        ]
+    },
+    "22": {
+        "category": "Security Requirements",
+        "requirement": "Previous Testing",
+        "question": "When was the last security assessment? Please answer in DD/MM/YYYY format",
+        "type": "open"
+    },
+    "23": {
+        "category": "Security Requirements",
+        "requirement": "Known Vulnerabilities",
+        "question": "What were the known vulnerabilities reported?",
+        "type": "open"
+    },
+    "24": {
+        "category": "Security Requirements",
+        "requirement": "Critical Assets",
+        "question": "What were the critical asset handled?",
+        "type": "open"
+    },
+    "25": {
+        "category": "Testing Constraints",
+        "requirement": "Time Restrictions",
+        "question": "When can we test your application?",
+        "type": "mcq_multi",
+        "options": [
+            "During Business Hours only",
+            "24/7 Allowed",
+            "Specific Time Window"
+        ],
+        "text": [
+            "During Business Hours only: This option indicates that the testing of the application is permitted during regular business hours, typically from 9 AM to 5 PM (or a similar timeframe) in the region where the business operates.\n\n",
+            "24/7 Allowed: This option signifies that the testing can be done at any time, day or night, as the application is designed to function without interruption around the clock.\n\n",
+            "Specific Time Window: This option implies that there are specific, non-business hours during which the testing of the application can occur. The testing window may consist of one or multiple time periods outside regular business hours, such as overnight or on weekends."
+        ]
+    },
+    "26": {
+        "category": "Testing Constraints",
+        "requirement": "Testing Limitations",
+        "question": "What testing limitations would you like to set?",
+        "type": "mcq_multi",
+        "options": [
+            "No Destructive Testing",
+            "No Automated Scanning",
+            "No Performance Testing"
+        ],
+        "text": [
+            "No Destructive Testing - This means that the tests conducted will not cause any harm or damage to the system or software being tested. The focus is on functional testing and verifying that the system behaves as expected without altering its core structure or functionality.\n\n",
+            "No Automated Scanning - With this choice, only manual testing methods are used, and no automated tools are employed for scanning code, checking for vulnerabilities, or analyzing performance.\n\n",
+            "No Performance Testing - In this case, the focus is solely on functional testing to ensure that the system performs its intended functions correctly. The impact of high loads or stressful conditions will not be tested or evaluated."
+        ]
+    },
+    "27": {
+        "category": "Deliverables",
+        "requirement": "Required Reports",
+        "question": "Which reports would you like to receive?",
+        "type": "mcq_multi",
+        "options": [
+            "Executive Summary",
+            "Technical Details",
+            "Remediation Plan",
+            "Compliance Mapping",
+            "Risk Rating"
+        ],
+        "text": [
+            "Executive Summary - This report provides an overview of the findings, conclusions, and recommendations from a technical analysis or audit. It is ideal for executives who need a high-level understanding of the situation without delving into the details.\n\n",
+            "Technical Details - This report includes in-depth information about the systems, processes, and procedures that were audited or analyzed. It is suitable for IT professionals and technical teams who require detailed findings and recommendations.\n\n",
+            "Remediation Plan - This report outlines the steps necessary to address any issues or vulnerabilities identified during an audit or analysis. It includes action items, timelines, and responsible parties, making it valuable for operational teams seeking guidance on improvement efforts.\n\n",
+            "Compliance Mapping - This report maps the audited systems, processes, and procedures against relevant compliance standards or regulations. It helps organizations ensure they are meeting industry requirements and can be useful in demonstrating compliance to external stakeholders such as regulators, clients, or customers.\n\n",
+            "Risk Rating - This report assigns a risk level (e.g., high, medium, low) to the issues identified during an audit or analysis, helping organizations prioritize their remediation efforts based on potential impact and likelihood of occurrence.\n\n",
+            "Combination Reports - This option offers a selection of multiple reports tailored to meet different needs within your organization (e.g., Executive Summary + Risk Rating for senior management, Technical Details + Remediation Plan for technical teams).\n\n",
+            "Custom Report - If you require a report that doesn't fit the standard options listed above, choose this option to discuss specific reporting requirements with our team. We will work together to create a customized report that meets your unique needs."
+        ]
+    },
+    "28": {
+        "category": "Notes",
+        "requirement": "Additional Information",
+        "question": "Any additional information would you like to add?",
+        "type": "open"
+    },
+    "29": {
+        "category": "Client Contact Information",
+        "requirement": "Client Email",
+        "question": "Please add your email for future contact.",
+        "type": "open"
     }
 }
