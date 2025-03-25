@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS project_action_logs (
     ) NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     -- current_step 
-    FOREIGN KEY (project_id) REFERENCES project_details(project_id)
+    FOREIGN KEY (project_id) REFERENCES project_details(project_id) ON DELETE CASCADE
 );

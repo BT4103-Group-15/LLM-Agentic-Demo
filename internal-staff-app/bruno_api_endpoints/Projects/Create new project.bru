@@ -1,0 +1,21 @@
+meta {
+  name: Create new project
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/project-details
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "client_id": 1,
+    "application_name": "Web App Security Test",
+    "production_url": "https://example.com",
+    "testing_environment": "Staging",
+    "application_type": "Web Application"
+  }
+}

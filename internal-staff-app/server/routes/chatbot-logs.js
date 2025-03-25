@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../db');
 
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");  // Or specify a particular origin instead of "*"
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
+
 /**
  * Get all chatbot logs
  * GET /chatbot-logs
@@ -10,10 +17,7 @@ const { pool } = require('../db');
 router.get('/', async (req, res) => {
   try {
     const [rows] = await pool.query(`
-      SELECT cl.*, pr.project_id 
-      FROM chatbot_logs cl
-      LEFT JOIN project_id pr ON cl.project_id = pr.project_id
-      ORDER BY cl.timestamp DESC
+      SELECT * FROM chatbot_logs
     `);
     res.json(rows);
   } catch (error) {
@@ -30,10 +34,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const [rows] = await pool.query(`
-      SELECT cl.*, pr.project_id 
-      FROM chatbot_logs cl
-      LEFT JOIN project_id pr ON cl.project_id = pr.project_id
-      WHERE cl.log_id = ?
+      SELECT * FROM chatbot_logs where log_id = ?
     `, [req.params.id]);
     
     if (rows.length === 0) {
@@ -86,11 +87,11 @@ router.get('/project-details/:projectId', async (req, res) => {
       // Check if project id exists if project_id is provided
       if (project_id) {
         const [requestRows] = await pool.query(
-          'SELECT project_id FROM project_id WHERE project_id = ?', 
+          'SELECT project_id FROM project_details WHERE project_id = ?', 
           [project_id]
         );
         if (requestRows.length === 0) {
-          return res.status(404).json({ error: 'Project details not found' });
+          return res.status(404).json({ error: 'Project details not found. The referenced project does not exist.' });
         }
       }
       

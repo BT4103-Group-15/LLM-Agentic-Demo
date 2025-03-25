@@ -1,0 +1,21 @@
+meta {
+  name: Create chatbot log
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/chatbot-logs
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "project_id": 6,
+    "chat_history": [
+        {"role":"user","content":"Hello!"},
+        {"role":"assistant","content":"Hi there!"}
+    ]
+  }
+}

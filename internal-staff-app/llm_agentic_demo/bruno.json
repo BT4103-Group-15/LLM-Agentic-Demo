@@ -1,9 +1,0 @@
-{
-  "version": "1",
-  "name": "llm_agentic_demo",
-  "type": "collection",
-  "ignore": [
-    "node_modules",
-    ".git"
-  ]
-}

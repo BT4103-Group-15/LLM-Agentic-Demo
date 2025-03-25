@@ -1,0 +1,25 @@
+meta {
+  name: Create new report
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/reports
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "project_id": 2,
+    "report_type": "REQUIREMENT_VALIDATION",
+    "content": {
+      "findings": ["Finding 1", "Finding 2"],
+      "description": "Security assessment of user authentication",
+      "severity": "High",
+      "recommendations": ["Implement MFA", "Add rate limiting"]
+    },
+    "status": "DRAFT"
+  }
+}

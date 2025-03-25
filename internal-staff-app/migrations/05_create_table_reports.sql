@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS reports (
     content JSON,
     status ENUM('DRAFT', 'SENT', 'APPROVED') DEFAULT 'DRAFT',
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES project_details(project_id)
+    FOREIGN KEY (project_id) REFERENCES project_details(project_id) ON DELETE CASCADE
 );
