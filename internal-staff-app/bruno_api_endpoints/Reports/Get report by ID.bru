@@ -1,0 +1,15 @@
+meta {
+  name: Get report by ID
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/reports/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 1
+}

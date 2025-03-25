@@ -1,4 +1,3 @@
-// common.js
 function buildTable(columns, data, tableId, buttonLabel) {
     const tableHead = document.getElementById("tableHead");
     const tableBody = document.getElementById("tableBody");
@@ -8,15 +7,34 @@ function buildTable(columns, data, tableId, buttonLabel) {
     tableHead.innerHTML = `<tr>${columns.map(col => `<th class='cell'>${col}</th>`).join('')}</tr>`;
 
     // Create table rows
-    tableBody.innerHTML = data.map(row => {
+    tableBody.innerHTML = data.map((row, index) => {
         return `<tr class='table-row'>
-            ${columns.slice(0, -1).map(col => `<td class='cell'>${row[col] || ""}</td>`).join('')}
-            <td class='cell'>
-                <button class='custom-button'>${buttonLabel}</button>
-            </td>
+            ${columns.filter(col => col !== "").map(col => `<td class='cell'>${row[col] || ""}</td>`).join('')}
+            ${buttonLabel ? `<td class='cell'><button class='custom-button' data-index="${index}">${buttonLabel}</button></td>` : ''}
         </tr>`;
     }).join('');
+
+    // Add event listeners to each 'Details' button only if buttonLabel is not empty
+    if (buttonLabel) {
+        const buttons = tableBody.querySelectorAll('.custom-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                const index = button.getAttribute('data-index');
+                const projectId = data[index]["Project ID"];
+                window.location.href = `Project_subpage.html?project_id=${projectId}`;
+            });
+        });
+    }
 }
+
+
+
+
+// Function to handle redirect to project subpage with the project_id
+function viewDetails(projectId) {
+    window.location.href = `Project_subpage.html?project_id=${projectId}`;
+}
+
 
 
 

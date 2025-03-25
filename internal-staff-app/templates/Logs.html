@@ -15,7 +15,7 @@
   <!-- Main content -->
   <div class="container">
       <div class="header">
-          <h1 class="title">Logs</h1>
+          <h1 class="title">Action Logs</h1>
           <div class="controls">
               <button id="filterBtn" class="filter-button">Filter</button>
               <input id="searchInput" type="text" placeholder="Search" class="search-input">
@@ -31,7 +31,7 @@
               <tbody id="tableBody"></tbody>
           </table>
       </div>
-      <button class="back-button" onclick="window.history.back()">Back</button>
+      <button class="back-button" onclick="window.location.href='../index.html';">Back</button>
   </div>
 
   <!-- Modal -->
@@ -42,11 +42,10 @@
           <div class="modal-body">
               <label for="columnSelect">Select Column:</label>
               <select id="columnSelect">
-                  <option value="Project ID">Project ID</option>
-                  <option value="Client ID">Client ID</option>
-                  <option value="Agent Type">Agent Type</option>
-                  <option value="Client Email">Client Email</option>
-                  <option value="Last Update">Last Update</option>
+                 <option value="Log ID">Log ID</option>
+                 <option value="Project ID">Project ID</option>
+                  <option value="Action Type">Action Type</option>
+                  <option value="Timestamp">Timestamp</option>
               </select>
 
               <label for="filterInput">Enter Filter Value:</label>
@@ -61,25 +60,83 @@
   <!-- Link to external JS files -->
   <script src="../assets/js/table.js"></script> <!-- Link to the common JavaScript file -->
   <script src="../assets/js/script.js"></script> <!-- Link to the navbar sidebar toggle script -->
-
   <script>
-      // Define columns and data specific to the page (project or logs)
-      const columns = ["Project ID", "Client ID", "Agent Type", "Client Email", "Status", ""];
-      const originalData = [
-          { "Project ID": "003", "Client ID": "002", "Agent Type": "Sales", "Client Email": "alice@example.com", "Status": "Drafting SOW" },
-          { "Project ID": "004", "Client ID": "003", "Agent Type": "Sales", "Client Email": "bob@example.com", "Status": "Drafting SOW" },
-          { "Project ID": "005", "Client ID": "002", "Agent Type": "Sales", "Client Email": "charlie@example.com", "Status": "Drafting SOW" }
-      ];
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchData();
+    });
 
-      // Initialize filtered data
-      let filteredData = [...originalData];
+    async function fetchData() {
+        try {
+            // Fetch data from the n8n webhook
+            const project_response = await fetch('http://localhost:3000/activity-logs');
+            if (!project_response.ok) {
+                throw new Error(`HTTP error! Status: ${project_response.status}`);
+            }
 
-      // Call the functions for table, modal, and search handling
-      const buttonLabel = "Download";
+            // Parse the JSON response
+            const projects = await project_response.json();
+            console.log("Response data:", projects);
+ 
 
-      buildTable(columns, filteredData, "table", buttonLabel);
-      handleModal("filterBtn", "filterModal", "close", "applyFilterBtn", "resetFilterBtn", "table", buttonLabel, columns, originalData);
-      handleSearch("searchInput", "table", buttonLabel, columns, originalData);
+            if (!projects || projects.length === 0) {
+                console.warn("No project data received.");
+                return;
+            }
+
+            // Define columns
+            const columns = ["Log ID", "Project ID", "Action Type", "Timestamp"];
+            const buttonLabel = "";
+            const project_summary = projects.map(project => {
+
+                return {
+                    "Log ID": project.log_id,  // Accessing 'project_id' property
+                    "Project ID": project.project_id,  // Accessing 'project_id' property
+                    "Action Type": formatActionType(project.action_type),    // Accessing 'client_id' property
+                    "Timestamp": formatDate(new Date(project.timestamp)),
+                };
+            });
+            console.log("Logs data:", project_summary);
+
+            // Populate the table with the fetched data
+            buildTable(columns, project_summary, "table", buttonLabel);
+
+            // Store the fetched data as originalData
+            window.originalData = project_summary;
+            window.filteredData = [...project_summary];
+
+
+            // Initialize the modal and search with the fetched data
+            handleModal("filterBtn", "filterModal", "close", "applyFilterBtn", "resetFilterBtn", "table", buttonLabel, columns, window.originalData);
+            handleSearch("searchInput", "table", buttonLabel, columns, window.originalData);
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = date.getSeconds().toString().padStart(2, '0');
+
+        // Format the date as YYYY-MM-DD HH:MM:SS
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
+    function formatActionType(actionType) {
+    return actionType
+        .toLowerCase()              // Convert everything to lowercase
+        .replace(/_/g, " ")         // Replace underscores with spaces
+        .replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first letter of each word
+    }
+
+
+    
+
+    
   </script>
 </body>
 </html>

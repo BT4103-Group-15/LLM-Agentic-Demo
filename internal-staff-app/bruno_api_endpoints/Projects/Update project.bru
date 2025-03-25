@@ -1,0 +1,22 @@
+meta {
+  name: Update project
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3000/project-details/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 2
+}
+
+body:json {
+  {
+    "application_name": "Updated App Security Test",
+    "testing_environment": "Production-like environment"
+  }
+}

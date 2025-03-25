@@ -1,0 +1,23 @@
+meta {
+  name: Update client
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/clients/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 3
+}
+
+body:json {
+  {
+    "company_name": "Test update",
+    "contact_name": "Update client",
+    "email": "test@update.com"
+  }
+}

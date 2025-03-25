@@ -12,23 +12,39 @@ h2 {
 }
 
 p {
-    font-size: 1.6vw;
+    font-size: 1.5vw;
 }
 
-.row-1 {
-    padding-top: 8vh !important;
-    display: grid;
-    grid-template-columns: 2fr 3fr;
+.container {
+    display: flex;
+    justify-content: space-between;
     gap: 1vw;
-    height: 42vh;
+    margin-top: 5%;
 }
 
-.row-2 {
-    display: grid;
-    grid-template-columns: 2fr 4fr;
+.left-column {
+    width: 45%; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
     gap: 1vw;
-    height: 42vh;
-    padding-top: 1vw;
+    height: 100%
+}
+
+.right-column {
+    width: 55%; /* Takes the remaining space */
+    overflow-y: auto; /* Makes the right column scrollable */
+    padding-right: 2vw;
+    max-height: 76vh;
+}
+
+/* Top Section (Project Section) */
+.top-section {
+    flex: 25; /* Adjust the space it takes up (2 times the size of the bottom section) */
+}
+
+/* Bottom Section (Action Buttons) */
+.bottom-section {
+    flex: 1; /* Adjust the space it takes up (1 time the size of the top section) */
 }
 
 .section {
@@ -67,5 +83,22 @@ p {
 
 .action-buttons button:hover {
     background-color: #f0f0f0; /* Light gray background on hover */
+}
 
+/* Scrollable Description Section */
+.description {
+    max-height: 100%; /* Ensures description section doesn't overflow */
+    overflow-y: auto;
+}
+
+.group {
+    margin-bottom: 1.5vw;
+}
+
+.group h3 {
+    font-size: 1.8vw;
+}
+
+.group p {
+    font-size: 1.6vw;
 }

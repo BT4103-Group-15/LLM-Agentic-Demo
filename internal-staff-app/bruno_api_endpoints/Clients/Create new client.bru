@@ -1,0 +1,19 @@
+meta {
+  name: Create new client
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/clients
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "company_name": "Acme Corp",
+    "contact_name": "New client",
+    "email": "test@add.com"
+  }
+}

@@ -1,0 +1,18 @@
+meta {
+  name: Create new project action log
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/project-action-logs
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "project_id": 5,
+    "action_type": "SCOPING_SHEET_SUBMISSION"
+  }
+}
