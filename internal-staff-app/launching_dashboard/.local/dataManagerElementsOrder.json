@@ -11,8 +11,15 @@
     {
       "Path": "Main.xaml",
       "SortBy": 0,
-      "VariablesSectionElementsOrder": [],
-      "ArgumentsSectionElementsOrder": [],
+      "VariablesSectionElementsOrder": [
+        "project_directory&Sequence_1",
+        "dashboard&Sequence_1",
+        "file_path&Sequence_1",
+        "folder_path&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "dashboardType"
+      ],
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
     }

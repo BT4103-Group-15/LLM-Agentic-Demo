@@ -11,7 +11,7 @@
             const robot = UiPathRobot.init();
             robot.getProcesses()
             .then(processes => {
-                let processName = "Launching Dashboard v3";
+                let processName = "Launching Dashboard v6";
                 let process = processes.find(p => p.name === processName);
                 if (process) {
                     console.log("Process found! Starting now...");
