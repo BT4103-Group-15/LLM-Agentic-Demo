@@ -57,7 +57,7 @@
     </div>
 
     <!-- Back Button aligned to the right -->
-    <button class="back-button" onclick="window.history.back()">Back</button>
+    <button id="back-button" class = "back-button">Back</button>
 
     <script src="../assets/js/file_upload_download.js"></script> <!-- Link to the external JavaScript file -->
     <script src="../assets/js/table.js"></script>
@@ -251,6 +251,12 @@
             }
 
 
+        });
+
+        document.getElementById("back-button").addEventListener("click", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('project_id');
+            window.location.href = 'Project_subpage.html?project_id=' + projectId;
         });
     </script>
     
