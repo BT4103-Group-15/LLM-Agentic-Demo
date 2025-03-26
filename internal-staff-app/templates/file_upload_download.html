@@ -71,7 +71,6 @@
 
             const urlParams = new URLSearchParams(window.location.search);
             const projectId = urlParams.get('project_id');
-            console.log("projectId: ", projectId)
     
             let currentApiUrl = ""; // Store the current API URL for downloading
     
@@ -158,7 +157,7 @@
                     // Create file input dynamically
                     const fileInput = document.createElement("input");
                     fileInput.type = "file";
-                    fileInput.accept = "*/*"; // Allow all file types
+                    fileInput.accept = ".json"; // Allow only json files
     
                     // When the user selects a file
                     fileInput.addEventListener("change", function (event) {
@@ -167,7 +166,7 @@
                             console.log("Selected file:", file);
     
                             // Handle file upload here (e.g., upload to server)
-                            uploadFile(file);
+                            cleanJsonData(file, projectId);
                         }
                     });
     
@@ -175,33 +174,83 @@
                     fileInput.click();
                 });
             });
-    
-            // Function to handle file upload (example)
-            function uploadFile(file) {
+
+            function cleanJsonData(file, projectId) {
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    try {
+                        const fileContent = event.target.result;
+                        let jsonData = JSON.parse(fileContent); // Parse the JSON content
+                        console.log("json: ", jsonData)
+                        // Clean the JSON data 
+                        delete jsonData.project_id;
+
+                        const dateFields = [
+                            "previous_testing",
+                            "project_start_date",
+                            "draft_report_due_date",
+                            "final_report_due_date"
+                        ];
+
+                        dateFields.forEach(field => {
+                            if (jsonData[field]) {
+                                // Convert the date string to the required format: YYYY-MM-DD
+                                const formattedDate = new Date(jsonData[field]).toISOString().split('T')[0];
+                                jsonData[field] = formattedDate;
+                            }
+                        });
+                        console.log("Cleaned Data:", jsonData);
+
+                        // After cleaning, re-upload the file or send the data
+                        uploadFile(jsonData, projectId);
+
+                    } catch (error) {
+                        console.error("Error reading or parsing JSON file:", error);
+                        alert("Error reading or parsing JSON file");
+                    }
+                };
+
+                reader.onerror = function(error) {
+                    console.error("Error reading the file:", error);
+                    alert("Error reading the file");
+                };
+
+                reader.readAsText(file); // Read the file as text
+            }
+
+        
+
+            function uploadFile(file, projectId) {
                 const formData = new FormData();
-                formData.append("file", file);
-    
-                // Define the API URL for file upload (this can change based on your server)
-                const uploadApiUrl = "http://localhost:3000/upload-file";
-    
+
+                // Construct the URL
+                const uploadApiUrl = `http://localhost:3000/project-details/${projectId}`;
+                console.log('Uploading file and data to URL:', uploadApiUrl);
+
+                // Send the request
                 fetch(uploadApiUrl, {
-                    method: "POST",
-                    body: formData,
+                    method: 'PUT',
+                    body: JSON.stringify(file),
+                    headers: { "Content-Type": "application/json; charset=UTF-8" }
                 })
                 .then(response => {
-                    if (response.ok) {
-                        console.log("File uploaded successfully");
-                        alert("File uploaded successfully");
-                    } else {
-                        console.error("File upload failed");
-                        alert("Failed to upload the file");
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
                     }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Response from server:', data);
+                    alert("Successfully updated!");  // Show popup on success
                 })
                 .catch(error => {
-                    console.error("Error uploading file:", error);
-                    alert("Error uploading file");
+                    console.error('Error uploading file and data:', error);
+                    alert("Update failed. Please try again.");  // Show error popup
                 });
             }
+
+
         });
     </script>
     

@@ -6,6 +6,11 @@ router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");  // Or specify a particular origin instead of "*"
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();  // Respond with 200 status for OPTIONS preflight request
+  }
+  
   next();
 });
 
