@@ -68,6 +68,10 @@
             const pdfButton = document.getElementById("download-pdf");
             const jsonButton = document.getElementById("download-json");
             const closeButton = document.getElementById("close-popup");
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('project_id');
+            console.log("projectId: ", projectId)
     
             let currentApiUrl = ""; // Store the current API URL for downloading
     
@@ -132,7 +136,7 @@
             if (downloadButton) {
                 downloadButton.addEventListener("click", function () {
                     console.log("Download button with ID req-download clicked");
-                    openPopup("http://localhost:3000/project-details"); // Set the API URL for Scoping Form
+                    openPopup("http://localhost:3000/project-details/" + projectId); // Set the API URL for Scoping Form
                 });
             }
     
