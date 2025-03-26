@@ -6,6 +6,7 @@
     <title>File Management</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/file_upload_download.css">
+    <link rel="stylesheet" href="../assets/css/file_download_popup.css">
     
 </head>
 <body>
@@ -33,18 +34,7 @@
                     <td><button class="button" id="req-download">Download File</button></td>
                     <td><button class="button reupload" id="req-reupload">Reupload File</button></td>
                 </tr>
-                <!-- <tr class="file-row" data-process="Technical Assessment">
-                    <td>Technical Assessment</td>
-                    <td>Sales</td>
-                    <td><button class="button" id="tech-upload">Upload File</button></td>
-                    <td><button class="button reupload" id="tech-reupload" style="display: none;">Reupload File</button></td>
-                </tr>
-                <tr class="file-row" data-process="Risk Assessment">
-                    <td>Risk Assessment</td>
-                    <td>Sales</td>
-                    <td><button class="button" id="risk-upload">Upload File</button></td>
-                    <td><button class="button reupload" id="risk-reupload" style="display: none;">Reupload File</button></td>
-                </tr> -->
+                
                 <tr class="file-row" data-process="SOW">
                     <td>SOW</td>
                     <td>Sales</td>
@@ -55,11 +45,163 @@
         </table>
     </div>
 
+    <!-- File Download Popup -->
+    <div id="download-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <!-- Close button (X) in the top-right corner -->
+            <span id="close-popup" class="close-btn">&times;</span>
+            <h3>Choose File Format</h3>
+            <button id="download-pdf">Download PDF</button>
+            <button id="download-json">Download JSON</button>
+        </div>
+    </div>
+
     <!-- Back Button aligned to the right -->
     <button class="back-button" onclick="window.history.back()">Back</button>
 
     <script src="../assets/js/file_upload_download.js"></script> <!-- Link to the external JavaScript file -->
     <script src="../assets/js/table.js"></script>
     <script src="../assets/js/script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const popup = document.getElementById("download-popup");
+            const pdfButton = document.getElementById("download-pdf");
+            const jsonButton = document.getElementById("download-json");
+            const closeButton = document.getElementById("close-popup");
+    
+            let currentApiUrl = ""; // Store the current API URL for downloading
+    
+            // Function to open popup
+            function openPopup(apiUrl) {
+                console.log("Download button clicked");
+                currentApiUrl = apiUrl; // Set the current API URL based on the clicked button
+                popup.style.display = "block";
+            }
+    
+            // Function to close popup
+            function closePopup() {
+                console.log("Closing popup");
+                popup.style.display = "none";
+            }
+    
+            // PDF download
+            pdfButton.addEventListener("click", function () {
+                console.log("PDF download clicked");
+                window.location.href = "https://your-n8n-instance.com/webhook/pdf-download";
+                closePopup();
+            });
+    
+            // JSON download - Fetch data from different API based on clicked button
+            jsonButton.addEventListener("click", async function () {
+                console.log("JSON download clicked");
+    
+                try {
+                    // Fetch data from the appropriate API based on currentApiUrl
+                    const response = await fetch(currentApiUrl);
+                    console.log("url: ", currentApiUrl);
+                    console.log("response:", response);
+    
+                    // Check if the response is valid
+                    if (response.ok) {
+                        const data = await response.json();
+    
+                        const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+                        const link = document.createElement("a");
+                        link.href = URL.createObjectURL(jsonBlob);
+                        link.download = `${currentApiUrl.split("/").pop()}.json`; // Use the endpoint name to name the file
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else {
+                        console.error("Failed to fetch data from the server.");
+                        alert("Failed to download JSON file.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching JSON file:", error);
+                    alert("Failed to download JSON file.");
+                }
+    
+                closePopup();
+            });
+    
+            // Close popup event
+            closeButton.addEventListener("click", closePopup);
+    
+            // Attach click event to the "Download File" button for Scoping Form
+            const downloadButton = document.getElementById("req-download");
+            if (downloadButton) {
+                downloadButton.addEventListener("click", function () {
+                    console.log("Download button with ID req-download clicked");
+                    openPopup("http://localhost:3000/project-details"); // Set the API URL for Scoping Form
+                });
+            }
+    
+            // Attach click event to the "Upload File" button for SOW
+            const uploadButton = document.getElementById("sow-upload");
+            if (uploadButton) {
+                uploadButton.addEventListener("click", function () {
+                    console.log("Upload button with ID sow-upload clicked");
+                    openPopup("http://localhost:3000/sow-details"); // Set the API URL for SOW
+                });
+            }
+    
+            // Attach click event to the "Reupload File" button for Scoping Form or SOW
+            const reuploadButtons = document.querySelectorAll(".reupload");
+            reuploadButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    console.log("Reupload button clicked");
+    
+                    // Create file input dynamically
+                    const fileInput = document.createElement("input");
+                    fileInput.type = "file";
+                    fileInput.accept = "*/*"; // Allow all file types
+    
+                    // When the user selects a file
+                    fileInput.addEventListener("change", function (event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            console.log("Selected file:", file);
+    
+                            // Handle file upload here (e.g., upload to server)
+                            uploadFile(file);
+                        }
+                    });
+    
+                    // Trigger file input click to open the file selection dialog
+                    fileInput.click();
+                });
+            });
+    
+            // Function to handle file upload (example)
+            function uploadFile(file) {
+                const formData = new FormData();
+                formData.append("file", file);
+    
+                // Define the API URL for file upload (this can change based on your server)
+                const uploadApiUrl = "http://localhost:3000/upload-file";
+    
+                fetch(uploadApiUrl, {
+                    method: "POST",
+                    body: formData,
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("File uploaded successfully");
+                        alert("File uploaded successfully");
+                    } else {
+                        console.error("File upload failed");
+                        alert("Failed to upload the file");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error uploading file:", error);
+                    alert("Error uploading file");
+                });
+            }
+        });
+    </script>
+    
+    
+    
 </body>
 </html>

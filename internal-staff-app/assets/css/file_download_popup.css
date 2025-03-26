@@ -1,0 +1,50 @@
+/* Popup Modal Styles */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+}
+
+/* Close button (X) styles */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: black;
+}
+
+.popup-content {
+    position: relative; /* So that we can position the close button in the top-right corner */
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 30%; /* Could be more or less, depending on screen size */
+    text-align: center;
+    border-radius: 15px; /* Rounded corners */
+}
+
+.popup-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none; /* Remove border */
+}
+
+.popup-content button:hover {
+    background-color: #ddd;
+}
