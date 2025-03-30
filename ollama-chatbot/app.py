@@ -3,6 +3,7 @@ import json
 import webbrowser
 from flask import Flask, render_template, request, jsonify
 from model import get_answer
+from scoping_sheet import create_markdown, send_to_n8n_google_drive
 app = Flask(__name__)
 
 scoping_questions = {}
@@ -12,6 +13,7 @@ scoping_questions = json.loads(scoping_data)
 scoping_questions = {int(k): v for k, v in scoping_questions.items()}
 print(scoping_questions)
 requirement_df = []
+client_info = ""
 #print(scoping_questions[0])
 
 @app.route("/")
@@ -38,6 +40,8 @@ def chat():
         scoping_requirements["requirement"] = scoping_questions[index-1]["requirement"]
         scoping_requirements["status"] = answer  # Store previous response
         requirement_df.append(scoping_requirements)
+        if scoping_questions[index-1]["category"] == "Client Contact Information":
+            client_info = scoping_questions[index-1]["requirement"]
         scoping_requirements = {}
 
     if index in scoping_questions:
@@ -56,7 +60,12 @@ def chat():
         return jsonify(response_data)
     else:
         print(requirement_df)
-        return jsonify({"message": "Thanks for your responses!"})
+        print(client_info)
+        # send requirement_df to generate markdown
+        markdown = create_markdown(requirement_df)
+        print(markdown)
+        # send json response to n8n and save the file to google drive
+        return jsonify({"message": "Thanks for your responses Your request is currently pending for the sales team approval!"})
 
 if __name__ == "__main__":
     webbrowser.open('http://127.0.0.1:5001/')
