@@ -8,15 +8,17 @@ import pandas as pd
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from google.oauth2 import service_account
+from datetime import datetime
 
 model = OllamaLLM(model="mistral")
 
 # to generate markdown of the requirement df
-def create_markdown(requirement_df):
+def create_markdown(requirement_df, email):
     # Convert the updated document to markdown
     markdown_content = pd.DataFrame(
         requirement_df
     ).to_markdown()
+    #print(markdown_content)
     template_for_md = """
     Create a markdown file for the scoping sheet based on the dataframe {scoping_df} given.
 
@@ -32,7 +34,20 @@ def create_markdown(requirement_df):
     
     print("Markdown Document:")
     print(str_output)
-    return str_output
+    print("Markdown generation Done. Now creating the json response and sending it to n8n.")
+    # creating local json file to store the response to send to n8n
+    scoping_requirement_response = {}
+    scoping_requirement_response["id"] = 1
+    scoping_requirement_response["email"] = email
+    scoping_requirement_response["scopingsheet_markdown"] = str_output
+    scoping_requirement_response["requirement_df"] = requirement_df
+    scoping_requirement_response["timestamp"] = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    email_json = re.sub(r"[^a-zA-Z0-9_.-]", "_", email)
+    file_name = f"{email_json}_{scoping_requirement_response["timestamp"]}.json"
+    with open(file_name, 'w') as fp:
+        json.dump(scoping_requirement_response, fp, indent=4)
+    print("json response created")
+    #return str_output
 # save the file to google drive
 # need to pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
 
@@ -64,7 +79,7 @@ def send_to_n8n_google_drive():
     # get http endpoint
 
     # API endpoint on n8n
-    url = "https://example.com/api/upload"
+    url = "http://localhost:5678/webhook/5a0cd093-a0ed-404a-bfa1-be712355a441"
 
     # Load JSON file
     with open("data.json", "r") as file:
@@ -74,7 +89,7 @@ def send_to_n8n_google_drive():
     response = requests.post(url, json=json_data, headers={"Content-Type": "application/json"})
     
     # save to google drive file
-    send_to_drive(json_data)
+    # send_to_drive(json_data)
     # Print response
     return response.status_code, response.json()
 

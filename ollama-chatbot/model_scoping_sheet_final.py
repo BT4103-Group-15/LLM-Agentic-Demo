@@ -66,7 +66,7 @@ def get_application_overview():
             {
                 "category": "Application Overview",
                 "requirement":"Environment for Testing",
-                "question":"What is your current authentication method for your application?",
+                "question":"What is your current environment for testing your application?",
                 "type":"mcq_multi",
                 "options": ["Production","Staging","Development"],
                 "text":[]
@@ -384,7 +384,7 @@ def get_client_contact_info():
 # print(authentication_questions)
 # input_questions = get_input_processing()
 # print(3)
-data_questions = get_data_processing()
+data_questions = get_application_overview()
 print(data_questions)
 # api_questions = get_api_details()
 # print(5)

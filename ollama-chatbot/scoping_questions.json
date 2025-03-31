@@ -14,7 +14,7 @@
     "2": {
         "category": "Application Overview",
         "requirement": "Environment for Testing",
-        "question": "What is your current authentication method for your application?",
+        "question": "What is your current environment for testing your application?",
         "type": "mcq_multi",
         "options": [
             "Production",
@@ -22,10 +22,9 @@
             "Development"
         ],
         "text": [
-            "Development Authentication Method - This method is typically used during the development phase and may not be as secure as other methods due to its simplicity. It could involve using hardcoded credentials or sharing sensitive information among team members.\n\n",
-            "Staging Authentication Method - In the staging environment, more secure authentication methods are usually implemented to simulate a production environment. This may include using OAuth, two-factor authentication (2FA), or even third-party identity providers like Google Sign-In or Facebook Login.\n\n",
-            "Production Authentication Method - For the production application, the most secure authentication methods should be employed. This could involve using encryption, secure tokens, and robust password policies. It's also common to use third-party services for identity verification, such as Okta or Auth0, which offer additional security features like multi-factor authentication (MFA) and session management.\n\n",
-            "Not Set - If the application is in its early stages, it may not have an authentication method set up yet. In this case, it's crucial to prioritize implementing a secure authentication solution as soon as possible."
+            "Production Environment - This is where the fully tested and deployed application lives and serves end users. It's the live version of your website or application, accessible to all users. \n\n",
+            "Staging Environment - Also known as QA (Quality Assurance) or pre-production environment, this is a replica of the production environment used for testing before deployment. It allows testers to ensure that the application works correctly under expected load conditions.\n\n",
+            "Development Environment - This is where the actual coding and building of the application takes place. It's an environment designed to allow developers to write, test, and debug code.\n\n"
         ]
     },
     "3": {
@@ -54,7 +53,6 @@
         "options": [
             "Username & Password",
             "SSO",
-            "Development",
             "OAuth",
             "Certificate-based",
             "Other"
@@ -62,7 +60,6 @@
         "text": [
             "Username & Password: This method requires users to input a unique username and password to access the application. It's a common approach for web and mobile applications.\n\n",
             "SSO (Single Sign-On): SSO allows users to log in once and gain access to multiple applications without having to re-enter their credentials each time.\n\n",
-            "Development: If you're developing an application, the authentication method could be hardcoded for testing purposes or use simple methods like a static username/password combination.\n\n",
             "OAuth: OAuth is an open standard authorization protocol that allows users to grant third-party applications limited access to their data from another service without sharing their credentials. This is commonly used in applications that require access to user data from other services, such as Google or Facebook.\n\n",
             "Certificate-based: In this method, clients are authenticated through digital certificates instead of usernames and passwords. It's often used in enterprise environments for higher security requirements.\n\n",
             "Other: This option is for any authentication method not listed above, such as biometric authentication (fingerprint scanning, facial recognition), multi-factor authentication, etc."
