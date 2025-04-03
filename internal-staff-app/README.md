@@ -40,7 +40,7 @@ a `.env` file with your credentials.
 - Then, in the project folder, `cd internal-staff-app`, then run `npm install` in your command line. 
 
 ## 3. Database actions
-- `npm run db:drop` to drop database
+- `npm run db:reset` to drop database
 - `npm run db:migrate` to seed database with all migration scripts from the migrations folder.
 - `npm run start` to start the database connection [Note: This command is necessary if you would like to utilise the API endpoints.]
 - Note: Ensure that you are in the `internal-staff-app` folder before running the above commands.
