@@ -90,9 +90,49 @@
             // PDF download
             pdfButton.addEventListener("click", function () {
                 console.log("PDF download clicked");
-                window.location.href = "https://your-n8n-instance.com/webhook/pdf-download";
+
+                const downloadButton = document.getElementById("req-download");
+                let file = downloadButton ? "scoping" : "sow";
+        
+
+                fetch("http://localhost:5678/webhook-test/e16c6e2f-f583-4b54-ab7d-ba7e1859eb26", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        type: "pdf",
+                        project_id: projectId,
+                        file: file
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch PDF");
+                    }
+                    return response.blob(); // Get PDF as a Blob
+                })
+                .then(blob => {
+                    // Create a temporary link to download the PDF
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = `project_${projectId}.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error("Error downloading PDF:", error);
+                    alert("Failed to download PDF.");
+                });
+
                 closePopup();
             });
+
+
+
     
             // JSON download - Fetch data from different API based on clicked button
             jsonButton.addEventListener("click", async function () {
@@ -144,7 +184,7 @@
             if (uploadButton) {
                 uploadButton.addEventListener("click", function () {
                     console.log("Upload button with ID sow-upload clicked");
-                    openPopup("http://localhost:3000/sow-details"); // Set the API URL for SOW
+                    openPopup("http://localhost:3000/sow-details" + projectId); // Set the API URL for SOW
                 });
             }
     
