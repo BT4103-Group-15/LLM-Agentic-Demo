@@ -151,7 +151,7 @@
                         const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
                         const link = document.createElement("a");
                         link.href = URL.createObjectURL(jsonBlob);
-                        link.download = `${currentApiUrl.split("/").pop()}.json`; // Use the endpoint name to name the file
+                        link.download = `project_${projectId}.json`; // Use the endpoint name to name the file
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
@@ -184,7 +184,7 @@
             if (uploadButton) {
                 uploadButton.addEventListener("click", function () {
                     console.log("Upload button with ID sow-upload clicked");
-                    openPopup("http://localhost:3000/sow-details" + projectId); // Set the API URL for SOW
+                    openPopup("http://localhost:3000/project-details/" + projectId); // Set the API URL for SOW
                 });
             }
     
