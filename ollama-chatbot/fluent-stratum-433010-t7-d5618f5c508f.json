@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "fluent-stratum-433010-t7",
+  "private_key_id": "d5618f5c508f0c08f4445289482bbbde6808d8cd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDbRLHLzeKlUk7D\nbUIGkdotkO8FDza1a2zIA2afuvPhMsU6tdvS2MpZcAREjt95Zhk3dJ1LBM/fZxtJ\nDdavUhOlp/0hd1AKZb7jX4dFutDAHcOY7c0Ept4O4HzC4toM7wCN5zaUc52gJ14S\nsLPkd/oFYf4F0I8r3BceIT7PjVBtxLfqXI8wQlSuPBhgPeoroLQskIpGtA/5Be1K\n62SIWBVI2i7+TK9gW/uoBPPKYY1UbTk26XypLduvA+54xy91u0qIN+2BOKwuF9Is\nU8uFbA8goAmXTEaf46tfMdszAIV1qgBdi8no7lNwfF0wGnZVC5Mx00TuyMbS9zn9\naeETfEm9AgMBAAECggEAKHtExgdDXllVUFBGHddkq//zmQAHjjQAl+bE1h2adAu/\nDQlRRdqfdSawqwWjrZKTekEN3zFKvYiYKYMkDSc+mFls6vZPsTO6q9jRrSaB7s4v\n8/aHYOH74kxAzGw8bKHdfNVgpsS3p79M5293LumVn9PJJcKtBCB0pivmIESLQlB1\nThQgPE8tdpWhmGYRQ6qIax74Iu0PvvzTQYRteSPSHon0VqurGe67z7e7ddbHnNQs\negDm6znghy06b2R+Mw4219Jwd8vngI7/bGHKPjvAYOK506DfyfXHeXlpr/2DQDWN\no7ADjSRqdJ1IXXOCjgUUsiYkXFYZpqnA55x4gl5+4QKBgQDzcKLYIU0btnvKx7t1\nOT6oAcE4KeOD/MySbZg08PnSLnxs7WdplJp35D2t0v1jmEkqJs6YBiujwLbB6Iba\n9Zzrye5evPJOekWpetT72r2Ij4tQjpAReEk+vTFrnjfC+sSHUe2qVmE7owrBKMnC\n1B6SNsDziUPIXljnQOmjVVxSzQKBgQDmlMxmw/yZ0rZYMfmX7+FMx7rS6doFnELJ\nRRGeJoQuorzoYVvjfoMNKkmaKahIKxOEeZRqRyU4BmJh69BJVrF7rQxaMeWKiWum\nOceJ8LxULSD6s2P7H0FG5HCck1Smjrm4tFPX7bM3qmlusV0pvnCEStnQyeohBaBK\nGKAEjmcysQKBgQDKK+Hhso5SFJPsTUHeUYM6jfKEjS044QqYFNJSLUqcBiUpZWP7\nqAE8zl127YGoY8Fnc0EhugYmAZcFpPHSCCahH1uKbEqjaCJQZQVagEflkKi3Zx44\nk/foVcEkSgqvMAllBGJnk0M+/uGglxowZm9ZKIXH+1hCoDAfJaajEfIRhQKBgAhw\nw/azD+kVlIUv9yH/rvCfkxArbUatTKiPdbCjWk1WubGL9tAiDmwJ8z3IbpeNtB4y\nUSN+zTb6zNkmx64XlVGgqQYYM33Zv+4KyWocPNib+kwTCwLjRwFwVUr1/bBHIzdG\nqpcJ5XiRLWDW70Ea7oV5M/X3njFtQkvUEO95wv9RAoGAOYTvS4EuB8h6UqeL5Tx+\nmdWZPzWqyYOHuaT+W9x7d1JBpOV/OCyzvdU6siq8E7mSitDWykwjAkIH+0SIuR2g\n5QUpKw76rvEY7S4yPMXcoWx4crVXAfkV7nKcGp2vUsct8WNBDfYHMW48/ra8dykp\nR5QqAjEIh0aF0KMfeXACQKo=\n-----END PRIVATE KEY-----\n",
+  "client_email": "scoping-agent-chatbot@fluent-stratum-433010-t7.iam.gserviceaccount.com",
+  "client_id": "107846011862357183468",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/scoping-agent-chatbot%40fluent-stratum-433010-t7.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

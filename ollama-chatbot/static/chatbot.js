@@ -37,13 +37,14 @@ function sendMessage() {
 }
 
 // Start scoping
+let inQueryMode = false;
 let currentIndex = 0;  // Track question index
 
-async function fetchQuestion(index = 0, answer = null) {
+async function fetchQuestion(index = 0, answer = null, query = false) {
     let response = await fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ index: index, answer: answer })
+        body: JSON.stringify({ index: index, answer: answer , in_query_mode: query})
     });
 
     let data = await response.json();
@@ -57,6 +58,25 @@ function displayQuestion(data) {
 
     currentIndex = data.index; // Update question index
     const messagesDiv = document.getElementById('messages');
+    if (data.terminate) {
+        const botMessage = document.createElement('li');
+        botMessage.classList.add('chat-incoming', 'chat');
+        botMessage.innerHTML = `<p>${data.message}</p>`;
+        messagesDiv.appendChild(botMessage);
+        document.getElementById("open-input").style.display = "none";
+        inQueryMode = false;
+        return;
+    }
+
+    if (data.query_prompt) {
+        inQueryMode = true;
+    }
+
+    // show appropriate input
+    if (inQueryMode || data.query_prompt) {
+        document.getElementById("open-input").style.display = "block";
+    }
+
     if (data.responses) {
         // Chat is finished
         // questionElement.innerText = data.message;
@@ -149,9 +169,10 @@ function submitOpenAnswer() {
         userMessage.classList.add('chat-outgoing', 'chat');
         userMessage.innerHTML = `<p>${customAnswer}</p>`;
         messagesDiv.appendChild(userMessage);
-        fetchQuestion(currentIndex, customAnswer);
+        fetchQuestion(currentIndex, customAnswer, inQueryMode);
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
         document.getElementById('custom-answer').value = '';
+        openInputContainer.style.display = "none";
     }
 }
 

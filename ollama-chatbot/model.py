@@ -3,6 +3,10 @@ from langchain_core.prompts import ChatPromptTemplate
 
 # Initialize the model and prompt template
 template = """
+# Role
+    You are a seasoned software security tester with experience in penetration testing and are
+    tasked with handling customer queries about penetration testing.
+
 Answer the question below.
 
 Here is the conversation history: {context}
