@@ -35,35 +35,36 @@ INSERT INTO project_details (
     draft_report_due_date, 
     final_report_due_date
 ) VALUES 
-(1, 'Web Application Security Assessment', 'https://example.com', 'Staging environment', 'Web Application', 'OAuth 2.0', 
- 'Admin, User, Guest', 'Cookie-based', 30, 25, 'Text, Number, Date', 'PII, Payment Data', 
- 'MySQL Database', 15, TRUE, TRUE, TRUE, 'WAF, Input Validation', 'AWS', 
- 'Authentication, Payment Processing', 'PCI-DSS, GDPR', '2024-01-15', '8 hours per day', 
- 'No production testing', 'Executive Summary, Technical Details', '2025-03-25', '2025-04-10', '2025-04-20'),
+(1, 'Web Application Security Assessment', 'https://example.com', JSON_ARRAY('Staging environment'), JSON_ARRAY('Web Application'), JSON_ARRAY('OAuth 2.0'), 
+ JSON_ARRAY('Admin', 'User', 'Guest'), JSON_ARRAY('Cookie-based'), 30, 25, JSON_ARRAY('Text', 'Number', 'Date'), JSON_ARRAY('PII', 'Payment Data'), 
+ JSON_ARRAY('MySQL Database'), 15, 'Yes', 'Yes', 'Yes', JSON_ARRAY('WAF', 'Input Validation'), JSON_ARRAY('AWS'), 
+ JSON_ARRAY('Authentication', 'Payment Processing'), JSON_ARRAY('PCI-DSS', 'GDPR'), '2024-01-15', JSON_ARRAY('8 hours per day'), 
+ JSON_ARRAY('No production testing'), JSON_ARRAY('Executive Summary', 'Technical Details'), '2025-03-25', '2025-04-10', '2025-04-20'),
 
-(2, 'Network Infrastructure Audit', 'https://network.example.org', 'Test lab', 'Network', 'Certificate-based', 
- 'Admin, Auditor', 'Token-based', 60, 0, 'None', 'Network Configurations', 
- 'Configuration files', 30, TRUE, FALSE, TRUE, 'Firewall, IDS/IPS', 'On-premises', 
- 'Routing, Access Control', 'ISO 27001', '2024-02-20', 'After business hours', 
- 'No downtime allowed', 'Risk Assessment, Remediation Plan', '2025-03-28', '2025-04-15', '2025-04-25'),
+(2, 'Network Infrastructure Audit', 'https://network.example.org', JSON_ARRAY('Test lab'), JSON_ARRAY('Network'), JSON_ARRAY('Certificate-based'), 
+ JSON_ARRAY('Admin', 'Auditor'), JSON_ARRAY('Token-based'), 60, 0, JSON_ARRAY('None'), JSON_ARRAY('Network Configurations'), 
+ JSON_ARRAY('Configuration files'), 30, 'Yes', 'No', 'Yes', JSON_ARRAY('Firewall', 'IDS/IPS'), JSON_ARRAY('On-premises'), 
+ JSON_ARRAY('Routing', 'Access Control'), JSON_ARRAY('ISO 27001'), '2024-02-20', JSON_ARRAY('After business hours'), 
+ JSON_ARRAY('No downtime allowed'), JSON_ARRAY('Risk Assessment', 'Remediation Plan'), '2025-03-28', '2025-04-15', '2025-04-25'),
 
-(3, 'Mobile App Security Review', 'https://mobileapp.example.com/api', 'Development environment', 'Mobile Application', 'JWT', 
- 'User, Premium', 'Token-based', 45, 18, 'Text, Image, Location', 'Location Data, User Profiles', 
- 'Firebase', 12, TRUE, TRUE, FALSE, 'Cert Pinning, App Signing', 'Google Cloud', 
- 'User Authentication, Data Sync', 'OWASP MASVS', NULL, 'Business hours only', 
- 'iOS testing limited to simulators', 'OWASP Top 10 Mobile', '2025-04-01', '2025-04-20', '2025-04-30'),
+(3, 'Mobile App Security Review', 'https://mobileapp.example.com/api', JSON_ARRAY('Development environment'), JSON_ARRAY('Mobile Application'), JSON_ARRAY('JWT'), 
+ JSON_ARRAY('User', 'Premium'), JSON_ARRAY('Token-based'), 45, 18, JSON_ARRAY('Text', 'Image', 'Location'), JSON_ARRAY('Location Data', 'User Profiles'), 
+ JSON_ARRAY('Firebase'), 12, 'Yes', 'Yes', 'No', JSON_ARRAY('Cert Pinning', 'App Signing'), JSON_ARRAY('Google Cloud'), 
+ JSON_ARRAY('User Authentication', 'Data Sync'), JSON_ARRAY('OWASP MASVS'), NULL, JSON_ARRAY('Business hours only'), 
+ JSON_ARRAY('iOS testing limited to simulators'), JSON_ARRAY('OWASP Top 10 Mobile'), '2025-04-01', '2025-04-20', '2025-04-30'),
 
-(4, 'Cloud Infrastructure Assessment', 'https://cloud.example.net', 'Sandbox account', 'Cloud Service', 'IAM Roles', 
- 'Admin, DevOps, Developer', 'Role-based', 120, 5, 'Configuration, Commands', 'Infrastructure Secrets', 
- 'S3, DynamoDB', 25, TRUE, TRUE, TRUE, 'Security Groups, KMS', 'AWS', 
- 'Data Processing, Storage', 'SOC 2, HIPAA', '2023-11-10', 'No restrictions', 
- 'Read-only access to production', 'Cloud Security Posture Report', '2025-04-05', '2025-04-22', '2025-05-05'),
+(4, 'Cloud Infrastructure Assessment', 'https://cloud.example.net', JSON_ARRAY('Sandbox account'), JSON_ARRAY('Cloud Service'), JSON_ARRAY('IAM Roles'), 
+ JSON_ARRAY('Admin', 'DevOps', 'Developer'), JSON_ARRAY('Role-based'), 120, 5, JSON_ARRAY('Configuration', 'Commands'), JSON_ARRAY('Infrastructure Secrets'), 
+ JSON_ARRAY('S3', 'DynamoDB'), 25, 'Yes', 'Yes', 'Yes', JSON_ARRAY('Security Groups', 'KMS'), JSON_ARRAY('AWS'), 
+ JSON_ARRAY('Data Processing', 'Storage'), JSON_ARRAY('SOC 2', 'HIPAA'), '2023-11-10', JSON_ARRAY('No restrictions'), 
+ JSON_ARRAY('Read-only access to production'), JSON_ARRAY('Cloud Security Posture Report'), '2025-04-05', '2025-04-22', '2025-05-05'),
 
-(5, 'API Security Testing', 'https://api.example.io', 'QA environment', 'API', 'API Keys', 
- 'Service Accounts', 'Stateless', 0, 35, 'JSON, XML', 'Business Data', 
- 'PostgreSQL', 40, TRUE, TRUE, TRUE, 'Rate Limiting, Request Validation', 'Microsoft Azure', 
- 'Data Exchange, Business Logic', 'OpenAPI Spec Compliance', '2024-03-01', 'Weekend testing preferred', 
- 'No load testing', 'API Security Assessment', '2025-04-10', '2025-04-28', '2025-05-10');
+(5, 'API Security Testing', 'https://api.example.io', JSON_ARRAY('QA environment'), JSON_ARRAY('API'), JSON_ARRAY('API Keys'), 
+ JSON_ARRAY('Service Accounts'), JSON_ARRAY('Stateless'), 0, 35, JSON_ARRAY('JSON', 'XML'), JSON_ARRAY('Business Data'), 
+ JSON_ARRAY('PostgreSQL'), 40, 'Yes', 'Yes', 'Yes', JSON_ARRAY('Rate Limiting', 'Request Validation'), JSON_ARRAY('Microsoft Azure'), 
+ JSON_ARRAY('Data Exchange', 'Business Logic'), JSON_ARRAY('OpenAPI Spec Compliance'), '2024-03-01', JSON_ARRAY('Weekend testing preferred'), 
+ JSON_ARRAY('No load testing'), JSON_ARRAY('API Security Assessment'), '2025-04-10', '2025-04-28', '2025-05-10');
+
 
  
 INSERT INTO reports (project_id, report_type, content, status) VALUES 

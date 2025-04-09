@@ -1,9 +1,0 @@
-{
-  "version": "1",
-  "name": "n8n Scoping Sheet",
-  "type": "collection",
-  "ignore": [
-    "node_modules",
-    ".git"
-  ]
-}

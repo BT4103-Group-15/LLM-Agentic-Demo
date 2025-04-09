@@ -11,8 +11,8 @@
       "type": "n8n-nodes-base.apiTemplateIo",
       "typeVersion": 1,
       "position": [
-        -420,
-        380
+        80,
+        340
       ],
       "id": "848fe260-62f3-48d9-803a-df286fab4216",
       "name": "APITemplate.io1",
@@ -48,7 +48,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        1080,
+        1740,
         460
       ],
       "id": "96b2fb5d-6567-4c09-8769-607e982b03c2",
@@ -82,7 +82,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        380,
+        1040,
         360
       ],
       "id": "f14c0818-e750-49f5-b3ce-b66b9149f9f4",
@@ -100,7 +100,7 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        860,
+        1520,
         460
       ],
       "id": "fa13a09b-7e8a-4ecd-a1bb-85bbb10da0ce",
@@ -112,19 +112,6 @@
           "name": "SMTP account"
         }
       }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        1100,
-        260
-      ],
-      "id": "0c56f6be-8342-4042-9ca3-b284413de373",
-      "name": "Respond to Webhook"
     },
     {
       "parameters": {
@@ -176,7 +163,7 @@
             {
               "id": "659eee23-dd3b-46f9-b774-cf035c0e9253",
               "name": "request",
-              "value": "{\"id\" : 789,    \"email\": \"diansofia03@gmail.com\", \"scopingsheet_markdown\": \"```markdown\\n# Scoping Sheet:\\n|    | 0                                               | 1                                            | status                |\\n|---:|:------------------------------------------------|:---------------------------------------------|:------------------------------------------------------------|\\n|  0 | ('category', 'Application Overview')            | ('requirement', 'Application Name')          | NA                |\\n|  1 | ('category', 'Application Overview')            | ('requirement', 'Production URL')            | NA                |\\n|  2 | ('category', 'Application Overview')            | ('requirement', 'Environment for Testing')   | NA                |\\n|  3 | ('category', 'Application Overview')            | ('requirement', 'Application Type')          | Application Type: Web, API, Mobile |\\n|  4 | ('category', 'Authentication & Access Control') | ('requirement', 'Authentication Method')     | Authentication Method |\\n|  5 | ('category', 'Authentication & Access Control') | ('requirement', 'User Roles')                | NA                |\\n|  6 | ('category', 'Authentication & Access Control') | ('requirement', 'Session Management')        | Session Management |\\n|  7 | ('category', 'Authentication & Access Control') | ('requirement', 'Session timeout period')    | Session timeout period |\\n|  8 | ('category', 'Input Processing')                | ('requirement', 'total_num_input_fields')    | NA                |\\n|  9 | ('category', 'Input Processing')                | ('requirement', 'Input Types Present')       | NA                |\\n| 10 | ('category', 'Data Processing')                 | ('requirement', 'Sensitive Data Handled')    | Sensitive Data Handled: Personal and Healthcare Information |\\n| 11 | ('category', 'Data Processing')                 | ('requirement', 'Data Storage')              | NA                |\\n| 12 | ('category', 'API Details')                     | ('requirement', 'Number of Endpoints')       | NA                |\\n| 13 | ('category', 'API Details')                     | ('requirement', 'Authentication Required')   | Authentication Required |\\n| 14 | ('category', 'API Details')                     | ('requirement', 'Rate Limiting')             | NA                |\\n| 15 | ('category', 'API Details')                     | ('requirement', 'Documentation Available')   | NA                |\\n| 16 | ('category', 'Infrastructure')                  | ('requirement', 'Security Controls Present') | Security Controls |\\n| 17 | ('category', 'Infrastructure')                  | ('requirement', 'Input Types Present')       | NA                |\\n| 18 | ('category', 'Business Logic')                  | ('requirement', 'Critical Functions')        | NA                |\\n| 19 | ('category', 'Security Requirements')           | ('requirement', 'Compliance Requirements')   | HIPAA, GDPR |\\n| 20 | ('category', 'Security Requirements')           | ('requirement', 'Previous Testing')          | NA                |\\n| 21 | ('category', 'Testing Constraints')             | ('requirement', 'Time Restrictions')         | Testing Window: Business Hours |\\n| 22 | ('category', 'Testing Constraints')             | ('requirement', 'Testing Limitations')       | NA                |\\n| 23 | ('category', 'Deliverables')                    | ('requirement', 'Required Reports')          | NA                |\\n| 24 | ('category', 'Deliverables')                    | ('requirement', 'Timeline')                  | NA                |\\n```\\n\\n\\n\\n\",     \"requirement_df\": [         {             \"0\": [                 \"category\",                 \"Application Overview\"             ],             \"1\": [                 \"requirement\",                 \"Application Name\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Application Overview\"             ],             \"1\": [                 \"requirement\",                 \"Production URL\"             ],             \"status\": \"NA \\n\"},         {             \"0\": [                 \"category\",                 \"Application Overview\"             ],             \"1\": [                 \"requirement\",                 \"Environment for Testing\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Application Overview\"             ],             \"1\": [                 \"requirement\",                 \"Application Type\"             ],             \"status\": \"Application Type: Web, API, Mobile \\n\"         },         {             \"0\": [                 \"category\",                 \"Authentication & Access Control\"             ],             \"1\": [                 \"requirement\",                 \"Authentication Method\"             ],             \"status\": \"Authentication Method \\n\"         },         {             \"0\": [                 \"category\",                 \"Authentication & Access Control\"             ],             \"1\": [                 \"requirement\",                 \"User Roles\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Authentication & Access Control\"             ],             \"1\": [                 \"requirement\",                 \"Session Management\"             ],             \"status\": \"Session Management \\n\"         },         {             \"0\": [                 \"category\",                 \"Authentication & Access Control\"             ],             \"1\": [                 \"requirement\",                 \"Session timeout period\"             ],             \"status\": \"Session timeout period \\n\"         },         {             \"0\": [                 \"category\",                 \"Input Processing\"             ],             \"1\": [                 \"requirement\",                 \"total_num_input_fields\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Input Processing\"             ],             \"1\": [                 \"requirement\",                 \"Input Types Present\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Data Processing\"             ],             \"1\": [                 \"requirement\",                 \"Sensitive Data Handled\"             ],             \"status\": \"Sensitive Data Handled: Personal and Healthcare Information \\n\"         },         {             \"0\": [                 \"category\",                 \"Data Processing\"             ],             \"1\": [                 \"requirement\",                 \"Data Storage\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"API Details\"             ],             \"1\": [                 \"requirement\",                 \"Number of Endpoints\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"API Details\"             ],             \"1\": [                 \"requirement\",                 \"Authentication Required\"             ],             \"status\": \"Authentication Required \\n\"         },         {             \"0\": [                 \"category\",                 \"API Details\"             ],             \"1\": [                 \"requirement\",                 \"Rate Limiting\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"API Details\"             ],             \"1\": [                 \"requirement\",                 \"Documentation Available\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Infrastructure\"             ],             \"1\": [                 \"requirement\",                 \"Security Controls Present\"             ],             \"status\": \"Security Controls \\n\"         },         {             \"0\": [                 \"category\",                 \"Infrastructure\"],             \"1\": [                 \"requirement\",                 \"Input Types Present\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Business Logic\"             ],             \"1\": [                 \"requirement\",                 \"Critical Functions\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Security Requirements\"             ],             \"1\": [                 \"requirement\",                 \"Compliance Requirements\"             ],             \"status\": \"HIPAA, GDPR \\n\"         },         {             \"0\": [                 \"category\",                 \"Security Requirements\"             ],             \"1\": [                 \"requirement\",                 \"Previous Testing\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Testing Constraints\"             ],             \"1\": [                 \"requirement\",                 \"Time Restrictions\"             ],             \"status\": \"Testing Window: Business Hours  \\n\"         },         {             \"0\": [                 \"category\",                 \"Testing Constraints\"             ],             \"1\": [                 \"requirement\",                 \"Testing Limitations\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Deliverables\"             ],             \"1\": [                 \"requirement\",                 \"Required Reports\"             ],             \"status\": \"NA \\n\"         },         {             \"0\": [                 \"category\",                 \"Deliverables\"             ],             \"1\": [                 \"requirement\",                 \"Timeline\"             ],             \"status\": \"NA \\n\"         }     ] }",
+              "value": "{     \"id\": 1,     \"email\": \"diansofia03@gmail.com\",     \"scopingsheet_markdown\": \" Scoping Sheet for FinSecureApp\\n\\n   | Category | Requirement | Status |\\n   | --- | :-------------------------------- |:----------------------------------------------------------------------------------------------------------------------|\\n   | Application Overview | Application Name | FinSecureApp |\\n   | Application Overview | Production URL | https://finsecure.com |\\n   | Application Overview | Environment for Testing | ['Staging'] |\\n   | Application Overview | Application Type | ['Web', 'API'] |\\n   | Authentication & Access Control | Authentication Method | ['Username & Password', 'SSO'] |\\n   | Authentication & Access Control | User Roles | ['Anonymous Users', 'Regular Users', 'Power Users', 'Administrators', 'System Administrators'] |\\n   | Authentication & Access Control | Custom Roles | 2 |\\n   | Authentication & Access Control | Session Management | ['JWT'] |\\n   | Authentication & Access Control | Session Timeout Period | 20 |\\n   | Input Processing | total_num_input_fields | 15 |\\n   | Input Processing | Input Types Present | ['Free text fields', 'File uploads (Types allowed: .pdf, .png)', 'Payment information', 'Personal data', 'API calls'] |\\n   | Data Processing | Sensitive Data Handled | ['Personal Information', 'Financial Data'] |\\n   | Data Processing | Data Storage | ['Local Database', 'Cloud Storage'] |\\n   | API Details | Number of Endpoints | 20 |\\n   | API Details | Authentication Required | Yes |\\n   | API Details | Rate Limiting | Yes |\\n   | API Details | Documentation Available | Yes |\\n   | API Details | API Methods | ['GET', 'POST', 'PUT'] |\\n   | Infrastructure | Security Controls Present | ['WAF', 'IPS/IDS', 'Load Balancer', 'Anti-DDoS'] |\\n   | Infrastructure | Hosting | ['Cloud'] |\\n   | Business Logic | Critical Functions | ['Financial Transactions', 'User Data Management'] |\\n   | Security Requirements | Compliance Requirements | ['PCI DSS', 'GDPR'] |\\n   | Security Requirements | Previous Testing | 10/12/2023 |\\n   | Security Requirements | Known Vulnerabilities | none reported |\\n   | Security Requirements | Critical Assets | payment gateway, user accounts |\\n   | Testing Constraints | Time Restrictions | ['24/7 Allowed'] |\\n   | Testing Constraints | Testing Limitations | ['No Destructive Testing'] |\\n   | Deliverables | Required Reports | ['Executive Summary', 'Technical Details', 'Remediation Plan', 'Risk Rating'] |\\n   | Notes | Additional Information | Application uses two-factor authentication for all roles. API rate limits enforced at 500 requests per minute |\\n   | Client Contact Information | Client Email | aliceBrown@outlook.com |\",     \"requirement_df\": [         {             \"category\": \"Application Overview\",             \"requirement\": \"Application Name\",             \"status\": \"FinSecureApp\"         },         {             \"category\": \"Application Overview\",             \"requirement\": \"Production URL\",             \"status\": \"https://finsecure.com\"         },         {             \"category\": \"Application Overview\",             \"requirement\": \"Environment for Testing\",             \"status\": [                 \"Staging\"             ]         },         {             \"category\": \"Application Overview\",             \"requirement\": \"Application Type\",             \"status\": [                 \"Web\",                 \"API\"             ]         },         {             \"category\": \"Authentication & Access Control\",             \"requirement\": \"Authentication Method\",             \"status\": [                 \"Username & Password\",                 \"SSO\"             ]         },         {             \"category\": \"Authentication & Access Control\",             \"requirement\": \"User Roles\",             \"status\": [                 \"Anonymous Users\",                 \"Regular Users\",                 \"Power Users\",                 \"Administrators\",                 \"System Administrators\"             ]         },         {             \"category\": \"Authentication & Access Control\",             \"requirement\": \"Custom Roles\",             \"status\": \"2\"         },         {             \"category\": \"Authentication & Access Control\",             \"requirement\": \"Session Management\",             \"status\": [                 \"JWT\"             ]         },         {             \"category\": \"Authentication & Access Control\",             \"requirement\": \"Session Timeout Period\",             \"status\": \"20\"         },         {             \"category\": \"Input Processing\",             \"requirement\": \"total_num_input_fields\",             \"status\": \"15\"         },         {             \"category\": \"Input Processing\",             \"requirement\": \"Input Types Present\",             \"status\": [                 \"Free text fields\",                 \"File uploads (Types allowed: .pdf, .png)\",                 \"Payment information\",                 \"Personal data\",                 \"API calls\"             ]         },         {             \"category\": \"Data Processing\",             \"requirement\": \"Sensitive Data Handled\",             \"status\": [                 \"Personal Information\",                 \"Financial Data\"             ]         },         {             \"category\": \"Data Processing\",             \"requirement\": \"Data Storage\",             \"status\": [                 \"Local Database\",                 \"Cloud Storage\"             ]         },         {             \"category\": \"API Details\",             \"requirement\": \"Number of Endpoints\",             \"status\": \"20\"         },         {             \"category\": \"API Details\",             \"requirement\": \"Authentication Required\",             \"status\": \"Yes\"         },         {             \"category\": \"API Details\",             \"requirement\": \"Rate Limiting\",             \"status\": \"Yes\"         },         {             \"category\": \"API Details\",             \"requirement\": \"Documentation Available\",             \"status\": \"Yes\"         },         {             \"category\": \"API Details\",             \"requirement\": \"API Methods\",             \"status\": [                 \"GET\",                 \"POST\",                 \"PUT\"             ]         },         {             \"category\": \"Infrastructure\",             \"requirement\": \"Security Controls Present\",             \"status\": [                 \"WAF\",                 \"IPS/IDS\",                 \"Load Balancer\",                 \"Anti-DDoS\"             ]         },         {             \"category\": \"Infrastructure\",             \"requirement\": \"Hosting\",             \"status\": [                 \"Cloud\"             ]         },         {             \"category\": \"Business Logic\",             \"requirement\": \"Critical Functions\",             \"status\": [                 \"Financial Transactions\",                 \"User Data Management\"             ]         },         {             \"category\": \"Security Requirements\",             \"requirement\": \"Compliance Requirements\",             \"status\": [                 \"PCI DSS\",                 \"GDPR\"             ]         },         {             \"category\": \"Security Requirements\",             \"requirement\": \"Previous Testing\",             \"status\": \"10/12/2023\"         },         {             \"category\": \"Security Requirements\",             \"requirement\": \"Known Vulnerabilities\",             \"status\": \"none reported\"         },         {             \"category\": \"Security Requirements\",             \"requirement\": \"Critical Assets\",             \"status\": \"payment gateway, user accounts\"         },         {             \"category\": \"Testing Constraints\",             \"requirement\": \"Time Restrictions\",             \"status\": [                 \"24/7 Allowed\"             ]         },         {             \"category\": \"Testing Constraints\",             \"requirement\": \"Testing Limitations\",             \"status\": [                 \"No Destructive Testing\"             ]         },         {             \"category\": \"Deliverables\",             \"requirement\": \"Required Reports\",             \"status\": [                 \"Executive Summary\",                 \"Technical Details\",                 \"Remediation Plan\",                 \"Risk Rating\"             ]         },         {             \"category\": \"Notes\",             \"requirement\": \"Additional Information\",             \"status\": \"Application uses two-factor authentication for all roles. API rate limits enforced at 500 requests per minute\"         },         {             \"category\": \"Client Contact Information\",             \"requirement\": \"Client Email\",             \"status\": \"aliceBrown@outlook.com\"         }     ],     \"timestamp\": \"2025-03-31_20-20-03\" }",
               "type": "object"
             }
           ]
@@ -195,7 +182,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Extract data from requirement_df\nconst data = $json.request.requirement_df;\n\n// Table headers\nlet markdownTable = \"## Scoping Sheet\\n\\n\";\nmarkdownTable += \"| Category | Requirement | Status |\\n\";\nmarkdownTable += \"|----------|------------|--------|\\n\";\n\n// Loop through each row and extract details\ndata.forEach(row => {\n    let category = row[0][1];  // Get category name\n    let requirement = row[1][1];  // Get requirement name\n    let status = row.status ? row.status.trim() : \"NA\";  // Clean status field\n\n    // Append row to Markdown table\n    markdownTable += `| ${category} | ${requirement} | ${status} |\\n`;\n});\n\n// Return formatted Markdown\nreturn { scopingsheet_markdown: markdownTable };\n"
+        "jsCode": "// Extract data from requirement_df\nconst data = $json.request.requirement_df;\n\n// Table headers\nlet markdownTable = \"## Scoping Sheet\\n\\n\";\nmarkdownTable += \"| Category | Requirement | Status |\\n\";\nmarkdownTable += \"|----------|-------------|--------|\\n\";\n\n// Loop through each row and extract details\ndata.forEach(row => {\n    const category = row.category || \"NA\";\n    const requirement = row.requirement || \"NA\";\n\n    // Handle status formatting:\n    let status = \"NA\";\n    if (Array.isArray(row.status)) {\n        status = row.status.join(', ');\n    } else if (typeof row.status === 'string' || typeof row.status === 'number') {\n        status = row.status.toString().trim();\n    }\n\n    // Append row to Markdown table\n    markdownTable += `| ${category} | ${requirement} | ${status} |\\n`;\n});\n\n// Return formatted Markdown\nreturn { json: { scopingsheet_markdown: markdownTable } };\n\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -237,60 +224,6 @@
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT \n  CASE \n    WHEN EXISTS (\n      SELECT 1 \n      FROM information_schema.tables \n      WHERE table_schema = 'scoping_data' \n        AND table_name = 'scope_db'\n    ) \n    THEN TRUE \n    ELSE FALSE \n  END AS table_exists;",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.mySql",
-      "typeVersion": 2.4,
-      "position": [
-        -600,
-        1040
-      ],
-      "id": "31306dbb-9571-49a1-990f-c5430d88ce6b",
-      "name": "Check whether table exists",
-      "credentials": {
-        "mySql": {
-          "id": "pwehlYKuQhhIXisF",
-          "name": "MySQL account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "84de71cd-6bef-4560-a039-51429f06821e",
-              "leftValue": "={{ $json.table_exists }}",
-              "rightValue": 1,
-              "operator": {
-                "type": "number",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -380,
-        1040
-      ],
-      "id": "b8446e4f-bb18-4219-a816-eaea91a1ea9a",
-      "name": "If1"
-    },
-    {
-      "parameters": {
         "table": {
           "__rl": true,
           "value": "scope_db",
@@ -300,7 +233,7 @@
         "valuesToSend": {
           "values": [
             {
-              "column": "id",
+              "column": "client_id",
               "value": "={{ $('combining').item.json.id }}"
             },
             {
@@ -310,6 +243,14 @@
             {
               "column": "scopingsheet_markdown",
               "value": "={{ $('combining').item.json.scopingsheet_markdown }}"
+            },
+            {
+              "column": "project_id",
+              "value": "={{ $json.project_id }}"
+            },
+            {
+              "column": "scopingsheet_URL",
+              "value": "={{ $('APITemplate.io1').item.json.download_url }}"
             }
           ]
         },
@@ -318,8 +259,8 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        -120,
-        820
+        2140,
+        220
       ],
       "id": "a31a6529-fbaa-4172-968b-921f5b2f5244",
       "name": "Insert data into scope_db",
@@ -332,91 +273,16 @@
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "CREATE TABLE scope_db (\n  id varchar(255) PRIMARY KEY,\n  email VARCHAR(255),\n  scopingsheet_markdown TEXT,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.mySql",
-      "typeVersion": 2.4,
-      "position": [
-        -160,
-        1140
-      ],
-      "id": "179e5837-bc80-4e3e-8825-c8218c287f0b",
-      "name": "Creating table",
-      "credentials": {
-        "mySql": {
-          "id": "pwehlYKuQhhIXisF",
-          "name": "MySQL account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "table": {
-          "__rl": true,
-          "value": "scope_db",
-          "mode": "name"
-        },
-        "dataMode": "defineBelow",
-        "valuesToSend": {
-          "values": [
-            {
-              "column": "id",
-              "value": "={{ $('combining').item.json.id }}"
-            },
-            {
-              "column": "email",
-              "value": "={{ $('combining').item.json.email }}"
-            },
-            {
-              "column": "scopingsheet_markdown",
-              "value": "={{ $('combining').item.json.scopingsheet_markdown }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.mySql",
-      "typeVersion": 2.4,
-      "position": [
-        60,
-        1140
-      ],
-      "id": "070203ae-42d0-48d8-b21a-aaca54587a87",
-      "name": "Insert data into scope_db 2",
-      "credentials": {
-        "mySql": {
-          "id": "pwehlYKuQhhIXisF",
-          "name": "MySQL account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        100,
-        820
+        3000,
+        240
       ],
       "id": "3c88af0c-50e7-4bf8-9ddb-a1633814ee17",
       "name": "Respond to Webhook2"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        280,
-        1140
-      ],
-      "id": "c6902f52-8037-4800-b1fa-0342d0b7e889",
-      "name": "Respond to Webhook3"
     },
     {
       "parameters": {
@@ -455,80 +321,16 @@
     },
     {
       "parameters": {
-        "operation": "sendAndWait",
-        "fromEmail": "stormyferntreeofficial@gmail.com",
-        "toEmail": "=bluebrooke@naver.com",
-        "subject": "Generated Scoping Sheet Approval",
-        "message": "=Please view the generated scoping sheet through the link before approving or rejecting the document.\nLink:  {{ $json.download_url }}",
-        "approvalOptions": {
-          "values": {
-            "approvalType": "double",
-            "disapproveLabel": "Reject"
-          }
-        },
-        "options": {
-          "limitWaitTime": {
-            "values": {
-              "resumeAmount": 2,
-              "resumeUnit": "days"
-            }
-          }
-        }
-      },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [
-        0,
-        280
-      ],
-      "id": "e79ed88f-c9bf-4182-aee0-ae5865bbb41a",
-      "name": "Send Email to Staff",
-      "webhookId": "4e0f99db-90bd-418c-a4f9-2893d04ab103",
-      "alwaysOutputData": false,
-      "credentials": {
-        "smtp": {
-          "id": "E6qJoQyuVDVdeRx1",
-          "name": "SMTP account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        200,
-        540
+        900,
+        600
       ],
       "id": "146eb457-03db-4d8c-8d67-796aa314058e",
       "name": "Respond to Webhook4"
-    },
-    {
-      "parameters": {
-        "fromEmail": "stormyferntreeofficial@gmail.com",
-        "toEmail": "={{ $('combining').item.json.email }}",
-        "subject": "Generated Scoping Sheet",
-        "emailFormat": "text",
-        "text": "=Click on the link to view the generated scoping sheet. The content is based on the responses provided in the chat. \nLink:  {{ $json.download_url }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [
-        -20,
-        540
-      ],
-      "id": "50f6ca90-e769-4a07-bbd4-2abc97885d9a",
-      "name": "Send Email to client",
-      "webhookId": "9e5d33d3-b455-44f8-94cf-6c1807341513",
-      "credentials": {
-        "smtp": {
-          "id": "E6qJoQyuVDVdeRx1",
-          "name": "SMTP account"
-        }
-      }
     },
     {
       "parameters": {
@@ -551,8 +353,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        880,
-        260
+        2740,
+        220
       ],
       "id": "d6d885ab-aa31-4d1c-b251-de15d5df8cda",
       "name": "Execute SOW Workflow"
@@ -572,6 +374,12 @@
               "name": "client_email",
               "value": "={{ $('combining').item.json.email }}",
               "type": "string"
+            },
+            {
+              "id": "d1c423b0-1f20-4eed-a559-4f732dffdec0",
+              "name": "project_id",
+              "value": "={{ $('obtaining project id').item.json.project_id }}",
+              "type": "number"
             }
           ]
         },
@@ -580,11 +388,256 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        600,
-        260
+        2460,
+        220
       ],
       "id": "a739dd89-e818-4519-b6b4-3e0727d17c2e",
       "name": "Passing Key"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "fromEmail": "stormyferntreeofficial@gmail.com",
+        "toEmail": "={{ $('combining').item.json.email }} ",
+        "subject": "Generated Scoping Sheet Approval",
+        "message": "=Please view the generated scoping sheet through the link before approving or rejecting the document. The content is based on the responses provided in the chat.\nLink:  {{ $json.download_url }}",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "disapproveLabel": "Reject"
+          }
+        },
+        "options": {
+          "limitWaitTime": {
+            "values": {
+              "resumeAmount": 2,
+              "resumeUnit": "days"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        660,
+        280
+      ],
+      "id": "e79ed88f-c9bf-4182-aee0-ae5865bbb41a",
+      "name": "Send Email to Client",
+      "webhookId": "4e0f99db-90bd-418c-a4f9-2893d04ab103",
+      "alwaysOutputData": false,
+      "credentials": {
+        "smtp": {
+          "id": "E6qJoQyuVDVdeRx1",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "stormyferntreeofficial@gmail.com",
+        "toEmail": "=stormyferntreeofficial@gmail.com",
+        "subject": "Generated Scoping Sheet",
+        "html": "=markdown file attached",
+        "options": {
+          "attachments": "data"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        100,
+        620
+      ],
+      "id": "50f6ca90-e769-4a07-bbd4-2abc97885d9a",
+      "name": "Send Email to Staff",
+      "webhookId": "9e5d33d3-b455-44f8-94cf-6c1807341513",
+      "credentials": {
+        "smtp": {
+          "id": "E6qJoQyuVDVdeRx1",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "scopingsheet_markdown",
+        "options": {
+          "fileName": "markdown_sheet1.md"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -320,
+        380
+      ],
+      "id": "975705ce-daf8-42cd-a004-ab5ab98fcc93",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "project_details",
+          "mode": "list",
+          "cachedResultName": "project_details"
+        },
+        "dataMode": "defineBelow",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "application_name",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[0].status }}"
+            },
+            {
+              "column": "production_url",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[1].status }}"
+            },
+            {
+              "column": "testing_environment",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[2].status) }}"
+            },
+            {
+              "column": "application_type",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[3].status) }}"
+            },
+            {
+              "column": "authentication_method",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[4].status) }}"
+            },
+            {
+              "column": "user_roles",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[5].status) }}"
+            },
+            {
+              "column": "session_management",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[7].status) }}"
+            },
+            {
+              "column": "session_timeout_period",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[8].status }}"
+            },
+            {
+              "column": "total_num_input_fields",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[9].status }}"
+            },
+            {
+              "column": "input_types_present",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[10].status) }}"
+            },
+            {
+              "column": "sensitive_data_handled",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[11].status) }}"
+            },
+            {
+              "column": "data_storage",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[12].status) }}"
+            },
+            {
+              "column": "number_of_endpoints",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[13].status }}"
+            },
+            {
+              "column": "authentication_required",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[14].status }}"
+            },
+            {
+              "column": "rate_limiting",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[15].status }}"
+            },
+            {
+              "column": "documentation_available",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[16].status }}"
+            },
+            {
+              "column": "security_controls_present",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[18].status) }}"
+            },
+            {
+              "column": "hosting",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[19].status) }}"
+            },
+            {
+              "column": "critical_functions",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[20].status) }}"
+            },
+            {
+              "column": "compliance_requirements",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[21].status) }}"
+            },
+            {
+              "column": "previous_testing",
+              "value": "={{ new Date($('Setting of JSON Obj').item.json.request.requirement_df[22].status).toISOString().split('T')[0] }}"
+            },
+            {
+              "column": "time_restrictions",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[25].status) }}"
+            },
+            {
+              "column": "testing_limitations",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[26].status) }}"
+            },
+            {
+              "column": "required_reports",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[27].status) }}"
+            },
+            {
+              "column": "client_id",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.id }}"
+            },
+            {
+              "column": "project_start_date",
+              "value": "={{ $json.project_start_date ? $json.project_start_date : null }}"
+            },
+            {
+              "column": "draft_report_due_date",
+              "value": "={{ $json.draft_report_due_date ? $json.draft_report_due_date : null }}"
+            },
+            {
+              "column": "final_report_due_date",
+              "value": "={{ $json.final_report_due_date ? $json.final_report_due_date : null }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        1420,
+        280
+      ],
+      "id": "2c29bd50-e700-412b-a828-c5499c7a5967",
+      "name": "Insert into Project Details",
+      "credentials": {
+        "mySql": {
+          "id": "pwehlYKuQhhIXisF",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT project_id FROM data.project_details\nWHERE client_id = {{ $('Setting of JSON Obj').item.json.request.id }}\nORDER BY created_at DESC\nLIMIT 1;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        1780,
+        220
+      ],
+      "id": "e37ce4d9-3cfb-40dc-a1ca-af347afc0f67",
+      "name": "obtaining project id",
+      "credentials": {
+        "mySql": {
+          "id": "pwehlYKuQhhIXisF",
+          "name": "MySQL account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -593,12 +646,7 @@
       "main": [
         [
           {
-            "node": "Send Email to client",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Send Email to Staff",
+            "node": "Send Email to Client",
             "type": "main",
             "index": 0
           }
@@ -620,12 +668,7 @@
       "main": [
         [
           {
-            "node": "Check whether table exists",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Passing Key",
+            "node": "Insert into Project Details",
             "type": "main",
             "index": 0
           }
@@ -683,62 +726,11 @@
         ]
       ]
     },
-    "Check whether table exists": {
-      "main": [
-        [
-          {
-            "node": "If1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If1": {
-      "main": [
-        [
-          {
-            "node": "Insert data into scope_db",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Creating table",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Creating table": {
-      "main": [
-        [
-          {
-            "node": "Insert data into scope_db 2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Insert data into scope_db": {
       "main": [
         [
           {
-            "node": "Respond to Webhook2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Insert data into scope_db 2": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook3",
+            "node": "Passing Key",
             "type": "main",
             "index": 0
           }
@@ -749,29 +741,7 @@
       "main": [
         [
           {
-            "node": "APITemplate.io1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Send Email to Staff": {
-      "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Send Email to client": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook4",
+            "node": "Convert to File",
             "type": "main",
             "index": 0
           }
@@ -782,7 +752,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "Respond to Webhook2",
             "type": "main",
             "index": 0
           }
@@ -799,13 +769,73 @@
           }
         ]
       ]
+    },
+    "Send Email to Client": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email to Staff": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "APITemplate.io1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Email to Staff",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert into Project Details": {
+      "main": [
+        [
+          {
+            "node": "obtaining project id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtaining project id": {
+      "main": [
+        [
+          {
+            "node": "Insert data into scope_db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "bbfd5ece-17fb-4b5f-aba8-1d11c4935d65",
+  "versionId": "983db53c-7e50-42c1-87cf-7b10d298e1e2",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "8712c2bb4e02902a13a43c75c2acacd2aabdb06be443b7b14c332bd919069ab1"
