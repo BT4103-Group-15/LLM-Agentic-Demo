@@ -19,33 +19,32 @@ p {
     display: flex;
     justify-content: space-between;
     gap: 1vw;
-    margin-top: 5%;
+    margin-top: 3.8%;
+    /* height: 70%; Ensures it takes up the full viewport height */
+    align-items: stretch; /* Makes sure children expand */ 
 }
 
+.top-section {
+    height: 54vh;
+}
+
+.bottom-section {
+    height: 21vh;
+}
 .left-column {
-    width: 45%; /* Adjust as needed */
+    gap: 2vh;
     display: flex;
     flex-direction: column;
-    gap: 1vw;
-    height: 100%
+    width: 45%;
 }
+
 
 .right-column {
     width: 55%; /* Takes the remaining space */
     overflow-y: auto; /* Makes the right column scrollable */
     padding-right: 2vw;
-    max-height: 76vh;
 }
 
-/* Top Section (Project Section) */
-.top-section {
-    flex: 25; /* Adjust the space it takes up (2 times the size of the bottom section) */
-}
-
-/* Bottom Section (Action Buttons) */
-.bottom-section {
-    flex: 1; /* Adjust the space it takes up (1 time the size of the top section) */
-}
 
 .section {
     border: 1px solid #ccc;
@@ -65,16 +64,14 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
 }
 .action-buttons button {
     font-weight: bold; /* Make text bold */
     font-size: 1.9vw;
-    height: 100%; /* Ensure button fills the container */
+    padding: 1.5%;
     border: none; /* Remove border */
     background-color: #ffffff; /* Add a background color */
     color: rgb(0, 0, 0);
-    padding: 15px; /* Adjust padding as needed */
     cursor: pointer;
 }
 .action-buttons button:not(:last-child) {
@@ -87,8 +84,8 @@ p {
 
 /* Scrollable Description Section */
 .description {
-    max-height: 100%; /* Ensures description section doesn't overflow */
     overflow-y: auto;
+    max-height: 79vh;
 }
 
 .group {

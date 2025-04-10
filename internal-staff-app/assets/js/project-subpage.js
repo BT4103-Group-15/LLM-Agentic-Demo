@@ -22,6 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.getElementById("file-upload-button").addEventListener("click", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('project_id');
+    window.location.href = 'file_upload_download.html?project_id=' + projectId;
+});
+
+
+
 async function fetchProjectData(projectId) {
     try {
         // Assuming you already have the project data (either from the previous page or from an API)
