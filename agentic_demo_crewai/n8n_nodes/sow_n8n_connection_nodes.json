@@ -1,0 +1,118 @@
+{
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "172a4fa7-6afd-46df-bb1e-ebc5429e6660",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "876d6422-8d0e-48f0-8eb5-4af9f318cf0a",
+              "name": "id",
+              "value": "789",
+              "type": "string"
+            },
+            {
+              "id": "a1d53457-349d-4e51-abb2-434b9cdfd2fe",
+              "name": "email",
+              "value": "diansofia03@gmail.com",
+              "type": "string"
+            },
+            {
+              "id": "177206b2-836d-4766-bc88-d4103dd8fcd6",
+              "name": "scopingsheet_markdown",
+              "value": "Scoping Sheet for FinSecureApp\\n\\n   | Category | Requirement | Status |\\n   | --- | :-------------------------------- |:----------------------------------------------------------------------------------------------------------------------|\\n   | Application Overview | Application Name | FinSecureApp |\\n   | Application Overview | Production URL | https://finsecure.com |\\n   | Application Overview | Environment for Testing | ['Staging'] |\\n   | Application Overview | Application Type | ['Web', 'API'] |\\n   | Authentication & Access Control | Authentication Method | ['Username & Password', 'SSO'] |\\n   | Authentication & Access Control | User Roles | ['Anonymous Users', 'Regular Users', 'Power Users', 'Administrators', 'System Administrators'] |\\n   | Authentication & Access Control | Custom Roles | 2 |\\n   | Authentication & Access Control | Session Management | ['JWT'] |\\n   | Authentication & Access Control | Session Timeout Period | 20 |\\n   | Input Processing | total_num_input_fields | 15 |\\n   | Input Processing | Input Types Present | ['Free text fields', 'File uploads (Types allowed: .pdf, .png)', 'Payment information', 'Personal data', 'API calls'] |\\n   | Data Processing | Sensitive Data Handled | ['Personal Information', 'Financial Data'] |\\n   | Data Processing | Data Storage | ['Local Database', 'Cloud Storage'] |\\n   | API Details | Number of Endpoints | 20 |\\n   | API Details | Authentication Required | Yes |\\n   | API Details | Rate Limiting | Yes |\\n   | API Details | Documentation Available | Yes |\\n   | API Details | API Methods | ['GET', 'POST', 'PUT'] |\\n   | Infrastructure | Security Controls Present | ['WAF', 'IPS/IDS', 'Load Balancer', 'Anti-DDoS'] |\\n   | Infrastructure | Hosting | ['Cloud'] |\\n   | Business Logic | Critical Functions | ['Financial Transactions', 'User Data Management'] |\\n   | Security Requirements | Compliance Requirements | ['PCI DSS', 'GDPR'] |\\n   | Security Requirements | Previous Testing | 10/12/2023 |\\n   | Security Requirements | Known Vulnerabilities | none reported |\\n   | Security Requirements | Critical Assets | payment gateway, user accounts |\\n   | Testing Constraints | Time Restrictions | ['24/7 Allowed'] |\\n   | Testing Constraints | Testing Limitations | ['No Destructive Testing'] |\\n   | Deliverables | Required Reports | ['Executive Summary', 'Technical Details', 'Remediation Plan', 'Risk Rating'] |\\n   | Notes | Additional Information | Application uses two-factor authentication for all roles. API rate limits enforced at 500 requests per minute |\\n   | Client Contact Information | Client Email | aliceBrown@outlook.com |",
+              "type": "string"
+            },
+            {
+              "id": "9317e7a8-1790-4bff-a932-2bc5611a6901",
+              "name": "created_at",
+              "value": "2025-04-07 18:10:12",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "65b4a6c4-476a-4e84-9475-844c79016b82",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://0fa7-119-74-205-158.ngrok-free.app/api/sow-local-flow",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "sample_sow",
+              "value": "# Scope of Work (SOW) ## Penetration Testing Services  ### 1. **Project Overview** This Scope of Work (SOW) outlines the objectives, deliverables, and timelines for the penetration testing services to be provided by [Company Name] (hereafter referred to as \"The Service Provider\"). The purpose of this engagement is to assess the security posture of [Client Name]’s systems and networks, identify vulnerabilities, and provide recommendations for mitigation.  ### 2. **Objectives** The primary objective of this engagement is to conduct thorough penetration testing on [Client Name]’s systems to:  - Identify vulnerabilities within the client's network, systems, and web applications. - Simulate real-world cyber-attacks to evaluate the security response mechanisms in place. - Assess the client's current defenses and suggest remediation strategies. - Provide a comprehensive report of findings with actionable recommendations.  ### 3. **Scope of Services**  #### 3.1 **Penetration Testing Areas** The penetration testing will cover the following areas:  - **External Network Testing**: Testing of the external-facing assets (web applications, firewalls, VPNs, etc.) for vulnerabilities. - **Internal Network Testing**: Simulating insider threats and testing internal network assets. - **Web Application Testing**: Conducting tests on web applications for OWASP Top 10 vulnerabilities and other common security risks. - **Wireless Network Testing**: Assessment of wireless networks for security flaws, including weak encryption and unauthorized access. - **Social Engineering (Optional)**: Conducting simulated phishing attacks or other forms of social engineering to evaluate employee susceptibility.  #### 3.2 **Testing Methodology** - The penetration testing will follow industry best practices, including OWASP, NIST, and PTES frameworks. - Tools such as [list of tools, e.g., Burp Suite, Nessus, Metasploit] will be used to conduct the tests. - The engagement will be divided into the following phases:   1. **Reconnaissance**: Gather publicly available information on the client’s systems.   2. **Vulnerability Scanning**: Use automated tools to identify potential vulnerabilities.   3. **Exploitation**: Attempt to exploit vulnerabilities to determine their severity.   4. **Post-Exploitation**: Assess the extent of control gained through exploitation.   5. **Reporting**: Provide detailed findings and remediation recommendations.  #### 3.3 **Exclusions** The following activities are excluded from the scope: - Testing of physical security systems (e.g., lockpicking, badge cloning). - Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks. - Testing of systems not explicitly outlined in this SOW. - Social engineering beyond email phishing campaigns (e.g., physical access tests).  ### 4. **Deliverables** The following deliverables will be provided at the conclusion of the engagement:  - **Penetration Testing Report**: A detailed report outlining identified vulnerabilities, exploited vulnerabilities, potential impacts, and recommended remediation actions. - **Executive Summary**: A high-level summary of the findings for non-technical stakeholders. - **Risk Assessment**: A prioritized list of vulnerabilities based on risk levels (e.g., High, Medium, Low). - **Proof of Concepts**: Detailed documentation of any exploits or successful attacks, including screenshots, logs, and steps to reproduce.  ### 5. **Timeline and Milestones**  | Phase                      | Start Date    | End Date      | Duration   | |----------------------------|---------------|---------------|------------| | Project Kickoff             | [Start Date]  | [Start Date]  | 1 Day      | | Reconnaissance & Scanning   | [Start Date]  | [End Date]    | [X days]   | | Exploitation & Post-Exploitation | [Start Date] | [End Date]   | [X days]   | | Reporting & Review          | [Start Date]  | [End Date]    | [X days]   | | Final Review & Delivery     | [Start Date]  | [End Date]    | 1 Day      |  ### 6. **Roles and Responsibilities**  #### 6.1 **Client Responsibilities** - Provide necessary access to systems, networks, and applications. - Ensure all systems are properly backed up before testing begins. - Designate a point of contact for coordination throughout the engagement.  #### 6.2 **Service Provider Responsibilities** - Perform the penetration testing according to the outlined scope and best practices. - Maintain confidentiality and adhere to non-disclosure agreements (NDAs). - Provide a detailed report of findings within the agreed timeline.  ### 7. **Confidentiality and Data Security** - All data and information gathered during the engagement will be treated as confidential. - The Service Provider will not disclose any client information without prior written consent, except as required by law. - The Service Provider will take reasonable steps to secure client data during the testing process.  ### 8. **Pricing and Payment Terms** The total cost for the penetration testing services is [Total Price], broken down as follows: - Initial deposit: [Deposit Amount] - Remaining balance: [Balance Amount] - Payment is due upon receipt of the final report.  ### 9. **Acceptance** By signing below, both parties acknowledge and accept the terms outlined in this Scope of Work.  **Client Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  **Service Provider Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  ---  ### 10. **Terms and Conditions** - The engagement will follow the agreed-upon schedule and timelines. - Any changes or additions to the scope of work may result in additional costs or timeline adjustments. - Either party may terminate this agreement with [Number of Days] notice."
+            },
+            {
+              "name": "completed_scopingsheet",
+              "value": "={{ $json.scopingsheet_markdown }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "1bb254b4-427e-4eec-85ce-914dcc75427e",
+      "name": "HTTP Request"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f03c7e4ccd09a329d97d57aadca4e782af92e08e6d355ffc9ace5c99699323ff"
+  }
+}

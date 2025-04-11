@@ -1,10 +1,14 @@
 from pydantic import BaseModel
 
 # from langgraph.graph import Graph # For simple with typed input output labelling
-from langgraph.graph import START, END, StateGraph  # for State managed Graphs
+from langgraph.graph import START, StateGraph  # for State managed Graphs
 
 # import ollama # Direct version, does not accept prompt template
 from langchain_core.prompts import ChatPromptTemplate  # For formatting purposes
+from langchain_core.output_parsers import (
+    StrOutputParser,
+)  # extracting .content : model agnostic
+from langchain.schema.runnable import RunnableSequence
 from langchain_ollama import OllamaLLM  # for LangChain version
 import pandas as pd
 
@@ -37,9 +41,11 @@ llama3_8b_local = OllamaLLM(model="llama3.1")
 qwen_2p5b_local = OllamaLLM(model="qwen2.5:14b")
 
 groq_api_key = api_key  # move into dotenv
-llm = ChatGroq(
-    groq_api_key=groq_api_key, model_name="llama-3.3-70b-versatile", temperature=0.7
-)
+# llm = ChatGroq(
+#     groq_api_key=groq_api_key, model_name="llama-3.3-70b-versatile", temperature=0.7
+# ) # Rate limit exceeded
+# llm = ChatGroq(groq_api_key=groq_api_key, model_name="gemma2-9b-it", temperature=0.3)
+llm = mistral_7b_local
 
 
 ###################################################################################################
@@ -51,6 +57,7 @@ class InputState(BaseModel):
     """
 
     email_text: str
+    sample_scopingsheet: str  # in markdown format string
     requirement_df: list[RequirementItem]  # confirm type from HTTP request
 
 
@@ -69,6 +76,7 @@ class OverAllState(BaseModel):
     # requirement_df: pd.DataFrame  not allowed in pydantic framework
     requirement_df: list[dict]  # standard
     scopingsheet_markdown: str
+    sample_scopingsheet: str
     workflow_steps: int  # track cycle from agents
 
     model_config = {"arbitrary_types_allowed": True}
@@ -95,7 +103,7 @@ class OutputState(BaseModel):
 def extract_requirements(state: InputState) -> OverAllState:
     # The output here does not affect input of the next step
     """
-    Use the Ollama Mistral model to extract requirements from the email.
+    Using Mistral model from OllamaLLM to extract requirements from the email.
     Going through each requirement one at a time, the function will feed the local LLM with
     the specific requirement and the full email text to extract the requirement.
     It will then update the requirement document which is a pandas dataframe.
@@ -107,44 +115,63 @@ def extract_requirements(state: InputState) -> OverAllState:
     # Role
     You are a seasoned software security tester with experience in penetration testing and are
     tasked with extracting software requirements from the clients email before conducting
-    a software security test. This is part of the customer engagement phase.
+    a software security test.
 
     # Task
-    Extract a specific software requirement from the following email.
+    Extract this software requirement: {the_requirement}
+    from the following email: 
+    {email_content}
 
     # Output Format
-    1. If the requirement is not clear enough, please output NA as the output string.
-    2. If the requirements are clear, output the extracted requirement in short phrases
-    under 20 words.
-
-    # Software Requirement: {the_requirement}
-
-    # Email:
-    \n\n{email_content}\n\n
+    1. If the requirement is not clear enough, please output NA only.
+    2. Else, output the extracted requirement in point form, do not include any reasoning.
+    3. DO NOT OUTPUT ANYTHING ELSE OTHER THAN THE REQUIREMENT OR NA
+    """
+    req_checking_template = """
+    # Task
+    Please ensure that the requirement gathered here is not verbose and only mentions the relevant
+    content. If is appears as NA, output NA only.
+    # Requirement:
+    {requirement_row} 
     """
     requirement_dataframe = pd.DataFrame(
-        state.requirement_df
-    )  # already converts to DF here
+        state.requirement_df, columns=["category", "requirement"]
+    )
+    # requirement_dataframe.columns = [col[1] if isinstance(col, tuple) else col for col in requirement_dataframe.columns]
+    # print(requirement_dataframe.columns.tolist())
+    print(type(requirement_dataframe["category"].iloc[0]))  # Check first value in 'category' column
+    print(type(requirement_dataframe["requirement"].iloc[0]))  # Check first value in 'requirement' column
+    requirement_dataframe["category"] = requirement_dataframe["category"].apply(lambda x: x[1] if isinstance(x, tuple) else x)
+    requirement_dataframe["requirement"] = requirement_dataframe["requirement"].apply(lambda x: x[1] if isinstance(x, tuple) else x)
+
+    print("dataframe is: \n ", requirement_dataframe)
     status_column = []
-    prompt = ChatPromptTemplate.from_template(req_extraction_template)
-    chain = prompt | llm
-    for index, requirement in requirement_dataframe.iterrows():
-        req_string = str(index) + ", ".join(
-            requirement.astype(str)
-        )  # will this work on dictionary?
-        groq_output = chain.invoke(
+    extraction_prompt = ChatPromptTemplate.from_template(req_extraction_template)
+    qa_prompt = ChatPromptTemplate.from_template(req_checking_template)
+
+    step1 = extraction_prompt | llm | StrOutputParser()  # Extracts the "content" string
+    step2 = qa_prompt | llm | StrOutputParser()
+
+    extraction_chain = step1 | step2  # Chaining the two prompts
+
+    for index, row in requirement_dataframe.iterrows():
+        req_description = (
+            f"Category: {row['category']}\nRequirement: {row['requirement']}"
+        )
+        str_output = extraction_chain.invoke(
             {
                 "email_content": state.email_text,
-                "the_requirement": req_string,  # str from row of dataframe
+                "the_requirement": req_description,  # str from row of dataframe
             }
         )
-        req_status = groq_output.content
-        checking_status = groq_output.response_metadata[
-            "token_usage"
-        ]  # check groq output times
-        print(checking_status)
-        status_column.append(req_status)
-    requirement_dataframe["status"] = status_column
+        print(index, " : " + str_output)  # LLM evaluation
+        status_column.append(str_output)
+
+    # requirement_dataframe["status"] = status_column
+    # Add new column without modifying existing structure
+    requirement_dataframe = requirement_dataframe.assign(status=status_column)
+    print("dataframe became: \n ", requirement_dataframe)
+
     # Must return all fields in the OverAllState object that are to be tracked
     return {
         "email_text": state.email_text,
@@ -173,16 +200,22 @@ def create_markdown(state: OverAllState):
     {template_for_md}
     """
     md_prompt = ChatPromptTemplate.from_template(template_for_md)
-    chain = md_prompt | llm
-    groq_output = chain.invoke(
-        {"scopingsheet_md": markdown_content, "template_for_md": template_for_md}
+    chain = md_prompt | llm | StrOutputParser()
+    # Template_for_md needs to be copied into OverAllState from InputState
+    # That is if the sponsor even gives us a template
+    str_output = chain.invoke(
+        {
+            "scopingsheet_md": markdown_content,
+            "template_for_md": state.sample_scopingsheet,
+        }
     )
-    markdown_content = groq_output.content
-    checking_status = groq_output.response_metadata["token_usage"]
-    print(checking_status)
-    print(markdown_content)
+    # markdown_content = groq_output.content
+    # checking_status = groq_output.response_metadata["token_usage"]
+    # print(checking_status)
+    print("Markdown Document:")
+    print(str_output)
     return {
-        "scopingsheet_markdown": markdown_content,
+        "scopingsheet_markdown": str_output,
     }
 
 
@@ -199,8 +232,8 @@ def output_document(state: OverAllState) -> OutputState:
     """
     Print the updated requirement document.
     """
-    print("Updated Requirement Document:")
-    print(state.requirement_df)
+    # print("Updated Requirement Document:")
+    # print(state.requirement_df)
     return {
         "scopingsheet_markdown": state.scopingsheet_markdown,
         "requirement_df": state.requirement_df,
@@ -233,14 +266,20 @@ compiled_workflow = workflow.compile()  # Graph is compiled
 # Scoping Generator Method
 ###################################################################################################
 def run_scoping_generator(
-    email_content: str, requirement_dataframe: List[RequirementItem]
+    email_content: str,
+    requirement_dataframe: List[RequirementItem],
+    sample_scopingsheet: str,
 ) -> str:
     """
     Wrapper method to run the scoping generator workflow.
     """
 
     output = compiled_workflow.invoke(
-        {"email_text": email_content, "requirement_df": requirement_dataframe}
+        {
+            "email_text": email_content,
+            "requirement_df": requirement_dataframe,
+            "sample_scopingsheet": sample_scopingsheet,
+        }
     )
-    print(output)
+    # print(output)
     return output
