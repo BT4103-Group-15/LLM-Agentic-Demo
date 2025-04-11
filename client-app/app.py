@@ -68,13 +68,13 @@ def chat():
             # send json response to n8n and save the file to google drive
             #return jsonify({"message": "Thanks for your responses Your request is currently pending for the sales team approval!"})
             return jsonify({
-                "message": "Thanks for your responses Your request is currently pending for the sales team approval! In the mean time, do you have any questions for us? If not, please answer with 'no'.",
+                "message": "Thank you for your responses. Your request is currently pending for the sales team approval! In the mean time, do you have any questions for us? If not, please answer with 'no'.",
                 "query_prompt": True,  # frontend will handle this
                 "index": index,
                 "in_query_mode": True
             })
     else:
-        print("here")
+        # print("here")
         # Handle post-Q&A user queries
         if answer.lower() in ["no", "nope", "none"]:
             return jsonify({
