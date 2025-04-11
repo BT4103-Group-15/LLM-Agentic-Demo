@@ -1,0 +1,212 @@
+{
+    "id": 1,
+    "email": "aliceBrown@outlook.com",
+    "scopingsheet_markdown": " Scoping Sheet for FinSecureApp\n\n   | Category | Requirement | Status |\n   | --- | :-------------------------------- |:----------------------------------------------------------------------------------------------------------------------|\n   | Application Overview | Application Name | FinSecureApp |\n   | Application Overview | Production URL | https://finsecure.com |\n   | Application Overview | Environment for Testing | ['Staging'] |\n   | Application Overview | Application Type | ['Web', 'API'] |\n   | Authentication & Access Control | Authentication Method | ['Username & Password', 'SSO'] |\n   | Authentication & Access Control | User Roles | ['Anonymous Users', 'Regular Users', 'Power Users', 'Administrators', 'System Administrators'] |\n   | Authentication & Access Control | Custom Roles | 2 |\n   | Authentication & Access Control | Session Management | ['JWT'] |\n   | Authentication & Access Control | Session Timeout Period | 20 |\n   | Input Processing | total_num_input_fields | 15 |\n   | Input Processing | Input Types Present | ['Free text fields', 'File uploads (Types allowed: .pdf, .png)', 'Payment information', 'Personal data', 'API calls'] |\n   | Data Processing | Sensitive Data Handled | ['Personal Information', 'Financial Data'] |\n   | Data Processing | Data Storage | ['Local Database', 'Cloud Storage'] |\n   | API Details | Number of Endpoints | 20 |\n   | API Details | Authentication Required | Yes |\n   | API Details | Rate Limiting | Yes |\n   | API Details | Documentation Available | Yes |\n   | API Details | API Methods | ['GET', 'POST', 'PUT'] |\n   | Infrastructure | Security Controls Present | ['WAF', 'IPS/IDS', 'Load Balancer', 'Anti-DDoS'] |\n   | Infrastructure | Hosting | ['Cloud'] |\n   | Business Logic | Critical Functions | ['Financial Transactions', 'User Data Management'] |\n   | Security Requirements | Compliance Requirements | ['PCI DSS', 'GDPR'] |\n   | Security Requirements | Previous Testing | 10/12/2023 |\n   | Security Requirements | Known Vulnerabilities | none reported |\n   | Security Requirements | Critical Assets | payment gateway, user accounts |\n   | Testing Constraints | Time Restrictions | ['24/7 Allowed'] |\n   | Testing Constraints | Testing Limitations | ['No Destructive Testing'] |\n   | Deliverables | Required Reports | ['Executive Summary', 'Technical Details', 'Remediation Plan', 'Risk Rating'] |\n   | Notes | Additional Information | Application uses two-factor authentication for all roles. API rate limits enforced at 500 requests per minute |\n   | Client Contact Information | Client Email | aliceBrown@outlook.com |",
+    "requirement_df": [
+        {
+            "category": "Application Overview",
+            "requirement": "Application Name",
+            "status": "FinSecureApp"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Production URL",
+            "status": "https://finsecure.com"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Environment for Testing",
+            "status": [
+                "Staging"
+            ]
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Application Type",
+            "status": [
+                "Web",
+                "API"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Authentication Method",
+            "status": [
+                "Username & Password",
+                "SSO"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "User Roles",
+            "status": [
+                "Anonymous Users",
+                "Regular Users",
+                "Power Users",
+                "Administrators",
+                "System Administrators"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Custom Roles",
+            "status": "2"
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Management",
+            "status": [
+                "JWT"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Timeout Period",
+            "status": "20"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "total_num_input_fields",
+            "status": "15"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "Input Types Present",
+            "status": [
+                "Free text fields",
+                "File uploads (Types allowed: .pdf, .png)",
+                "Payment information",
+                "Personal data",
+                "API calls"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Sensitive Data Handled",
+            "status": [
+                "Personal Information",
+                "Financial Data"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Data Storage",
+            "status": [
+                "Local Database",
+                "Cloud Storage"
+            ]
+        },
+        {
+            "category": "API Details",
+            "requirement": "Number of Endpoints",
+            "status": "20"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Authentication Required",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Rate Limiting",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Documentation Available",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "API Methods",
+            "status": [
+                "GET",
+                "POST",
+                "PUT"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Security Controls Present",
+            "status": [
+                "WAF",
+                "IPS/IDS",
+                "Load Balancer",
+                "Anti-DDoS"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Hosting",
+            "status": [
+                "Cloud"
+            ]
+        },
+        {
+            "category": "Business Logic",
+            "requirement": "Critical Functions",
+            "status": [
+                "Financial Transactions",
+                "User Data Management"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Compliance Requirements",
+            "status": [
+                "PCI DSS",
+                "GDPR"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Previous Testing",
+            "status": "10/12/2023"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Known Vulnerabilities",
+            "status": "none reported"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Critical Assets",
+            "status": "payment gateway, user accounts"
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Time Restrictions",
+            "status": [
+                "24/7 Allowed"
+            ]
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Testing Limitations",
+            "status": [
+                "No Destructive Testing"
+            ]
+        },
+        {
+            "category": "Deliverables",
+            "requirement": "Required Reports",
+            "status": [
+                "Executive Summary",
+                "Technical Details",
+                "Remediation Plan",
+                "Risk Rating"
+            ]
+        },
+        {
+            "category": "Notes",
+            "requirement": "Additional Information",
+            "status": "Application uses two-factor authentication for all roles. API rate limits enforced at 500 requests per minute"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Email",
+            "status": "aliceBrown@outlook.com"
+        }
+    ],
+    "timestamp": "2025-03-31_20-20-03"
+}

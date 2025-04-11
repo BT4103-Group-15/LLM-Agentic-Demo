@@ -36,7 +36,7 @@
         
         <ul class="chatbox" id="messages">
             <li class="chat-incoming chat">
-                <p>Hey! How can I assist you today?</p>
+                <p id="question">Loading Questions...</p>
             </li>
         </ul>
 
@@ -45,9 +45,24 @@
         </div>
 
         <div class="chat-input">
-            <textarea id="userInput" rows="4" cols="20" placeholder="Enter a message..."></textarea>
-            <div class="send-btn-container">
-                <button id="sendBTN" onclick="sendMessage()"></button>
+            <!-- Open Input -->
+            <div id="open-input">
+                <textarea id="custom-answer" rows="4" cols="20" placeholder="Enter a message..."></textarea>
+                <div class="send-btn-container">
+                    <button id="sendBTN" onclick="submitOpenAnswer()"></button>
+                </div>
+            </div>
+            <!-- Multi-choice -->
+            <div id="multi-choice-container">
+                <div class="send-btn-container">
+                    <button id="sendBTN" onclick="submitMultiChoiceAnswer()"></button>
+                </div>
+            </div>
+            <!-- Multi-choice -->
+            <div id="multi-choice-single-container">
+                <div class="send-btn-container">
+                    <button id="sendBTN" onclick="getSelectedRadioOption()"></button>
+                </div>
             </div>
         </div>
     </div>

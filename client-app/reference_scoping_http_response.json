@@ -1,0 +1,104 @@
+{
+    "scopingsheet_markdown":" Here is the markdown file for the scoping sheet based on the provided template:\n\n    ```markdown\n    # Scoping Sheet:\n    |   | category                        | requirement               | status                                                                                                  |\n    |---|---|------------------------------|--------------------------|--------------------------------------------------------------------------------------------------------|\n    |   0 | Application Overview            | Application Name          | Application Name: HealthTrack                                                                           |\n    |  1 | Application Overview            | Production URL            | Requirement: Production URL (NA)                                                                        |\n    |  2 | Application Overview            | Environment for Testing   | Requirement: Testing Environment                                                                        |\n    |  3 | Application Overview            | Application Type          | Application Types: [Web, API, Mobile]                                                                   |\n    |  4 | Authentication & Access Control | Authentication Method     | Authentication Method: Username/Password, OAuth                                                         |\n    |  5 | Authentication & Access Control | User Roles                | 1. Administrator (Can manage users, settings, and system operations)                                    |\n    |          |                           |     - Superadmin (Has full access to all functionalities of the administrator role)                     |\n    |          |                           |     - Moderator (Can manage user permissions and content moderation)                                    |\n    |          |                           |     - Staff Member (Can perform tasks assigned by admins/mods or have specific task-related privileges) |\n    |          |                           |                                                                                                         |\n    |          |                           |    2. User (Can interact with the system, access features based on their role and permissions)          |\n    |          |                           |       - Anonymous User (Limited access to public features only, can register for full access)           |\n    |          |                           |       - Registered User (Has a user account, can access more features)                                  |\n    |          |                           |       - Premium User (Paid subscription to access exclusive content/features)                           |\n    |  6 | Authentication & Access Control | Session Management        | Session Management (NA for additional details)                                                          |\n    |  7 | Authentication & Access Control | Session timeout period    | Authentication & Access Control > Session Timeout Period                                                |\n    |  8 | Input Processing                | total_num_input_fields    | total_num_input_fields (Input Processing)                                                               |\n    |  9 | Input Processing                | Input Types Present       | Input Types (Input Processing): [Text, Number, File]                                                    |\n    | 10 | Data Processing                 | Sensitive Data Handled    | 1. Sensitive Data Type: Personal, Healthcare Information                                                |\n    | 11 | Data Processing                 | Data Storage              | Data Storage (Data Processing) - NA                                                                     |\n    | 12 | API Details                     | Number of Endpoints       | Requirement: Number of API endpoints (NA)                                                               |\n    | 13 | API Details                     | Authentication Required   | API-Authentication (OAuth)                                                                              |\n    | 14 | API Details                     | Rate Limiting             | 1. API Rate Limiting (Details: NA)                                                                      |\n    | 15 | API Details                     | Documentation Available   | Requirement: API Endpoint Documentation (NA)                                                            |\n    | 16 | Infrastructure                  | Security Controls Present | Security Controls: WAF, IPS/IDS, Load Balancer, API Gateway (Present)                                   |\n    | 17 | Infrastructure                  | Input Types Present       | NA (The requirement for \"Input Types Present\" is not clear. It should specify the input types in the infrastructure.) |\n    | 22 | Testing Constraints             | Time Restrictions         | Testing Constraints: Time Restriction (Business Hours Only)                                             |\n    | 23 | Testing Constraints             | Testing Limitations       | - Testing Limitations: Business Hours Only (NA for further details)                                     |\n    | 24 | Deliverables                    | Required Reports          | Required Reports (NA)                                                                                   |\n    | 25 | Deliverables                    | Timeline                  | Requirement: Timeline (NA)                                                                              |\n    ```",
+    "requirement_df":[
+        {
+            "category":"Application Overview",
+            "requirement":"Application Name",
+            "status":" Application Name: HealthTrack"},
+        {
+            "category":"Application Overview",
+            "requirement":"Production URL",
+            "status":" Requirement: Production URL (NA)"},
+        {
+            "category":"Application Overview",
+            "requirement":"Environment for Testing",
+            "status":" Requirement: Testing Environment"},
+        {
+            "category":"Application Overview",
+            "requirement":"Application Type",
+            "status":" Application Types: [Web, API, Mobile]"},
+        {
+            "category":"Authentication & Access Control",
+            "requirement":"Authentication Method",
+            "status":" Authentication Method: Username/Password, OAuth"},
+        {
+            "category":"Authentication & Access Control",
+            "requirement":"User Roles",
+            "status":"1. Administrator (Can manage users, settings, and system operations)\n    - Superadmin (Has full access to all functionalities of the administrator role)\n    - Moderator (Can manage user permissions and content moderation)\n    - Staff Member (Can perform tasks assigned by admins/mods or have specific task-related privileges)\n\n   2. User (Can interact with the system, access features based on their role and permissions)\n      - Anonymous User (Limited access to public features only, can register for full access)\n      - Registered User (Has a user account, can access more features)\n      - Premium User (Paid subscription to access exclusive content/features)"},
+        {
+            "category":"Authentication & Access Control",
+            "requirement":"Session Management",
+            "status":" Session Management (NA for additional details)"},
+        {
+            "category":"Authentication & Access Control",
+            "requirement":"Session timeout period",
+            "status":" Authentication & Access Control > Session Timeout Period"},
+        {
+            "category":"Input Processing",
+            "requirement":"total_num_input_fields",
+            "status":" total_num_input_fields (Input Processing)"},
+        {
+            "category":"Input Processing",
+            "requirement":"Input Types Present",
+            "status":" Input Types (Input Processing): [Text, Number, File]"},
+        {
+            "category":"Data Processing",
+            "requirement":"Sensitive Data Handled",
+            "status":"1. Sensitive Data Type: Personal, Healthcare Information"},
+        {
+            "category":"Data Processing",
+            "requirement":"Data Storage",
+            "status":" Data Storage (Data Processing) - NA"},
+        {
+            "category":"API Details",
+            "requirement":"Number of Endpoints",
+            "status":" Requirement: Number of API endpoints (NA)"},
+        {
+            "category":"API Details",
+            "requirement":"Authentication Required",
+            "status":" API-Authentication (OAuth)"},
+        {
+            "category":"API Details",
+            "requirement":"Rate Limiting",
+            "status":"1. API Rate Limiting (Details: NA)"},
+        {
+            "category":"API Details",
+            "requirement":"Documentation Available",
+            "status":" Requirement: API Endpoint Documentation (NA)"},
+        {
+            "category":"Infrastructure",
+            "requirement":"Security Controls Present",
+            "status":" Security Controls: WAF, IPS/IDS, Load Balancer, API Gateway (Present)"},
+        {
+            "category":"Infrastructure",
+            "requirement":"Input Types Present",
+            "status":" NA (The requirement for \"Input Types Present\" is not explicitly stated in the provided email)"},
+        {
+            "category":"Business Logic",
+            "requirement":"Critical Functions",
+            "status":"1. Security Testing for Critical Functions (NA)"},
+        {
+            "category":"Security Requirements",
+            "requirement":"Compliance Requirements",
+            "status":" Compliance Requirements: [HIPAA, GDPR]"},
+        {
+            "category":"Security Requirements",
+            "requirement":"Previous Testing",
+            "status":"1. Previous testing on sensitive data handling and security controls."},
+        {
+            "category":"Testing Constraints",
+            "requirement":"Time Restrictions",
+            "status":" Testing Constraints: Time Restriction (Business Hours Only)"},
+        {
+            "category":"Testing Constraints",
+            "requirement":"Testing Limitations",
+            "status":" - Testing Limitations: Business Hours Only (NA for further details)"},
+        {
+            "category":"Deliverables",
+            "requirement":"Required Reports",
+            "status":" Required Reports (NA)"},
+        {
+            "category":"Deliverables",
+            "requirement":"Timeline",
+            "status":" Requirement: Timeline (NA)"}]
+    }

@@ -1,0 +1,30 @@
+{
+	"email": "Hi Team, Please add the following requirements to the project: 1. Requirement ID: REQ001, Description: User authentication, Priority: High, Status: New 2. Requirement ID: REQ002, Description: Data encryption, Priority: Medium, Status: New Thanks, John",
+    "requirement_columns" : [
+        {"Category": "Application Overview", "Requirement": "Application Name"},
+        {"Category": "Application Overview", "Requirement": "Production URL"},
+        {"Category": "Application Overview", "Requirement": "Environment for Testing"},
+        {"Category": "Application Overview", "Requirement": "Application Type"},
+        {"Category": "Authentication & Access Control", "Requirement": "Authentication Method"},
+        {"Category": "Authentication & Access Control", "Requirement": "User Roles"},
+        {"Category": "Authentication & Access Control", "Requirement": "Session Management"},
+        {"Category": "Authentication & Access Control", "Requirement": "Session timeout period"},
+        {"Category": "Input Processing", "Requirement": "total_num_input_fields"},
+        {"Category": "Input Processing", "Requirement": "Input Types Present"},
+        {"Category": "Data Processing", "Requirement": "Sensitive Data Handled"},
+        {"Category": "Data Processing", "Requirement": "Data Storage"},
+        {"Category": "API Details", "Requirement": "Number of Endpoints"},
+        {"Category": "API Details", "Requirement": "Authentication Required"},
+        {"Category": "API Details", "Requirement": "Rate Limiting"},
+        {"Category": "API Details", "Requirement": "Documentation Available"},
+        {"Category": "Infrastructure", "Requirement": "Security Controls Present"},
+        {"Category": "Infrastructure", "Requirement": "Input Types Present"},
+        {"Category": "Business Logic", "Requirement": "Critical Functions"},
+        {"Category": "Security Requirements", "Requirement": "Compliance Requirements"},
+        {"Category": "Security Requirements", "Requirement": "Previous Testing"},
+        {"Category": "Testing Constraints", "Requirement": "Time Restrictions"},
+        {"Category": "Testing Constraints", "Requirement": "Testing Limitations"},
+        {"Category": "Deliverables", "Requirement": "Required Reports"},
+        {"Category": "Deliverables", "Requirement": "Timeline"}
+    ]
+}
