@@ -15,7 +15,7 @@ from langchain_ollama import OllamaLLM  # for LangChain version
 ###################################################################################################
 # Model Initialisation
 ###################################################################################################
-llama3_8b_local = OllamaLLM(model="llama3.1")
+llama3_8b_local = OllamaLLM(model="llama3.1", temperature=0.1)
 
 ###################################################################################################
 # Scope of Work Generator Method
@@ -58,9 +58,27 @@ def generate_sow(
 
     # Scoping Sheet containing information to be used to fill up the scope of work document
     {scoping_sheet}
+
+    # Requirement:
+    1. Output the SOW in markdown format ONLY, DO NOT INCLUDeE ANY OTHER TEXT.
+    """
+    output_check_template = """
+    # Task: 
+    1. Check if the output_document is in markdown format, if it isnt, please make the necessary edits.
+    2. If the output_document is in markdown format, please return the output_document as it is
+
+    # Output Document:
+    {output_document}
+
+    # Requirement:
+    1. OUTPUT ONLY THE DOCUMENT
+    2. DO NOT TELL ME ANYTHING OR INCLUDE ANY OTHER TEXT
     """
     sow_generation_prompt = ChatPromptTemplate.from_template(sow_generation_template)
-    chain = sow_generation_prompt | llama3_8b_local | StrOutputParser()
+    qa_prompt = ChatPromptTemplate.from_template(output_check_template)
+    generation_step = sow_generation_prompt | llama3_8b_local | StrOutputParser()
+    qa_step = qa_prompt | llama3_8b_local | StrOutputParser()
+    chain = generation_step | qa_step
     sow_mkdn = chain.invoke(
         {"example": sample_sow, "scoping_sheet": completed_scopingsheet}
     )
