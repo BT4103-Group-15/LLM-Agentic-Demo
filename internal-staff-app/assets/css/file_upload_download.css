@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    font-size: 1.4vw;
+}
+
+h2{
+    padding-top: 8vh;
+}
+
+/* Wrapper for table with rounded corners, border, and shadow */
+.table-wrapper {
+    border: 1px solid #e1e0e0; /* Outer border */
+    border-radius: 10px;
+    overflow: hidden; /* Ensures the rounded corners are visible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 1vw;
+    text-align: center;
+}
+
+th {
+    background-color: #ffffff;
+    border-bottom: 2px solid #e1e0e0; /* Add a bottom border for the header */
+}
+
+.freeze-header thead {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 1;
+}
+
+.button {
+    padding: 0.7vw 2vw;
+    margin: 2px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 2px solid #e1e0e0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.3vw;
+    width: 15vw;
+    height: 7vh;
+    transition: background-color 0.3s, color 0.3s; /* Add smooth transition for background and color */
+}
+
+.button:hover {
+    background-color: #f2f2f2; /* Slight grey background on hover */
+    color: #000; /* Keep the text color dark */
+}
+
+.button.reupload {
+    background-color: #ffffff;
+}
+
+/* Hover effect for reupload button */
+.button.reupload:hover {
+    background-color: #dcdcdc; /* Slight darker grey for reupload button */
+}
+
+

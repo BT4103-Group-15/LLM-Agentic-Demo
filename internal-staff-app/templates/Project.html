@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="../assets/css/table.css"> <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+     <!-- Navbar -->
+     <div id="navbar-container"></div>
+
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Project</h1> <!-- You can change this title based on the page -->
+            <div class="controls">
+                <button id="filterBtn" class="filter-button">Filter</button>
+                <input id="searchInput" type="text" placeholder="Search" class="search-input">
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr id="tableHead" class="table-header"></tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        <button class="back-button" onclick="window.location.href='../index.html';">Back</button>
+
+    </div>
+
+    <!-- Modal -->
+    <div id="filterModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Filter Table</h2>
+            <div class="modal-body">
+                <label for="columnSelect">Select Column:</label>
+                <select id="columnSelect">
+                    <option value="Project ID">Project ID</option>
+                    <option value="Client ID">Client ID</option>
+                    <option value="Status">Status</option>
+                    <option value="Project Start Date">Project Start Date</option>
+                    <option value="Draft Report Due">Draft Report Due</option>
+                    <option value="Final Report Due">Final Report Due</option>
+                </select>
+
+                <label for="filterInput">Enter Filter Value:</label>
+                <input type="text" id="filterInput" placeholder="Enter filter value" />
+                
+                <button id="applyFilterBtn">Apply Filter</button>
+                <button id="resetFilterBtn">Reset Filter</button>
+            
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/table.js"></script> <!-- Link to the common JavaScript file -->
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/project.js"></script>
+    
+
+</body>
+</html>

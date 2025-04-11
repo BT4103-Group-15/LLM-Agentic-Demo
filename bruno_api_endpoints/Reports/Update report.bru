@@ -1,0 +1,26 @@
+meta {
+  name: Update report
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3000/reports/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 2
+}
+
+body:json {
+  {
+    "content": {
+      "findings": ["Updated Finding 1", "New Critical Issue Found"],
+      "severity": "High",
+      "recommendations": ["Implement input validation", "Add server-side checks"]
+    },
+    "status": "SENT"
+  }
+}

@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 2vw;
+    margin-left: 1vw;
+}
+
+h1 {
+    font-size: 3vw;
+}
+h2 {
+    font-size: 2.3vw;
+}
+
+p {
+    font-size: 1.5vw;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1vw;
+    margin-top: 3.8%;
+    /* height: 70%; Ensures it takes up the full viewport height */
+    align-items: stretch; /* Makes sure children expand */ 
+}
+
+.top-section {
+    height: 54vh;
+}
+
+.bottom-section {
+    height: 21vh;
+}
+.left-column {
+    gap: 2vh;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+
+.right-column {
+    width: 55%; /* Takes the remaining space */
+    overflow-y: auto; /* Makes the right column scrollable */
+    padding-right: 2vw;
+}
+
+
+.section {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-top: 1vw;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.project-details {
+    margin-left: 4vw;
+}
+
+/* Action Section */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.action-buttons button {
+    font-weight: bold; /* Make text bold */
+    font-size: 1.9vw;
+    padding: 1.5%;
+    border: none; /* Remove border */
+    background-color: #ffffff; /* Add a background color */
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+.action-buttons button:not(:last-child) {
+    border-bottom: 2px solid #5a5a5a; /* Add a light gray line between buttons */
+}
+
+.action-buttons button:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+}
+
+/* Scrollable Description Section */
+.description {
+    overflow-y: auto;
+    max-height: 79vh;
+}
+
+.group {
+    margin-bottom: 1.5vw;
+}
+
+.group h3 {
+    font-size: 1.8vw;
+}
+
+.group p {
+    font-size: 1.6vw;
+}

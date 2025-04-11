@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/visualization.css">
+    <script src="../assets/js/UiPathRobot.js"></script>
+    <title>HomePage</title>
+    <script>
+        function TriggerUiPathRobot(dashboard_type) {
+            const robot = UiPathRobot.init();
+            robot.getProcesses()
+            .then(processes => {
+                let processName = "Launching Dashboard v6";
+                let process = processes.find(p => p.name === processName);
+                if (process) {
+                    console.log("Process found! Starting now...");
+                    let input_agr= {
+                        "dashboardType": dashboard_type
+                    };
+                    process.start(input_agr)
+                    .then(job => {
+                        console.log("Process Started Successfully:", job);
+                    }).catch(err => {
+                        console.error("Error Starting Process:", error);
+                        alert("Failed to start process: " + error);
+                    });
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <button class="back-button" onclick="window.location.href='../index.html'">&lt;</button>
+    </nav>
+
+    <h1>Visualisation</h1>
+    
+    <div class="button-container">
+        <button class="button", onclick="TriggerUiPathRobot('test')">
+            <img src="../assets/images/presale-icon.png" alt="Projects">
+            Pre-Sale
+        </button>
+        <button class="button", onclick="TriggerUiPathRobot('log')">
+            <img src="../assets/images/log-icon.png" alt="Projects">
+            Logs
+        </button>
+        <!-- <button class="button">
+            <img src="../assets/images/requirement-icon.png" alt="Projects">
+            Requirement Analysis
+        </button>
+        <button class="button">
+            <img src="../assets/images/scope-icon.png" alt="Projects">
+            Scope Impact
+        </button> -->
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+meta {
+  name: Get project action log by log ID
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/project-action-logs/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 18
+}

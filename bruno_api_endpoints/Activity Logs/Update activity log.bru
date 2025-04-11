@@ -1,0 +1,22 @@
+meta {
+  name: Update activity log
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/activity-logs/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 5
+}
+
+body:json {
+  {
+    "action_type": "UPDATED_REQUEST",
+    "project_id": 5
+  } 
+}
