@@ -95,6 +95,50 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
+ * @api {get} /clients/name/:name Get client ID by exact name
+ * @apiGroup Clients
+ * 
+ * @apiParam {String} name Client's exact company name
+ * 
+ * @apiSuccess {Number} client_id Unique identifier of the client
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "client_id": 1
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Client not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve client"
+ *   }
+ */
+
+router.get('/name/:name', async (req, res) => {
+  try {
+    // Using exact match and only selecting the client_id field
+    const [rows] = await pool.query('SELECT client_id FROM clients WHERE company_name = ?', [req.params.name]);
+    
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Client not found' });
+    }
+    
+    // Return just the client_id
+    res.json({ client_id: rows[0].client_id });
+  } catch (error) {
+    console.error('Error fetching client by name:', error);
+    res.status(500).json({ error: 'Failed to retrieve client' });
+  }
+});
+/**
  * @api {post} /clients Create a new client
  * @apiGroup Clients
  * 
