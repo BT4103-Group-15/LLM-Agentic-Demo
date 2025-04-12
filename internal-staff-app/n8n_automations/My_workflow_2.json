@@ -1,0 +1,67 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2863e031-a2fc-4185-9369-7166e8224f66",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": {
+          "__rl": true,
+          "value": "project_details",
+          "mode": "list",
+          "cachedResultName": "project_details"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "53778905-69de-4081-88d4-7ff69d21d645",
+      "name": "MySQL",
+      "credentials": {
+        "mySql": {
+          "id": "pwehlYKuQhhIXisF",
+          "name": "MySQL account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b72a6ab6-ce84-4af7-8427-146ad6409c65",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8712c2bb4e02902a13a43c75c2acacd2aabdb06be443b7b14c332bd919069ab1"
+  },
+  "id": "Il10fUKdtOeCA0i3",
+  "tags": []
+}
