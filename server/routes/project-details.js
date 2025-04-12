@@ -11,9 +11,71 @@ router.use(function(req, res, next) {
 
 
 /**
- * Get all project details
- * GET /project-details
- * curl http://localhost:3000/project-details
+ * @api {get} /project-details Get all project details
+ * @apiGroup ProjectDetails
+ * 
+ * @apiSuccess {Object[]} projects List of project details
+ * @apiSuccess {Number} projects.project_id Unique identifier of the project
+ * @apiSuccess {Number} projects.client_id Client identifier
+ * @apiSuccess {String} projects.application_name Name of the application
+ * @apiSuccess {String} projects.production_url Production URL of the application
+ * @apiSuccess {String} projects.testing_environment Testing environment details
+ * @apiSuccess {String} projects.application_type Type of application
+ * @apiSuccess {String} projects.authentication_method Authentication method used
+ * @apiSuccess {String} projects.user_roles User roles in the application
+ * @apiSuccess {String} projects.session_management Session management details
+ * @apiSuccess {String} projects.session_timeout_period Session timeout period
+ * @apiSuccess {Number} projects.total_num_input_fields Total number of input fields
+ * @apiSuccess {String} projects.input_types_present Types of input fields present
+ * @apiSuccess {String} projects.sensitive_data_handled Sensitive data handled by the application
+ * @apiSuccess {String} projects.data_storage Data storage details
+ * @apiSuccess {Number} projects.number_of_endpoints Number of endpoints
+ * @apiSuccess {Boolean} projects.authentication_required Whether authentication is required
+ * @apiSuccess {Boolean} projects.rate_limiting Whether rate limiting is implemented
+ * @apiSuccess {Boolean} projects.documentation_available Whether documentation is available
+ * @apiSuccess {String} projects.security_controls_present Security controls present
+ * @apiSuccess {String} projects.hosting Hosting details
+ * @apiSuccess {String} projects.critical_functions Critical functions details
+ * @apiSuccess {String} projects.compliance_requirements Compliance requirements
+ * @apiSuccess {String} projects.previous_testing Previous testing details
+ * @apiSuccess {String} projects.time_restrictions Time restrictions for testing
+ * @apiSuccess {String} projects.testing_limitations Testing limitations
+ * @apiSuccess {String} projects.required_reports Required reports
+ * @apiSuccess {Date} projects.project_start_date Project start date
+ * @apiSuccess {Date} projects.draft_report_due_date Draft report due date
+ * @apiSuccess {Date} projects.final_report_due_date Final report due date
+ * @apiSuccess {Date} projects.created_at Creation timestamp
+ * @apiSuccess {Date} projects.updated_at Last update timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   [
+ *     {
+ *       "project_id": 1,
+ *       "client_id": 1,
+ *       "application_name": "Web App Security Test",
+ *       "production_url": "https://example.com",
+ *       "testing_environment": "Staging",
+ *       "application_type": "Web Application",
+ *       ...
+ *     },
+ *     {
+ *       "project_id": 2,
+ *       "client_id": 1,
+ *       "application_name": "Mobile App Security Test",
+ *       "production_url": null,
+ *       "testing_environment": "Development",
+ *       "application_type": "Mobile Application",
+ *       ...
+ *     }
+ *   ]
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve project details"
+ *   }
  */
 router.get('/', async (req, res) => {
   try {
@@ -28,9 +90,67 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * Get project details by ID
- * GET /project-details/:id
- * curl http://localhost:3000/project-details/1
+ * @api {get} /project-details/:id Get project details by ID
+ * @apiGroup ProjectDetails
+ * 
+ * @apiParam {Number} id Project's unique ID
+ * 
+ * @apiSuccess {Number} project_id Unique identifier of the project
+ * @apiSuccess {Number} client_id Client identifier
+ * @apiSuccess {String} application_name Name of the application
+ * @apiSuccess {String} production_url Production URL of the application
+ * @apiSuccess {String} testing_environment Testing environment details
+ * @apiSuccess {String} application_type Type of application
+ * @apiSuccess {String} authentication_method Authentication method used
+ * @apiSuccess {String} user_roles User roles in the application
+ * @apiSuccess {String} session_management Session management details
+ * @apiSuccess {String} session_timeout_period Session timeout period
+ * @apiSuccess {Number} total_num_input_fields Total number of input fields
+ * @apiSuccess {String} input_types_present Types of input fields present
+ * @apiSuccess {String} sensitive_data_handled Sensitive data handled by the application
+ * @apiSuccess {String} data_storage Data storage details
+ * @apiSuccess {Number} number_of_endpoints Number of endpoints
+ * @apiSuccess {Boolean} authentication_required Whether authentication is required
+ * @apiSuccess {Boolean} rate_limiting Whether rate limiting is implemented
+ * @apiSuccess {Boolean} documentation_available Whether documentation is available
+ * @apiSuccess {String} security_controls_present Security controls present
+ * @apiSuccess {String} hosting Hosting details
+ * @apiSuccess {String} critical_functions Critical functions details
+ * @apiSuccess {String} compliance_requirements Compliance requirements
+ * @apiSuccess {String} previous_testing Previous testing details
+ * @apiSuccess {String} time_restrictions Time restrictions for testing
+ * @apiSuccess {String} testing_limitations Testing limitations
+ * @apiSuccess {String} required_reports Required reports
+ * @apiSuccess {Date} project_start_date Project start date
+ * @apiSuccess {Date} draft_report_due_date Draft report due date
+ * @apiSuccess {Date} final_report_due_date Final report due date
+ * @apiSuccess {Date} created_at Creation timestamp
+ * @apiSuccess {Date} updated_at Last update timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "project_id": 1,
+ *     "client_id": 1,
+ *     "application_name": "Web App Security Test",
+ *     "production_url": "https://example.com",
+ *     "testing_environment": "Staging",
+ *     "application_type": "Web Application",
+ *     ...
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Project not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve project details"
+ *   }
  */
 router.get('/:id', async (req, res) => {
   try {
@@ -51,9 +171,73 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
- * Get project details by client ID
- * GET /project-details/client/:clientId
- * curl http://localhost:3000/project-details/client/1
+ * @api {get} /project-details/client/:clientId Get projects by client ID
+ * @apiGroup ProjectDetails
+ * 
+ * @apiParam {Number} clientId Client's unique ID
+ * 
+ * @apiSuccess {Object[]} projects List of project details for the specified client
+ * @apiSuccess {Number} projects.project_id Unique identifier of the project
+ * @apiSuccess {Number} projects.client_id Client identifier
+ * @apiSuccess {String} projects.application_name Name of the application
+ * @apiSuccess {String} projects.production_url Production URL of the application
+ * @apiSuccess {String} projects.testing_environment Testing environment details
+ * @apiSuccess {String} projects.application_type Type of application
+ * @apiSuccess {String} projects.authentication_method Authentication method used
+ * @apiSuccess {String} projects.user_roles User roles in the application
+ * @apiSuccess {String} projects.session_management Session management details
+ * @apiSuccess {String} projects.session_timeout_period Session timeout period
+ * @apiSuccess {Number} projects.total_num_input_fields Total number of input fields
+ * @apiSuccess {String} projects.input_types_present Types of input fields present
+ * @apiSuccess {String} projects.sensitive_data_handled Sensitive data handled by the application
+ * @apiSuccess {String} projects.data_storage Data storage details
+ * @apiSuccess {Number} projects.number_of_endpoints Number of endpoints
+ * @apiSuccess {Boolean} projects.authentication_required Whether authentication is required
+ * @apiSuccess {Boolean} projects.rate_limiting Whether rate limiting is implemented
+ * @apiSuccess {Boolean} projects.documentation_available Whether documentation is available
+ * @apiSuccess {String} projects.security_controls_present Security controls present
+ * @apiSuccess {String} projects.hosting Hosting details
+ * @apiSuccess {String} projects.critical_functions Critical functions details
+ * @apiSuccess {String} projects.compliance_requirements Compliance requirements
+ * @apiSuccess {String} projects.previous_testing Previous testing details
+ * @apiSuccess {String} projects.time_restrictions Time restrictions for testing
+ * @apiSuccess {String} projects.testing_limitations Testing limitations
+ * @apiSuccess {String} projects.required_reports Required reports
+ * @apiSuccess {Date} projects.project_start_date Project start date
+ * @apiSuccess {Date} projects.draft_report_due_date Draft report due date
+ * @apiSuccess {Date} projects.final_report_due_date Final report due date
+ * @apiSuccess {Date} projects.created_at Creation timestamp
+ * @apiSuccess {Date} projects.updated_at Last update timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   [
+ *     {
+ *       "project_id": 1,
+ *       "client_id": 1,
+ *       "application_name": "Web App Security Test",
+ *       "production_url": "https://example.com",
+ *       "testing_environment": "Staging",
+ *       "application_type": "Web Application",
+ *       ...
+ *     },
+ *     {
+ *       "project_id": 2,
+ *       "client_id": 1,
+ *       "application_name": "Mobile App Security Test",
+ *       "production_url": null,
+ *       "testing_environment": "Development",
+ *       "application_type": "Mobile Application",
+ *       ...
+ *     }
+ *   ]
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve client project details"
+ *   }
  */
 router.get('/client/:clientId', async (req, res) => {
   try {
@@ -71,11 +255,112 @@ router.get('/client/:clientId', async (req, res) => {
 });
 
 /**
- * Create new project
- * POST /project-details
- * curl -X POST http://localhost:3000/project-details \
-  -H "Content-Type: application/json" \
-  -d "{\"client_id\":1,\"application_name\":\"Web App Security Test\",\"production_url\":\"https://example.com\",\"testing_environment\":\"Staging\",\"application_type\":\"Web Application\"}"
+ * @api {post} /project-details Create new project
+ * @apiGroup ProjectDetails
+ * 
+ * @apiParam {Number} client_id Client's unique ID (required)
+ * @apiParam {String} application_name Name of the application (required)
+ * @apiParam {String} [production_url] Production URL of the application
+ * @apiParam {String} [testing_environment] Testing environment details
+ * @apiParam {String} [application_type] Type of application
+ * @apiParam {String} [authentication_method] Authentication method used
+ * @apiParam {String} [user_roles] User roles in the application
+ * @apiParam {String} [session_management] Session management details
+ * @apiParam {String} [session_timeout_period] Session timeout period
+ * @apiParam {Number} [total_num_input_fields] Total number of input fields
+ * @apiParam {String} [input_types_present] Types of input fields present
+ * @apiParam {String} [sensitive_data_handled] Sensitive data handled by the application
+ * @apiParam {String} [data_storage] Data storage details
+ * @apiParam {Number} [number_of_endpoints] Number of endpoints
+ * @apiParam {Boolean} [authentication_required] Whether authentication is required
+ * @apiParam {Boolean} [rate_limiting] Whether rate limiting is implemented
+ * @apiParam {Boolean} [documentation_available] Whether documentation is available
+ * @apiParam {String} [security_controls_present] Security controls present
+ * @apiParam {String} [hosting] Hosting details
+ * @apiParam {String} [critical_functions] Critical functions details
+ * @apiParam {String} [compliance_requirements] Compliance requirements
+ * @apiParam {String} [previous_testing] Previous testing details
+ * @apiParam {String} [time_restrictions] Time restrictions for testing
+ * @apiParam {String} [testing_limitations] Testing limitations
+ * @apiParam {String} [required_reports] Required reports
+ * @apiParam {Date} [project_start_date] Project start date
+ * @apiParam {Date} [draft_report_due_date] Draft report due date
+ * @apiParam {Date} [final_report_due_date] Final report due date
+ * 
+ * @apiParamExample {json} Request-Example:
+ *   {
+ *     "client_id": 1,
+ *     "application_name": "Web App Security Test",
+ *     "production_url": "https://example.com",
+ *     "testing_environment": "Staging",
+ *     "application_type": "Web Application"
+ *   }
+ * 
+ * @apiSuccess {Number} project_id Unique identifier of the created project
+ * @apiSuccess {Number} client_id Client identifier
+ * @apiSuccess {String} application_name Name of the application
+ * @apiSuccess {String} production_url Production URL of the application
+ * @apiSuccess {String} testing_environment Testing environment details
+ * @apiSuccess {String} application_type Type of application
+ * @apiSuccess {String} authentication_method Authentication method used
+ * @apiSuccess {String} user_roles User roles in the application
+ * @apiSuccess {String} session_management Session management details
+ * @apiSuccess {String} session_timeout_period Session timeout period
+ * @apiSuccess {Number} total_num_input_fields Total number of input fields
+ * @apiSuccess {String} input_types_present Types of input fields present
+ * @apiSuccess {String} sensitive_data_handled Sensitive data handled by the application
+ * @apiSuccess {String} data_storage Data storage details
+ * @apiSuccess {Number} number_of_endpoints Number of endpoints
+ * @apiSuccess {Boolean} authentication_required Whether authentication is required
+ * @apiSuccess {Boolean} rate_limiting Whether rate limiting is implemented
+ * @apiSuccess {Boolean} documentation_available Whether documentation is available
+ * @apiSuccess {String} security_controls_present Security controls present
+ * @apiSuccess {String} hosting Hosting details
+ * @apiSuccess {String} critical_functions Critical functions details
+ * @apiSuccess {String} compliance_requirements Compliance requirements
+ * @apiSuccess {String} previous_testing Previous testing details
+ * @apiSuccess {String} time_restrictions Time restrictions for testing
+ * @apiSuccess {String} testing_limitations Testing limitations
+ * @apiSuccess {String} required_reports Required reports
+ * @apiSuccess {Date} project_start_date Project start date
+ * @apiSuccess {Date} draft_report_due_date Draft report due date
+ * @apiSuccess {Date} final_report_due_date Final report due date
+ * @apiSuccess {Date} created_at Creation timestamp
+ * @apiSuccess {Date} updated_at Last update timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 201 Created
+ *   {
+ *     "project_id": 3,
+ *     "client_id": 1,
+ *     "application_name": "Web App Security Test",
+ *     "production_url": "https://example.com",
+ *     "testing_environment": "Staging",
+ *     "application_type": "Web Application",
+ *     "created_at": "2025-04-12T15:30:45.000Z",
+ *     "updated_at": "2025-04-12T15:30:45.000Z",
+ *     ...
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Bad-Request-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "Missing required fields (client_id and application_name are required)"
+ *   }
+ * 
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Invalid client"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Project creation failed",
+ *     "details": "Error message details"
+ *   }
  */
 router.post('/', async (req, res) => {
   const { 
@@ -207,11 +492,116 @@ router.post('/', async (req, res) => {
 });
 
 /**
- * Update project details
- * PUT /project-details/:id
- * curl -X PUT http://localhost:3000/project-details/1 \
-  -H "Content-Type: application/json" \
-  -d "{\"application_name\":\"Updated App Security Test\",\"testing_environment\":\"Production-like environment\"}"
+ * @api {put} /project-details/:id Update project details
+ * @apiGroup ProjectDetails
+ * 
+ * @apiParam {Number} id Project's unique ID
+ * @apiParam {Number} [client_id] Client's unique ID
+ * @apiParam {String} [application_name] Name of the application
+ * @apiParam {String} [production_url] Production URL of the application
+ * @apiParam {String} [testing_environment] Testing environment details
+ * @apiParam {String} [application_type] Type of application
+ * @apiParam {String} [authentication_method] Authentication method used
+ * @apiParam {String} [user_roles] User roles in the application
+ * @apiParam {String} [session_management] Session management details
+ * @apiParam {String} [session_timeout_period] Session timeout period
+ * @apiParam {Number} [total_num_input_fields] Total number of input fields
+ * @apiParam {String} [input_types_present] Types of input fields present
+ * @apiParam {String} [sensitive_data_handled] Sensitive data handled by the application
+ * @apiParam {String} [data_storage] Data storage details
+ * @apiParam {Number} [number_of_endpoints] Number of endpoints
+ * @apiParam {Boolean} [authentication_required] Whether authentication is required
+ * @apiParam {Boolean} [rate_limiting] Whether rate limiting is implemented
+ * @apiParam {Boolean} [documentation_available] Whether documentation is available
+ * @apiParam {String} [security_controls_present] Security controls present
+ * @apiParam {String} [hosting] Hosting details
+ * @apiParam {String} [critical_functions] Critical functions details
+ * @apiParam {String} [compliance_requirements] Compliance requirements
+ * @apiParam {String} [previous_testing] Previous testing details
+ * @apiParam {String} [time_restrictions] Time restrictions for testing
+ * @apiParam {String} [testing_limitations] Testing limitations
+ * @apiParam {String} [required_reports] Required reports
+ * @apiParam {Date} [project_start_date] Project start date
+ * @apiParam {Date} [draft_report_due_date] Draft report due date
+ * @apiParam {Date} [final_report_due_date] Final report due date
+ * 
+ * @apiParamExample {json} Request-Example:
+ *   {
+ *     "application_name": "Updated App Security Test",
+ *     "testing_environment": "Production-like environment"
+ *   }
+ * 
+ * @apiSuccess {Number} project_id Unique identifier of the project
+ * @apiSuccess {Number} client_id Client identifier
+ * @apiSuccess {String} application_name Updated name of the application
+ * @apiSuccess {String} production_url Production URL of the application
+ * @apiSuccess {String} testing_environment Updated testing environment details
+ * @apiSuccess {String} application_type Type of application
+ * @apiSuccess {String} authentication_method Authentication method used
+ * @apiSuccess {String} user_roles User roles in the application
+ * @apiSuccess {String} session_management Session management details
+ * @apiSuccess {String} session_timeout_period Session timeout period
+ * @apiSuccess {Number} total_num_input_fields Total number of input fields
+ * @apiSuccess {String} input_types_present Types of input fields present
+ * @apiSuccess {String} sensitive_data_handled Sensitive data handled by the application
+ * @apiSuccess {String} data_storage Data storage details
+ * @apiSuccess {Number} number_of_endpoints Number of endpoints
+ * @apiSuccess {Boolean} authentication_required Whether authentication is required
+ * @apiSuccess {Boolean} rate_limiting Whether rate limiting is implemented
+ * @apiSuccess {Boolean} documentation_available Whether documentation is available
+ * @apiSuccess {String} security_controls_present Security controls present
+ * @apiSuccess {String} hosting Hosting details
+ * @apiSuccess {String} critical_functions Critical functions details
+ * @apiSuccess {String} compliance_requirements Compliance requirements
+ * @apiSuccess {String} previous_testing Previous testing details
+ * @apiSuccess {String} time_restrictions Time restrictions for testing
+ * @apiSuccess {String} testing_limitations Testing limitations
+ * @apiSuccess {String} required_reports Required reports
+ * @apiSuccess {Date} project_start_date Project start date
+ * @apiSuccess {Date} draft_report_due_date Draft report due date
+ * @apiSuccess {Date} final_report_due_date Final report due date
+ * @apiSuccess {Date} created_at Creation timestamp
+ * @apiSuccess {Date} updated_at Last update timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "project_id": 1,
+ *     "client_id": 1,
+ *     "application_name": "Updated App Security Test",
+ *     "production_url": "https://example.com",
+ *     "testing_environment": "Production-like environment",
+ *     "application_type": "Web Application",
+ *     "created_at": "2025-04-10T14:20:30.000Z",
+ *     "updated_at": "2025-04-12T15:45:22.000Z",
+ *     ...
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Bad-Request-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "No update data provided"
+ *   }
+ * 
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Project not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Client-Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Client not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to update project details",
+ *     "details": "Error message details"
+ *   }
  */
 router.put('/:id', async (req, res) => {
   const projectId = req.params.id;
@@ -313,9 +703,30 @@ router.put('/:id', async (req, res) => {
 });
 
 /**
- * Delete project details
- * DELETE /project-details/:id
- * curl -X DELETE http://localhost:3000/project-details/1
+ * @api {delete} /project-details/:id Delete project details
+ * @apiGroup ProjectDetails
+ * 
+ * @apiParam {Number} id Project's unique ID
+ * 
+ * @apiDescription Deletes a project and all associated records due to ON DELETE CASCADE.
+ * 
+ * @apiSuccess {null} null No content on success
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 204 No Content
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Project not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to delete project details",
+ *     "details": "Error message details"
+ *   }
  */
 router.delete('/:id', async (req, res) => {
   try {

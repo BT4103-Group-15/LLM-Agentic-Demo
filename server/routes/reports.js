@@ -3,9 +3,44 @@ const router = express.Router();
 const { pool } = require('../db');
 
 /**
- * Get all reports
- * GET /reports
- * curl http://localhost:3000/reports
+ * @api {get} /reports Get all reports
+ * @apiGroup Reports
+ * 
+ * @apiSuccess {Object[]} reports List of reports
+ * @apiSuccess {Number} reports.report_id Unique identifier of the report
+ * @apiSuccess {Number} reports.project_id Project identifier
+ * @apiSuccess {String} reports.report_type Type of report
+ * @apiSuccess {Object} reports.content Report content
+ * @apiSuccess {String} reports.status Report status
+ * @apiSuccess {Date} reports.timestamp Creation timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   [
+ *     {
+ *       "report_id": 1,
+ *       "project_id": 1,
+ *       "report_type": "REQUIREMENT_VALIDATION",
+ *       "content": {"findings": ["Finding 1"]},
+ *       "status": "DRAFT",
+ *       "timestamp": "2025-04-11T15:30:45.000Z"
+ *     },
+ *     {
+ *       "report_id": 2,
+ *       "project_id": 2,
+ *       "report_type": "FINAL_REPORT",
+ *       "content": {"findings": ["Critical Issue Found"]},
+ *       "status": "SENT",
+ *       "timestamp": "2025-04-12T10:45:22.000Z"
+ *     }
+ *   ]
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve reports"
+ *   }
  */
 router.get('/', async (req, res) => {
   try {
@@ -18,9 +53,41 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * Get report by ID
- * GET /reports/:id
- * curl http://localhost:3000/reports/1
+ * @api {get} /reports/:id Get report by ID
+ * @apiGroup Reports
+ * 
+ * @apiParam {Number} id Report's unique ID
+ * 
+ * @apiSuccess {Number} report_id Unique identifier of the report
+ * @apiSuccess {Number} project_id Project identifier
+ * @apiSuccess {String} report_type Type of report
+ * @apiSuccess {Object} content Report content
+ * @apiSuccess {String} status Report status
+ * @apiSuccess {Date} timestamp Creation timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "report_id": 1,
+ *     "project_id": 1,
+ *     "report_type": "REQUIREMENT_VALIDATION",
+ *     "content": {"findings": ["Finding 1"]},
+ *     "status": "DRAFT",
+ *     "timestamp": "2025-04-11T15:30:45.000Z"
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Report not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve report"
+ *   }
  */
 router.get('/:id', async (req, res) => {
   try {
@@ -38,9 +105,41 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
- * Get reports by project
- * GET /reports/project-details/:projectId
- * curl http://localhost:3000/reports/project-details/1
+ * @api {get} /reports/:id Get report by ID
+ * @apiGroup Reports
+ * 
+ * @apiParam {Number} id Report's unique ID
+ * 
+ * @apiSuccess {Number} report_id Unique identifier of the report
+ * @apiSuccess {Number} project_id Project identifier
+ * @apiSuccess {String} report_type Type of report
+ * @apiSuccess {Object} content Report content
+ * @apiSuccess {String} status Report status
+ * @apiSuccess {Date} timestamp Creation timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "report_id": 1,
+ *     "project_id": 1,
+ *     "report_type": "REQUIREMENT_VALIDATION",
+ *     "content": {"findings": ["Finding 1"]},
+ *     "status": "DRAFT",
+ *     "timestamp": "2025-04-11T15:30:45.000Z"
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Report not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve report"
+ *   }
  */
 router.get('/project-details/:projectId', async (req, res) => {
   try {
@@ -55,9 +154,52 @@ router.get('/project-details/:projectId', async (req, res) => {
 });
 
 /**
- * Create new report
- * POST /reports
- * curl -X POST http://localhost:3000/reports -H "Content-Type: application/json" -d "{\"project_id\":1,\"report_type\":\"REQUIREMENT_VALIDATION\",\"content\":{\"findings\":[\"Finding 1\"]},\"status\":\"DRAFT\"}"
+ * @api {post} /reports Create new report
+ * @apiGroup Reports
+ * 
+ * @apiParam {Number} project_id Project's unique ID
+ * @apiParam {String} report_type Type of report
+ * @apiParam {Object} content Report content
+ * @apiParam {String} [status="DRAFT"] Report status
+ * 
+ * @apiParamExample {json} Request-Example:
+ *   {
+ *     "project_id": 1,
+ *     "report_type": "REQUIREMENT_VALIDATION",
+ *     "content": {"findings": ["Finding 1"]},
+ *     "status": "DRAFT"
+ *   }
+ * 
+ * @apiSuccess {Number} report_id Unique identifier of the created report
+ * @apiSuccess {Number} project_id Project identifier
+ * @apiSuccess {String} report_type Type of report
+ * @apiSuccess {Object} content Report content
+ * @apiSuccess {String} status Report status
+ * @apiSuccess {Date} timestamp Creation timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 201 Created
+ *   {
+ *     "report_id": 4,
+ *     "project_id": 1,
+ *     "report_type": "REQUIREMENT_VALIDATION",
+ *     "content": {"findings": ["Finding 1"]},
+ *     "status": "DRAFT",
+ *     "timestamp": "2025-04-12T16:45:30.000Z"
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Bad-Request-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "Missing required fields"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to create report"
+ *   }
  */
 router.post('/', async (req, res) => {
   const { project_id, report_type, content, status = 'DRAFT' } = req.body;
@@ -94,9 +236,56 @@ router.post('/', async (req, res) => {
 });
 
 /**
- * Update report
- * PUT /reports/:id
- * curl -X PUT http://localhost:3000/reports/4 -H "Content-Type: application/json" -d "{\"content\":{\"findings\":[\"Updated Finding\"]},\"status\":\"SENT\"}"
+ * @api {put} /reports/:id Update report
+ * @apiGroup Reports
+ * 
+ * @apiParam {Number} id Report's unique ID
+ * @apiParam {String} [report_type] Type of report
+ * @apiParam {Object} [content] Report content
+ * @apiParam {String} [status] Report status
+ * 
+ * @apiParamExample {json} Request-Example:
+ *   {
+ *     "content": {"findings": ["Updated Finding"]},
+ *     "status": "SENT"
+ *   }
+ * 
+ * @apiSuccess {Number} report_id Unique identifier of the report
+ * @apiSuccess {Number} project_id Project identifier
+ * @apiSuccess {String} report_type Type of report
+ * @apiSuccess {Object} content Updated report content
+ * @apiSuccess {String} status Updated report status
+ * @apiSuccess {Date} timestamp Creation timestamp
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "report_id": 1,
+ *     "project_id": 1,
+ *     "report_type": "REQUIREMENT_VALIDATION",
+ *     "content": {"findings": ["Updated Finding"]},
+ *     "status": "SENT",
+ *     "timestamp": "2025-04-11T15:30:45.000Z"
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Bad-Request-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "No update fields provided"
+ *   }
+ * 
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Report not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to update report"
+ *   }
  */
 router.put('/:id', async (req, res) => {
   try {
@@ -153,9 +342,27 @@ router.put('/:id', async (req, res) => {
 });
 
 /**
- * Delete report
- * DELETE /reports/:id
- * curl -X DELETE http://localhost:3000/reports/1
+ * @api {delete} /reports/:id Delete report
+ * @apiGroup Reports
+ * 
+ * @apiParam {Number} id Report's unique ID
+ * 
+ * @apiSuccess {null} null No content on success
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 204 No Content
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Report not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to delete report"
+ *   }
  */
 router.delete('/:id', async (req, res) => {
   try {
