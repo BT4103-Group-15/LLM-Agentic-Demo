@@ -6,6 +6,7 @@
     <title>Project Dashboard</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/project-subpage.css">
+      
 </head>
 <body>
 
@@ -95,8 +96,106 @@
             </div>
         </div>
     </div>
-    
-    <button class="back-button" onclick="window.location.href='Project.html';">Back</button>
+
+
+    <div class="button-container">
+        <button id="update-button" class="update-button">Update Data</button>
+        <button class="back-button" onclick="window.location.href='Project.html';">Back</button>
+    </div>
+
+<!-- Popup Modal -->
+<div id="update-popup" class="popup-update">
+    <div class="popup-content">
+      <span id="close-popup" class="close">&times;</span>
+      <h2>Update Data</h2>
+      <form id="update-form">
+        <div class="form-container">
+          <label>Application Name:</label>
+          <input type="text" id="application_name" name="application_name">
+  
+          <label>Production URL:</label>
+          <input type="text" id="production_url" name="production_url">
+  
+          <label>Testing Environment (comma-separated):</label>
+          <input type="text" id="testing_environment" name="testing_environment">
+  
+          <label>Application Type (comma-separated):</label>
+          <input type="text" id="application_type" name="application_type">
+  
+          <label>Authentication Method (comma-separated):</label>
+          <input type="text" id="authentication_method" name="authentication_method">
+  
+          <label>User Roles (comma-separated):</label>
+          <input type="text" id="user_roles" name="user_roles">
+  
+          <label>Session Management (comma-separated):</label>
+          <input type="text" id="session_management" name="session_management">
+  
+          <label>Session Timeout Period (minutes):</label>
+          <input type="number" id="session_timeout_period" name="session_timeout_period">
+  
+          <label>Total Number of Input Fields:</label>
+          <input type="number" id="total_num_input_fields" name="total_num_input_fields">
+  
+          <label>Input Types Present (comma-separated):</label>
+          <input type="text" id="input_types_present" name="input_types_present" >
+  
+          <label>Sensitive Data Handled (comma-separated):</label>
+          <input type="text" id="sensitive_data_handled" name="sensitive_data_handled">
+  
+          <label>Data Storage (comma-separated):</label>
+          <input type="text" id="data_storage" name="data_storage" >
+  
+          <label>Number of Endpoints:</label>
+          <input type="number" id="number_of_endpoints" name="number_of_endpoints">
+  
+          <label>Authentication Required (Yes/No):</label>
+          <input type="text" id="authentication_required" name="authentication_required">
+  
+          <label>Rate Limiting (Yes/No):</label>
+          <input type="text" id="rate_limiting" name="rate_limiting">
+
+          <label>Documentation Available (Yes/No):</label>
+          <input type="text" id="documentation_available" name="documentation_available">
+  
+          <label>Security Controls Present (comma-separated):</label>
+          <input type="text" id="security_controls_present" name="security_controls_present" >
+  
+          <label>Hosting (comma-separated):</label>
+          <input type="text" id="hosting1" name="hosting1">
+  
+          <label>Critical Functions (comma-separated):</label>
+          <input type="text" id="critical_functions" name="critical_functions">
+  
+          <label>Compliance Requirements (comma-separated):</label>
+          <input type="text" id="compliance_requirements" name="compliance_requirements">
+  
+          <label>Previous Testing Date:</label>
+          <input type="date" id="previous_testing" name="previous_testing" >
+  
+          <label>Time Restrictions (comma-separated):</label>
+          <input type="text" id="time_restrictions" name="time_restrictions">
+  
+          <label>Testing Limitations (comma-separated):</label>
+          <input type="text" id="testing_limitations" name="testing_limitations">
+  
+          <label>Required Reports (comma-separated):</label>
+          <input type="text" id="required_reports" name="required_reports">
+  
+          <label>Project Start Date:</label>
+          <input type="date" id="project_start_date" name="project_start_date">
+  
+          <label>Draft Report Due Date:</label>
+          <input type="date" id="draft_report_due_date" name="draft_report_due_date">
+  
+          <label>Final Report Due Date:</label>
+          <input type="date" id="final_report_due_date" name="final_report_due_date">
+  
+          <button type="submit">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
     <script src="../assets/js/project-subpage.js"></script>
     <script src="../assets/js/script.js"></script>
