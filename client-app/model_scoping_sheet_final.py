@@ -374,21 +374,6 @@ def get_client_contact_info():
                 "question":"Please add your email for future contact.",
                 "type": "open"
             },
-        30:
-            {
-                "category":"Client Contact Information",
-                "requirement":"Client Company",
-                "question":"What is the name of your company?",
-                "type": "open"
-            },
-        31:
-            {
-                "category":"Client Contact Information",
-                "requirement":"Client Name",
-                "question":"What is your contact name?",
-                "type": "open"
-            },
-        
     }
 
     return client_contact_info_questions

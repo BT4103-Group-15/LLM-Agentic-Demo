@@ -63,7 +63,7 @@ function displayQuestion(data) {
         botMessage.classList.add('chat-incoming', 'chat');
         botMessage.innerHTML = `<p>${data.message}</p>`;
         messagesDiv.appendChild(botMessage);
-        document.getElementById("open-input").classList.add('hidden');
+        document.getElementById("open-input").style.display = "none";
         inQueryMode = false;
         return;
     }
@@ -74,7 +74,7 @@ function displayQuestion(data) {
 
     // show appropriate input
     if (inQueryMode || data.query_prompt) {
-        document.getElementById("open-input").classList.remove('hidden');
+        document.getElementById("open-input").style.display = "block";
     }
 
     if (data.responses) {
@@ -86,9 +86,9 @@ function displayQuestion(data) {
         botMessage.classList.add('chat-incoming', 'chat');
         botMessage.innerHTML = `<p>${data.message}</p>`;
         messagesDiv.appendChild(botMessage);
-        openInputContainer.classList.add('hidden');
-        multiChoiceContainer.classList.add('hidden');
-        radioChoiceContainer.classList.add('hidden');
+        openInputContainer.style.display = "none";
+        multiChoiceContainer.style.display = "none";
+        radioChoiceContainer.style.display = "none";
     } else {
         // Show new question
         const botMessage = document.createElement('li');
@@ -99,9 +99,9 @@ function displayQuestion(data) {
 
         // Scroll to the bottom
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        openInputContainer.classList.add('hidden');
-        multiChoiceContainer.classList.add('hidden');
-        radioChoiceContainer.classList.add('hidden');
+        openInputContainer.style.display = "none";
+        multiChoiceContainer.style.display = "none";
+        radioChoiceContainer.style.display = "none";
 
         if (data.type === "mcq") {
             // Display single-choice buttons
@@ -147,10 +147,10 @@ function displayQuestion(data) {
                 messagesDiv.appendChild(optionMessage);
             });
 
-            multiChoiceContainer.classList.remove('hidden'); // Show Submit button
+            multiChoiceContainer.style.display = "block"; // Show Submit button
         } else {
             // Show text input for open-ended questions
-            openInputContainer.classList.remove('hidden');
+            openInputContainer.style.display = "block";
         }
     }
 }
@@ -172,7 +172,7 @@ function submitOpenAnswer() {
         fetchQuestion(currentIndex, customAnswer, inQueryMode);
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
         document.getElementById('custom-answer').value = '';
-        openInputContainer.classList.remove('hidden');
+        openInputContainer.style.display = "none";
     }
 }
 
