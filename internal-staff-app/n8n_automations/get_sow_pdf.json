@@ -1,0 +1,147 @@
+{
+  "name": "get_sow_pdf",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "e16c6e2f-f583-4b54-ab7d-ba7e1859eb26",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7a4dfa45-bae3-4193-ba3c-7a7b4e1a5bd1",
+      "name": "Webhook",
+      "webhookId": "e16c6e2f-f583-4b54-ab7d-ba7e1859eb26"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        820,
+        0
+      ],
+      "id": "7c097b87-52f2-4a93-814b-3f56096bba36",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd5f6567-0c9f-4765-a90c-d6cf38a08e74",
+              "name": "project_id",
+              "value": "={{$json[\"body\"][\"project_id\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "c0449e57-1983-496f-a3f1-9ae80f6db2bb",
+              "name": "file",
+              "value": "={{$json[\"body\"][\"file\"]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "71ec13ea-b8c2-43db-8c1d-c3114f385315",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": {
+          "__rl": true,
+          "value": "sow_db",
+          "mode": "list",
+          "cachedResultName": "sow_db"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "project_id",
+              "value": "={{ $json.project_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        500,
+        0
+      ],
+      "id": "682cc185-ab43-4a80-9b22-b3e8cc8e8232",
+      "name": "retrieving sow",
+      "credentials": {
+        "mySql": {
+          "id": "W9CePzGpt5LA5SMf",
+          "name": "MySQL account 5"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "retrieving sow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "retrieving sow": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1cfff2c1-5c96-4b8b-baea-481850f8e479",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "36dde0839d5214a73a536a62fa90c77cce7d6a5ab100894df6447c122fc2b270"
+  },
+  "id": "zWhxDBjxvEnq50lQ",
+  "tags": []
+}
