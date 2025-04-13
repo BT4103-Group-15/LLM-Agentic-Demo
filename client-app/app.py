@@ -14,7 +14,7 @@ scoping_questions = json.loads(scoping_data)
 scoping_questions = {int(k): v for k, v in scoping_questions.items()}
 #print(scoping_questions)
 requirement_df = []
-client_info = ""
+client_info = []
 #print(scoping_questions[0])
 
 @app.route("/")
@@ -41,7 +41,7 @@ def chat():
             scoping_requirements["status"] = answer  # Store previous response
             requirement_df.append(scoping_requirements)
             if scoping_questions[index-1]["category"] == "Client Contact Information":
-                client_info = answer
+                client_info.append(answer)
             scoping_requirements = {}
 
         if index in scoping_questions:

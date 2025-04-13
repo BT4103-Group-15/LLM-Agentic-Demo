@@ -99,3 +99,71 @@ p {
 .group p {
     font-size: 1.6vw;
 }
+
+.update-button {
+    display: block;
+    margin-top: 20px;
+    padding: 0.5vw;
+    cursor: pointer;
+    background-color: #327800;
+    color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.3vw;
+    text-align: center;
+    width: 10vw;
+
+    margin-left: 75vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for back button */
+    text-decoration: none;
+    }
+
+.button-container {
+display: flex;
+}
+.update-button:hover {
+background-color: #59c20f;
+}
+    .popup-update {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+  
+    .popup-content {
+      background: white;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 500px;
+      position: relative;
+    }
+  
+    .close {
+      position: absolute;
+      top: 10px; right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+  
+    .popup-content input, .popup-content textarea {
+      width: 100%;
+      margin: 5px 0 15px;
+    }
+
+    /* Ensure the form container is scrollable */
+    .popup-update .popup-content {
+    max-height: 80vh; /* Adjust this value to fit your needs */
+    overflow-y: auto;
+    padding: 20px;
+    }
+
+    /* Optional: you can add some styling to the form container */
+    .form-container {
+    max-height: 60vh;  /* Max height for the form to be scrollable */
+    overflow-y: auto;  /* Enable scrolling */
+    }

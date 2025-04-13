@@ -10,10 +10,40 @@ router.use(function(req, res, next) {
 });
 
 /**
- * Get all project action logs
- * GET /project-action-logs
- * curl http://localhost:3000/project-action-logs
+ * @api {get} /project-action-logs Get all project action logs
+ * @apiGroup ProjectActionLogs
+ * 
+ * @apiSuccess {Object[]} logs List of project action logs
+ * @apiSuccess {Number} logs.log_id Unique identifier of the log
+ * @apiSuccess {Number} logs.project_id Project identifier
+ * @apiSuccess {String} logs.action_type Type of action performed
+ * @apiSuccess {Date} logs.timestamp Time when the action was logged
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   [
+ *     {
+ *       "log_id": 1,
+ *       "project_id": 123,
+ *       "action_type": "SCOPING_SHEET_SUBMISSION",
+ *       "timestamp": "2025-04-11T15:30:45.000Z"
+ *     },
+ *     {
+ *       "log_id": 2,
+ *       "project_id": 456,
+ *       "action_type": "SOW_APPROVAL",
+ *       "timestamp": "2025-04-10T12:15:22.000Z"
+ *     }
+ *   ]
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve project action logs"
+ *   }
  */
+
 router.get('/', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM project_action_logs ORDER BY timestamp DESC');
@@ -25,10 +55,48 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * Get project action logs by project ID
- * GET /project-action-logs/project/:projectId
- * curl http://localhost:3000/project-action-logs/project/1
+ * @api {get} /project-action-logs/project/:projectId Get logs by project ID
+ * @apiGroup ProjectActionLogs
+ * 
+ * @apiParam {Number} projectId Project's unique identifier
+ * 
+ * @apiSuccess {Object[]} logs List of project action logs for the specified project
+ * @apiSuccess {Number} logs.log_id Unique identifier of the log
+ * @apiSuccess {Number} logs.project_id Project identifier
+ * @apiSuccess {String} logs.action_type Type of action performed
+ * @apiSuccess {Date} logs.timestamp Time when the action was logged
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   [
+ *     {
+ *       "log_id": 1,
+ *       "project_id": 123,
+ *       "action_type": "SCOPING_SHEET_SUBMISSION",
+ *       "timestamp": "2025-04-11T15:30:45.000Z"
+ *     },
+ *     {
+ *       "log_id": 3,
+ *       "project_id": 123,
+ *       "action_type": "SCOPING_SHEET_APPROVAL",
+ *       "timestamp": "2025-04-12T09:45:30.000Z"
+ *     }
+ *   ]
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "No action logs found for this project"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve project action logs"
+ *   }
  */
+
 router.get('/project/:projectId', async (req, res) => {
   try {
     const [rows] = await pool.query(
@@ -48,10 +116,39 @@ router.get('/project/:projectId', async (req, res) => {
 });
 
 /**
- * Get project action log by ID
- * GET /project-action-logs/:id
- * curl http://localhost:3000/project-action-logs/1
+ * @api {get} /project-action-logs/:id Get project action log by ID
+ * @apiGroup ProjectActionLogs
+ * 
+ * @apiParam {Number} id Log's unique identifier
+ * 
+ * @apiSuccess {Number} log_id Unique identifier of the log
+ * @apiSuccess {Number} project_id Project identifier
+ * @apiSuccess {String} action_type Type of action performed
+ * @apiSuccess {Date} timestamp Time when the action was logged
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "log_id": 1,
+ *     "project_id": 123,
+ *     "action_type": "SCOPING_SHEET_SUBMISSION",
+ *     "timestamp": "2025-04-11T15:30:45.000Z"
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Project action log not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to retrieve project action log"
+ *   }
  */
+
 router.get('/:id', async (req, res) => {
   try {
     const [rows] = await pool.query(
@@ -71,12 +168,66 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
- * Create new project action log
- * POST /project-action-logs
-  curl -X POST http://localhost:3000/project-action-logs \
-   -H "Content-Type: application/json" \
-   -d "{\"project_id\":1,\"action_type\":\"SCOPING_SHEET_SUBMISSION\"}"
+ * @api {post} /project-action-logs Create new project action log
+ * @apiGroup ProjectActionLogs
+ * 
+ * @apiParam {Number} project_id Project's unique identifier
+ * @apiParam {String} action_type Type of action performed
+ * 
+ * @apiDescription The action_type must be one of the following values:
+ * - SCOPING_SHEET_SUBMISSION
+ * - SCOPING_SHEET_APPROVAL
+ * - SOW_DRAFTING_TRIGGERED
+ * - DRAFT_SOW_SUBMISSION
+ * - SOW_APPROVAL
+ * - FINAL_SOW_SENT_TO_CLIENT
+ * 
+ * @apiParamExample {json} Request-Example:
+ *   {
+ *     "project_id": 123,
+ *     "action_type": "SCOPING_SHEET_SUBMISSION"
+ *   }
+ * 
+ * @apiSuccess {Number} log_id Unique identifier of the created log
+ * @apiSuccess {Number} project_id Project identifier
+ * @apiSuccess {String} action_type Type of action performed
+ * @apiSuccess {Date} timestamp Time when the action was logged
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 201 Created
+ *   {
+ *     "log_id": 4,
+ *     "project_id": 123,
+ *     "action_type": "SCOPING_SHEET_SUBMISSION",
+ *     "timestamp": "2025-04-12T18:45:30.000Z"
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Bad-Request-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "Project ID and action type are required"
+ *   }
+ * 
+ * @apiErrorExample {json} Invalid-Action-Type-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "Invalid action type. Must be one of: SCOPING_SHEET_SUBMISSION, SCOPING_SHEET_APPROVAL, SOW_DRAFTING_TRIGGERED, DRAFT_SOW_SUBMISSION, SOW_APPROVAL, FINAL_SOW_SENT_TO_CLIENT"
+ *   }
+ * 
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Project not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to create project action log"
+ *   }
  */
+
 router.post('/', async (req, res) => {
   const { project_id, action_type } = req.body;
   
@@ -131,12 +282,73 @@ router.post('/', async (req, res) => {
 });
 
 /**
- * Update project action log by ID
- * PUT /project-action-logs/:id
- * curl -X PUT http://localhost:3000/project-action-logs/1 \
- *  -H "Content-Type: application/json" \
- *  -d '{"project_id":2,"action_type":"SOW_APPROVAL"}'
+ * @api {put} /project-action-logs/:id Update project action log
+ * @apiGroup ProjectActionLogs
+ * 
+ * @apiParam {Number} id Log's unique identifier
+ * @apiParam {Number} project_id Project's unique identifier
+ * @apiParam {String} action_type Type of action performed
+ * 
+ * @apiDescription The action_type must be one of the following values:
+ * - SCOPING_SHEET_SUBMISSION
+ * - SCOPING_SHEET_APPROVAL
+ * - SOW_DRAFTING_TRIGGERED
+ * - DRAFT_SOW_SUBMISSION
+ * - SOW_APPROVAL
+ * - FINAL_SOW_SENT_TO_CLIENT
+ * 
+ * @apiParamExample {json} Request-Example:
+ *   {
+ *     "project_id": 456,
+ *     "action_type": "SOW_APPROVAL"
+ *   }
+ * 
+ * @apiSuccess {Number} log_id Unique identifier of the log
+ * @apiSuccess {Number} project_id Updated project identifier
+ * @apiSuccess {String} action_type Updated action type
+ * @apiSuccess {String} message Success message
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "log_id": "1",
+ *     "project_id": 456,
+ *     "action_type": "SOW_APPROVAL",
+ *     "message": "Project action log updated successfully"
+ *   }
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Bad-Request-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "Project ID and action type are required"
+ *   }
+ * 
+ * @apiErrorExample {json} Invalid-Action-Type-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "Invalid action type. Must be one of: SCOPING_SHEET_SUBMISSION, SCOPING_SHEET_APPROVAL, SOW_DRAFTING_TRIGGERED, DRAFT_SOW_SUBMISSION, SOW_APPROVAL, FINAL_SOW_SENT_TO_CLIENT"
+ *   }
+ * 
+ * @apiErrorExample {json} Invalid-Project-Error:
+ *   HTTP/1.1 400 Bad Request
+ *   {
+ *     "error": "Invalid project_id. The referenced project does not exist."
+ *   }
+ * 
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Project action log not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to update project action log"
+ *   }
  */
+
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { project_id, action_type } = req.body;
@@ -193,10 +405,29 @@ router.put('/:id', async (req, res) => {
 });
 
 /**
- * Delete project action log
- * DELETE /project-action-logs/:id
- * curl -X DELETE http://localhost:3000/project-action-logs/1
+ * @api {delete} /project-action-logs/:id Delete project action log
+ * @apiGroup ProjectActionLogs
+ * 
+ * @apiParam {Number} id Log's unique identifier
+ * 
+ * @apiSuccess {null} null No content on success
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 204 No Content
+ * 
+ * @apiError {Object} error Error message
+ * @apiErrorExample {json} Not-Found-Error:
+ *   HTTP/1.1 404 Not Found
+ *   {
+ *     "error": "Project action log not found"
+ *   }
+ * 
+ * @apiErrorExample {json} Server-Error:
+ *   HTTP/1.1 500 Internal Server Error
+ *   {
+ *     "error": "Failed to delete project action log"
+ *   }
  */
+
 router.delete('/:id', async (req, res) => {
   try {
     const [result] = await pool.query(

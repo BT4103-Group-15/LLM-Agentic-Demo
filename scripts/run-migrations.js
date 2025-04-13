@@ -32,6 +32,39 @@ async function runMigrations() {
       return;
     }
     
+// db:seed_dummy_data command
+if (specificFile === '01_insert_dummy_data.sql') {
+  console.log('Seeding database with dummy data...');
+  // Select the database before running the seed script
+  await rootConnection.query(`USE ${process.env.DB_NAME || 'data'}`);
+  
+  try {
+    // Read the seed SQL file
+    const sqlFilePath = path.join(__dirname, '..', 'migrations', '01_insert_dummy_data.sql');
+    const seedSQL = await fs.readFile(sqlFilePath, 'utf8');
+    
+    // Split the SQL content into separate statements
+    const statements = seedSQL
+      .split(';')
+      .map(statement => statement.trim())
+      .filter(statement => statement.length > 0);
+    
+    // Execute each statement separately
+    for (const statement of statements) {
+      await rootConnection.query(statement);
+    }
+    
+    console.log('Database has been seeded with dummy data');
+  } catch (error) {
+    console.error(`Error reading or executing seed file:`);
+    console.error(error);
+    throw error;
+  }
+  
+  await rootConnection.end();
+  return;
+}
+
     // Create database if not exists
     console.log('Creating database if not exists...');
     await rootConnection.query('CREATE DATABASE IF NOT EXISTS data');
@@ -59,9 +92,15 @@ async function runMigrations() {
     
     // Execute each migration file in order
     for (const file of sqlFiles) {
-      // Skip the database creation file if it exists
-      if (file === '00_create_database.sql') {
-        console.log(`Skipping ${file} - database already created`);
+      // Skip the drop database file - it should be run separately
+      if (file === '00_drop_database.sql') {
+        console.log(`Skipping ${file} - database should be reset only with the db:reset command`);
+        continue;
+      }
+
+      // Skip the dummy data file - it should be run separately
+      if (file === '01_insert_dummy_data.sql') {
+        console.log(`Skipping ${file} - dummy data should be inserted with db:seed_dummy_data command`);
         continue;
       }
       

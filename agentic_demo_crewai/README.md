@@ -19,9 +19,11 @@ a `.env` file with your credentials.
 - Then, in the project folder, run `npm install` in your command line. 
 
 ## 3. Database actions
-- `npm run db:reset` to drop database
-- `npm run db:migrate` to seed database with all migration scripts from the migrations folder.
-- `npm run start` to start the database connection [Note: This command is necessary if you would like to utilise the API endpoints.]
+- `npm run db:test` - Tests the database connection to verify configuration [Only tests if database connection works]
+- `npm run db:reset` - Drops and recreates the database, giving you a clean slate
+- `npm run db:migrate` - Initializes the database with tables defined in migration files
+- `npm run db:seed_dummy_data` - Populates the database with sample data for testing
+- `npm run start`  - Starts the application with database connection [Required for API endpoints]
 
 ## 4. Testing APIs
 - Download Bruno 
