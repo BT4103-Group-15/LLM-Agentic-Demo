@@ -9,14 +9,19 @@ and outputs
 from langchain_core.prompts import ChatPromptTemplate  # For formatting purposes
 from langchain_core.output_parsers import StrOutputParser
 
+#comment later
+import os
+os.environ["QROQ_API_KEY"]= "gsk_XsYc4agDeX8A5R9vWpXHWGdyb3FYlCOMbVUB2t2ka0eU6isB3M3qgsk_7y3HLZlG69yeNcRcQDBCWGdyb3FYBRAl4TcInNKBPLQ6xw9Yjk9C"
+from langchain_groq import ChatGroq
+
 # from langchain.schema.runnable import RunnableSequence
-from langchain_ollama import OllamaLLM  # for LangChain version
+#from langchain_ollama import OllamaLLM  # for LangChain version
 
 ###################################################################################################
 # Model Initialisation
 ###################################################################################################
-llama3_8b_local = OllamaLLM(model="llama3.1", temperature=0.1)
-
+#llama3_8b_local = OllamaLLM(model="llama3.1", temperature=0.1)
+llama3_8b_local = ChatGroq(model_name = "llama-3.3-70b-versatile",temperature=0.7)
 ###################################################################################################
 # Scope of Work Generator Method
 ###################################################################################################

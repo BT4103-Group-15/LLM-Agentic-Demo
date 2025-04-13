@@ -7,6 +7,8 @@ require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const args = process.argv.slice(2);
 const fileArg = args.find(arg => arg.startsWith('--file='));
 const specificFile = fileArg ? fileArg.split('=')[1] : null;
+console.log('Trying to connect to:', process.env.DB_HOST);
+
 
 async function runMigrations() {
   let rootConnection;
