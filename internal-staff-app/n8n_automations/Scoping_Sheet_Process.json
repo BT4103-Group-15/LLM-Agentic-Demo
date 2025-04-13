@@ -3,28 +3,6 @@
   "nodes": [
     {
       "parameters": {
-        "resource": "pdf",
-        "pdfTemplateId": "29077b2398cd8cb6",
-        "jsonParameters": true,
-        "propertiesJson": "={{ $('Converting Obj to String').item.json.request }}"
-      },
-      "type": "n8n-nodes-base.apiTemplateIo",
-      "typeVersion": 1,
-      "position": [
-        80,
-        340
-      ],
-      "id": "848fe260-62f3-48d9-803a-df286fab4216",
-      "name": "APITemplate.io1",
-      "credentials": {
-        "apiTemplateIoApi": {
-          "id": "rF2CXSqjAXrdooEx",
-          "name": "APITemplate.io account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "path": "5a0cd093-a0ed-404a-bfa1-be712355a441",
         "responseMode": "responseNode",
         "options": {}
@@ -32,7 +10,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -1620,
+        -1720,
         380
       ],
       "id": "a0b4cdb0-3b42-4119-a985-8b54d943c39d",
@@ -48,7 +26,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        1740,
+        4060,
         460
       ],
       "id": "96b2fb5d-6567-4c09-8769-607e982b03c2",
@@ -66,7 +44,7 @@
           "conditions": [
             {
               "id": "2d0f7d07-a014-4c0e-83cb-7d6e02e6d946",
-              "leftValue": "={{ $json.data.approved }}",
+              "leftValue": "={{ $('Send Email to Client').item.json.data.approved }}",
               "rightValue": "",
               "operator": {
                 "type": "boolean",
@@ -82,8 +60,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1040,
-        360
+        1440,
+        80
       ],
       "id": "f14c0818-e750-49f5-b3ce-b66b9149f9f4",
       "name": "If"
@@ -100,7 +78,7 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        1520,
+        3040,
         460
       ],
       "id": "fa13a09b-7e8a-4ecd-a1bb-85bbb10da0ce",
@@ -150,8 +128,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        540,
-        660
+        1140,
+        580
       ],
       "id": "ecbd3eb8-7254-4c9a-863a-61b14eb8c2e1",
       "name": "Sticky Note2"
@@ -173,7 +151,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1420,
+        -1520,
         380
       ],
       "id": "3c06279f-3513-4764-a72e-b488a5920e8b",
@@ -187,7 +165,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1200,
+        -1300,
         380
       ],
       "id": "0a0a6cfe-892b-4616-a7b8-db271bc55223",
@@ -200,7 +178,7 @@
             {
               "id": "87af8451-5340-45a3-83b4-d8dd672efcde",
               "name": "request.scopingsheet_markdown",
-              "value": "={{ $json.scopingsheet_markdown }}",
+              "value": "={{ $('Formatting Markdown in JSON').item.json.scopingsheet_markdown }}",
               "type": "string"
             },
             {
@@ -216,8 +194,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -900,
-        380
+        -360,
+        320
       ],
       "id": "5a036070-b3e4-45d8-875b-748c5e414ecf",
       "name": "Converting Obj to String"
@@ -246,11 +224,11 @@
             },
             {
               "column": "project_id",
-              "value": "={{ $json.project_id }}"
+              "value": "={{ $('obtaining project id').item.json.project_id }}"
             },
             {
               "column": "scopingsheet_URL",
-              "value": "={{ $('APITemplate.io1').item.json.download_url }}"
+              "value": "={{ $('Edit Fields').item.json.final_url }}"
             }
           ]
         },
@@ -259,8 +237,8 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        2140,
-        220
+        3020,
+        80
       ],
       "id": "a31a6529-fbaa-4172-968b-921f5b2f5244",
       "name": "Insert data into scope_db",
@@ -278,8 +256,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        3000,
-        240
+        3860,
+        100
       ],
       "id": "3c88af0c-50e7-4bf8-9ddb-a1633814ee17",
       "name": "Respond to Webhook2"
@@ -313,8 +291,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -680,
-        380
+        -180,
+        300
       ],
       "id": "0b22377a-2059-42c4-9104-3e45fee75830",
       "name": "combining"
@@ -326,8 +304,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        900,
-        600
+        1500,
+        520
       ],
       "id": "146eb457-03db-4d8c-8d67-796aa314058e",
       "name": "Respond to Webhook4"
@@ -353,8 +331,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        2740,
-        220
+        3660,
+        100
       ],
       "id": "d6d885ab-aa31-4d1c-b251-de15d5df8cda",
       "name": "Execute SOW Workflow"
@@ -388,8 +366,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2460,
-        220
+        3320,
+        120
       ],
       "id": "a739dd89-e818-4519-b6b4-3e0727d17c2e",
       "name": "Passing Key"
@@ -419,8 +397,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        660,
-        280
+        1060,
+        80
       ],
       "id": "e79ed88f-c9bf-4182-aee0-ae5865bbb41a",
       "name": "Send Email to Client",
@@ -446,8 +424,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        100,
-        620
+        700,
+        540
       ],
       "id": "50f6ca90-e769-4a07-bbd4-2abc97885d9a",
       "name": "Send Email to Staff",
@@ -470,8 +448,8 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        -320,
-        380
+        200,
+        280
       ],
       "id": "975705ce-daf8-42cd-a004-ab5ab98fcc93",
       "name": "Convert to File"
@@ -606,8 +584,8 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        1420,
-        280
+        -980,
+        380
       ],
       "id": "2c29bd50-e700-412b-a828-c5499c7a5967",
       "name": "Insert into Project Details",
@@ -627,11 +605,216 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        1780,
-        220
+        -660,
+        340
       ],
       "id": "e37ce4d9-3cfb-40dc-a1ca-af347afc0f67",
       "name": "obtaining project id",
+      "credentials": {
+        "mySql": {
+          "id": "pwehlYKuQhhIXisF",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('APITemplate.io1').item.json.download_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2000,
+        60
+      ],
+      "id": "a687d72c-1bc8-4cf5-a1e3-2389acce13b0",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "name": "=scope_{{ $('Setting of JSON Obj').item.json.request.email }}_v1.pdf",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1IGykjR_DP8trfvFj4tYtG48am6ZnCHgc",
+          "mode": "list",
+          "cachedResultName": "Scoping PDF",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1IGykjR_DP8trfvFj4tYtG48am6ZnCHgc"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2220,
+        60
+      ],
+      "id": "ab45f1da-f862-41ed-b90e-c78f8913a01f",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "xk0w6EYoa45yKnpi",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2440,
+        60
+      ],
+      "id": "85dd0354-ca52-4b9c-b1fb-17150fb2c1d3",
+      "name": "Google Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "xk0w6EYoa45yKnpi",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6a8cbba5-9a65-4b3d-94ed-8ffe890a17d2",
+              "name": "final_url",
+              "value": "=https://drive.google.com/file/d/{{ $('Google Drive').item.json.id }}/view",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2660,
+        60
+      ],
+      "id": "b459489d-21fc-4f9a-b363-028cdbe03480",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "resource": "pdf",
+        "pdfTemplateId": "29077b2398cd8cb6",
+        "jsonParameters": true,
+        "propertiesJson": "={{ $('Converting Obj to String').item.json.request }}"
+      },
+      "type": "n8n-nodes-base.apiTemplateIo",
+      "typeVersion": 1,
+      "position": [
+        660,
+        200
+      ],
+      "id": "848fe260-62f3-48d9-803a-df286fab4216",
+      "name": "APITemplate.io1",
+      "credentials": {
+        "apiTemplateIoApi": {
+          "id": "rF2CXSqjAXrdooEx",
+          "name": "APITemplate.io account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "table": {
+          "__rl": true,
+          "value": "scope_db",
+          "mode": "name"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "project_id",
+              "value": "={{ $('obtaining project id').item.json.project_id }}"
+            },
+            {
+              "column": "client_id",
+              "value": "={{ $('combining').item.json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        3340,
+        460
+      ],
+      "id": "3e84a621-1995-455e-b17f-d1e0b6d30bfe",
+      "name": "drop row in scope_db",
+      "credentials": {
+        "mySql": {
+          "id": "pwehlYKuQhhIXisF",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "table": {
+          "__rl": true,
+          "value": "project_details",
+          "mode": "list",
+          "cachedResultName": "project_details"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "project_id",
+              "value": "={{ $('obtaining project id').item.json.project_id }}"
+            },
+            {
+              "column": "client_id",
+              "value": "={{ $('combining').item.json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        3560,
+        460
+      ],
+      "id": "3d1e934b-9b0b-4c48-8359-aa975b177e11",
+      "name": "MySQL",
       "credentials": {
         "mySql": {
           "id": "pwehlYKuQhhIXisF",
@@ -642,17 +825,6 @@
   ],
   "pinData": {},
   "connections": {
-    "APITemplate.io1": {
-      "main": [
-        [
-          {
-            "node": "Send Email to Client",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Webhook1": {
       "main": [
         [
@@ -668,7 +840,7 @@
       "main": [
         [
           {
-            "node": "Insert into Project Details",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -686,7 +858,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook1",
+            "node": "drop row in scope_db",
             "type": "main",
             "index": 0
           }
@@ -708,7 +880,7 @@
       "main": [
         [
           {
-            "node": "Converting Obj to String",
+            "node": "Insert into Project Details",
             "type": "main",
             "index": 0
           }
@@ -796,12 +968,12 @@
       "main": [
         [
           {
-            "node": "APITemplate.io1",
+            "node": "Send Email to Staff",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Send Email to Staff",
+            "node": "APITemplate.io1",
             "type": "main",
             "index": 0
           }
@@ -823,7 +995,84 @@
       "main": [
         [
           {
+            "node": "Converting Obj to String",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
             "node": "Insert data into scope_db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "APITemplate.io1": {
+      "main": [
+        [
+          {
+            "node": "Send Email to Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "drop row in scope_db": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
             "type": "main",
             "index": 0
           }
@@ -835,7 +1084,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "983db53c-7e50-42c1-87cf-7b10d298e1e2",
+  "versionId": "9121a6f2-9034-4544-a19d-8607d45a4101",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "8712c2bb4e02902a13a43c75c2acacd2aabdb06be443b7b14c332bd919069ab1"
