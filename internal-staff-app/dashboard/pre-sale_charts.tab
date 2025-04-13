@@ -1,0 +1,6 @@
+﻿Sheet Name	ObjectID	Object Name	Location	Expression
+Main	CH01	 		=Date(Timestamp#([project_start_date], 'YYYY-MM-DD'))
+Main	CH01	 	Chart Main Expression	=count(project_start_date)
+Main	CH02	 	Chart Main Expression	=count(application_type)
+Main	CH03	 	Chart Main Expression	=count(testing_environment)
+Main	CH04	 	Chart Main Expression	=count(required_reports)

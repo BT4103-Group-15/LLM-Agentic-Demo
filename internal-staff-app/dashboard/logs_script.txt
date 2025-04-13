@@ -1,0 +1,60 @@
+Project_Details:
+LOAD [project_id], 
+     [Client ID], 
+     [Application Name], 
+     [Production URL], 
+     [Environment for Testing], 
+     [Application Type], 
+     [Authentication Method], 
+     [User Roles], 
+     [Session Management], 
+     [Session timeout period], 
+     total_num_input_fields, 
+     [Input Types Present], 
+     [Sensitive Data Handled], 
+     [Data Storage], 
+     [Number of Endpoints], 
+     [Authentication Required], 
+     [Rate Limiting], 
+     [Documentation Available], 
+     [Security Controls Present], 
+     Hosting, 
+     [Critical Functions], 
+     [Compliance Requirements], 
+     [Previous Testing], 
+     [Time Restrictions], 
+     [Testing Limitations], 
+     [Required Reports], 
+     [Project Start Date],
+     [Draft Report Due],
+     [Final Report Due], 
+     [Timestamp]
+FROM
+[C:\Users\jarel\Downloads\New folder\LLM-Agentic-Demo\internal-staff-app\sample_data\project_details.xlsx]
+(ooxml, embedded labels, table is Sheet1);
+
+Logs:
+LOAD project_id, 
+     Action, 
+     timestamp
+FROM
+[C:\Users\jarel\Downloads\New folder\LLM-Agentic-Demo\internal-staff-app\sample_data\logs.xlsx]
+(ooxml, embedded labels, table is Sheet1);
+
+LatestLogs:
+LOAD project_id,
+     Max(timestamp) as latest_timestamp
+RESIDENT Logs
+GROUP BY project_id;
+
+JOIN (Logs)
+LOAD project_id,
+     latest_timestamp
+RESIDENT LatestLogs;
+
+LatestLogsFiltered:
+LOAD project_id,
+     Action as Current_Action,
+     timestamp
+RESIDENT Logs
+WHERE timestamp = latest_timestamp;

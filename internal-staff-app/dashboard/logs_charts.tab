@@ -1,0 +1,6 @@
+﻿Sheet Name	ObjectID	Object Name	Location	Expression
+Main	CH05	Current Status	Chart Main Expression	=FirstSortedValue(Action, -timestamp)
+
+Main	CH05	Current Status	Chart Main Expression	=Max(timestamp)
+
+Main	CH08	 	Chart Main Expression	=count(Current_Action)

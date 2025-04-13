@@ -1,0 +1,105 @@
+// Create REST connector
+CUSTOM CONNECT TO "Provider=QvRestConnector.exe;
+url=http://localhost:3000/project-action-logs;
+timeout=30;
+method=GET;
+XUserId=QERWcPC;
+XPassword=YdXHHFA;";
+
+CUSTOM CONNECT TO "Provider=QvRestConnector.exe;
+url=http://localhost:3000/project-details;
+timeout=30;
+method=GET;
+XUserId=KZbCGdD;
+XPassword=IYSWAPB;";
+
+
+
+Project_Details:
+LOAD
+    project_id,
+    client_id,
+    application_name,
+    production_url,
+    testing_environment,
+    application_type,
+    user_roles,
+    session_management,
+    session_timeout_period,
+    total_num_input_fields,
+    input_types_present,
+    sensitive_data_handled,
+    data_storage,
+    number_of_endpoints,
+    authentication_required,
+    rate_limiting,
+    documentation_available,
+    security_controls_present,
+    hosting,
+    critical_functions,
+    compliance_requirements,
+    previous_testing,
+    time_restrictions,
+    testing_limitations,
+    required_reports,
+    project_start_date,
+    draft_report_due_date,
+    final_report_due_date
+FROM [http://localhost:3000/project-details]
+(json);
+
+
+Logs:
+LOAD
+    log_id,
+    project_id,
+    action_type,
+    Timestamp#(timestamp, 'YYYY-MM-DD HH:MM:SS') AS timestamp
+FROM [http://localhost:3000/project-action-logs]
+(json);
+
+
+LatestLogs:
+LOAD 
+    project_id,
+    Timestamp(Max(timestamp)) AS latest_timestamp
+RESIDENT Logs
+GROUP BY project_id;
+
+
+JOIN (Logs)
+LOAD project_id,
+     latest_timestamp
+RESIDENT LatestLogs;
+
+LatestLogsFiltered:
+LOAD project_id,
+     action_type as Current_Action,
+     timestamp
+RESIDENT Logs
+WHERE timestamp = latest_timestamp;
+
+
+// Filter ProjectsDueSoon to only include projects with due dates in the next 7 days
+DraftReportsDueSoonFiltered:
+LOAD 
+    [project_id], 
+    [client_id], 
+    [application_name], 
+    Date(Timestamp#([draft_report_due_date], 'YYYY-MM-DD HH:MM:SS')) AS [Draft Report Due Soon]
+    
+Resident Project_Details
+WHERE 
+    Date(Timestamp#([draft_report_due_date], 'YYYY-MM-DD')) <= Date(Today() + 30);
+ 
+ 
+ReportsDueSoonFiltered:
+LOAD
+    project_id,
+    [client_id], 
+    [application_name],
+    Date(Timestamp#([final_report_due_date], 'YYYY-MM-DD')) AS [Report Due Soon]
+    
+Resident Project_Details
+WHERE 
+    Date(Timestamp#([final_report_due_date], 'YYYY-MM-DD')) <= Date(Today() + 30);
