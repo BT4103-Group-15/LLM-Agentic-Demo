@@ -13,13 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Fetch logs when the button is clicked
         fetchLogs();
     });
-
-    // Add event listener for the "Logs" button
-    const chatButton = document.getElementById('chat-button');
-    chatButton.addEventListener('click', () => {
-        // Fetch logs when the button is clicked
-        fetchChatHistory();
-    });
+    
 });
 
 document.getElementById("file-upload-button").addEventListener("click", function() {
@@ -335,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Log the JSON to the console (or send it somewhere)
         cleanJsonData(data, projectId);
-        window.location.reload();
+        // window.location.reload();
         
     });
 });
@@ -408,7 +402,32 @@ function uploadFile(file, projectId) {
 
             // Construct the URL
             const uploadApiUrl = `http://localhost:3000/project-details/${projectId}`;
+            const n8nURL = `http://localhost:5678/webhook-test/3aa217cb-cf2f-4a34-b65e-10d2b68b6c2b`;
             console.log('Uploading file and data to URL:', uploadApiUrl);
+
+            fetch(n8nURL, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    id: projectId, // Send the id here
+                    file: file // Send the file data here
+                }),
+                headers: { "Content-Type": "application/json; charset=UTF-8" }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response from server:', data);
+                alert("Successfully updated!");  // Show popup on success
+            })
+            .catch(error => {
+                console.error('Error uploading file and data:', error);
+                alert("Update failed. Please try again.");  // Show error popup
+            });
+
 
             // Send the request
             fetch(uploadApiUrl, {
