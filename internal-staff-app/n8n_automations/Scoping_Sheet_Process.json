@@ -1,5 +1,5 @@
 {
-  "name": "Scoping Sheet Process",
+  "name": "Scoping_Sheet_Process",
   "nodes": [
     {
       "parameters": {
@@ -10,10 +10,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -1720,
-        380
+        -260,
+        260
       ],
-      "id": "a0b4cdb0-3b42-4119-a985-8b54d943c39d",
+      "id": "29e55b22-97f2-477d-ab3b-993351069165",
       "name": "Webhook1",
       "webhookId": "5a0cd093-a0ed-404a-bfa1-be712355a441"
     },
@@ -26,10 +26,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        4060,
-        460
+        5520,
+        340
       ],
-      "id": "96b2fb5d-6567-4c09-8769-607e982b03c2",
+      "id": "65067be3-31eb-45e6-b5b4-b628441d7f70",
       "name": "Respond to Webhook1"
     },
     {
@@ -60,10 +60,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1440,
-        80
+        2900,
+        -40
       ],
-      "id": "f14c0818-e750-49f5-b3ce-b66b9149f9f4",
+      "id": "ec490555-8dee-46f5-9d71-1cc73db02d91",
       "name": "If"
     },
     {
@@ -78,18 +78,12 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        3040,
-        460
+        4500,
+        340
       ],
-      "id": "fa13a09b-7e8a-4ecd-a1bb-85bbb10da0ce",
+      "id": "cb8618fc-85cc-486b-bdf3-2e503b5573d6",
       "name": "Send Email1",
-      "webhookId": "8b8f6558-1b2a-476a-9ab8-a810e265bbca",
-      "credentials": {
-        "smtp": {
-          "id": "E6qJoQyuVDVdeRx1",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "8b8f6558-1b2a-476a-9ab8-a810e265bbca"
     },
     {
       "parameters": {
@@ -100,10 +94,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1140,
-        120
+        320,
+        0
       ],
-      "id": "73b28d2f-d4b1-4b12-9f75-a8ec42d0869e",
+      "id": "a6370106-c1e2-42ba-9e07-b432009355e0",
       "name": "Sticky Note"
     },
     {
@@ -114,10 +108,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        0,
-        0
+        1460,
+        -120
       ],
-      "id": "7fb79a33-0c4b-4d37-ae77-f1c51e134739",
+      "id": "77a94844-5f2c-4019-b01d-dcb8985e462f",
       "name": "Sticky Note1"
     },
     {
@@ -128,10 +122,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1140,
-        580
+        2600,
+        460
       ],
-      "id": "ecbd3eb8-7254-4c9a-863a-61b14eb8c2e1",
+      "id": "69291aaa-1ca2-4626-a179-8e5a0343bab2",
       "name": "Sticky Note2"
     },
     {
@@ -151,10 +145,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1520,
-        380
+        -60,
+        260
       ],
-      "id": "3c06279f-3513-4764-a72e-b488a5920e8b",
+      "id": "ceb23795-8e95-4e9e-a4e0-ac29435ff880",
       "name": "Setting of JSON Obj"
     },
     {
@@ -165,10 +159,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1300,
-        380
+        160,
+        260
       ],
-      "id": "0a0a6cfe-892b-4616-a7b8-db271bc55223",
+      "id": "0ed14a57-64d0-4ebf-95bd-971649262e8c",
       "name": "Formatting Markdown in JSON"
     },
     {
@@ -194,10 +188,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -360,
-        320
+        1100,
+        200
       ],
-      "id": "5a036070-b3e4-45d8-875b-748c5e414ecf",
+      "id": "de6f64cb-de15-4912-9ebd-65cbfd2613f1",
       "name": "Converting Obj to String"
     },
     {
@@ -237,15 +231,15 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        3020,
-        80
+        4480,
+        -40
       ],
-      "id": "a31a6529-fbaa-4172-968b-921f5b2f5244",
+      "id": "f1087ede-5e3d-40ae-86c5-8e7af27c943c",
       "name": "Insert data into scope_db",
       "credentials": {
         "mySql": {
-          "id": "pwehlYKuQhhIXisF",
-          "name": "MySQL account"
+          "id": "W9CePzGpt5LA5SMf",
+          "name": "MySQL account 5"
         }
       }
     },
@@ -256,10 +250,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        3860,
-        100
+        5320,
+        -20
       ],
-      "id": "3c88af0c-50e7-4bf8-9ddb-a1633814ee17",
+      "id": "515c153d-ef00-44c5-b91b-d49b4d16fa7f",
       "name": "Respond to Webhook2"
     },
     {
@@ -291,10 +285,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -180,
-        300
+        1280,
+        180
       ],
-      "id": "0b22377a-2059-42c4-9104-3e45fee75830",
+      "id": "a68c0bc5-31bd-4470-bd83-67760530f0ac",
       "name": "combining"
     },
     {
@@ -304,10 +298,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        1500,
-        520
+        2960,
+        400
       ],
-      "id": "146eb457-03db-4d8c-8d67-796aa314058e",
+      "id": "8eca6bd3-4273-44f3-a7fb-a6acdf7765a6",
       "name": "Respond to Webhook4"
     },
     {
@@ -331,10 +325,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        3660,
-        100
+        5120,
+        -20
       ],
-      "id": "d6d885ab-aa31-4d1c-b251-de15d5df8cda",
+      "id": "85dcb0a9-d1f0-4f78-b3a5-c695ea163d26",
       "name": "Execute SOW Workflow"
     },
     {
@@ -366,10 +360,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3320,
-        120
+        4780,
+        0
       ],
-      "id": "a739dd89-e818-4519-b6b4-3e0727d17c2e",
+      "id": "8f75d3f2-fbcf-48b2-8bcd-d4ea54949f80",
       "name": "Passing Key"
     },
     {
@@ -397,19 +391,13 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        1060,
-        80
+        2520,
+        -40
       ],
-      "id": "e79ed88f-c9bf-4182-aee0-ae5865bbb41a",
+      "id": "fd69f648-a84a-4d56-bc3c-fbd03b6544c1",
       "name": "Send Email to Client",
       "webhookId": "4e0f99db-90bd-418c-a4f9-2893d04ab103",
-      "alwaysOutputData": false,
-      "credentials": {
-        "smtp": {
-          "id": "E6qJoQyuVDVdeRx1",
-          "name": "SMTP account"
-        }
-      }
+      "alwaysOutputData": false
     },
     {
       "parameters": {
@@ -424,18 +412,12 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        700,
-        540
+        2160,
+        420
       ],
-      "id": "50f6ca90-e769-4a07-bbd4-2abc97885d9a",
+      "id": "b0369451-7eea-41d9-afca-94f5dbfb63b1",
       "name": "Send Email to Staff",
-      "webhookId": "9e5d33d3-b455-44f8-94cf-6c1807341513",
-      "credentials": {
-        "smtp": {
-          "id": "E6qJoQyuVDVdeRx1",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "9e5d33d3-b455-44f8-94cf-6c1807341513"
     },
     {
       "parameters": {
@@ -448,10 +430,10 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        200,
-        280
+        1660,
+        160
       ],
-      "id": "975705ce-daf8-42cd-a004-ab5ab98fcc93",
+      "id": "1854ac9a-9c3e-482c-b75b-82f47a05a2a1",
       "name": "Convert to File"
     },
     {
@@ -584,15 +566,15 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        -980,
-        380
+        480,
+        260
       ],
-      "id": "2c29bd50-e700-412b-a828-c5499c7a5967",
+      "id": "2997bda1-833a-4b54-b4f3-f871f1a966d9",
       "name": "Insert into Project Details",
       "credentials": {
         "mySql": {
-          "id": "pwehlYKuQhhIXisF",
-          "name": "MySQL account"
+          "id": "W9CePzGpt5LA5SMf",
+          "name": "MySQL account 5"
         }
       }
     },
@@ -605,15 +587,15 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        -660,
-        340
+        800,
+        220
       ],
-      "id": "e37ce4d9-3cfb-40dc-a1ca-af347afc0f67",
+      "id": "b4af8899-a4df-4483-a984-768df0c8cf51",
       "name": "obtaining project id",
       "credentials": {
         "mySql": {
-          "id": "pwehlYKuQhhIXisF",
-          "name": "MySQL account"
+          "id": "W9CePzGpt5LA5SMf",
+          "name": "MySQL account 5"
         }
       }
     },
@@ -631,10 +613,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2000,
-        60
+        3460,
+        -60
       ],
-      "id": "a687d72c-1bc8-4cf5-a1e3-2389acce13b0",
+      "id": "c9dcc51e-03d4-4ff2-b7f4-6fb140960226",
       "name": "HTTP Request"
     },
     {
@@ -657,17 +639,11 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2220,
-        60
+        3680,
+        -60
       ],
-      "id": "ab45f1da-f862-41ed-b90e-c78f8913a01f",
-      "name": "Google Drive",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "xk0w6EYoa45yKnpi",
-          "name": "Google Drive account"
-        }
-      }
+      "id": "1f44e3a1-01fc-42e7-9da4-a9d5151d4f38",
+      "name": "Google Drive"
     },
     {
       "parameters": {
@@ -688,17 +664,11 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        2440,
-        60
+        3900,
+        -60
       ],
-      "id": "85dd0354-ca52-4b9c-b1fb-17150fb2c1d3",
-      "name": "Google Drive1",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "xk0w6EYoa45yKnpi",
-          "name": "Google Drive account"
-        }
-      }
+      "id": "34d216be-3acd-4d68-9e45-1ed1c53d2901",
+      "name": "Google Drive1"
     },
     {
       "parameters": {
@@ -717,10 +687,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2660,
-        60
+        4120,
+        -60
       ],
-      "id": "b459489d-21fc-4f9a-b363-028cdbe03480",
+      "id": "9a30a44d-9661-4cce-a3c7-9078c983a838",
       "name": "Edit Fields"
     },
     {
@@ -733,17 +703,11 @@
       "type": "n8n-nodes-base.apiTemplateIo",
       "typeVersion": 1,
       "position": [
-        660,
-        200
+        2120,
+        80
       ],
-      "id": "848fe260-62f3-48d9-803a-df286fab4216",
-      "name": "APITemplate.io1",
-      "credentials": {
-        "apiTemplateIoApi": {
-          "id": "rF2CXSqjAXrdooEx",
-          "name": "APITemplate.io account"
-        }
-      }
+      "id": "fd88ae85-b939-46a6-8801-ae5b42dfa3f1",
+      "name": "APITemplate.io1"
     },
     {
       "parameters": {
@@ -771,17 +735,11 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        3340,
-        460
+        4800,
+        340
       ],
-      "id": "3e84a621-1995-455e-b17f-d1e0b6d30bfe",
-      "name": "drop row in scope_db",
-      "credentials": {
-        "mySql": {
-          "id": "pwehlYKuQhhIXisF",
-          "name": "MySQL account"
-        }
-      }
+      "id": "012ccc56-bfdf-48c3-8839-7e03584c0c62",
+      "name": "drop row in scope_db"
     },
     {
       "parameters": {
@@ -810,17 +768,101 @@
       "type": "n8n-nodes-base.mySql",
       "typeVersion": 2.4,
       "position": [
-        3560,
-        460
+        5020,
+        340
       ],
-      "id": "3d1e934b-9b0b-4c48-8359-aa975b177e11",
-      "name": "MySQL",
-      "credentials": {
-        "mySql": {
-          "id": "pwehlYKuQhhIXisF",
-          "name": "MySQL account"
-        }
-      }
+      "id": "4cefbd44-8abe-42db-ae7d-bb36363ca870",
+      "name": "MySQL"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  {{ $json.project_id}},\n  \"action_type\": \"SCOPING_SHEET_SUBMISSION\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        -240
+      ],
+      "id": "4583d3c2-cb9c-4b62-a062-4550f9a33b92",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  6,\n  \"action_type\": \"SCOPING_SHEET_APPROVAL\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3100,
+        -320
+      ],
+      "id": "887cf99c-0492-476d-9e48-b135990b872d",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  6,\n  \"action_type\": \"SOW_GENERATED\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5300,
+        -340
+      ],
+      "id": "b684dea6-357e-4aee-83bc-9c3048f4c616",
+      "name": "HTTP Request4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  6,\n  \"action_type\": \"SOW_DRAFTING_TRIGGERED\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3720,
+        -400
+      ],
+      "id": "4c7339b4-c15a-4e27-af88-d345529900b2",
+      "name": "HTTP Request5"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  6,\n  \"action_type\": \"SCOPING_SHEET_REJECTED\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3060,
+        220
+      ],
+      "id": "b03cfb61-1220-49df-8dcf-10e189f4cc5a",
+      "name": "HTTP Request7"
     }
   ],
   "pinData": {},
@@ -843,11 +885,21 @@
             "node": "HTTP Request",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
           }
         ],
         [
           {
             "node": "Send Email1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request7",
             "type": "main",
             "index": 0
           }
@@ -927,6 +979,11 @@
             "node": "Respond to Webhook2",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -976,6 +1033,11 @@
             "node": "APITemplate.io1",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "HTTP Request7",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -998,6 +1060,11 @@
             "node": "Converting Obj to String",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -1007,6 +1074,11 @@
         [
           {
             "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request5",
             "type": "main",
             "index": 0
           }
@@ -1084,11 +1156,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "9121a6f2-9034-4544-a19d-8607d45a4101",
+  "versionId": "a60e92cf-6477-498f-8691-8a08ffae5897",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "8712c2bb4e02902a13a43c75c2acacd2aabdb06be443b7b14c332bd919069ab1"
+    "instanceId": "36dde0839d5214a73a536a62fa90c77cce7d6a5ab100894df6447c122fc2b270"
   },
-  "id": "qMT0KZFYsYYr5ypg",
+  "id": "AALG0j4lnIkcVakK",
   "tags": []
 }
