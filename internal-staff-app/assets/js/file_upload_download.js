@@ -1,94 +1,39 @@
-// Function to manage the button changes based on the current process
-function updateButtons(currentProcess) {
-    const rows = document.querySelectorAll('.file-row');
-    let changeToUpload = false; // Track when we should change to "Upload File"
 
-    rows.forEach(row => {
-        const process = row.getAttribute('data-process');
-        const uploadButton = row.querySelector('td button');
-        const reuploadButton = row.querySelector('td button.reupload');
-
-        if (process === currentProcess) {
-            // For the current process, use "Upload File" and no "Reupload"
-            uploadButton.innerText = 'Upload File';
-            reuploadButton.style.display = 'none';
-            changeToUpload = true; // Start changing subsequent files
-        } else if (changeToUpload) {
-            // For all subsequent rows, show "Upload File" and no "Reupload"
-            uploadButton.innerText = 'Upload File';
-            reuploadButton.style.display = 'none';
-        } else {
-            // For previous rows, show "Download File" and "Reupload"
-            uploadButton.innerText = 'Download File';
-            reuploadButton.style.display = 'inline-block';
-        }
-    });
-}
-
-// Example: Set the current process to "Technical Assessment"
-updateButtons('Technical Assessment');
 
 document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("download-popup");
-    const pdfButton = document.getElementById("download-pdf");
-    const jsonButton = document.getElementById("download-json");
-    const closeButton = document.getElementById("close-popup");
+    const reqButton = document.getElementById("req-download");
+    const sowButton = document.getElementById("sow-upload");
 
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('project_id');
 
-    let currentApiUrl = ""; // Store the current API URL for downloading
-    let currentFileType = ""; // Track if it's 'scoping' or 'sow'
-
-    // Function to open popup
-    function openPopup(apiUrl, fileType) {
-        console.log("Download button clicked");
-        currentApiUrl = apiUrl;
-        currentFileType = fileType; // Set the file type for later use
-        console.log(currentApiUrl, currentFileType);
-        popup.style.display = "block";
-    }
-
-    // Function to close popup
-    function closePopup() {
-        console.log("Closing popup");
-        popup.style.display = "none";
-    }
-
-    // PDF download
-    pdfButton.addEventListener("click", async function () {
+    // When download button is clicked
+    reqButton.addEventListener("click", async function () {
         console.log("PDF download clicked");
-        handleDownload(currentApiUrl, 'pdf');
+        handleDownload("http://localhost:3000/project-details/" + projectId, 'scoping');
     });
-
-    // JSON download - Fetch data from different API based on clicked button
-    jsonButton.addEventListener("click", async function () {
-        console.log("JSON download clicked");
-        handleDownload(currentApiUrl, 'json');
+    sowButton.addEventListener("click", async function () {
+        console.log("PDF download clicked");
+        handleDownload("http://localhost:3000/project-details/" + projectId, 'sow');
     });
 
     // Function to handle download for both PDF and JSON
     async function handleDownload(apiUrl, type) {
         try {
-            pdfButton.disabled = true;
-            jsonButton.disabled = true;
-
             const response = await fetch(apiUrl);
 
             if (response.ok) {
                 const data = await response.json();
 
                 if (data && typeof data === 'object') {
-                    if (type === 'pdf') {
-                        // Choose which function to call
-                        if (currentFileType === 'scoping') {
-                            generateScopingPDF(data);
-                        } else if (currentFileType === 'sow') {
-                            generateSOWPDF(data);
-                        }
-                    } else if (type === 'json') {
-                        downloadJsonFile(data);
+                    
+                    // Choose which function to call
+                    if (type === 'scoping') {
+                        generateScopingPDF(data);
+                    } else if (type === 'sow') {
+                        generateSOWPDF(data);
                     }
+                    
                 } else {
                     console.error("Unexpected response structure");
                     alert("Failed to process data. Unexpected structure.");
@@ -101,198 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error fetching data:", error);
             alert("An error occurred while fetching the data.");
         }
+    } 
 
-        pdfButton.disabled = false;
-        jsonButton.disabled = false;
-    }
-
-
-
-    // JSON file download function
-    function downloadJsonFile(data) {
-        const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(jsonBlob);
-        link.download = `project_${projectId}.json`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    // Close popup event
-    closeButton.addEventListener("click", closePopup);
-
-    // Attach click event to the "Download File" button for Scoping Form
-    const downloadButton = document.getElementById("req-download");
-    if (downloadButton) {
-        downloadButton.addEventListener("click", function () {
-            console.log("Download button with ID req-download clicked");
-            openPopup("http://localhost:3000/project-details/" + projectId); // Set the API URL for Scoping Form
-        });
-    }
-
-    // Attach click event to the "Upload File" button for SOW
-    const uploadButton = document.getElementById("sow-upload");
-    if (uploadButton) {
-        uploadButton.addEventListener("click", function () {
-            console.log("Upload button with ID sow-upload clicked");
-            openPopup("http://localhost:3000/project-details/" + projectId); // Set the API URL for SOW
-        });
-    }
-
-    // Scoping Form Download
-    if (downloadButton) {
-        downloadButton.addEventListener("click", function () {
-            console.log("Scoping Download clicked");
-            openPopup("http://localhost:3000/project-details/" + projectId, "scoping");
-        });
-    }
-
-    // SOW Download
-    if (uploadButton) {
-        uploadButton.addEventListener("click", function () {
-            console.log("SOW Download clicked");
-            openPopup("http://localhost:3000/project-details/" + projectId, "sow");
-        });
-    }
-
-    // Attach click event to the "Reupload File" button for Scoping Form or SOW
-    const reuploadButtons = document.querySelectorAll(".reupload");
-    reuploadButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            console.log("Reupload button clicked");
-
-            // Create file input dynamically
-            const fileInput = document.createElement("input");
-            fileInput.type = "file";
-            fileInput.accept = ".json"; // Allow only json files
-
-            // When the user selects a file
-            fileInput.addEventListener("change", function (event) {
-                const file = event.target.files[0];
-                if (file) {
-                    console.log("Selected file:", file);
-
-                    // Handle file upload here (e.g., upload to server)
-                    cleanJsonData(file, projectId);
-                }
-            });
-
-            // Trigger file input click to open the file selection dialog
-            fileInput.click();
-        });
-    });
-
-    // Function to clean JSON data before uploading
-    function cleanJsonData(file, projectId) {
-        const reader = new FileReader();
-        
-        reader.onload = function(event) {
-            try {
-                const fileContent = event.target.result;
-                let jsonData = JSON.parse(fileContent); // Parse the JSON content
-                console.log("json: ", jsonData)
-
-                // Clean the JSON data 
-                delete jsonData.project_id;
-
-                const dateFields = [
-                    "previous_testing",
-                    "project_start_date",
-                    "draft_report_due_date",
-                    "final_report_due_date"
-                ];
-
-                dateFields.forEach(field => {
-                    if (jsonData[field]) {
-                        // Convert the date string to the required format: YYYY-MM-DD
-                        const formattedDate = new Date(jsonData[field]).toISOString().split('T')[0];
-                        jsonData[field] = formattedDate;
-                    }
-                });
-
-                // Convert JSON arrays to JSON strings for SQL insertion
-                const jsonFields = [
-                    "testing_environment",
-                    "application_type",
-                    "authentication_method",
-                    "user_roles",
-                    "session_management",
-                    "input_types_present",
-                    "sensitive_data_handled",
-                    "data_storage",
-                    "security_controls_present",
-                    "hosting",
-                    "critical_functions",
-                    "compliance_requirements",
-                    "time_restrictions",
-                    "testing_limitations",
-                    "required_reports"
-                ];
-
-                jsonFields.forEach(field => {
-                    if (Array.isArray(jsonData[field])) {
-                        // Convert array to a JSON string
-                        jsonData[field] = JSON.stringify(jsonData[field]);
-                    }
-                });
-
-                console.log("Cleaned Data:", jsonData);
-
-                // After cleaning, re-upload the file or send the data
-                uploadFile(jsonData, projectId);
-
-            } catch (error) {
-                console.error("Error reading or parsing JSON file:", error);
-                alert("Error reading or parsing JSON file");
-            }
-        };
-
-        reader.onerror = function(error) {
-            console.error("Error reading the file:", error);
-            alert("Error reading the file");
-        };
-
-        reader.readAsText(file); // Read the file as text
-    }
-
-
-    // Function to upload the cleaned file
-    function uploadFile(file, projectId) {
-        const formData = new FormData();
-
-        // Construct the URL
-        const uploadApiUrl = `http://localhost:3000/project-details/${projectId}`;
-        console.log('Uploading file and data to URL:', uploadApiUrl);
-
-        // Send the request
-        fetch(uploadApiUrl, {
-            method: 'PUT',
-            body: JSON.stringify(file),
-            headers: { "Content-Type": "application/json; charset=UTF-8" }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Response from server:', data);
-            alert("Successfully updated!");  // Show popup on success
-        })
-        .catch(error => {
-            console.error('Error uploading file and data:', error);
-            alert("Update failed. Please try again.");  // Show error popup
-        });
-    }
-
-    // Back button functionality
-    document.getElementById("back-button").addEventListener("click", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const projectId = urlParams.get('project_id');
-        window.location.href = 'Project_subpage.html?project_id=' + projectId;
-    });
 
     // PDF generation function
     function generateScopingPDF(jsonData) {
@@ -334,165 +89,174 @@ document.addEventListener("DOMContentLoaded", function () {
         // Save the generated PDF
         doc.save('project_information_table.pdf');
     }
+
+    function generateSOWPDF(data) {
+        const { jsPDF } = window.jspdf;
+    
+        const doc = new jsPDF();
+        doc.setFontSize(12);
+    
+        let yPosition = 10; // Initial Y position
+    
+        // Helper function to handle page breaks
+        function checkPageBreak() {
+            if (doc.internal.pageSize.height - yPosition < 20) {
+            doc.addPage();
+            yPosition = 10; // Reset Y position after page break
+            }
+        }
+    
+        function addText(text) {
+            doc.text(text, 14, yPosition);
+            yPosition += 10; // Increment Y position after adding text
+            checkPageBreak(); // Check for page break
+        }
+    
+        addText('## Scope of Work (SOW)');
+        addText('## Security Assessment Services for ' + data.application_name);
+        addText("")
+        
+        addText('###1. **Project Overview**');
+    
+        addText('This Scope of Work (SOW) outlines the objectives, deliverables, and timelines for the security');
+        addText('assessment services to be provided by [Company Name] (hereafter referred to as "The Service');
+        addText('Provider"). The purpose of this engagement is to evaluate the security posture of');
+        addText(data.application_name + ", identify vulnerabilities, and provide recommendations");
+        addText('for mitigation. The testing environment will be the '+ data.testing_environment.join(', ').toLowerCase() );
+        addText('located at ' + data.production_url + ".");
+        addText("")
+        
+        addText('### 2. **Objectives**');
+    
+        addText('The primary objective of this engagement is to conduct a comprehensive security assessment of');
+        addText(data.application_name + ' to:');
+    
+        addText('- Identify vulnerabilities within the web application and API.');
+        addText('- Evaluate the effectiveness of authentication and access control mechanisms.');
+        addText('- Assess data processing and storage practices.');
+        addText('- Simulate real-world attacks to evaluate the security response mechanisms in place.');
+        addText('- Provide a comprehensive report of findings with actionable recommendations.');
+        addText("")
+    
+        addText('3. Scope of Services');
+    
+        addText('#### 3.1 **Security Assessment Areas**');
+        addText('The security assessment will cover the following areas:');
+        addText('- **Authentication & Access Control**: Evaluation of username/password, SSO, user roles, and')
+        addText('session management.');
+        addText('- **Input Processing**: Assessment of input fields for potential injection attacks.');
+        addText('- **Data Processing**: Review of sensitive data handling, storage, and compliance with regulations.');
+        addText('- **API Security**: Testing of API endpoints for vulnerabilities and security controls.');
+        addText('- **Infrastructure Security**: Evaluation of security controls and hosting environment.');
+        addText("")
+    
+        addText('#### 3.2 **Testing Methodology**');
+        addText('- The security assessment will follow industry best practices, including OWASP, NIST, and PTES');
+        addText('frameworks.');
+        addText('- Tools such as OWASP ZAP, Burp Suite, and custom scripts will be used to conduct the tests.');
+        addText('- The engagement will be divided into the following phases:');
+        addText('1. **Planning**: Define the scope and objectives of the assessment.');
+        addText('2. **Reconnaissance**: Gather information on the target systems and applications.');
+        addText('3. **Vulnerability Assessment**: Identify potential vulnerabilities using automated tools and manual');
+        addText('testing.');
+        addText('4. **Exploitation**: Attempt to exploit vulnerabilities to determine their severity.');
+        addText('5. **Reporting**: Provide detailed findings and remediation recommendations.');
+        addText("")
+    
+        addText('#### 3.3 **Exclusions**');
+        addText('The following activities are excluded from the scope:');
+    
+        addText("- Testing of third-party systems or services not under the client's control.");
+        addText('- Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks.');
+        addText('- Physical security assessments.');
+        addText('- Social engineering tests beyond the scope defined in the planning phase.');
+        addText("")
+    
+        addText('### 4. **Deliverables**');
+        addText('The following deliverables will be provided at the conclusion of the engagement:');
+        
+        addText('- Executive Summary: A high-level overview of the findings for non-technical stakeholders.');
+        addText('- Technical Details: A detailed report outlining identified vulnerabilities, potential impacts, and');
+        addText('recommended remediation actions.');
+        addText('- Remediation Plan: A prioritized list of vulnerabilities with steps to mitigate them.');
+        addText('- Risk Rating: A classification of vulnerabilities based on their severity and potential impact.');
+        addText("")
+    
+        addText('### 5. **Timeline and Milestones**');
+    
+        addText('| Phase | Start Date | End Date | Duration |');
+        addText('|----------------------------|---------------|---------------|------------|');
+        addText('| Project Kickoff | ' + data.project_start_date + ' | ' + data.project_start_date + ' | 1 Day |');
+        addText('| Reconnaissance & Scanning | [Start Date] | [End Date] | [X days] |');
+        addText('| Vulnerability Assessment | [Start Date] | [End Date] | [X days] |');
+        addText('| Exploitation & Analysis | [Start Date] | [End Date] | [X days] |');
+        addText('| Draft Reporting | ' + data.draft_report_due_date + ' | [End Date] | [X days] |');
+        addText('| Reporting & Review | '+ data.final_report_due_date + ' | [End Date] | [X days] |');
+        addText('| Final Review & Delivery | [Start Date] | [End Date] | 1 Day |');
+        addText("")
+    
+        addText('### 6. **Roles and Responsibilities**');
+    
+        addText('#### 6.1 **Client Responsibilities**');
+    
+        addText('- Provide necessary access to the ' + data.testing_environment.join(', ').toLowerCase() + ' and relevant documentation.');
+        addText('- Ensure all systems are properly backed up before testing begins.');
+        addText('- Designate a point of contact for coordination throughout the engagement.');
+        addText("")
+    
+        addText('#### 6.2 **Service Provider Responsibilities**');
+    
+        addText('- Perform the security assessment according to the outlined scope and best practices.');
+        addText('- Maintain confidentiality and adhere to non-disclosure agreements (NDAs).');
+        addText('- Provide a detailed report of findings within the agreed timeline.');
+        addText("")
+    
+        addText('### 7. **Confidentiality and Data Security**');
+    
+        addText('- All data and information gathered during the engagement will be treated as confidential.');
+        addText('- The Service Provider will not disclose any client information without prior written consent, except as');
+        addText('required by law.');
+        addText('- The Service Provider will take reasonable steps to secure client data during the testing process.');
+        addText("")
+    
+        addText('### 8. **Pricing and Payment Terms**');
+    
+        addText('The total cost for the security assessment services is [Total Price], broken down as follows:');
+    
+        addText('- Initial deposit: [Deposit Amount]');
+        addText('- Remaining balance: [Balance Amount]');
+        addText('- Payment is due upon receipt of the final report.');
+        addText("")
+    
+        addText('### 9. **Acceptance**');
+    
+        addText('By signing below, both parties acknowledge and accept the terms outlined in this Scope of Work.');
+        addText("")
+    
+        // Signature section
+        addText('**Client Name**: ________________________ **Signature**: __________________________');
+        addText('**Date**: _______________________________');
+        addText('**Service Provider Name**: ________________________ **Signature**:');
+        addText('__________________________ **Date**: _______________________________');
+        addText('---');
+    
+        addText('### 10. **Terms and Conditions**');
+    
+        addText('- The engagement will follow the agreed-upon schedule and timelines.');
+        addText('- Any changes or additions to the scope of work may result in additional costs or timeline');
+        addText('adjustments.');
+        addText('- Either party may terminate this agreement with [Number of Days] notice.');
+    
+        // Save the PDF
+        doc.save('Security_Assessment_SOW.pdf');
+    }
 });
 
-function generateSOWPDF(data) {
-    const { jsPDF } = window.jspdf;
 
-    const doc = new jsPDF();
-    doc.setFontSize(12);
 
-    let yPosition = 10; // Initial Y position
-
-    // Helper function to handle page breaks
-    function checkPageBreak() {
-        if (doc.internal.pageSize.height - yPosition < 20) {
-        doc.addPage();
-        yPosition = 10; // Reset Y position after page break
-        }
-    }
-
-    function addText(text) {
-        doc.text(text, 14, yPosition);
-        yPosition += 10; // Increment Y position after adding text
-        checkPageBreak(); // Check for page break
-    }
-
-    addText('## Scope of Work (SOW)');
-    addText('## Security Assessment Services for ' + data.application_name);
-    addText("")
-    
-    addText('###1. **Project Overview**');
-
-    addText('This Scope of Work (SOW) outlines the objectives, deliverables, and timelines for the security');
-    addText('assessment services to be provided by [Company Name] (hereafter referred to as "The Service');
-    addText('Provider"). The purpose of this engagement is to evaluate the security posture of');
-    addText(data.application_name + ", identify vulnerabilities, and provide recommendations");
-    addText('for mitigation. The testing environment will be the '+ data.testing_environment.join(', ').toLowerCase() );
-    addText('located at ' + data.production_url + ".");
-    addText("")
-    
-    addText('### 2. **Objectives**');
-
-    addText('The primary objective of this engagement is to conduct a comprehensive security assessment of');
-    addText(data.application_name + ' to:');
-
-    addText('- Identify vulnerabilities within the web application and API.');
-    addText('- Evaluate the effectiveness of authentication and access control mechanisms.');
-    addText('- Assess data processing and storage practices.');
-    addText('- Simulate real-world attacks to evaluate the security response mechanisms in place.');
-    addText('- Provide a comprehensive report of findings with actionable recommendations.');
-    addText("")
-
-    addText('3. Scope of Services');
-
-    addText('#### 3.1 **Security Assessment Areas**');
-    addText('The security assessment will cover the following areas:');
-    addText('- **Authentication & Access Control**: Evaluation of username/password, SSO, user roles, and')
-    addText('session management.');
-    addText('- **Input Processing**: Assessment of input fields for potential injection attacks.');
-    addText('- **Data Processing**: Review of sensitive data handling, storage, and compliance with regulations.');
-    addText('- **API Security**: Testing of API endpoints for vulnerabilities and security controls.');
-    addText('- **Infrastructure Security**: Evaluation of security controls and hosting environment.');
-    addText("")
-
-    addText('#### 3.2 **Testing Methodology**');
-    addText('- The security assessment will follow industry best practices, including OWASP, NIST, and PTES');
-    addText('frameworks.');
-    addText('- Tools such as OWASP ZAP, Burp Suite, and custom scripts will be used to conduct the tests.');
-    addText('- The engagement will be divided into the following phases:');
-    addText('1. **Planning**: Define the scope and objectives of the assessment.');
-    addText('2. **Reconnaissance**: Gather information on the target systems and applications.');
-    addText('3. **Vulnerability Assessment**: Identify potential vulnerabilities using automated tools and manual');
-    addText('testing.');
-    addText('4. **Exploitation**: Attempt to exploit vulnerabilities to determine their severity.');
-    addText('5. **Reporting**: Provide detailed findings and remediation recommendations.');
-    addText("")
-
-    addText('#### 3.3 **Exclusions**');
-    addText('The following activities are excluded from the scope:');
-
-    addText("- Testing of third-party systems or services not under the client's control.");
-    addText('- Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks.');
-    addText('- Physical security assessments.');
-    addText('- Social engineering tests beyond the scope defined in the planning phase.');
-    addText("")
-
-    addText('### 4. **Deliverables**');
-    addText('The following deliverables will be provided at the conclusion of the engagement:');
-    
-    addText('- Executive Summary: A high-level overview of the findings for non-technical stakeholders.');
-    addText('- Technical Details: A detailed report outlining identified vulnerabilities, potential impacts, and');
-    addText('recommended remediation actions.');
-    addText('- Remediation Plan: A prioritized list of vulnerabilities with steps to mitigate them.');
-    addText('- Risk Rating: A classification of vulnerabilities based on their severity and potential impact.');
-    addText("")
-
-    addText('### 5. **Timeline and Milestones**');
-
-    addText('| Phase | Start Date | End Date | Duration |');
-    addText('|----------------------------|---------------|---------------|------------|');
-    addText('| Project Kickoff | ' + data.project_start_date + ' | ' + data.project_start_date + ' | 1 Day |');
-    addText('| Reconnaissance & Scanning | [Start Date] | [End Date] | [X days] |');
-    addText('| Vulnerability Assessment | [Start Date] | [End Date] | [X days] |');
-    addText('| Exploitation & Analysis | [Start Date] | [End Date] | [X days] |');
-    addText('| Draft Reporting | ' + data.draft_report_due_date + ' | [End Date] | [X days] |');
-    addText('| Reporting & Review | '+ data.final_report_due_date + ' | [End Date] | [X days] |');
-    addText('| Final Review & Delivery | [Start Date] | [End Date] | 1 Day |');
-    addText("")
-
-    addText('### 6. **Roles and Responsibilities**');
-
-    addText('#### 6.1 **Client Responsibilities**');
-
-    addText('- Provide necessary access to the ' + data.testing_environment.join(', ').toLowerCase() + ' and relevant documentation.');
-    addText('- Ensure all systems are properly backed up before testing begins.');
-    addText('- Designate a point of contact for coordination throughout the engagement.');
-    addText("")
-
-    addText('#### 6.2 **Service Provider Responsibilities**');
-
-    addText('- Perform the security assessment according to the outlined scope and best practices.');
-    addText('- Maintain confidentiality and adhere to non-disclosure agreements (NDAs).');
-    addText('- Provide a detailed report of findings within the agreed timeline.');
-    addText("")
-
-    addText('### 7. **Confidentiality and Data Security**');
-
-    addText('- All data and information gathered during the engagement will be treated as confidential.');
-    addText('- The Service Provider will not disclose any client information without prior written consent, except as');
-    addText('required by law.');
-    addText('- The Service Provider will take reasonable steps to secure client data during the testing process.');
-    addText("")
-
-    addText('### 8. **Pricing and Payment Terms**');
-
-    addText('The total cost for the security assessment services is [Total Price], broken down as follows:');
-
-    addText('- Initial deposit: [Deposit Amount]');
-    addText('- Remaining balance: [Balance Amount]');
-    addText('- Payment is due upon receipt of the final report.');
-    addText("")
-
-    addText('### 9. **Acceptance**');
-
-    addText('By signing below, both parties acknowledge and accept the terms outlined in this Scope of Work.');
-    addText("")
-
-    // Signature section
-    addText('**Client Name**: ________________________ **Signature**: __________________________');
-    addText('**Date**: _______________________________');
-    addText('**Service Provider Name**: ________________________ **Signature**:');
-    addText('__________________________ **Date**: _______________________________');
-    addText('---');
-
-    addText('### 10. **Terms and Conditions**');
-
-    addText('- The engagement will follow the agreed-upon schedule and timelines.');
-    addText('- Any changes or additions to the scope of work may result in additional costs or timeline');
-    addText('adjustments.');
-    addText('- Either party may terminate this agreement with [Number of Days] notice.');
-
-    // Save the PDF
-    doc.save('Security_Assessment_SOW.pdf');
-}
+// Back button functionality
+document.getElementById("back-button").addEventListener("click", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('project_id');
+    window.location.href = 'Project_subpage.html?project_id=' + projectId;
+});

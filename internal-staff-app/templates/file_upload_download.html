@@ -24,7 +24,6 @@
                     <th>Files</th>
                     <th>Agent Type</th>
                     <th>Upload/Export</th>
-                    <th>Reupload</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,27 +31,16 @@
                     <td>Scoping Form</td>
                     <td>Sales</td>
                     <td><button class="button" id="req-download">Download File</button></td>
-                    <td><button class="button reupload" id="req-reupload">Reupload File</button></td>
                 </tr>
                 
                 <tr class="file-row" data-process="SOW">
                     <td>SOW</td>
                     <td>Sales</td>
                     <td><button class="button" id="sow-upload">Download File</button></td>
-                    <td><button class="button reupload" id="sow-reupload" style="display: none;">Reupload File</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-    <!-- File Download Popup -->
-    <div id="download-popup" class="popup" style="display: none;">
-        <div class="popup-content">
-            <!-- Close button (X) in the top-right corner -->
-            <span id="close-popup" class="close-btn">&times;</span>
-            <h3>Choose File Format</h3>
-            <button id="download-pdf">Download PDF</button>
-            <button id="download-json">Download JSON</button>
         </div>
     </div>
 
