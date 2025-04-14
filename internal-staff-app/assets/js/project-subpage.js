@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Log the JSON to the console (or send it somewhere)
         cleanJsonData(data, projectId);
-        // window.location.reload();
+        window.location.reload();
         
     });
 });
@@ -413,27 +413,12 @@ function uploadFile(file, projectId) {
                 }),
                 headers: { "Content-Type": "application/json; charset=UTF-8" }
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
             .then(data => {
-                console.log('Response from server:', data);
-                alert("Successfully updated!");  // Show popup on success
-            })
-            .catch(error => {
-                console.error('Error uploading file and data:', error);
-                alert("Update failed. Please try again.");  // Show error popup
-            });
-
-
-            // Send the request
-            fetch(uploadApiUrl, {
-                method: 'PUT',
-                body: JSON.stringify(file),
-                headers: { "Content-Type": "application/json; charset=UTF-8" }
+                return fetch(uploadApiUrl, {
+                    method: 'PUT',
+                    body: JSON.stringify(file),
+                    headers: { "Content-Type": "application/json; charset=UTF-8" }
+                });
             })
             .then(response => {
                 if (!response.ok) {
