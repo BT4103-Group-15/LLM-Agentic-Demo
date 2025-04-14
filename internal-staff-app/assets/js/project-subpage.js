@@ -329,7 +329,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Log the JSON to the console (or send it somewhere)
         cleanJsonData(data, projectId);
-        window.location.reload();
+        setTimeout(function() {
+            window.location.reload();
+        }, 500); // waits for 3 seconds before reloading
         
     });
 });
@@ -402,7 +404,7 @@ function uploadFile(file, projectId) {
 
             // Construct the URL
             const uploadApiUrl = `http://localhost:3000/project-details/${projectId}`;
-            const n8nURL = `http://localhost:5678/webhook-test/3aa217cb-cf2f-4a34-b65e-10d2b68b6c2b`;
+            const n8nURL = `http://localhost:5678/webhook/3aa217cb-cf2f-4a34-b65e-10d2b68b6c2b`;
             console.log('Uploading file and data to URL:', uploadApiUrl);
 
             fetch(n8nURL, {

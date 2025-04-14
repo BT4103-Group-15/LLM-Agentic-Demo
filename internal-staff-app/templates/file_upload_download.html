@@ -37,12 +37,23 @@
                     <td>SOW</td>
                     <td>Sales</td>
                     <td><button class="button" id="sow-upload">Download File</button></td>
+                    <td><button class="button" id="sow-edit">Edit SOW</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+       <!-- Edit SOW Popup -->
+        <div id="editSowPopup" class="popup-overlay" style="display:none;">
+            <div class="popup-content">
+                <h3>Edit SOW</h3>
+                <textarea id="sowTextArea" rows="10" cols="50"></textarea>
+                <br>
+                <button id="saveSow">Save</button>
+                <button id="closePopup">Cancel</button>
+            </div>
         </div>
-    </div>
+
 
     <!-- Back Button aligned to the right -->
     <button id="back-button" class = "back-button">Back</button>

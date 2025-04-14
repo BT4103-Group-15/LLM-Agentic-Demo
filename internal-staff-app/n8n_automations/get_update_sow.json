@@ -1,5 +1,5 @@
 {
-  "name": "get_sow_pdf",
+  "name": "get_update_sow",
   "nodes": [
     {
       "parameters": {
@@ -95,6 +95,59 @@
           "name": "MySQL account 5"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpMethod": "PUT",
+        "path": "93bedca7-29b9-44e2-9c63-1079072acfe0",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        -200
+      ],
+      "id": "c11bfb58-08b5-42fa-bd40-ecb0ca364e9a",
+      "name": "Webhook1",
+      "webhookId": "93bedca7-29b9-44e2-9c63-1079072acfe0"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": {
+          "__rl": true,
+          "value": "sow_db",
+          "mode": "list",
+          "cachedResultName": "sow_db"
+        },
+        "dataMode": "defineBelow",
+        "columnToMatchOn": "project_id",
+        "valueToMatchOn": "={{ $json.body.project_id }}",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "sowsheet_markdown",
+              "value": "={{ $json.body.sowsheet_markdown }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        260,
+        -200
+      ],
+      "id": "cf40f5cd-0841-4931-9779-d621896dbaec",
+      "name": "MySQL",
+      "credentials": {
+        "mySql": {
+          "id": "W9CePzGpt5LA5SMf",
+          "name": "MySQL account 5"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -131,13 +184,24 @@
           }
         ]
       ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "1cfff2c1-5c96-4b8b-baea-481850f8e479",
+  "versionId": "7946c224-06b7-4f16-b0d8-34b498127bee",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "36dde0839d5214a73a536a62fa90c77cce7d6a5ab100894df6447c122fc2b270"

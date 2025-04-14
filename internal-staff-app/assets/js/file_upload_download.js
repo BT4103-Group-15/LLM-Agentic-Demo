@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function generateSOWPDF(data) {
         try {
-            const response = await fetch("http://localhost:5678/webhook-test/e16c6e2f-f583-4b54-ab7d-ba7e1859eb26", {
+            const response = await fetch("http://localhost:5678/webhook/e16c6e2f-f583-4b54-ab7d-ba7e1859eb26", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -157,10 +157,79 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Fetch error:", error);
         }
     }
+
+    // Edit SOW pop up
+    const editButton = document.getElementById('sow-edit');
+    const popup = document.getElementById('editSowPopup');
+    const textArea = document.getElementById('sowTextArea');
+    const closeBtn = document.getElementById('closePopup');
+    const saveBtn = document.getElementById('saveSow');
+
+    editButton.addEventListener('click',async function() {
+        try {
+            const response = await fetch("http://localhost:5678/webhook/e16c6e2f-f583-4b54-ab7d-ba7e1859eb26", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    type: "pdf",
+                    project_id: projectId,
+                    file: "sow"
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                 textArea.value = data[0].sowsheet_markdown;  // Set the value in the textarea
+                 popup.style.display = 'flex';
+                 console.log(data[0])
+             })
+            .catch(err => {
+                console.error('Error fetching SOW:', err);
+                alert('Failed to load SOW content.');
+            });
+
+        } catch (error) {
+            console.error("Fetch error:", error);
+        }
     
+    });
+
+    saveBtn.addEventListener('click', async function() {
+        const updatedSow = textArea.value;
+
+        try {
+            const response = await fetch("http://localhost:5678/webhook/93bedca7-29b9-44e2-9c63-1079072acfe0", {  // replace with your real save endpoint
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    project_id: projectId,
+                    sowsheet_markdown: updatedSow
+                })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert("SOW saved successfully!");
+                popup.style.display = 'none';  // Close popup after save
+            } else {
+                alert("Error saving SOW: " + result.message);
+            }
+        } catch (error) {
+            console.error("Error saving SOW:", error);
+            alert("Failed to save SOW. See console for details.");
+        }
+
+        closeBtn.addEventListener('click', function() {
+            popup.style.display = 'none';
+        });
+    
+    });
+
 });
-
-
 
 // Back button functionality
 document.getElementById("back-button").addEventListener("click", function() {
