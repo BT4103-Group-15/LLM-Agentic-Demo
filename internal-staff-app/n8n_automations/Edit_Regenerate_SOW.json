@@ -1,0 +1,148 @@
+{
+  "name": "Edit_Regenerate_SOW",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"scoping_sheet\": \"{{ JSON.stringify($json.body.file).replace(/\\\\/g, '\\\\\\\\').replace(/\\\"/g, '\\\\\\\"') }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        520,
+        300
+      ],
+      "id": "22ee298e-bcf3-414d-bb93-c95d2d7437e3",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/api/sow-local-flow",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "sample_sow",
+              "value": "=# Scope of Work (SOW) ## Penetration Testing Services  ### 1. **Project Overview** This Scope of Work (SOW) outlines the objectives, deliverables, and timelines for the penetration testing services to be provided by [Company Name] (hereafter referred to as \\\"The Service Provider\\\"). The purpose of this engagement is to assess the security posture of [Client Name]’s systems and networks, identify vulnerabilities, and provide recommendations for mitigation.  ### 2. **Objectives** The primary objective of this engagement is to conduct thorough penetration testing on [Client Name]’s systems to:  - Identify vulnerabilities within the client's network, systems, and web applications. - Simulate real-world cyber-attacks to evaluate the security response mechanisms in place. - Assess the client's current defenses and suggest remediation strategies. - Provide a comprehensive report of findings with actionable recommendations.  ### 3. **Scope of Services**  #### 3.1 **Penetration Testing Areas** The penetration testing will cover the following areas:  - **External Network Testing**: Testing of the external-facing assets (web applications, firewalls, VPNs, etc.) for vulnerabilities. - **Internal Network Testing**: Simulating insider threats and testing internal network assets. - **Web Application Testing**: Conducting tests on web applications for OWASP Top 10 vulnerabilities and other common security risks. - **Wireless Network Testing**: Assessment of wireless networks for security flaws, including weak encryption and unauthorized access. - **Social Engineering (Optional)**: Conducting simulated phishing attacks or other forms of social engineering to evaluate employee susceptibility.  #### 3.2 **Testing Methodology** - The penetration testing will follow industry best practices, including OWASP, NIST, and PTES frameworks. - Tools such as [list of tools, e.g., Burp Suite, Nessus, Metasploit] will be used to conduct the tests. - The engagement will be divided into the following phases:   1. **Reconnaissance**: Gather publicly available information on the client’s systems.   2. **Vulnerability Scanning**: Use automated tools to identify potential vulnerabilities.   3. **Exploitation**: Attempt to exploit vulnerabilities to determine their severity.   4. **Post-Exploitation**: Assess the extent of control gained through exploitation.   5. **Reporting**: Provide detailed findings and remediation recommendations.  #### 3.3 **Exclusions** The following activities are excluded from the scope: - Testing of physical security systems (e.g., lockpicking, badge cloning). - Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks. - Testing of systems not explicitly outlined in this SOW. - Social engineering beyond email phishing campaigns (e.g., physical access tests).  ### 4. **Deliverables** The following deliverables will be provided at the conclusion of the engagement:  - **Penetration Testing Report**: A detailed report outlining identified vulnerabilities, exploited vulnerabilities, potential impacts, and recommended remediation actions. - **Executive Summary**: A high-level summary of the findings for non-technical stakeholders. - **Risk Assessment**: A prioritized list of vulnerabilities based on risk levels (e.g., High, Medium, Low). - **Proof of Concepts**: Detailed documentation of any exploits or successful attacks, including screenshots, logs, and steps to reproduce.  ### 5. **Timeline and Milestones**  | Phase                      | Start Date    | End Date      | Duration   | |----------------------------|---------------|---------------|------------| | Project Kickoff             | [Start Date]  | [Start Date]  | 1 Day      | | Reconnaissance & Scanning   | [Start Date]  | [End Date]    | [X days]   | | Exploitation & Post-Exploitation | [Start Date] | [End Date]   | [X days]   | | Reporting & Review          | [Start Date]  | [End Date]    | [X days]   | | Final Review & Delivery     | [Start Date]  | [End Date]    | 1 Day      |  ### 6. **Roles and Responsibilities**  #### 6.1 **Client Responsibilities** - Provide necessary access to systems, networks, and applications. - Ensure all systems are properly backed up before testing begins. - Designate a point of contact for coordination throughout the engagement.  #### 6.2 **Service Provider Responsibilities** - Perform the penetration testing according to the outlined scope and best practices. - Maintain confidentiality and adhere to non-disclosure agreements (NDAs). - Provide a detailed report of findings within the agreed timeline.  ### 7. **Confidentiality and Data Security** - All data and information gathered during the engagement will be treated as confidential. - The Service Provider will not disclose any client information without prior written consent, except as required by law. - The Service Provider will take reasonable steps to secure client data during the testing process.  ### 8. **Pricing and Payment Terms** The total cost for the penetration testing services is [Total Price], broken down as follows: - Initial deposit: [Deposit Amount] - Remaining balance: [Balance Amount] - Payment is due upon receipt of the final report.  ### 9. **Acceptance** By signing below, both parties acknowledge and accept the terms outlined in this Scope of Work.  **Client Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  **Service Provider Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  ---  ### 10. **Terms and Conditions** - The engagement will follow the agreed-upon schedule and timelines. - Any changes or additions to the scope of work may result in additional costs or timeline adjustments. - Either party may terminate this agreement with [Number of Days] notice."
+            },
+            {
+              "name": "completed_scopingsheet",
+              "value": "={{ $json.scoping_sheet }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        300
+      ],
+      "id": "de908777-b31a-4615-9f65-127b7b4b3c70",
+      "name": "Grok HTTP Request1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": {
+          "__rl": true,
+          "value": "sow_db",
+          "mode": "list",
+          "cachedResultName": "sow_db"
+        },
+        "dataMode": "defineBelow",
+        "columnToMatchOn": "project_id",
+        "valueToMatchOn": "={{ $('Webhook').item.json.body.id }}",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "sowsheet_markdown",
+              "value": "={{ $json.sow_document }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        1020,
+        300
+      ],
+      "id": "b2834644-a0bf-4a0a-b52e-0448019e8c5e",
+      "name": "MySQL1",
+      "credentials": {
+        "mySql": {
+          "id": "W9CePzGpt5LA5SMf",
+          "name": "MySQL account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "PUT",
+        "path": "3aa217cb-cf2f-4a34-b65e-10d2b68b6c2b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "id": "e6dc7e62-e725-4aa6-9af1-bc0d124d8e03",
+      "name": "Webhook",
+      "webhookId": "3aa217cb-cf2f-4a34-b65e-10d2b68b6c2b"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Grok HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Grok HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a40f85fd-3bf7-4c03-b00e-ac01b4e31c26",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "36dde0839d5214a73a536a62fa90c77cce7d6a5ab100894df6447c122fc2b270"
+  },
+  "id": "WuAY1G30SDFFTgU6",
+  "tags": []
+}
