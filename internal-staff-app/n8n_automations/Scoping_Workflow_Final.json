@@ -1,0 +1,1205 @@
+{
+  "name": "Scoping Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "5a0cd093-a0ed-404a-bfa1-be712355a441",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -3980,
+        660
+      ],
+      "id": "a01feddf-6d8c-4145-a125-0610f739159e",
+      "name": "Webhook1",
+      "webhookId": "5a0cd093-a0ed-404a-bfa1-be712355a441"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1800,
+        740
+      ],
+      "id": "e15ad717-c6bf-4329-abae-071d4fad63b8",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2d0f7d07-a014-4c0e-83cb-7d6e02e6d946",
+              "leftValue": "={{ $('Send Email to Client').item.json.data.approved }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -820,
+        360
+      ],
+      "id": "46e306ed-22bf-4147-ab2b-2e71fae5cd11",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "fromEmail": "stormyferntreeofficial@gmail.com",
+        "toEmail": "bluebrooke@naver.com",
+        "subject": "Scoping Status",
+        "emailFormat": "text",
+        "text": "=Scoping sheet approval rejected. Please reach out to the client to gather the scope. \nClient Email:  {{ $('combining').item.json.email }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        780,
+        740
+      ],
+      "id": "d4f28644-4db0-428f-954f-be67e2050960",
+      "name": "Send Email1",
+      "webhookId": "8b8f6558-1b2a-476a-9ab8-a810e265bbca",
+      "credentials": {
+        "smtp": {
+          "id": "jmydfn70gphONJZA",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Formatting to Markdown \nTakes in JSON request from SLM to generate the Scoping sheet, sending it to Sales for approval.",
+        "height": 200,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3400,
+        400
+      ],
+      "id": "d9a8c62c-cf06-4beb-bf45-20dd69109e12",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Scoping Sheet approved\nWill trigger the next workflow to generate SOW",
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2260,
+        280
+      ],
+      "id": "302f428e-bd3b-44a9-9665-a33539d876b6",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Scoping Sheet rejected\nSends email to staff, prompting them to reach out to client for scope",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        780
+      ],
+      "id": "b112e5c3-8a55-4a03-92f8-35db8af06a23",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9f8a66f9-1230-49c8-bfbc-effb99852553",
+              "name": "request",
+              "value": "={{ $json.body }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3780,
+        660
+      ],
+      "id": "efab0439-6385-4650-a848-59b15aea69de",
+      "name": "Setting of JSON Obj"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Extract data from requirement_df\nconst data = $json.request.requirement_df;\n\n// Table headers\nlet markdownTable = \"## Scoping Sheet\\n\\n\";\nmarkdownTable += \"| Category | Requirement | Status |\\n\";\nmarkdownTable += \"|----------|-------------|--------|\\n\";\n\n// Loop through each row and extract details\ndata.forEach(row => {\n    const category = row.category || \"NA\";\n    const requirement = row.requirement || \"NA\";\n\n    // Handle status formatting:\n    let status = \"NA\";\n    if (Array.isArray(row.status)) {\n        status = row.status.join(', ');\n    } else if (typeof row.status === 'string' || typeof row.status === 'number') {\n        status = row.status.toString().trim();\n    }\n\n    // Append row to Markdown table\n    markdownTable += `| ${category} | ${requirement} | ${status} |\\n`;\n});\n\n// Return formatted Markdown\nreturn { json: { scopingsheet_markdown: markdownTable } };\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -3560,
+        660
+      ],
+      "id": "0b9f0bf9-609d-4340-b7e7-66d668a99be3",
+      "name": "Formatting Markdown in JSON"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "87af8451-5340-45a3-83b4-d8dd672efcde",
+              "name": "request.scopingsheet_markdown",
+              "value": "={{ $('Formatting Markdown in JSON').item.json.scopingsheet_markdown }}",
+              "type": "string"
+            },
+            {
+              "id": "06178b62-2bbf-4a63-8755-ba544cd134a7",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2620,
+        600
+      ],
+      "id": "3c9fea46-0a2e-49aa-bd68-f1efc259062e",
+      "name": "Converting Obj to String"
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "scope_db",
+          "mode": "name"
+        },
+        "dataMode": "defineBelow",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "client_id",
+              "value": "={{ $('combining').item.json.id }}"
+            },
+            {
+              "column": "email",
+              "value": "={{ $('combining').item.json.email }}"
+            },
+            {
+              "column": "scopingsheet_markdown",
+              "value": "={{ $('combining').item.json.scopingsheet_markdown }}"
+            },
+            {
+              "column": "project_id",
+              "value": "={{ $('obtaining project id').item.json.project_id }}"
+            },
+            {
+              "column": "scopingsheet_URL",
+              "value": "={{ $('Edit Fields').item.json.final_url }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        760,
+        360
+      ],
+      "id": "3aaed405-1053-47c9-8b09-35ee5a71f634",
+      "name": "Insert data into scope_db",
+      "credentials": {
+        "mySql": {
+          "id": "KgbuNYO1ulZnpHdp",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1600,
+        380
+      ],
+      "id": "a1107268-b5cd-4abe-a57b-156a4781b7b3",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "db9b3e6e-437b-446a-aa03-80f0d8b5d373",
+              "name": "scopingsheet_markdown",
+              "value": "={{ $json.request.scopingsheet_markdown }}",
+              "type": "string"
+            },
+            {
+              "id": "8e49c9a7-c9ed-4d00-aa67-071cf06faf47",
+              "name": "id",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.id }}",
+              "type": "string"
+            },
+            {
+              "id": "65b05988-5ac7-49fd-962f-718c057f8684",
+              "name": "email",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2440,
+        580
+      ],
+      "id": "69f8190a-203d-451a-87f8-64ea54695fa5",
+      "name": "combining"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -760,
+        800
+      ],
+      "id": "442ae111-1a6a-4655-bf51-f7cf4b515ffc",
+      "name": "Respond to Webhook4"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "x53D18fEzb2zwvlZ",
+          "mode": "list",
+          "cachedResultName": "SOW generation"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1400,
+        380
+      ],
+      "id": "0f9f9996-38d4-4d09-aa5b-3eb8be5d66af",
+      "name": "Execute SOW Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ab4320ab-ff4e-4d44-a8ef-b983b739d336",
+              "name": "client_id",
+              "value": "={{ $('combining').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "10df3fd4-3e95-415a-9c3d-cceb5fea7bc2",
+              "name": "client_email",
+              "value": "={{ $('combining').item.json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "d1c423b0-1f20-4eed-a559-4f732dffdec0",
+              "name": "project_id",
+              "value": "={{ $('obtaining project id').item.json.project_id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1060,
+        400
+      ],
+      "id": "00f42d5c-38cc-4039-b00f-3aaec2758a00",
+      "name": "Passing Key"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "fromEmail": "stormyferntreeofficial@gmail.com",
+        "toEmail": "={{ $('combining').item.json.email }} ",
+        "subject": "Generated Scoping Sheet Approval",
+        "message": "=Please view the generated scoping sheet through the link before approving or rejecting the document. The content is based on the responses provided in the chat.\nLink:  {{ $json.download_url }}",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "disapproveLabel": "Reject"
+          }
+        },
+        "options": {
+          "limitWaitTime": {
+            "values": {
+              "resumeAmount": 2,
+              "resumeUnit": "days"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -1200,
+        360
+      ],
+      "id": "99340c3a-83f7-4716-9169-a743d7a31c34",
+      "name": "Send Email to Client",
+      "webhookId": "4e0f99db-90bd-418c-a4f9-2893d04ab103",
+      "alwaysOutputData": false,
+      "credentials": {
+        "smtp": {
+          "id": "jmydfn70gphONJZA",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "stormyferntreeofficial@gmail.com",
+        "toEmail": "=stormyferntreeofficial@gmail.com",
+        "subject": "Generated Scoping Sheet",
+        "html": "=markdown file attached",
+        "options": {
+          "attachments": "data"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -1560,
+        820
+      ],
+      "id": "5149f49d-4f92-423d-ac4d-0b25ba43c275",
+      "name": "Send Email to Staff",
+      "webhookId": "9e5d33d3-b455-44f8-94cf-6c1807341513",
+      "credentials": {
+        "smtp": {
+          "id": "jmydfn70gphONJZA",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "scopingsheet_markdown",
+        "options": {
+          "fileName": "markdown_sheet1.md"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -2060,
+        560
+      ],
+      "id": "6425601b-1300-44fc-b785-af588194276b",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "project_details",
+          "mode": "list",
+          "cachedResultName": "project_details"
+        },
+        "dataMode": "defineBelow",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "application_name",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[0].status }}"
+            },
+            {
+              "column": "production_url",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[1].status }}"
+            },
+            {
+              "column": "testing_environment",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[2].status) }}"
+            },
+            {
+              "column": "application_type",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[3].status) }}"
+            },
+            {
+              "column": "authentication_method",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[4].status) }}"
+            },
+            {
+              "column": "user_roles",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[5].status) }}"
+            },
+            {
+              "column": "session_management",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[7].status) }}"
+            },
+            {
+              "column": "session_timeout_period",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[8].status }}"
+            },
+            {
+              "column": "total_num_input_fields",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[9].status }}"
+            },
+            {
+              "column": "input_types_present",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[10].status) }}"
+            },
+            {
+              "column": "sensitive_data_handled",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[11].status) }}"
+            },
+            {
+              "column": "data_storage",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[12].status) }}"
+            },
+            {
+              "column": "number_of_endpoints",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[13].status }}"
+            },
+            {
+              "column": "authentication_required",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[14].status }}"
+            },
+            {
+              "column": "rate_limiting",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[15].status }}"
+            },
+            {
+              "column": "documentation_available",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.requirement_df[16].status }}"
+            },
+            {
+              "column": "security_controls_present",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[18].status) }}"
+            },
+            {
+              "column": "hosting",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[19].status) }}"
+            },
+            {
+              "column": "critical_functions",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[20].status) }}"
+            },
+            {
+              "column": "compliance_requirements",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[21].status) }}"
+            },
+            {
+              "column": "previous_testing",
+              "value": "={{ new Date($('Setting of JSON Obj').item.json.request.requirement_df[22].status).toISOString().split('T')[0] }}"
+            },
+            {
+              "column": "time_restrictions",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[25].status) }}"
+            },
+            {
+              "column": "testing_limitations",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[26].status) }}"
+            },
+            {
+              "column": "required_reports",
+              "value": "={{ JSON.stringify($('Setting of JSON Obj').item.json.request.requirement_df[27].status) }}"
+            },
+            {
+              "column": "client_id",
+              "value": "={{ $('Setting of JSON Obj').item.json.request.id }}"
+            },
+            {
+              "column": "project_start_date",
+              "value": "={{ $json.project_start_date ? $json.project_start_date : null }}"
+            },
+            {
+              "column": "draft_report_due_date",
+              "value": "={{ $json.draft_report_due_date ? $json.draft_report_due_date : null }}"
+            },
+            {
+              "column": "final_report_due_date",
+              "value": "={{ $json.final_report_due_date ? $json.final_report_due_date : null }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        -3240,
+        660
+      ],
+      "id": "cda846c1-e669-4f1d-889f-01d48fa6a6b6",
+      "name": "Insert into Project Details",
+      "credentials": {
+        "mySql": {
+          "id": "KgbuNYO1ulZnpHdp",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT project_id FROM data.project_details\nWHERE client_id = {{ $('Setting of JSON Obj').item.json.request.id }}\nORDER BY created_at DESC\nLIMIT 1;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        -2920,
+        620
+      ],
+      "id": "109abf46-55f6-4efb-a614-d2dbb201d604",
+      "name": "obtaining project id",
+      "credentials": {
+        "mySql": {
+          "id": "KgbuNYO1ulZnpHdp",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('APITemplate.io1').item.json.download_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -260,
+        340
+      ],
+      "id": "7464884e-9621-44f6-9b63-b61fbbeab5b5",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "name": "=scope_{{ $('Setting of JSON Obj').item.json.request.email }}_v1.pdf",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1IGykjR_DP8trfvFj4tYtG48am6ZnCHgc",
+          "mode": "list",
+          "cachedResultName": "Scoping PDF",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1IGykjR_DP8trfvFj4tYtG48am6ZnCHgc"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -40,
+        340
+      ],
+      "id": "4fa7de74-0a00-4e7a-8a27-539af880d629",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "v6Dzd5FAWsllkeLo",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        180,
+        340
+      ],
+      "id": "7b874aba-0459-4ce9-91d6-67a4e2ea2cd5",
+      "name": "Google Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "v6Dzd5FAWsllkeLo",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6a8cbba5-9a65-4b3d-94ed-8ffe890a17d2",
+              "name": "final_url",
+              "value": "=https://drive.google.com/file/d/{{ $('Google Drive').item.json.id }}/view",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        340
+      ],
+      "id": "5075c6bd-442b-41fd-833c-e55b42c7e1e3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "resource": "pdf",
+        "pdfTemplateId": "e6f77b239db87f34",
+        "jsonParameters": true,
+        "propertiesJson": "={{ $('Converting Obj to String').item.json.request }}"
+      },
+      "type": "n8n-nodes-base.apiTemplateIo",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        480
+      ],
+      "id": "a1d7e0e5-f5d9-4f51-a7fe-5c4a0e61238f",
+      "name": "APITemplate.io1",
+      "credentials": {
+        "apiTemplateIoApi": {
+          "id": "mQBBv63m6TqRiTVX",
+          "name": "APITemplate.io account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "table": {
+          "__rl": true,
+          "value": "scope_db",
+          "mode": "name"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "project_id",
+              "value": "={{ $('obtaining project id').item.json.project_id }}"
+            },
+            {
+              "column": "client_id",
+              "value": "={{ $('combining').item.json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        1080,
+        740
+      ],
+      "id": "ae709f58-d0b8-4cad-91b7-f98b42002ec5",
+      "name": "drop row in scope_db",
+      "credentials": {
+        "mySql": {
+          "id": "KgbuNYO1ulZnpHdp",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "table": {
+          "__rl": true,
+          "value": "project_details",
+          "mode": "list",
+          "cachedResultName": "project_details"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "project_id",
+              "value": "={{ $('obtaining project id').item.json.project_id }}"
+            },
+            {
+              "column": "client_id",
+              "value": "={{ $('combining').item.json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        1300,
+        740
+      ],
+      "id": "86ffa161-82c6-4b19-9dfe-2edf15a8c547",
+      "name": "MySQL",
+      "credentials": {
+        "mySql": {
+          "id": "KgbuNYO1ulZnpHdp",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  {{ $json.project_id}},\n  \"action_type\": \"SCOPING_SHEET_SUBMISSION\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2760,
+        160
+      ],
+      "id": "dc7c146d-85b2-40ae-a442-bbfaeab95194",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  6,\n  \"action_type\": \"SCOPING_SHEET_REJECTED\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -660,
+        620
+      ],
+      "id": "cddb047b-0940-4b98-aacd-636610302080",
+      "name": "HTTP Request7"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  {{ $('obtaining project id').item.json.project_id }},\n  \"action_type\": \"SCOPING_SHEET_APPROVAL\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -620,
+        80
+      ],
+      "id": "894053f7-57fc-4b65-9631-b9cc7d95030f",
+      "name": "SCOPING_SHEET_APPROVAL"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  {{ $json.project_id}},\n  \"action_type\": \"SOW_DRAFTING_TRIGGERED\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        100
+      ],
+      "id": "3a7e7eb7-0539-45b3-9b6e-ca2d99fe9c21",
+      "name": "SOW_DRAFTING_TRIGGERED"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:3000/project-action-logs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\":  {{ $('obtaining project id').item.json.project_id }},\n  \"action_type\": \"DRAFT_SOW_SUBMISSION\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        120
+      ],
+      "id": "8212263d-9bd1-42ac-97a9-78ec3de8c786",
+      "name": "DRAFT_SOW_SUBMISSION"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Setting of JSON Obj",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "SCOPING_SHEET_APPROVAL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Email1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email1": {
+      "main": [
+        [
+          {
+            "node": "drop row in scope_db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setting of JSON Obj": {
+      "main": [
+        [
+          {
+            "node": "Formatting Markdown in JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatting Markdown in JSON": {
+      "main": [
+        [
+          {
+            "node": "Insert into Project Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Converting Obj to String": {
+      "main": [
+        [
+          {
+            "node": "combining",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert data into scope_db": {
+      "main": [
+        [
+          {
+            "node": "Passing Key",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "combining": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute SOW Workflow": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DRAFT_SOW_SUBMISSION",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Passing Key": {
+      "main": [
+        [
+          {
+            "node": "Execute SOW Workflow",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "SOW_DRAFTING_TRIGGERED",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email to Client": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email to Staff": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Send Email to Staff",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "APITemplate.io1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert into Project Details": {
+      "main": [
+        [
+          {
+            "node": "obtaining project id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtaining project id": {
+      "main": [
+        [
+          {
+            "node": "Converting Obj to String",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Insert data into scope_db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "APITemplate.io1": {
+      "main": [
+        [
+          {
+            "node": "Send Email to Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "drop row in scope_db": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ea817aa8-a0ae-4bf5-9e62-6b0556138caa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a88732262e66e8b0e421dc2a282e442003e6bd304b2d4f3c1253516ded37e159"
+  },
+  "id": "GpWx68HGqDMWgsjs",
+  "tags": []
+}

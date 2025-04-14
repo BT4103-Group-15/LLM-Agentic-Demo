@@ -105,8 +105,8 @@ def send_to_drive(json_file_name):
 def send_to_n8n_google_drive(filename):
     # get http endpoint
 
-    # API endpoint on n8n
-    url = "http://localhost:5678/webhook-test/6c05037c-6a05-4e3d-99df-b9bda4eabec2"
+    # API endpoint on n8n - Production URL to n8n Scoping Flow
+    url = "http://localhost:5678/webhook/5a0cd093-a0ed-404a-bfa1-be712355a441"
 
     # Load JSON file
     with open(filename, "r") as file:
@@ -135,7 +135,7 @@ def get_create_client_info_from_db(company_name, client_name, email):
         conn.commit()
         return cursor.lastrowid
 
-# filename = "aliceBrown_outlook.com_2025-03-31_20-20-03.json"
+# filename = "john.d_outlook.com_2025-04-12_23-37-29.json"
 # response_n8n = send_to_n8n_google_drive(filename)
 # print(response_n8n)
 

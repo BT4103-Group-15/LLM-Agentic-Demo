@@ -121,7 +121,7 @@ function displayQuestion(data) {
                     optionMessage.appendChild(label);
                     messagesDiv.appendChild(optionMessage);
             });
-            radioChoiceContainer.style.display = "block";
+            radioChoiceContainer.classList.remove('hidden');
         } else if (data.type === "mcq_multi") {
             // Display multiple-choice checkboxes
             data.options.forEach((option, index) => {

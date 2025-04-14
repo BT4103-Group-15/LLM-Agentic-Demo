@@ -11,7 +11,7 @@ from langchain_core.output_parsers import StrOutputParser
 
 #comment later
 import os
-os.environ["QROQ_API_KEY"]= "gsk_XsYc4agDeX8A5R9vWpXHWGdyb3FYlCOMbVUB2t2ka0eU6isB3M3qgsk_7y3HLZlG69yeNcRcQDBCWGdyb3FYBRAl4TcInNKBPLQ6xw9Yjk9C"
+# os.environ["QROQ_API_KEY"]= "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"
 from langchain_groq import ChatGroq
 
 # from langchain.schema.runnable import RunnableSequence

@@ -1,0 +1,585 @@
+{
+  "name": "SOW generation",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8a905d9e-4506-4d7a-9d07-c4642af391ea",
+              "name": "sample_sow",
+              "value": "# Scope of Work (SOW) ## Penetration Testing Services  ### 1. **Project Overview** This Scope of Work (SOW) outlines the objectives, deliverables, and timelines for the penetration testing services to be provided by [Company Name] (hereafter referred to as \\\"The Service Provider\\\"). The purpose of this engagement is to assess the security posture of [Client Name]’s systems and networks, identify vulnerabilities, and provide recommendations for mitigation.  ### 2. **Objectives** The primary objective of this engagement is to conduct thorough penetration testing on [Client Name]’s systems to:  - Identify vulnerabilities within the client's network, systems, and web applications. - Simulate real-world cyber-attacks to evaluate the security response mechanisms in place. - Assess the client's current defenses and suggest remediation strategies. - Provide a comprehensive report of findings with actionable recommendations.  ### 3. **Scope of Services**  #### 3.1 **Penetration Testing Areas** The penetration testing will cover the following areas:  - **External Network Testing**: Testing of the external-facing assets (web applications, firewalls, VPNs, etc.) for vulnerabilities. - **Internal Network Testing**: Simulating insider threats and testing internal network assets. - **Web Application Testing**: Conducting tests on web applications for OWASP Top 10 vulnerabilities and other common security risks. - **Wireless Network Testing**: Assessment of wireless networks for security flaws, including weak encryption and unauthorized access. - **Social Engineering (Optional)**: Conducting simulated phishing attacks or other forms of social engineering to evaluate employee susceptibility.  #### 3.2 **Testing Methodology** - The penetration testing will follow industry best practices, including OWASP, NIST, and PTES frameworks. - Tools such as [list of tools, e.g., Burp Suite, Nessus, Metasploit] will be used to conduct the tests. - The engagement will be divided into the following phases:   1. **Reconnaissance**: Gather publicly available information on the client’s systems.   2. **Vulnerability Scanning**: Use automated tools to identify potential vulnerabilities.   3. **Exploitation**: Attempt to exploit vulnerabilities to determine their severity.   4. **Post-Exploitation**: Assess the extent of control gained through exploitation.   5. **Reporting**: Provide detailed findings and remediation recommendations.  #### 3.3 **Exclusions** The following activities are excluded from the scope: - Testing of physical security systems (e.g., lockpicking, badge cloning). - Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks. - Testing of systems not explicitly outlined in this SOW. - Social engineering beyond email phishing campaigns (e.g., physical access tests).  ### 4. **Deliverables** The following deliverables will be provided at the conclusion of the engagement:  - **Penetration Testing Report**: A detailed report outlining identified vulnerabilities, exploited vulnerabilities, potential impacts, and recommended remediation actions. - **Executive Summary**: A high-level summary of the findings for non-technical stakeholders. - **Risk Assessment**: A prioritized list of vulnerabilities based on risk levels (e.g., High, Medium, Low). - **Proof of Concepts**: Detailed documentation of any exploits or successful attacks, including screenshots, logs, and steps to reproduce.  ### 5. **Timeline and Milestones**  | Phase                      | Start Date    | End Date      | Duration   | |----------------------------|---------------|---------------|------------| | Project Kickoff             | [Start Date]  | [Start Date]  | 1 Day      | | Reconnaissance & Scanning   | [Start Date]  | [End Date]    | [X days]   | | Exploitation & Post-Exploitation | [Start Date] | [End Date]   | [X days]   | | Reporting & Review          | [Start Date]  | [End Date]    | [X days]   | | Final Review & Delivery     | [Start Date]  | [End Date]    | 1 Day      |  ### 6. **Roles and Responsibilities**  #### 6.1 **Client Responsibilities** - Provide necessary access to systems, networks, and applications. - Ensure all systems are properly backed up before testing begins. - Designate a point of contact for coordination throughout the engagement.  #### 6.2 **Service Provider Responsibilities** - Perform the penetration testing according to the outlined scope and best practices. - Maintain confidentiality and adhere to non-disclosure agreements (NDAs). - Provide a detailed report of findings within the agreed timeline.  ### 7. **Confidentiality and Data Security** - All data and information gathered during the engagement will be treated as confidential. - The Service Provider will not disclose any client information without prior written consent, except as required by law. - The Service Provider will take reasonable steps to secure client data during the testing process.  ### 8. **Pricing and Payment Terms** The total cost for the penetration testing services is [Total Price], broken down as follows: - Initial deposit: [Deposit Amount] - Remaining balance: [Balance Amount] - Payment is due upon receipt of the final report.  ### 9. **Acceptance** By signing below, both parties acknowledge and accept the terms outlined in this Scope of Work.  **Client Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  **Service Provider Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  ---  ### 10. **Terms and Conditions** - The engagement will follow the agreed-upon schedule and timelines. - Any changes or additions to the scope of work may result in additional costs or timeline adjustments. - Either party may terminate this agreement with [Number of Days] notice.",
+              "type": "string"
+            },
+            {
+              "id": "45df6122-58d9-4926-b40e-c4d0e2c05569",
+              "name": "scoping_sheet",
+              "value": "={{ $json.scopingsheet_markdown }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        140,
+        400
+      ],
+      "id": "be3fd3fb-bde1-4533-942d-a278d077029b",
+      "name": "setting sample sow"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": {
+          "__rl": true,
+          "value": "scope_db",
+          "mode": "list",
+          "cachedResultName": "scope_db"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "client_id",
+              "value": "={{ $json.client_id }}"
+            },
+            {
+              "column": "project_id",
+              "value": "={{ $json.project_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        -160,
+        400
+      ],
+      "id": "ec41d136-87de-4254-a371-f56ec77d87c1",
+      "name": "retrieving scoping sheet",
+      "credentials": {
+        "mySql": {
+          "id": "KgbuNYO1ulZnpHdp",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f61901f2-7388-4106-8639-c0bf90b71036",
+              "name": "sowsheet_markdown",
+              "value": "={{ $json.sow_document }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        700,
+        400
+      ],
+      "id": "49544dbe-8afd-44b7-81d8-b9449a63163a",
+      "name": "Edit Fields5"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "sowsheet_markdown",
+        "binaryPropertyName": "data_md",
+        "options": {
+          "fileName": "sowmarkdown_sheet.md"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        940,
+        400
+      ],
+      "id": "58b86da6-74bb-4c7a-be06-401040be078c",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2d21786d-2a23-4dd2-b385-dea88189b84d",
+              "name": "client_id",
+              "value": "={{ $('When Executed by Another Workflow').item.json.client_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b157350f-86ee-49a2-ba9b-e8a9c558cf59",
+              "name": "client_email",
+              "value": "={{ $('When Executed by Another Workflow').item.json.client_email }}",
+              "type": "string"
+            },
+            {
+              "id": "9309a997-3ff6-4d11-930f-f3b72896acac",
+              "name": "project_id",
+              "value": "={{ $('When Executed by Another Workflow').item.json.project_id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        400
+      ],
+      "id": "0e6908e1-923a-45ef-aa70-8c56557997ec",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -560,
+        420
+      ],
+      "id": "d1abde40-8676-45ba-89ab-19cfcf119c2b",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pdfshift.io/v3/convert/pdf",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"source\": {{ JSON.stringify($json.html) }}\n}\n",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1340,
+        400
+      ],
+      "id": "e7c6c47b-30b6-4d2c-af4b-757ab2bcf2e6",
+      "name": "generate pdf",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "TFyv4TLQkY22Yo7K",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $('retrieving scoping sheet').item.json.email }}_{{ $('retrieving scoping sheet').item.json.project_id }}.pdf",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1Wiqv2p8g2Icz9dDNMCRUeTvaFV-SfvKA",
+          "mode": "list",
+          "cachedResultName": "SOW PDF",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1Wiqv2p8g2Icz9dDNMCRUeTvaFV-SfvKA"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1540,
+        400
+      ],
+      "id": "d412ba6a-516f-40e7-9bac-c4dd3f8795aa",
+      "name": "save pdf to GDrive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "v6Dzd5FAWsllkeLo",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst markdown = $('Edit Fields5').first().json.sowsheet_markdown;\n\n// Very simple Markdown to HTML (not fully styled, for quick prototyping)\nconst html = `\n  <html>\n    <head><meta charset=\"utf-8\"><style>\n      body { font-family: sans-serif; padding: 2rem; }\n      table { border-collapse: collapse; }\n      th, td { border: 1px solid #999; padding: 0.5rem; }\n    </style></head>\n    <body>${markdown.replace(/\\n/g, \"<br>\")}</body>\n  </html>\n`;\n\nreturn [{\n  json: {\n    html\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        400
+      ],
+      "id": "72cff2d5-24c8-4eee-896e-cc2fe06d915d",
+      "name": "convert md to html format"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6c8b5cca-488f-44f8-9b95-55fbaa126f20",
+              "name": "public_url",
+              "value": "=https://drive.google.com/file/d/{{ $('save pdf to GDrive').item.json.id }}/view",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1960,
+        400
+      ],
+      "id": "bc786061-651f-467a-85cd-eaeb7467f654",
+      "name": "creating dynamic link"
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1740,
+        400
+      ],
+      "id": "03d52b67-84c9-4ee4-aee2-44112969b4fd",
+      "name": "setting file access",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "v6Dzd5FAWsllkeLo",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "sow_db",
+          "mode": "list",
+          "cachedResultName": "sow_db"
+        },
+        "dataMode": "defineBelow",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "client_id",
+              "value": "={{ $('retrieving scoping sheet').item.json.client_id }}"
+            },
+            {
+              "column": "project_id",
+              "value": "={{ $('retrieving scoping sheet').item.json.project_id }}"
+            },
+            {
+              "column": "email",
+              "value": "={{ $('retrieving scoping sheet').item.json.email }}"
+            },
+            {
+              "column": "sowsheet_markdown",
+              "value": "={{ $('Edit Fields5').item.json.sowsheet_markdown }}"
+            },
+            {
+              "column": "sowsheet_URL",
+              "value": "={{ $json.public_url }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        2180,
+        400
+      ],
+      "id": "bb2ecc83-6311-44f5-ad0e-0ea0e2bc4173",
+      "name": "saving to sow_db",
+      "credentials": {
+        "mySql": {
+          "id": "KgbuNYO1ulZnpHdp",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "stormyferntreeofficial@gmail.com",
+        "toEmail": "stormyferntreeofficial@gmail.com",
+        "subject": "Generated SOW Markdown sheet",
+        "html": "=The attached file contains the generated SOW markdown sheet. ",
+        "options": {
+          "attachments": "data_md",
+          "ccEmail": "={{ $('retrieving scoping sheet').item.json.email }}"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1160,
+        640
+      ],
+      "id": "8aeafeb7-ecd6-47d1-9b4a-775b205701c1",
+      "name": "send md to client and staff",
+      "webhookId": "e7c3f760-86b6-444d-99ee-cadaefda43ec",
+      "credentials": {
+        "smtp": {
+          "id": "jmydfn70gphONJZA",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:11434/api/generate",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "sample_sow",
+              "value": "=# Scope of Work (SOW) ## Penetration Testing Services  ### 1. **Project Overview** This Scope of Work (SOW) outlines the objectives, deliverables, and timelines for the penetration testing services to be provided by [Company Name] (hereafter referred to as \\\"The Service Provider\\\"). The purpose of this engagement is to assess the security posture of [Client Name]’s systems and networks, identify vulnerabilities, and provide recommendations for mitigation.  ### 2. **Objectives** The primary objective of this engagement is to conduct thorough penetration testing on [Client Name]’s systems to:  - Identify vulnerabilities within the client's network, systems, and web applications. - Simulate real-world cyber-attacks to evaluate the security response mechanisms in place. - Assess the client's current defenses and suggest remediation strategies. - Provide a comprehensive report of findings with actionable recommendations.  ### 3. **Scope of Services**  #### 3.1 **Penetration Testing Areas** The penetration testing will cover the following areas:  - **External Network Testing**: Testing of the external-facing assets (web applications, firewalls, VPNs, etc.) for vulnerabilities. - **Internal Network Testing**: Simulating insider threats and testing internal network assets. - **Web Application Testing**: Conducting tests on web applications for OWASP Top 10 vulnerabilities and other common security risks. - **Wireless Network Testing**: Assessment of wireless networks for security flaws, including weak encryption and unauthorized access. - **Social Engineering (Optional)**: Conducting simulated phishing attacks or other forms of social engineering to evaluate employee susceptibility.  #### 3.2 **Testing Methodology** - The penetration testing will follow industry best practices, including OWASP, NIST, and PTES frameworks. - Tools such as [list of tools, e.g., Burp Suite, Nessus, Metasploit] will be used to conduct the tests. - The engagement will be divided into the following phases:   1. **Reconnaissance**: Gather publicly available information on the client’s systems.   2. **Vulnerability Scanning**: Use automated tools to identify potential vulnerabilities.   3. **Exploitation**: Attempt to exploit vulnerabilities to determine their severity.   4. **Post-Exploitation**: Assess the extent of control gained through exploitation.   5. **Reporting**: Provide detailed findings and remediation recommendations.  #### 3.3 **Exclusions** The following activities are excluded from the scope: - Testing of physical security systems (e.g., lockpicking, badge cloning). - Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks. - Testing of systems not explicitly outlined in this SOW. - Social engineering beyond email phishing campaigns (e.g., physical access tests).  ### 4. **Deliverables** The following deliverables will be provided at the conclusion of the engagement:  - **Penetration Testing Report**: A detailed report outlining identified vulnerabilities, exploited vulnerabilities, potential impacts, and recommended remediation actions. - **Executive Summary**: A high-level summary of the findings for non-technical stakeholders. - **Risk Assessment**: A prioritized list of vulnerabilities based on risk levels (e.g., High, Medium, Low). - **Proof of Concepts**: Detailed documentation of any exploits or successful attacks, including screenshots, logs, and steps to reproduce.  ### 5. **Timeline and Milestones**  | Phase                      | Start Date    | End Date      | Duration   | |----------------------------|---------------|---------------|------------| | Project Kickoff             | [Start Date]  | [Start Date]  | 1 Day      | | Reconnaissance & Scanning   | [Start Date]  | [End Date]    | [X days]   | | Exploitation & Post-Exploitation | [Start Date] | [End Date]   | [X days]   | | Reporting & Review          | [Start Date]  | [End Date]    | [X days]   | | Final Review & Delivery     | [Start Date]  | [End Date]    | 1 Day      |  ### 6. **Roles and Responsibilities**  #### 6.1 **Client Responsibilities** - Provide necessary access to systems, networks, and applications. - Ensure all systems are properly backed up before testing begins. - Designate a point of contact for coordination throughout the engagement.  #### 6.2 **Service Provider Responsibilities** - Perform the penetration testing according to the outlined scope and best practices. - Maintain confidentiality and adhere to non-disclosure agreements (NDAs). - Provide a detailed report of findings within the agreed timeline.  ### 7. **Confidentiality and Data Security** - All data and information gathered during the engagement will be treated as confidential. - The Service Provider will not disclose any client information without prior written consent, except as required by law. - The Service Provider will take reasonable steps to secure client data during the testing process.  ### 8. **Pricing and Payment Terms** The total cost for the penetration testing services is [Total Price], broken down as follows: - Initial deposit: [Deposit Amount] - Remaining balance: [Balance Amount] - Payment is due upon receipt of the final report.  ### 9. **Acceptance** By signing below, both parties acknowledge and accept the terms outlined in this Scope of Work.  **Client Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  **Service Provider Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  ---  ### 10. **Terms and Conditions** - The engagement will follow the agreed-upon schedule and timelines. - Any changes or additions to the scope of work may result in additional costs or timeline adjustments. - Either party may terminate this agreement with [Number of Days] notice."
+            },
+            {
+              "name": "completed_scopingsheet",
+              "value": "={{ $json.scopingsheet_markdown }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "03e826b2-47d8-4506-9485-ed18fd614653",
+      "name": "OLLAMA HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/api/sow-local-flow",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "sample_sow",
+              "value": "=# Scope of Work (SOW) ## Penetration Testing Services  ### 1. **Project Overview** This Scope of Work (SOW) outlines the objectives, deliverables, and timelines for the penetration testing services to be provided by [Company Name] (hereafter referred to as \\\"The Service Provider\\\"). The purpose of this engagement is to assess the security posture of [Client Name]’s systems and networks, identify vulnerabilities, and provide recommendations for mitigation.  ### 2. **Objectives** The primary objective of this engagement is to conduct thorough penetration testing on [Client Name]’s systems to:  - Identify vulnerabilities within the client's network, systems, and web applications. - Simulate real-world cyber-attacks to evaluate the security response mechanisms in place. - Assess the client's current defenses and suggest remediation strategies. - Provide a comprehensive report of findings with actionable recommendations.  ### 3. **Scope of Services**  #### 3.1 **Penetration Testing Areas** The penetration testing will cover the following areas:  - **External Network Testing**: Testing of the external-facing assets (web applications, firewalls, VPNs, etc.) for vulnerabilities. - **Internal Network Testing**: Simulating insider threats and testing internal network assets. - **Web Application Testing**: Conducting tests on web applications for OWASP Top 10 vulnerabilities and other common security risks. - **Wireless Network Testing**: Assessment of wireless networks for security flaws, including weak encryption and unauthorized access. - **Social Engineering (Optional)**: Conducting simulated phishing attacks or other forms of social engineering to evaluate employee susceptibility.  #### 3.2 **Testing Methodology** - The penetration testing will follow industry best practices, including OWASP, NIST, and PTES frameworks. - Tools such as [list of tools, e.g., Burp Suite, Nessus, Metasploit] will be used to conduct the tests. - The engagement will be divided into the following phases:   1. **Reconnaissance**: Gather publicly available information on the client’s systems.   2. **Vulnerability Scanning**: Use automated tools to identify potential vulnerabilities.   3. **Exploitation**: Attempt to exploit vulnerabilities to determine their severity.   4. **Post-Exploitation**: Assess the extent of control gained through exploitation.   5. **Reporting**: Provide detailed findings and remediation recommendations.  #### 3.3 **Exclusions** The following activities are excluded from the scope: - Testing of physical security systems (e.g., lockpicking, badge cloning). - Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks. - Testing of systems not explicitly outlined in this SOW. - Social engineering beyond email phishing campaigns (e.g., physical access tests).  ### 4. **Deliverables** The following deliverables will be provided at the conclusion of the engagement:  - **Penetration Testing Report**: A detailed report outlining identified vulnerabilities, exploited vulnerabilities, potential impacts, and recommended remediation actions. - **Executive Summary**: A high-level summary of the findings for non-technical stakeholders. - **Risk Assessment**: A prioritized list of vulnerabilities based on risk levels (e.g., High, Medium, Low). - **Proof of Concepts**: Detailed documentation of any exploits or successful attacks, including screenshots, logs, and steps to reproduce.  ### 5. **Timeline and Milestones**  | Phase                      | Start Date    | End Date      | Duration   | |----------------------------|---------------|---------------|------------| | Project Kickoff             | [Start Date]  | [Start Date]  | 1 Day      | | Reconnaissance & Scanning   | [Start Date]  | [End Date]    | [X days]   | | Exploitation & Post-Exploitation | [Start Date] | [End Date]   | [X days]   | | Reporting & Review          | [Start Date]  | [End Date]    | [X days]   | | Final Review & Delivery     | [Start Date]  | [End Date]    | 1 Day      |  ### 6. **Roles and Responsibilities**  #### 6.1 **Client Responsibilities** - Provide necessary access to systems, networks, and applications. - Ensure all systems are properly backed up before testing begins. - Designate a point of contact for coordination throughout the engagement.  #### 6.2 **Service Provider Responsibilities** - Perform the penetration testing according to the outlined scope and best practices. - Maintain confidentiality and adhere to non-disclosure agreements (NDAs). - Provide a detailed report of findings within the agreed timeline.  ### 7. **Confidentiality and Data Security** - All data and information gathered during the engagement will be treated as confidential. - The Service Provider will not disclose any client information without prior written consent, except as required by law. - The Service Provider will take reasonable steps to secure client data during the testing process.  ### 8. **Pricing and Payment Terms** The total cost for the penetration testing services is [Total Price], broken down as follows: - Initial deposit: [Deposit Amount] - Remaining balance: [Balance Amount] - Payment is due upon receipt of the final report.  ### 9. **Acceptance** By signing below, both parties acknowledge and accept the terms outlined in this Scope of Work.  **Client Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  **Service Provider Name**: ________________________   **Signature**: __________________________   **Date**: _______________________________  ---  ### 10. **Terms and Conditions** - The engagement will follow the agreed-upon schedule and timelines. - Any changes or additions to the scope of work may result in additional costs or timeline adjustments. - Either party may terminate this agreement with [Number of Days] notice."
+            },
+            {
+              "name": "completed_scopingsheet",
+              "value": "={{ $json.scoping_sheet }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        400
+      ],
+      "id": "191c5900-007d-40a0-88b5-34a0ee37ce34",
+      "name": "Grok HTTP Request1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "setting sample sow": {
+      "main": [
+        [
+          {
+            "node": "Grok HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "retrieving scoping sheet": {
+      "main": [
+        [
+          {
+            "node": "setting sample sow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields5": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "convert md to html format",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "send md to client and staff",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "generate pdf": {
+      "main": [
+        [
+          {
+            "node": "save pdf to GDrive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "save pdf to GDrive": {
+      "main": [
+        [
+          {
+            "node": "setting file access",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "convert md to html format": {
+      "main": [
+        [
+          {
+            "node": "generate pdf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "creating dynamic link": {
+      "main": [
+        [
+          {
+            "node": "saving to sow_db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "setting file access": {
+      "main": [
+        [
+          {
+            "node": "creating dynamic link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "retrieving scoping sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Grok HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "40fed64a-6e7e-46ac-abd3-d87e151153b8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a88732262e66e8b0e421dc2a282e442003e6bd304b2d4f3c1253516ded37e159"
+  },
+  "id": "x53D18fEzb2zwvlZ",
+  "tags": []
+}
