@@ -240,8 +240,8 @@ document.addEventListener("DOMContentLoaded", function () {
 async function logActivity(projectId) {
     console.log("log")
     try {
-        const response = await fetch('http://localhost:3000/activity-logs/' + projectId, {
-            method: "PUT",
+        const response = await fetch('http://localhost:3000/activity-logs', {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
