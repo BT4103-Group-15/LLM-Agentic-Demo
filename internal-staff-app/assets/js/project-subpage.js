@@ -143,7 +143,7 @@ async function fetchChatHistory() {
 
 async function fetchLogs() {
     try {
-        const logs_response = await fetch('http://localhost:3000/project-action-logs');
+        const logs_response = await fetch('http://localhost:3000/activity-logs');
         if (!logs_response.ok) {
             throw new Error("Error fetching logs data");
         }

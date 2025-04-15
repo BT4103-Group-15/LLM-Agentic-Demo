@@ -15,7 +15,7 @@
   <!-- Main content -->
   <div class="container">
       <div class="header">
-          <h1 class="title">Action Logs</h1>
+          <h1 class="title">Status Logs</h1>
           <div class="controls">
               <button id="filterBtn" class="filter-button">Filter</button>
               <input id="searchInput" type="text" placeholder="Search" class="search-input">
@@ -67,8 +67,8 @@
 
     async function fetchData() {
         try {
-            // Fetch data from the n8n webhook
-            const project_response = await fetch('http://localhost:3000/activity-logs');
+            // Fetch data from the n8n webhook 
+            const project_response = await fetch('http://localhost:3000/project-action-logs');
             if (!project_response.ok) {
                 throw new Error(`HTTP error! Status: ${project_response.status}`);
             }
