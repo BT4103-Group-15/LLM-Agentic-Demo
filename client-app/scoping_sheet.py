@@ -103,6 +103,9 @@ def send_to_drive(json_file_name):
 
 # link to n8n
 def send_to_n8n_google_drive(filename):
+    # save to google drive file
+    send_to_drive(filename)
+    
     # get http endpoint
 
     # API endpoint on n8n - Production URL to n8n Scoping Flow
@@ -114,9 +117,6 @@ def send_to_n8n_google_drive(filename):
 
     # Send POST request
     response = requests.post(url, json=json_data, headers={"Content-Type": "application/json"})
-    
-    # save to google drive file
-    send_to_drive(filename)
     
     return response.status_code, response.json()
 

@@ -1,0 +1,434 @@
+{
+    "id": 7,
+    "email": "mingying1308@gmail.com",
+    "scopingsheet_markdown": " Application Overview:\n       - Name: EduTrack\n       - Type: Web and API\n       - Production URL: https://edutrack.com/\n       - Environment for Testing: Production\n\n   Authentication & Access Control:\n     - Authentication Method: Username & Password, SSO\n     - User Roles: Anonymous Users, Regular Users, Power Users, Administrators\n     - Custom Roles: 3\n     - Session Management: JWT\n     - Session Timeout Period: 25\n\n   Input Processing:\n     - Total number of input fields: 12\n     - Input Types Present: Free text fields, File uploads (Types allowed: .pdf, .png), Personal data, Database queries, API calls\n\n   Data Processing:\n     - Sensitive Data Handled: Personal Information, Intellectual Property\n     - Data Storage: Local Database, Cloud Storage\n\n   API Details:\n     - Number of Endpoints: 10\n     - Authentication Required: Yes\n     - Rate Limiting: Yes\n     - Documentation Available: Yes\n     - API Methods: GET, POST\n\n   Infrastructure:\n     - Security Controls Present: WAF, IPS/IDS, Load Balancer, Anti-DDoS\n     - Hosting: Cloud\n\n   Business Logic:\n     - Critical Functions: User Data Management, Administrative Operations, System Configuration\n\n   Security Requirements:\n     - Compliance Requirements: GDPR, ISO 27001\n     - Previous Testing: 15/01/2024\n     - Known Vulnerabilities: Minor XSS issue in user profiles\n     - Critical Assets: Student Records, Course Materials\n\n   Testing Constraints:\n     - Time Restrictions: During Business Hours only\n     - Testing Limitations: No Performance Testing\n\n   Deliverables:\n     - Required Reports: Executive Summary, Technical Details, Remediation Plan, Risk Rating\n\n   Additional Information: The platform enforces two-factor authentication for admin roles. Data encryption is implemented at rest and in transit.\n\n   Client Contact Information:\n     - Email: mingying1308@gmail.com\n     - Company: Edu Track\n     - Name: Ming Ying",
+    "requirement_df": [
+        {
+            "category": "Application Overview",
+            "requirement": "Application Name",
+            "status": "EduTrack"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Production URL",
+            "status": "https://edutrack.com"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Environment for Testing",
+            "status": [
+                "Production"
+            ]
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Application Type",
+            "status": [
+                "Web",
+                "API"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Authentication Method",
+            "status": [
+                "Username & Password",
+                "SSO"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "User Roles",
+            "status": [
+                "Anonymous Users",
+                "Regular Users",
+                "Power Users",
+                "Administrators"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Custom Roles",
+            "status": "3"
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Management",
+            "status": [
+                "JWT"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Timeout Period",
+            "status": "25"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "total_num_input_fields",
+            "status": "12"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "Input Types Present",
+            "status": [
+                "Free text fields",
+                "File uploads (Types allowed: .pdf, .png)",
+                "Personal data",
+                "Database queries",
+                "API calls"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Sensitive Data Handled",
+            "status": [
+                "Personal Information",
+                "Intellectual Property"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Data Storage",
+            "status": [
+                "Local Database",
+                "Cloud Storage"
+            ]
+        },
+        {
+            "category": "API Details",
+            "requirement": "Number of Endpoints",
+            "status": "10"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Authentication Required",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Rate Limiting",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Documentation Available",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "API Methods",
+            "status": [
+                "GET",
+                "POST"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Security Controls Present",
+            "status": [
+                "WAF",
+                "IPS/IDS",
+                "Load Balancer",
+                "Anti-DDoS"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Hosting",
+            "status": [
+                "Cloud"
+            ]
+        },
+        {
+            "category": "Business Logic",
+            "requirement": "Critical Functions",
+            "status": [
+                "User Data Management",
+                "Administrative Operations",
+                "System Configuration"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Compliance Requirements",
+            "status": [
+                "GDPR",
+                "ISO 27001"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Previous Testing",
+            "status": "15/01/2024"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Known Vulnerabilities",
+            "status": "Minor XSS issue in user profiles"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Critical Assets",
+            "status": "Student Records, Course Materials"
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Time Restrictions",
+            "status": [
+                "During Business Hours only"
+            ]
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Testing Limitations",
+            "status": [
+                "No Performance Testing"
+            ]
+        },
+        {
+            "category": "Deliverables",
+            "requirement": "Required Reports",
+            "status": [
+                "Executive Summary",
+                "Technical Details",
+                "Remediation Plan",
+                "Risk Rating"
+            ]
+        },
+        {
+            "category": "Notes",
+            "requirement": "Additional Information",
+            "status": "The platform enforces two-factor authentication for admin roles. Data encryption is implemented at rest and in transit."
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Email",
+            "status": "mingying1308@gmail.com"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Company",
+            "status": "Edu Track"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Name",
+            "status": "Ming Ying"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Application Name",
+            "status": "EduTrack"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Production URL",
+            "status": "https://edutrack.com/"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Environment for Testing",
+            "status": [
+                "Production"
+            ]
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Application Type",
+            "status": [
+                "Web",
+                "API"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Authentication Method",
+            "status": [
+                "Username & Password",
+                "SSO"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "User Roles",
+            "status": [
+                "Anonymous Users",
+                "Regular Users",
+                "Power Users",
+                "Administrators"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Custom Roles",
+            "status": "3"
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Management",
+            "status": [
+                "JWT"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Timeout Period",
+            "status": "25"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "total_num_input_fields",
+            "status": "12"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "Input Types Present",
+            "status": [
+                "Free text fields",
+                "File uploads (Types allowed: .pdf, .png)",
+                "Personal data",
+                "Database queries",
+                "API calls"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Sensitive Data Handled",
+            "status": [
+                "Personal Information",
+                "Intellectual Property"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Data Storage",
+            "status": [
+                "Local Database",
+                "Cloud Storage"
+            ]
+        },
+        {
+            "category": "API Details",
+            "requirement": "Number of Endpoints",
+            "status": "10"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Authentication Required",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Rate Limiting",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Documentation Available",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "API Methods",
+            "status": [
+                "GET",
+                "POST"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Security Controls Present",
+            "status": [
+                "WAF",
+                "IPS/IDS",
+                "Load Balancer",
+                "Anti-DDoS"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Hosting",
+            "status": [
+                "Cloud"
+            ]
+        },
+        {
+            "category": "Business Logic",
+            "requirement": "Critical Functions",
+            "status": [
+                "User Data Management",
+                "Administrative Operations",
+                "System Configuration"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Compliance Requirements",
+            "status": [
+                "GDPR",
+                "ISO 27001"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Previous Testing",
+            "status": "15/01/2024"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Known Vulnerabilities",
+            "status": "Minor XSS issue in user profiles"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Critical Assets",
+            "status": "Student Records, Course Materials"
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Time Restrictions",
+            "status": [
+                "During Business Hours only"
+            ]
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Testing Limitations",
+            "status": [
+                "No Performance Testing"
+            ]
+        },
+        {
+            "category": "Deliverables",
+            "requirement": "Required Reports",
+            "status": [
+                "Executive Summary",
+                "Technical Details",
+                "Remediation Plan",
+                "Risk Rating"
+            ]
+        },
+        {
+            "category": "Notes",
+            "requirement": "Additional Information",
+            "status": "The platform enforces two-factor authentication for admin roles. Data encryption is implemented at rest and in transit."
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Email",
+            "status": "mingying1308@gmail.com"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Company",
+            "status": "Edu Track"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Name",
+            "status": "Ming Ying"
+        }
+    ],
+    "timestamp": "2025-04-15_23-32-31"
+}

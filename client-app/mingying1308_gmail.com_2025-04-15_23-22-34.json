@@ -1,0 +1,221 @@
+{
+    "id": 7,
+    "email": "mingying1308@gmail.com",
+    "scopingsheet_markdown": " ```markdown\n   # Scoping Sheet\n\n   |    | category                        | requirement               | status                                                                                                                  |\n   |----|--------------------------------|--------------------------|------------------------------------------------------------------------------------------------------------------------|\n   |   0 | Application Overview            | Application Name          | EduTrack                                                                                                                |\n   |   1 | Application Overview            | Production URL            | [https://edutrack.com](https://edutrack.com)                                                                             |\n   |   2 | Application Overview            | Environment for Testing   | ['Production']                                                                                                          |\n   |   3 | Application Overview            | Application Type          | ['Web', 'API']                                                                                                          |\n   |   4 | Authentication & Access Control | Authentication Method     | ['Username & Password', 'SSO']                                                                                          |\n   |   5 | Authentication & Access Control | User Roles                | ['Anonymous Users', 'Regular Users', 'Power Users', 'Administrators']                                                   |\n   |   6 | Authentication & Access Control | Custom Roles              | 3                                                                                                                       |\n   |   7 | Authentication & Access Control | Session Management        | ['JWT']                                                                                                                 |\n   |   8 | Authentication & Access Control | Session Timeout Period    | 25                                                                                                                      |\n   |   9 | Input Processing                | total_num_input_fields    | 12                                                                                                                      |\n   |  10 | Input Processing                | Input Types Present       | ['Free text fields', 'File uploads (Types allowed: .pdf, .png)', 'Personal data', 'Database queries', 'API calls']      |\n   |  11 | Data Processing                 | Sensitive Data Handled    | ['Personal Information', 'Intellectual Property']                                                                       |\n   |  12 | Data Processing                 | Data Storage              | ['Local Database', 'Cloud Storage']                                                                                     |\n   |  13 | API Details                     | Number of Endpoints       | 10                                                                                                                      |\n   |  14 | API Details                     | Authentication Required   | Yes                                                                                                                     |\n   |  15 | API Details                     | Rate Limiting             | Yes                                                                                                                     |\n   |  16 | API Details                     | Documentation Available   | Yes                                                                                                                     |\n   |  17 | API Details                     | API Methods               | ['GET', 'POST']                                                                                                         |\n   |  18 | Infrastructure                  | Security Controls Present | ['WAF', 'IPS/IDS', 'Load Balancer', 'Anti-DDoS']                                                                        |\n   |  19 | Infrastructure                  | Hosting                   | ['Cloud']                                                                                                               |\n   |  20 | Business Logic                  | Critical Functions        | ['User Data Management', 'Administrative Operations', 'System Configuration']                                           |\n   |  21 | Security Requirements           | Compliance Requirements   | ['GDPR', 'ISO 27001']                                                                                                   |\n   |  22 | Security Requirements           | Previous Testing          | 15/01/2024                                                                                                              |\n   |  23 | Security Requirements           | Known Vulnerabilities     | Minor XSS issue in user profiles                                                                                        |\n   |  24 | Security Requirements           | Critical Assets           | Student Records, Course Materials                                                                                       |\n   |  25 | Testing Constraints             | Time Restrictions         | ['During Business Hours only']                                                                                          |\n   |  26 | Testing Constraints             | Testing Constraints      | ['During Business Hours only']                                                                                          |\n   |  27 | Deliverables                    | Deliverable 1            | Report on compliance with GDPR and ISO 27001                                                                            |\n   |  28 | Deliverables                    | Deliverable 2            | Security audit report                                                                                                   |\n   |  29 | Deliverables                    | Deliverable 3            | Risk assessment report                                                                                                  |\n   |  30 | Client Contact Information      | Client Email              | [mingying1308@gmail.com](mailto:mingying1308@gmail.com)                                                                |\n   |  31 | Client Contact Information      | Client Company            | Edu Track                                                                                                               |\n   |  32 | Client Contact Information      | Client Name               | Ming Ying                                                                                                               |\n\n   ```\n\nIn this markdown, I have added the deliverables with descriptions and also formatted the links for easier access.",
+    "requirement_df": [
+        {
+            "category": "Application Overview",
+            "requirement": "Application Name",
+            "status": "EduTrack"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Production URL",
+            "status": "https://edutrack.com"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Environment for Testing",
+            "status": [
+                "Production"
+            ]
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Application Type",
+            "status": [
+                "Web",
+                "API"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Authentication Method",
+            "status": [
+                "Username & Password",
+                "SSO"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "User Roles",
+            "status": [
+                "Anonymous Users",
+                "Regular Users",
+                "Power Users",
+                "Administrators"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Custom Roles",
+            "status": "3"
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Management",
+            "status": [
+                "JWT"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Timeout Period",
+            "status": "25"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "total_num_input_fields",
+            "status": "12"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "Input Types Present",
+            "status": [
+                "Free text fields",
+                "File uploads (Types allowed: .pdf, .png)",
+                "Personal data",
+                "Database queries",
+                "API calls"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Sensitive Data Handled",
+            "status": [
+                "Personal Information",
+                "Intellectual Property"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Data Storage",
+            "status": [
+                "Local Database",
+                "Cloud Storage"
+            ]
+        },
+        {
+            "category": "API Details",
+            "requirement": "Number of Endpoints",
+            "status": "10"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Authentication Required",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Rate Limiting",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Documentation Available",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "API Methods",
+            "status": [
+                "GET",
+                "POST"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Security Controls Present",
+            "status": [
+                "WAF",
+                "IPS/IDS",
+                "Load Balancer",
+                "Anti-DDoS"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Hosting",
+            "status": [
+                "Cloud"
+            ]
+        },
+        {
+            "category": "Business Logic",
+            "requirement": "Critical Functions",
+            "status": [
+                "User Data Management",
+                "Administrative Operations",
+                "System Configuration"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Compliance Requirements",
+            "status": [
+                "GDPR",
+                "ISO 27001"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Previous Testing",
+            "status": "15/01/2024"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Known Vulnerabilities",
+            "status": "Minor XSS issue in user profiles"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Critical Assets",
+            "status": "Student Records, Course Materials"
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Time Restrictions",
+            "status": [
+                "During Business Hours only"
+            ]
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Testing Limitations",
+            "status": [
+                "No Performance Testing"
+            ]
+        },
+        {
+            "category": "Deliverables",
+            "requirement": "Required Reports",
+            "status": [
+                "Executive Summary",
+                "Technical Details",
+                "Remediation Plan",
+                "Risk Rating"
+            ]
+        },
+        {
+            "category": "Notes",
+            "requirement": "Additional Information",
+            "status": "The platform enforces two-factor authentication for admin roles. Data encryption is implemented at rest and in transit."
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Email",
+            "status": "mingying1308@gmail.com"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Company",
+            "status": "Edu Track"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Name",
+            "status": "Ming Ying"
+        }
+    ],
+    "timestamp": "2025-04-15_23-22-34"
+}

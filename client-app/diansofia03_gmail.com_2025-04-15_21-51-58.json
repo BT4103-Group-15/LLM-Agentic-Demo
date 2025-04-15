@@ -1,0 +1,221 @@
+{
+    "id": 6,
+    "email": "diansofia03@gmail.com",
+    "scopingsheet_markdown": " # Scoping Sheet for HealthTrack Application\n\n   | Category                        | Requirement                             | Status                                                                                                                          |\n   | --------------------------------| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |\n   | Application Overview            | Application Name                        | HealthTrack                                                                                                                      |\n   | Application Overview            | Production URL                         | https://healthtrack.com                                                                                                          |\n   | Application Overview            | Environment for Testing                | Development                                                                                                                       |\n   | Application Overview            | Application Type                        | Web, API, Mobile                                                                                                                 |\n   | Authentication & Access Control | Authentication Method                  | Username & Password, OAuth                                                                                                       |\n   | Authentication & Access Control | User Roles                             | Anonymous Users, Regular Users, Power Users, Administrators                                                                      |\n   | Authentication & Access Control | Custom Roles                           | 1                                                                                                                               |\n   | Authentication & Access Control | Session Management                     | JWT                                                                                                                              |\n   | Authentication & Access Control | Session Timeout Period                 | 30 minutes                                                                                                                      |\n   | Input Processing                | Total Number of Input Fields            | 10                                                                                                                               |\n   | Input Processing                | Input Types Present                     | Free text fields, Personal data, Database queries                                                                                |\n   | Data Processing                 | Sensitive Data Handled                  | Personal Information, Healthcare Information                                                                                    |\n   | Data Processing                 | Data Storage                           | Local Database, Third-party Services                                                                                             |\n   | API Details                     | Number of Endpoints                      | 15                                                                                                                               |\n   | API Details                     | Authentication Required                | Yes                                                                                                                              |\n   | API Details                     | Rate Limiting                           | Yes                                                                                                                              |\n   | API Details                     | Documentation Available                | Yes                                                                                                                              |\n   | API Details                     | API Methods                             | GET, POST, PUT                                                                                                                   |\n   | Infrastructure                  | Security Controls Present               | WAF, IPS/IDS, Load Balancer, API Gateway                                                                                         |\n   | Infrastructure                  | Hosting                                | On-premises                                                                                                                     |\n   | Business Logic                  | Critical Functions                      | User Data Management                                                                                                            |\n   | Security Requirements           | Compliance Requirements                 | HIPAA, GDPR                                                                                                                       |\n   | Security Requirements           | Previous Testing                        | 20/11/2023                                                                                                                     |\n   | Security Requirements           | Known Vulnerabilities                   | Data Leakage in logs                                                                                                            |\n   | Security Requirements           | Critical Assets                        | Patient Records                                                                                                                 |\n   | Testing Constraints             | Time Restrictions                       | During Business Hours only                                                                                                      |\n   | Testing Constraints             | Testing Limitations                     | No Destructive Testing, No Automated Scanning                                                                                  |\n   | Deliverables                    | Required Reports                        | Executive Summary, Technical Details, Remediation Plan, Compliance Mapping, Risk Rating                                       |\n   | Notes                           | Additional Information                 | Application follows strict access control policies for healthcare data. Encryption is enforced for all stored patient records.  |\n   | Client Contact Information      | Client Email                           | diansofia03@gmail.com                                                                                                            |\n   | Client Contact Information      | Client Company                         | Health Track                                                                                                                    |\n   | Client Contact Information      | Client Name                            | Sofia                                                                                                                           |",
+    "requirement_df": [
+        {
+            "category": "Application Overview",
+            "requirement": "Application Name",
+            "status": "HealthTrack"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Production URL",
+            "status": "https://healthtrack.com"
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Environment for Testing",
+            "status": [
+                "Development"
+            ]
+        },
+        {
+            "category": "Application Overview",
+            "requirement": "Application Type",
+            "status": [
+                "Web",
+                "API",
+                "Mobile"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Authentication Method",
+            "status": [
+                "Username & Password",
+                "OAuth"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "User Roles",
+            "status": [
+                "Anonymous Users",
+                "Regular Users",
+                "Power Users",
+                "Administrators"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Custom Roles",
+            "status": "1"
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Management",
+            "status": [
+                "JWT"
+            ]
+        },
+        {
+            "category": "Authentication & Access Control",
+            "requirement": "Session Timeout Period",
+            "status": "30"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "total_num_input_fields",
+            "status": "10"
+        },
+        {
+            "category": "Input Processing",
+            "requirement": "Input Types Present",
+            "status": [
+                "Free text fields",
+                "Personal data",
+                "Database queries"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Sensitive Data Handled",
+            "status": [
+                "Personal Information",
+                "Healthcare Information"
+            ]
+        },
+        {
+            "category": "Data Processing",
+            "requirement": "Data Storage",
+            "status": [
+                "Local Database",
+                "Third-party Services"
+            ]
+        },
+        {
+            "category": "API Details",
+            "requirement": "Number of Endpoints",
+            "status": "15"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Authentication Required",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Rate Limiting",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "Documentation Available",
+            "status": "Yes"
+        },
+        {
+            "category": "API Details",
+            "requirement": "API Methods",
+            "status": [
+                "GET",
+                "POST",
+                "PUT"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Security Controls Present",
+            "status": [
+                "WAF",
+                "IPS/IDS",
+                "Load Balancer",
+                "API Gateway"
+            ]
+        },
+        {
+            "category": "Infrastructure",
+            "requirement": "Hosting",
+            "status": [
+                "On-premises"
+            ]
+        },
+        {
+            "category": "Business Logic",
+            "requirement": "Critical Functions",
+            "status": [
+                "User Data Management"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Compliance Requirements",
+            "status": [
+                "HIPAA",
+                "GDPR"
+            ]
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Previous Testing",
+            "status": "20/11/2023"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Known Vulnerabilities",
+            "status": "Data Leakage in logs"
+        },
+        {
+            "category": "Security Requirements",
+            "requirement": "Critical Assets",
+            "status": "Patient Records"
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Time Restrictions",
+            "status": [
+                "During Business Hours only"
+            ]
+        },
+        {
+            "category": "Testing Constraints",
+            "requirement": "Testing Limitations",
+            "status": [
+                "No Destructive Testing",
+                "No Automated Scanning"
+            ]
+        },
+        {
+            "category": "Deliverables",
+            "requirement": "Required Reports",
+            "status": [
+                "Executive Summary",
+                "Technical Details",
+                "Remediation Plan",
+                "Compliance Mapping",
+                "Risk Rating"
+            ]
+        },
+        {
+            "category": "Notes",
+            "requirement": "Additional Information",
+            "status": "Application follows strict access control policies for healthcare data. Encryption is enforced for all stored patient records"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Email",
+            "status": "diansofia03@gmail.com"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Company",
+            "status": "Health Track"
+        },
+        {
+            "category": "Client Contact Information",
+            "requirement": "Client Name",
+            "status": "Sofia"
+        }
+    ],
+    "timestamp": "2025-04-15_21-51-58"
+}
