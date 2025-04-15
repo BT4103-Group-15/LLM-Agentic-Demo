@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(responseData[0]);  // Log the first item in the response array
     
             let sowsheetMarkdown = responseData[0].sowsheet_markdown;  // Access the markdown field
+            sowsheetMarkdown = sowsheetMarkdown.replace(/[*#]/g, '');
             console.log("SOW Sheet Markdown:", sowsheetMarkdown);
             
             // Use jsPDF to create the PDF
@@ -188,10 +189,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error fetching SOW:', err);
                 alert('Failed to load SOW content.');
             });
+    
 
         } catch (error) {
             console.error("Fetch error:", error);
         }
+
+
     
     });
 
@@ -215,9 +219,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (response.ok) {
                 alert("SOW saved successfully!");
                 popup.style.display = 'none';  // Close popup after save
+                await logActivity(projectId);
             } else {
                 alert("Error saving SOW: " + result.message);
             }
+
         } catch (error) {
             console.error("Error saving SOW:", error);
             alert("Failed to save SOW. See console for details.");
@@ -230,6 +236,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+async function logActivity(projectId) {
+    console.log("log")
+    try {
+        const response = await fetch('http://localhost:3000/activity-logs/' + projectId, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action_type: "UPDATED_SOW",
+                project_id: projectId
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('Error logging activity:', data.message);
+        } else {
+            console.log('Activity logged successfully:', data);
+        }
+    } catch (error) {
+        console.error('Error logging activity:', error);
+    }
+}
+
 
 // Back button functionality
 document.getElementById("back-button").addEventListener("click", function() {
