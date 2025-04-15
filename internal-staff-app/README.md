@@ -15,7 +15,10 @@ Follow these steps to run your HTML file locally:
 - Run the following command in your terminal (assuming you're using Python 3):
 
   ```
+  npm install
+  node server.js
   python3 -m http.server
+
   ```
 
 ---
