@@ -405,6 +405,7 @@ function uploadFile(file, projectId) {
             // Construct the URL
             const uploadApiUrl = `http://localhost:3000/project-details/${projectId}`;
             const n8nURL = `http://localhost:5678/webhook/3aa217cb-cf2f-4a34-b65e-10d2b68b6c2b`;
+            const activityURL = 'http://localhost:3000/activity-logs'
             console.log('Uploading file and data to URL:', uploadApiUrl);
 
             fetch(n8nURL, {
@@ -419,6 +420,16 @@ function uploadFile(file, projectId) {
                 return fetch(uploadApiUrl, {
                     method: 'PUT',
                     body: JSON.stringify(file),
+                    headers: { "Content-Type": "application/json; charset=UTF-8" }
+                });
+            })
+            .then(data => {
+                return fetch(activityURL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action_type: "UPDATED_SOW",
+                        project_id: projectId
+                    }),
                     headers: { "Content-Type": "application/json; charset=UTF-8" }
                 });
             })
