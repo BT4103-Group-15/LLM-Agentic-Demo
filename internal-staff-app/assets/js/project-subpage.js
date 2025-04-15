@@ -427,7 +427,7 @@ function uploadFile(file, projectId) {
                 return fetch(activityURL, {
                     method: 'POST',
                     body: JSON.stringify({
-                        action_type: "UPDATED_SOW",
+                        action_type: "UPDATED_SCOPING",
                         project_id: projectId
                     }),
                     headers: { "Content-Type": "application/json; charset=UTF-8" }
