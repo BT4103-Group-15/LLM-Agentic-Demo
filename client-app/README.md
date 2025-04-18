@@ -22,15 +22,15 @@ Before running the chatbot application, ensure you have the following installed:
 
 5. Requests (for HTTP requests)
 
-  `pip install requests`
+   `pip install requests`
 
-6. Pandas (for Markdown)
+7. Pandas (for Markdown)
 
-  `pip install pandas`
+   `pip install pandas`
 
-7. Google API Authentication for Python (for connecting to Google Drive)
+8. Google API Authentication for Python (for connecting to Google Drive)
 
-  `pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client`
+   `pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client`
 
 8. MySQL (for database connection)
 
@@ -40,7 +40,7 @@ Before running the chatbot application, ensure you have the following installed:
 
 9. Python Dotev (for reading .env files)
 
-  `pip install python-dotenv`
+   `pip install python-dotenv`
 
 # Running the Application
 
