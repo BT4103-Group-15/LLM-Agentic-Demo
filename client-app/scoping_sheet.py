@@ -66,20 +66,13 @@ def create_markdown(requirement_df, client_info):
     n8n_response = send_to_n8n_google_drive(file_name)
     print(n8n_response)
     #return str_output
+
 # save the file to google drive
-# need to pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
 
 def send_to_drive(json_file_name):
-    # 134099195066-lj0433ibnbl53mbk975qre1av4so9sli.apps.googleusercontent.com
     # Load service account credentials
-    # filename = "aliceBrown_outlook.com_2025-03-31_20-20-03.json"
-    #SCOPES = ["C:\Users\mingy\Documents\USB Files Backup\University\Y3 Semester 2\BT4103\Project\LLM-Agentic-Demo\ollama-chatbot\fluent-stratum-433010-t7-d5618f5c508f.json"]
-    #SERVICE_ACCOUNT_FILE = "scoping-agent-chatbot@fluent-stratum-433010-t7.iam.gserviceaccount.com"  # Your service account JSON    
-    #creds = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    SERVICE_ACCOUNT_FILE = os.path.join(current_dir, "fluent-stratum-433010-t7-d5618f5c508f.json")
-    # fluent-stratum-433010-t7-d5618f5c508f.json
+    SERVICE_ACCOUNT_FILE = os.path.join(current_dir, "service_account.json")
     SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
     creds = service_account.Credentials.from_service_account_file(
@@ -135,7 +128,7 @@ def get_create_client_info_from_db(company_name, client_name, email):
         conn.commit()
         return cursor.lastrowid
 
-# filename = "john.d_outlook.com_2025-04-12_23-37-29.json"
-# response_n8n = send_to_n8n_google_drive(filename)
-# print(response_n8n)
+#filename = "john.d_outlook.com_2025-04-12_23-37-29.json"
+#response_n8n = send_to_drive(filename)
+#print(response_n8n)
 
