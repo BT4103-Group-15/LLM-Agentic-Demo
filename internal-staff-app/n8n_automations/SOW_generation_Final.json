@@ -1,5 +1,5 @@
 {
-  "name": "SOW generation",
+  "name": "sow_generation_final",
   "nodes": [
     {
       "parameters": {
@@ -27,7 +27,7 @@
         140,
         400
       ],
-      "id": "be3fd3fb-bde1-4533-942d-a278d077029b",
+      "id": "82464285-0e73-4936-8242-a7e8beb6e698",
       "name": "setting sample sow"
     },
     {
@@ -59,11 +59,11 @@
         -160,
         400
       ],
-      "id": "ec41d136-87de-4254-a371-f56ec77d87c1",
+      "id": "fcca7060-5f64-417b-994e-df6114ac060b",
       "name": "retrieving scoping sheet",
       "credentials": {
         "mySql": {
-          "id": "KgbuNYO1ulZnpHdp",
+          "id": "pwehlYKuQhhIXisF",
           "name": "MySQL account"
         }
       }
@@ -88,7 +88,7 @@
         700,
         400
       ],
-      "id": "49544dbe-8afd-44b7-81d8-b9449a63163a",
+      "id": "e3724c2b-adbc-4662-a167-ac7d3b15baa9",
       "name": "Edit Fields5"
     },
     {
@@ -106,7 +106,7 @@
         940,
         400
       ],
-      "id": "58b86da6-74bb-4c7a-be06-401040be078c",
+      "id": "e35e0a7e-0ec6-4def-8029-2448f14df913",
       "name": "Convert to File"
     },
     {
@@ -141,7 +141,7 @@
         -400,
         400
       ],
-      "id": "0e6908e1-923a-45ef-aa70-8c56557997ec",
+      "id": "ca979bdf-3e37-4b9e-8a66-976d81496415",
       "name": "Edit Fields"
     },
     {
@@ -154,7 +154,7 @@
         -560,
         420
       ],
-      "id": "d1abde40-8676-45ba-89ab-19cfcf119c2b",
+      "id": "820e1c42-7d36-41ee-9ddc-b5f8268481ba",
       "name": "When Executed by Another Workflow"
     },
     {
@@ -189,11 +189,11 @@
         1340,
         400
       ],
-      "id": "e7c6c47b-30b6-4d2c-af4b-757ab2bcf2e6",
+      "id": "23f550b9-ff19-4b18-9af9-50cb810bd325",
       "name": "generate pdf",
       "credentials": {
         "httpBasicAuth": {
-          "id": "TFyv4TLQkY22Yo7K",
+          "id": "D8En5d1KfGgEKaPX",
           "name": "Unnamed credential"
         }
       }
@@ -221,11 +221,11 @@
         1540,
         400
       ],
-      "id": "d412ba6a-516f-40e7-9bac-c4dd3f8795aa",
+      "id": "552831d2-1a26-45d0-b25a-5f9785e1644a",
       "name": "save pdf to GDrive",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "v6Dzd5FAWsllkeLo",
+          "id": "xk0w6EYoa45yKnpi",
           "name": "Google Drive account"
         }
       }
@@ -240,7 +240,7 @@
         1160,
         400
       ],
-      "id": "72cff2d5-24c8-4eee-896e-cc2fe06d915d",
+      "id": "8ad8c9de-15bb-4f02-9c12-08128e59f581",
       "name": "convert md to html format"
     },
     {
@@ -263,7 +263,7 @@
         1960,
         400
       ],
-      "id": "bc786061-651f-467a-85cd-eaeb7467f654",
+      "id": "4baad5f5-b18f-4568-821c-eab54ea38e09",
       "name": "creating dynamic link"
     },
     {
@@ -288,11 +288,11 @@
         1740,
         400
       ],
-      "id": "03d52b67-84c9-4ee4-aee2-44112969b4fd",
+      "id": "c0fa85b7-b1eb-4393-b7e7-a96957724520",
       "name": "setting file access",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "v6Dzd5FAWsllkeLo",
+          "id": "xk0w6EYoa45yKnpi",
           "name": "Google Drive account"
         }
       }
@@ -338,11 +338,11 @@
         2180,
         400
       ],
-      "id": "bb2ecc83-6311-44f5-ad0e-0ea0e2bc4173",
+      "id": "f219ae54-39d6-4099-9e3e-28e4f3937c34",
       "name": "saving to sow_db",
       "credentials": {
         "mySql": {
-          "id": "KgbuNYO1ulZnpHdp",
+          "id": "pwehlYKuQhhIXisF",
           "name": "MySQL account"
         }
       }
@@ -364,12 +364,12 @@
         1160,
         640
       ],
-      "id": "8aeafeb7-ecd6-47d1-9b4a-775b205701c1",
+      "id": "3dffb56d-8d7e-4aaa-be52-f77ec70cdfb4",
       "name": "send md to client and staff",
       "webhookId": "e7c3f760-86b6-444d-99ee-cadaefda43ec",
       "credentials": {
         "smtp": {
-          "id": "jmydfn70gphONJZA",
+          "id": "E6qJoQyuVDVdeRx1",
           "name": "SMTP account"
         }
       }
@@ -387,7 +387,7 @@
             },
             {
               "name": "completed_scopingsheet",
-              "value": "={{ $json.scopingsheet_markdown }}"
+              "value": "={{ $json.scoping_sheet }}"
             }
           ]
         },
@@ -396,10 +396,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        0,
-        0
+        420,
+        380
       ],
-      "id": "03e826b2-47d8-4506-9485-ed18fd614653",
+      "id": "5421d689-eeb4-4a0b-a276-af1485e10126",
       "name": "OLLAMA HTTP Request"
     },
     {
@@ -424,10 +424,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        500,
-        400
+        460,
+        -40
       ],
-      "id": "191c5900-007d-40a0-88b5-34a0ee37ce34",
+      "id": "847bc039-e567-4db2-99d3-f4159a1ce959",
       "name": "Grok HTTP Request1"
     }
   ],
@@ -437,7 +437,7 @@
       "main": [
         [
           {
-            "node": "Grok HTTP Request1",
+            "node": "OLLAMA HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -561,6 +561,11 @@
     },
     "Grok HTTP Request1": {
       "main": [
+        []
+      ]
+    },
+    "OLLAMA HTTP Request": {
+      "main": [
         [
           {
             "node": "Edit Fields5",
@@ -575,11 +580,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "40fed64a-6e7e-46ac-abd3-d87e151153b8",
+  "versionId": "663e6198-175e-42a7-839f-6d0b89c11cbb",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "a88732262e66e8b0e421dc2a282e442003e6bd304b2d4f3c1253516ded37e159"
+    "instanceId": "8712c2bb4e02902a13a43c75c2acacd2aabdb06be443b7b14c332bd919069ab1"
   },
-  "id": "x53D18fEzb2zwvlZ",
+  "id": "yXudOPuwm7Ih1z0a",
   "tags": []
 }
